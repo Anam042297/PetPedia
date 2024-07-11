@@ -3,7 +3,7 @@
 <head>
     <title>User Table</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -21,7 +21,10 @@
                         <h4 class="text-center text-success mt-5 mb-5"><b>User Data</b></h4>
                     </div>
                     <div class="col col-3">
-                        <!-- You can add any additional buttons or elements here -->
+                        <button type="button" class="btn btn-success btn-modal"
+                        data-href="" data-container_modal=".view_modal">
+                        <i class="fa fa-plus"></i>
+                        Add Brand
                     </div>
                 </div>
             </div>
