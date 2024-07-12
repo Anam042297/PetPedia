@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Catagory;
 
 class CatagoryController extends Controller
-{
+{public function index(){
+    return view('dashboard.petcatagory.view');
+}
+    public function datatable_blade(){
+    return view('dashboard.petcatagory.view');
+}
     public function create(){
         return view('dashboard.petcatagory.create');
     }

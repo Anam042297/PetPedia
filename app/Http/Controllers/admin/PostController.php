@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Image;
 use App\Models\User;
+use App\Models\Catagory;
+use App\Models\Breed;
 
 class PostController extends Controller
 {
     public function create(){
-        return view('dashboard.post.createpost');
+        $categories = Catagory::all();
+        $breeds = Breed::all();
+        return view('dashboard.post.createpost',['categories' => $categories,
+                                                'breeds' => $breeds]);
     }
     public function store(Request $request)
     {
@@ -19,9 +24,9 @@ class PostController extends Controller
         // Validate incoming request data
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
-            'pet_name' => 'required|string|max:255',
-            'category_id' => 'exists:categories,id',
+            'catagory_id' => 'exists:catagories,id',
             'breed_id' => 'exists:breeds,id',
+            'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
             'description' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image file
@@ -29,12 +34,12 @@ class PostController extends Controller
 
         // Create a new post instance
         $post = new Post();
-        $post->user_id = $validatedData['user_id'];
-        $post->pet_name = $validatedData['pet_name'];
-        $post->category_id = $validatedData['category_id'];
-        $post->breed_id = $validatedData['breed_id'];
-        $post->age = $validatedData['age'];
-        $post->description = $validatedData['description'];
+        $post->name = $request->name;
+        $post->age = $request->age;
+        $post->description = $request->description;
+        $post->catagory_id = $request->catagory_id;
+        $post->breed_id = $request->breed_id;
+        $post->user_id = Auth::id(); // Assuming authenticated user
 
         // Save the post
         $post->save();
@@ -42,12 +47,13 @@ class PostController extends Controller
         // Handle uploading and associating images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $imagePath = $image->store('images', 'public'); // Store the image file
-                // Create a new image record in the database
-                $newImage = new Image();
-                $newImage->post_id = $post->id; // Assuming post_id is the foreign key for images
-                $newImage->path = $imagePath;
-                $newImage->save();
+               $filename = time() . '.' . $image->getClientOriginalExtension();
+               $path = $image->storeAs('public/images', $filename);
+               $url = Storage::url($path);
+               Image::create(['url' => $url,
+              'post_id' => $post->id,
+           ]);
+
             }
         }
 

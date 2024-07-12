@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,11 +96,11 @@
                 </span>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Select Catagory</label>
-                <select class="form-control" id="catagory_id" name="catagory_id">
-                    {{-- @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                @endforeach --}}
+                <label for="catagory">Select Catagory</label>
+                <select class="form-control" id="catagory" name="catagory">
+                    @foreach($categories as $catagory)
+                    <option value="{{ $catagory->id }}">{{ $catagory->name }}</option>
+                @endforeach
                 </select>
                 <span class="text-danger">
                     @error('catagory_id')
@@ -108,11 +109,11 @@
                 </span>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Select Breed</label>
-                <select class="form-control" id="breed_id" name="breed_id">
-                    {{-- @foreach($breeds as $breed)
-                    <option value="{{ $breed->id }}">{{ $breed->breed_name }}</option>
-                @endforeach --}}
+                <label for="$breeds">Select Breed</label>
+                <select class="form-control" id="breed" name="breed">
+                    @foreach($breeds as $breed)
+                    <option value="{{ $breed->id }}">{{ $breed->name }}</option>
+                @endforeach
                 </select>
                 <span class="text-danger">
                     @error('breed_id')
