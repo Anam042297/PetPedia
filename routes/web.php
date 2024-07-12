@@ -11,6 +11,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 //admin side routes
 use App\Http\Controllers\UserTableController;
+use App\Http\Controllers\admin\PostController;
 //user side routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog',[BlogController::class,'index'])->name('blog');
@@ -28,3 +29,7 @@ Route::post('/store', [LoginController::class, 'store'])->name('user.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 //admin side routes
 Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
+Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
+Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
+//post routes
+Route::get('/createpost', [PostController::class, 'index'])->name('post.create');
