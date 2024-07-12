@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 //admin side routes
 use App\Http\Controllers\UserTableController;
 use App\Http\Controllers\admin\PostController;
+use App\Http\Controllers\admin\CatagoryController;
 //user side routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog',[BlogController::class,'index'])->name('blog');
@@ -34,3 +35,6 @@ Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('use
 //post routes
 Route::get('/createpost', [PostController::class, 'create'])->name('post.create');
 Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
+//Pet Catagory routes
+Route::get('/createcatagory', [CatagoryController::class, 'create'])->name('Catagory.create');
+Route::post('/storecatagory', [CatagoryController::class, 'store'])->name('Catagory.store');
