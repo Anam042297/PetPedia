@@ -37,8 +37,10 @@ Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('use
 Route::get('/createpost', [PostController::class, 'create'])->name('post.create');
 Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
 //Pet Catagory routes
+Route::get('/indexcatagory', [CatagoryController::class, 'index'])->name('Catagory.index');
 Route::get('/createcatagory', [CatagoryController::class, 'create'])->name('Catagory.create');
 Route::any('/storecatagory', [CatagoryController::class, 'store'])->name('Catagory.store');
+Route::get('/displaycatagory', [CatagoryController::class, 'datatable_blade'])->name('Catagory.display');
 //Pet Breed routes
 Route::get('/createbreed', [BreedController::class, 'create'])->name('breed.create');
 Route::any('/storebreed', [BreedController::class, 'store'])->name('breed.store');

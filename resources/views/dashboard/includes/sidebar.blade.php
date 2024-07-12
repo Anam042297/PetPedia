@@ -20,6 +20,7 @@
                         <a class="nav-link" href="layout-sidenav-light.html">Products</a>
                         <a class="nav-link" href="{{ route('usertable') }}">Users</a>
                         <a class="nav-link" href="{{ route('breed.create') }}">Pet Breed</a>
+                        <a class="nav-link" href="{{ route('Catagory.display') }}">view category</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
