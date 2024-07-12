@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Categary</title>
+    <title>Create Breed</title>
     <style>
         body {
             background: linear-gradient(to right, #F5F7FF, #F5F7FF);
@@ -70,7 +70,7 @@
     <div class="login-container">
 
         <div>
-            <h3 style="color:#4B49AC ;text-align:center">Create Category</h3>
+            <h3 style="color:#4B49AC ;text-align:center">Create Breed</h3>
         </div>
         @if (session('error'))
             <div class="alert alert-success">
@@ -83,7 +83,7 @@
                 {{ session('success') }}
             </div>
         @endif
-        <form  id="contactForm" action="{{ route('Catagory.store') }}" method="POST" enctype="multipart/form-data">
+        <form  id="contactForm" action="{{ route('breed.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="exampleFormControlSelect1">

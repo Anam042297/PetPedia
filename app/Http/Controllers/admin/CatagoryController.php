@@ -28,27 +28,7 @@ class CatagoryController extends Controller
         // Redirect to a success page or route
         return redirect()->route('Catagory.store');
 
-        // dd($request->all(), $request->file('images'));
-        // dd($request->ajax());
-        // if ($request->ajax()) {
-        //     // Validate the request inputs
-        //     $validator = Validator::make($request->all(), [
-        //         'name' => 'required|string|max:255',
-        //     ]);
-        //     // dd($validator);
-        //     if ($validator->fails()) {
-        //         return response()->json(['errors' => $validator->errors()], 422);
-        //     }
-        //     // dd($request->transmission);
-        //     // Create car entry
-        //     try {
-        //         $car = Catagory::create([
-        //             'title' => $request->title,
-        //             ]);
-        //         // dd($car);
-        //     } catch (\Exception $e) {
-        //         throw $e;
-        //         return response()->json(['error' => 'Error creating car: ' . $e->getMessage()], 500);
+
             }
 
     }
