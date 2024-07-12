@@ -13,13 +13,13 @@ class Image extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'url','post_id',
+       'post_id', 'url',
         // other fillable fields as needed
     ];
 
     // Example: If an image can belong to multiple posts
-    public function posts()
+    public function post()
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsTo(Post::class);
     }
 }

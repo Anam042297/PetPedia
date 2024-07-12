@@ -7,16 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Catagory extends Model
 { use HasFactory;
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-
-    ];
-
+    protected $fillable = ['name'];
 
     public function posts()
     {

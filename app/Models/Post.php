@@ -12,15 +12,7 @@ class Post extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'pet_name',
-        'age',
-        'description',
-        'user_id',
-        'catagory_id',
-        'breed_id',
-        'images',
-    ];
+    protected $fillable = ['user_id', 'category_id', 'breed_id', 'name', 'age', 'description'];
 
     public function user()
     {
@@ -37,8 +29,8 @@ class Post extends Model
         return $this->belongsTo(Breed::class);
     }
 
-    public function image()
+    public function images()
     {
-        return $this->belongsTo(Image::class);
+        return $this->hasMany(Image::class);
     }
 }

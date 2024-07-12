@@ -88,9 +88,9 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">
                     Category Name</label>
-                <input type="text" class="form-control" id="name" name="catagory_name">
+                <input type="text" class="form-control" id="name" name="name">
                 <span class="text-danger">
-                    @error('catagory_name')
+                    @error('name')
                         {{ $message }}
                     @enderror
                 </span>
