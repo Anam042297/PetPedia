@@ -87,30 +87,63 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Pet Name</label>
                 <input type="text" class="form-control" id="PetName" name="PetName" placeholder="Pet Name">
-
+                <span class="text-danger">
+                    @error('PetName')
+                        {{ $message }}
+                    @enderror
+                </span>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Select Catagory</label>
-                <select class="form-control">
-                    <option>Default select</option>
+                <select class="form-control" id="category_id" name="category_id">
+                    {{-- @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                @endforeach --}}
                 </select>
+                <span class="text-danger">
+                    @error('category_id')
+                        {{ $message }}
+                    @enderror
+                </span>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Select Breed</label>
-                <select class="form-control">
-                    <option>Default select</option>
+                <select class="form-control" id="breed_id" name="breed_id">
+                    {{-- @foreach($breeds as $breed)
+                    <option value="{{ $breed->id }}">{{ $breed->breed_name }}</option>
+                @endforeach --}}
                 </select>
+                <span class="text-danger">
+                    @error('breed_id')
+                        {{ $message }}
+                    @enderror
+                </span>
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Pet Age</label>
                 <input type="number" id="age" name="age" class="form-control" min="0" required>
+                <span class="text-danger">
+                    @error('age')
+                        {{ $message }}
+                    @enderror
+                </span>
              </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" id="description" name='description' rows="3"></textarea>
+                <span class="text-danger">
+                    @error('description')
+                        {{ $message }}
+                    @enderror
+                </span>
             </div>
             <div class="form-group">Choose images</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <input type="file" class="form-control-file" id="image" name='image'>
+                <span class="text-danger">
+                    @error('image')
+                        {{ $message }}
+                    @enderror
+                </span>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
