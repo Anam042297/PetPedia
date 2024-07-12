@@ -83,25 +83,26 @@
                 {{ session('success') }}
             </div>
         @endif
-        <form>
+        <form  id="contactForm" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Pet Name</label>
-                <input type="text" class="form-control" id="PetName" name="PetName" placeholder="Pet Name">
+                <input type="text" class="form-control" id="pet_name" name="pet_name" placeholder="Pet Name">
                 <span class="text-danger">
-                    @error('PetName')
+                    @error('pet_name')
                         {{ $message }}
                     @enderror
                 </span>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Select Catagory</label>
-                <select class="form-control" id="category_id" name="category_id">
+                <select class="form-control" id="catagory_id" name="catagory_id">
                     {{-- @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                 @endforeach --}}
                 </select>
                 <span class="text-danger">
-                    @error('category_id')
+                    @error('catagory_id')
                         {{ $message }}
                     @enderror
                 </span>
@@ -138,7 +139,7 @@
                 </span>
             </div>
             <div class="form-group">Choose images</label>
-                <input type="file" class="form-control-file" id="image" name='image'>
+                <input type="file" class="form-control p-4"name="images[]" id="image_id"name="image_id" multiple>
                 <span class="text-danger">
                     @error('image')
                         {{ $message }}

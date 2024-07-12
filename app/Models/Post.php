@@ -6,15 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
-{
+{ use HasFactory;
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'pet_name',
         'age',
         'description',
         'user_id',
-        'category_id',
+        'catagory_id',
         'breed_id',
-        'image_id',
+        'images',
     ];
 
     public function user()

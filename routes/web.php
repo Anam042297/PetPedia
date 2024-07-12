@@ -33,3 +33,4 @@ Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('user
 Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
 //post routes
 Route::get('/createpost', [PostController::class, 'create'])->name('post.create');
+Route::post('/storepost', [PostController::class, 'store'])->name('post.store');

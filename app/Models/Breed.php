@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Breed extends Model
 {
     use HasFactory;
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
