@@ -24,8 +24,8 @@ class PostController extends Controller
         // Validate incoming request data
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
-            'catagory_id' => 'exists:catagories,id',
-            'breed_id' => 'exists:breeds,id',
+            'catagory_id' => 'required|exists:catagories,id',
+            'breed_id' => 'required|exists:breeds,id',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
             'description' => 'required|string',
@@ -34,14 +34,12 @@ class PostController extends Controller
 
         // Create a new post instance
         $post = new Post();
+        $post->user_id = Auth::id(); // Assuming authenticated user
+        $post->catagory_id = $request->catagory_id;
+        $post->breed_id = $request->breed_id;
         $post->name = $request->name;
         $post->age = $request->age;
         $post->description = $request->description;
-        $post->catagory_id = $request->catagory_id;
-        $post->breed_id = $request->breed_id;
-        $post->user_id = Auth::id(); // Assuming authenticated user
-
-        // Save the post
         $post->save();
 
         // Handle uploading and associating images
@@ -50,8 +48,9 @@ class PostController extends Controller
                $filename = time() . '.' . $image->getClientOriginalExtension();
                $path = $image->storeAs('public/images', $filename);
                $url = Storage::url($path);
-               Image::create(['url' => $url,
+               Image::create([
               'post_id' => $post->id,
+              'url' => $url,
            ]);
 
             }

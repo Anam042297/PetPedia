@@ -10,23 +10,22 @@ use DataTables;
 class CatagoryController extends Controller
 {public function index(){
 
-        if ($request->ajax()) {
-            $data = Catagory::latest()->get();
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                $editUrl = route('catagory.edit', $row->id);
-                $deleteUrl = route('catagory.destroy', $row->id);
-                $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
-                $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
-                $buttons .= csrf_field();
-                $buttons .= method_field('DELETE');
-                $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
-                return $buttons;
-            })
-            ->addIndexColumn()
-            ->rawColumns(['action'])
-            ->make(true);
+    if ($request->ajax()) {
+        $data = Catagory::latest()->get();
+        return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $editUrl = route('catagory.edit', $row->id);
+                    $deleteUrl = route('catagory.destroy', $row->id);
+                    $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
+                    $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
+                    $buttons .= csrf_field();
+                    $buttons .= method_field('DELETE');
+                    $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
+                    return $buttons;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
     }
     return view('dashboard.petcatagory.view');
 }

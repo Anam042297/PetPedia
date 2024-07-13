@@ -44,21 +44,19 @@
     </div>
 
     <script type="text/javascript">
-        $(function () {
-
-            var table = $('#catagory_table').DataTable({
-                processing: true,
-                serverSide: true,
-                dd('#catagory_table');
-                ajax: {
-                    url: "/catagoryindex",
-                },
-                columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ]
-            });
+    $(function () {
+        var table = $('#catagory_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "/indexcatagory",
+            },
+            columns: [
+                { data: 'name', name: 'name' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+            ]
         });
-    </script>
+    });
+</script>
 </body>
 </html>
