@@ -12,6 +12,8 @@ use App\Http\Controllers\AdminController;
 //admin side routes
 use App\Http\Controllers\UserTableController;
 use App\Http\Controllers\admin\PostController;
+use App\Http\Controllers\admin\CatagoryController;
+use App\Http\Controllers\admin\BreedController;
 //user side routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog',[BlogController::class,'index'])->name('blog');
@@ -32,4 +34,13 @@ Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
 Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
 Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
 //post routes
-Route::get('/createpost', [PostController::class, 'index'])->name('post.create');
+Route::get('/createpost', [PostController::class, 'create'])->name('post.create');
+Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
+//Pet Catagory routes
+Route::get('/indexcatagory', [CatagoryController::class, 'index'])->name('Catagory.index');
+Route::get('/createcatagory', [CatagoryController::class, 'create'])->name('Catagory.create');
+Route::any('/storecatagory', [CatagoryController::class, 'store'])->name('Catagory.store');
+Route::get('/displaycatagory', [CatagoryController::class, 'datatable_blade'])->name('Catagory.display');
+//Pet Breed routes
+Route::get('/createbreed', [BreedController::class, 'create'])->name('breed.create');
+Route::any('/storebreed', [BreedController::class, 'store'])->name('breed.store');

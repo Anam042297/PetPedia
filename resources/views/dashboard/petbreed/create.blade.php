@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,12 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Create Breed</title>
     <style>
         body {
             background: linear-gradient(to right, #F5F7FF, #F5F7FF);
             font-family: Arial, sans-serif;
-            background-image: url("Dashboard/images/dashboard/people2.png");
             height: 100%;
             background-position: right;
             background-repeat: no-repeat;
@@ -71,7 +69,7 @@
     <div class="login-container">
 
         <div>
-            <h3 style="color:#4B49AC ;text-align:center">Create Post</h3>
+            <h3 style="color:#4B49AC ;text-align:center">Create Breed</h3>
         </div>
         @if (session('error'))
             <div class="alert alert-success">
@@ -84,65 +82,14 @@
                 {{ session('success') }}
             </div>
         @endif
-        <form  id="contactForm" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+        <form  id="contactForm" action="{{ route('breed.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Pet Name</label>
-                <input type="text" class="form-control" id="pet_name" name="pet_name" placeholder="Pet Name">
+                <label for="exampleFormControlSelect1">
+                    Category Name</label>
+                <input type="text" class="form-control" id="name" name="name">
                 <span class="text-danger">
-                    @error('pet_name')
-                        {{ $message }}
-                    @enderror
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="catagory">Select Catagory</label>
-                <select class="form-control" id="catagory" name="catagory">
-                    @foreach($categories as $catagory)
-                    <option value="{{ $catagory->id }}">{{ $catagory->name }}</option>
-                @endforeach
-                </select>
-                <span class="text-danger">
-                    @error('catagory_id')
-                        {{ $message }}
-                    @enderror
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="$breeds">Select Breed</label>
-                <select class="form-control" id="breed" name="breed">
-                    @foreach($breeds as $breed)
-                    <option value="{{ $breed->id }}">{{ $breed->name }}</option>
-                @endforeach
-                </select>
-                <span class="text-danger">
-                    @error('breed_id')
-                        {{ $message }}
-                    @enderror
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="formGroupExampleInput">Pet Age</label>
-                <input type="number" id="age" name="age" class="form-control" min="0" required>
-                <span class="text-danger">
-                    @error('age')
-                        {{ $message }}
-                    @enderror
-                </span>
-             </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" id="description" name='description' rows="3"></textarea>
-                <span class="text-danger">
-                    @error('description')
-                        {{ $message }}
-                    @enderror
-                </span>
-            </div>
-            <div class="form-group">Choose images</label>
-                <input type="file" class="form-control p-4"name="images[]" id="image_id"name="image_id" multiple>
-                <span class="text-danger">
-                    @error('image')
+                    @error('name')
                         {{ $message }}
                     @enderror
                 </span>
