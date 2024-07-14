@@ -8,15 +8,14 @@ use App\Models\Catagory;
 use DataTables;
 
 class CatagoryController extends Controller
-{public function index(){
+{public function index(Request $request){
 
     if ($request->ajax()) {
         $data = Catagory::latest()->get();
         return Datatables::of($data)
-                ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $editUrl = route('catagory.edit', $row->id);
-                    $deleteUrl = route('catagory.destroy', $row->id);
+                    $editUrl = route('Catagory.edit', $row->id);
+                    $deleteUrl = route('Catagory.destroy', $row->id);
                     $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
                     $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
                     $buttons .= csrf_field();
@@ -24,12 +23,14 @@ class CatagoryController extends Controller
                     $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
                     return $buttons;
                 })
+
+                ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->make(true);
     }
     return view('dashboard.petcatagory.view');
 }
-    public function datatable_blade(){
+    public function viewcatagory(){
     return view('dashboard.petcatagory.view');
 }
     public function create(){
@@ -56,20 +57,20 @@ class CatagoryController extends Controller
             }
             public function edit($id)
             {
-                $user = User::find($id);
-                return view('catagory.edit', compact('user'));
+                $catagory = Catagory::find($id);
+                return view('catagory.edit', compact('catagory'));
             }
             public function destroy($id)
             {
-                $user = User::find($id);
+                $catagory = Catagory::find($id);
 
-                if (!$user) {
-                    return redirect()->route('Catagory.display')->with('error', 'User not found.');
+                if (!$catagory) {
+                    return redirect()->route('Catagory.display');
                 }
 
-                $user->delete();
+                $catagory->delete();
 
-                return redirect()->route('Catagory.display')->with('success', 'User deleted successfully.');
+                return redirect()->route('Catagory.display');
             }
     }
 

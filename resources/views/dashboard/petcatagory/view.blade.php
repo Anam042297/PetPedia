@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-bordered" id="user_table">
+                <table class="table table-bordered" id="catagory_table">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -49,7 +49,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "/indexcatagory",
+                url: "/admin/indexcatagory",
             },
             columns: [
                 { data: 'name', name: 'name' },
