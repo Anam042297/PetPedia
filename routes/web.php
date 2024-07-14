@@ -55,16 +55,20 @@ Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
 //Pet Breed routes
 Route::get('/createbreed', [BreedController::class, 'create'])->name('breed.create');
 Route::any('/storebreed', [BreedController::class, 'store'])->name('breed.store');
-    // Community Post Routes
-    // Thread Routes
-    Route::get('/threadsindex', [ThreadController::class, 'index'])->name('threads.index');
-    Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
-    Route::delete('/threads/{thread}', [ThreadController::class, 'destroy'])->name('threads.destroy');
+Route::any('/displaybreed', [BreedController::class, 'viewbreed'])->name('breed.view');
+Route::any('/indexbreed', [BreedController::class, 'index'])->name('breed.index');
+Route::get('/breed/{id}/edit', [BreedController::class, 'edit'])->name('breed.edit');
+Route::delete('/breed/{id}', [BreedController::class, 'destroy'])->name('breed.destroy');
+ // Community Post Routes
+ // Thread Routes
+Route::get('/threadsindex', [ThreadController::class, 'index'])->name('threads.index');
+Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
+Route::delete('/threads/{thread}', [ThreadController::class, 'destroy'])->name('threads.destroy');
 
-    // CommunityPost Routes
-    Route::post('/threads/{thread}/community-posts', [CommunityPostController::class, 'store'])->name('communityposts.store');
-    Route::delete('/community-posts/{communityPost}', [CommunityPostController::class, 'destroy'])->name('communityposts.destroy');
+// CommunityPost Routes
+Route::post('/threads/{thread}/community-posts', [CommunityPostController::class, 'store'])->name('communityposts.store');
+Route::delete('/community-posts/{communityPost}', [CommunityPostController::class, 'destroy'])->name('communityposts.destroy');
 
-    // Reply Routes
-    Route::post('/community-posts/{communityPost}/replies', [ReplyController::class, 'store'])->name('replies.store');
-    Route::delete('/replies/{reply}', [ReplyController::class, 'destroy'])->name('replies.destroy');
+// Reply Routes
+Route::post('/community-posts/{communityPost}/replies', [ReplyController::class, 'store'])->name('replies.store');
+Route::delete('/replies/{reply}', [ReplyController::class, 'destroy'])->name('replies.destroy');

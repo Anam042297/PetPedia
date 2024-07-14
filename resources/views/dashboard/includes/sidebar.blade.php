@@ -21,6 +21,7 @@
                         <a class="nav-link" href="{{ route('usertable') }}">Users</a>
                         <a class="nav-link" href="{{ route('breed.create') }}">Pet Breed</a>
                         <a class="nav-link" href="/admin/displaycatagory">view category</a>
+                        <a class="nav-link" href="/displaybreed">view Breed</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
