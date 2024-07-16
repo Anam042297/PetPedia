@@ -51,7 +51,7 @@ class CatagoryController extends Controller
 
 
         // Redirect to a success page or route
-        return redirect()->route('Catagory.store');
+        return redirect()->route('Catagory.display');
 
 
             }

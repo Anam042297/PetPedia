@@ -86,18 +86,10 @@
         @endif
         <form  id="contactForm" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Pet Name</label>
-                <input type="text" class="form-control" id="pet_name" name="pet_name" placeholder="Pet Name">
-                <span class="text-danger">
-                    @error('pet_name')
-                        {{ $message }}
-                    @enderror
-                </span>
-            </div>
+
             <div class="form-group">
                 <label for="catagory">Select Catagory</label>
-                <select class="form-control" id="catagory" name="catagory">
+                <select class="form-control" id="catagory" name="catagory_id">
                     @foreach($categories as $catagory)
                     <option value="{{ $catagory->id }}">{{ $catagory->name }}</option>
                 @endforeach
@@ -110,13 +102,22 @@
             </div>
             <div class="form-group">
                 <label for="$breeds">Select Breed</label>
-                <select class="form-control" id="breed" name="breed">
+                <select class="form-control" id="breed" name="breed_id">
                     @foreach($breeds as $breed)
                     <option value="{{ $breed->id }}">{{ $breed->name }}</option>
                 @endforeach
                 </select>
                 <span class="text-danger">
                     @error('breed_id')
+                        {{ $message }}
+                    @enderror
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Pet Name</label>
+                <input type="text" class="form-control" id="pet_name" name="name" placeholder="Pet Name">
+                <span class="text-danger">
+                    @error('pet_name')
                         {{ $message }}
                     @enderror
                 </span>

@@ -24,7 +24,7 @@
                             <h4 class="text-center text-success mt-5 mb-5"><b>Category Table</b></h4>
                         </div>
                         <div class="col d-flex justify-content-end align-items-center"> <!-- Adjusted column for button -->
-                            <a href="{{ route('breed.create') }}" class="btn btn-success">
+                            <a href="{{ route('Catagory.create') }}" class="btn btn-success">
                                 <i class="fa fa-plus"></i>
                                 Add Category
                             </a>
