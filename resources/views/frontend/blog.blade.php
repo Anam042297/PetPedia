@@ -11,15 +11,14 @@
             <h4 class="text-secondary mb-3">Pet Blog</h4>
             <h1 class="display-4 m-0"><span class="text-primary">Updates</span> From Blog</h1>
         </div>
-        @section('content')
         <h1>Community Discussions</h1>
 
-        <form action="/admin/threads" method="POST">
+        <form action="/threads" method="POST">
             @csrf
             <button type="submit">Create Thread</button>
         </form>
 
-        {{-- @foreach($threads as $thread)
+        @foreach($threads as $thread)
             <div>
                 <h2>{{ $thread->title }}</h2>
                 <small>Started by {{ $thread->user->name }}</small>
@@ -30,7 +29,7 @@
                     <button type="submit">Delete Thread</button>
                 </form>
 
-                <form action="{{ route('posts.store', $thread) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('communityposts.store', $thread) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <textarea name="message" placeholder="Share something..." required></textarea>
@@ -90,8 +89,8 @@
             </div>
         @endforeach
 
-        {{ $threads->links() }} --}}
-    @endsection
+        {{ $threads->links() }}
+
         <div class="row pb-3">
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 mb-2">
