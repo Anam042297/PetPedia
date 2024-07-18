@@ -8,7 +8,7 @@
     <title>Create Categary</title>
     <style>
         body {
-            background: linear-gradient(to right, #F5F7FF, #F5F7FF);
+            background: linear-gradient(to right, #ffffff, #ffffff);
             font-family: Arial, sans-serif;
             height: 100%;
             background-position: right;

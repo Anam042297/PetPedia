@@ -8,7 +8,7 @@
     <title>Create Breed</title>
     <style>
         body {
-            background: linear-gradient(to right, #F5F7FF, #F5F7FF);
+            background: linear-gradient(to right, #ffffff, #ffffff);
             font-family: Arial, sans-serif;
             height: 100%;
             background-position: right;
@@ -86,7 +86,7 @@
             @csrf
             <div class="form-group">
                 <label for="exampleFormControlSelect1">
-                    Category Name</label>
+                    Breed Name</label>
                 <input type="text" class="form-control" id="name" name="name">
                 <span class="text-danger">
                     @error('name')

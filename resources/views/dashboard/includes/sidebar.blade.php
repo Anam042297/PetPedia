@@ -15,12 +15,11 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ route('Catagory.create') }}">Pet Category</a>
-                        <a class="nav-link" href="{{ route('post.create') }}">Posts</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Products</a>
                         <a class="nav-link" href="{{ route('usertable') }}">Users</a>
-                        <a class="nav-link" href="{{ route('breed.create') }}">Pet Breed</a>
-                        <a class="nav-link" href="{{ route('Catagory.display') }}">view category</a>
+                        <a class="nav-link" href="layout-sidenav-light.html">Products</a>
+                        <a class="nav-link" href="{{ route('post.create') }}"> Pet Posts</a>
+                        <a class="nav-link" href="/admin/displaycatagory"> Pet Category</a>
+                        <a class="nav-link" href="/displaybreed">Pet Breed</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"

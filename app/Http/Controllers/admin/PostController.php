@@ -35,16 +35,17 @@ class PostController extends Controller
         // Create a new post instance
         $post = new Post();
         $post->user_id = Auth::id(); // Assuming authenticated user
-        $post->catagory_id = $request->catagory_id;
-        $post->breed_id = $request->breed_id;
-        $post->name = $request->name;
-        $post->age = $request->age;
-        $post->description = $request->description;
+        $post->catagory_id = $validatedData['catagory_id'];
+        $post->breed_id = $validatedData['breed_id'];
+        $post->name = $validatedData['name'];
+        $post->age = $validatedData['age'];
+        $post->description = $validatedData['description'];
+         dd($post);
         $post->save();
 
         // Handle uploading and associating images
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
+        if ($validatedData->hasFile('images')) {
+            foreach ($validatedData->file('images') as $image) {
                $filename = time() . '.' . $image->getClientOriginalExtension();
                $path = $image->storeAs('public/images', $filename);
                $url = Storage::url($path);
@@ -57,6 +58,6 @@ class PostController extends Controller
         }
 
         // Redirect to a success page or route
-        return redirect()->route('posts.store');
+        return redirect()->route('posts.create');
     }
 }

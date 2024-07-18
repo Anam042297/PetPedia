@@ -11,20 +11,12 @@
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 </head>
 <body>
-
     <div class="container">
-
         <div class="card">
             <div class="card-header">
                 <div class="row">
                     <div class="col col-9">
                         <h4 class="text-center text-success mt-5 mb-5"><b>User Data</b></h4>
-                    </div>
-                    <div class="col col-3">
-                        <button type="button" class="btn btn-success btn-modal"
-                        data-href="" data-container_modal=".view_modal">
-                        <i class="fa fa-plus"></i>
-                        Add Brand
                     </div>
                 </div>
             </div>
@@ -43,7 +35,6 @@
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
         $(function () {
             var table = $('#user_table').DataTable({
