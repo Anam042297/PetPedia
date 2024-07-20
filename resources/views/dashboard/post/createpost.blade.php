@@ -10,7 +10,6 @@
         body {
             background: linear-gradient(to right, #F5F7FF, #F5F7FF);
             font-family: Arial, sans-serif;
-            background-image: url("Dashboard/images/dashboard/people2.png");
             height: 100%;
             background-position: right;
             background-repeat: no-repeat;
@@ -154,8 +153,7 @@
 
 
     </div>
-    <div class="container">
-    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
