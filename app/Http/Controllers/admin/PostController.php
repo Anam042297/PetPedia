@@ -11,9 +11,33 @@ use App\Models\Catagory;
 use App\Models\Breed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use DataTables;
 
 class PostController extends Controller
 {
+    public function index(Request $request){
+
+        if ($request->ajax()) {
+            $posts = Post::with(['catagory', 'breed', 'images', 'user'])->select('posts.*');
+            return DataTables::of($posts)
+                ->addColumn('action', function ($row) {
+                    return '<button class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+                })
+                ->addColumn('images', function ($row) {
+                    $images = '';
+                    foreach ($row->images as $image) {
+                        $images .= '<img src="' . asset('storage/images/' . $image->path) . '" class="img-thumbnail" width="100">';
+                    }
+                    return $images;
+                })
+                ->rawColumns(['images', 'action'])
+                ->make(true);
+        }
+        return view('dashboard.post.viewpost');
+    }
+    public function viewpost(){
+        return view('dashboard.post.viewpost');
+    }
     public function create(){
         $categories = Catagory::all();
         $breeds = Breed::all();
@@ -62,6 +86,11 @@ class PostController extends Controller
         }
 
         // Redirect to a success page or route
-        return redirect('/createpost')->with('success', 'Post created successfully!');
+        return redirect('/admin/createpost')->with('success', 'Post created successfully!');
     }
+    public function getBreeds($category_id)
+{
+    $breeds = Breed::where('category_id', $category_id)->get();
+    return response()->json($breeds);
+}
 }

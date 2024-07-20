@@ -85,6 +85,21 @@
         <form  id="contactForm" action="{{ route('breed.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label for="catagory">Select Catagory</label>
+                <select class="form-control" id="catagory" name="catagory_id">
+                    <option value="">Select category</option>
+                    @foreach($categories as $catagory)
+
+                    <option value="{{ $catagory->id }}">{{ $catagory->name }}</option>
+                @endforeach
+                </select>
+                <span class="text-danger">
+                    @error('catagory_id')
+                        {{ $message }}
+                    @enderror
+                </span>
+            </div>
+            <div class="form-group">
                 <label for="exampleFormControlSelect1">
                     Breed Name</label>
                 <input type="text" class="form-control" id="name" name="name">

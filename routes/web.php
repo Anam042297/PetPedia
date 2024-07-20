@@ -28,9 +28,11 @@ Route::get('/mart',[MartController::class,'index'])->name('mart');
 Route::get('/about',[AboutController::class,'index'])->name('about');
 Route::get('/register',[RegisterController::class,'index'])->name('register');
 Route::get('/login',[LoginController::class,'index'])->name('login');
+
+// admin middleware
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
-//Pet Catagory routes
+    //Pet Catagory routes
     Route::get('/indexcatagory', [CatagoryController::class, 'index'])->name('Catagory.index');
     Route::get('/createcatagory', [CatagoryController::class, 'create'])->name('Catagory.create');
     Route::any('/storecatagory', [CatagoryController::class, 'store'])->name('Catagory.store');
@@ -38,27 +40,34 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/editcatagory/{id}', [CatagoryController::class, 'edit'])->name('Catagory.edit');
     Route::delete('/destroycatagory/{id}', [CatagoryController::class, 'destroy'])->name('Catagory.destroy');
 
+    //Pet Breed routes
+    Route::get('/createbreed', [BreedController::class, 'create'])->name('breed.create');
+    Route::any('/storebreed', [BreedController::class, 'store'])->name('breed.store');
+    Route::any('/displaybreed', [BreedController::class, 'viewbreed'])->name('breed.view');
+    Route::any('/indexbreed', [BreedController::class, 'index'])->name('breed.index');
+    Route::get('/breed/{id}/edit', [BreedController::class, 'edit'])->name('breed.edit');
+    Route::delete('/breed/{id}', [BreedController::class, 'destroy'])->name('breed.destroy');
 
+    //post routes
+    Route::get('/indexpost', [PostController::class, 'index'])->name('post.index');
+    Route::get('/createpost', [PostController::class, 'create'])->name('post.create');
+    Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
+    Route::get('/viewpost', [PostController::class, 'viewpost'])->name('post.view');
+    Route::get('/get-breeds/{catagory_id}', [PostController::class, 'getBreeds']);
+
+
+    //admin side routes
+    Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
+    Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
+    Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
 });
 Route::any('/login-post', [LoginController::class, 'login'])->name('form.submit');
 Route::get('/register.page', [LoginController::class, 'showRegisterForm'])->name('register.page');
 Route::post('/store', [LoginController::class, 'store'])->name('user.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-//admin side routes
-Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
-Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
-Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
-//post routes
-Route::get('/createpost', [PostController::class, 'create'])->name('post.create');
-Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
 
-//Pet Breed routes
-Route::get('/createbreed', [BreedController::class, 'create'])->name('breed.create');
-Route::any('/storebreed', [BreedController::class, 'store'])->name('breed.store');
-Route::any('/displaybreed', [BreedController::class, 'viewbreed'])->name('breed.view');
-Route::any('/indexbreed', [BreedController::class, 'index'])->name('breed.index');
-Route::get('/breed/{id}/edit', [BreedController::class, 'edit'])->name('breed.edit');
-Route::delete('/breed/{id}', [BreedController::class, 'destroy'])->name('breed.destroy');
+
+
  // Community Post Routes
  // Thread Routes
 Route::get('/threadsindex', [ThreadController::class, 'index'])->name('threads.index');

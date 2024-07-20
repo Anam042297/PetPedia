@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Breed;
+use App\Models\Catagory;
 use DataTables;
 
 class BreedController extends Controller
@@ -36,20 +37,24 @@ public function viewbreed(){
 }
 
     public function create(){
-        return view('dashboard.petbreed.create');
+        $categories=Catagory::all();
+        // dd($categories);
+        return view('dashboard.petbreed.create', compact(['categories']));
     }
     public function store(Request $request){
 //    dd($request->all());
        // Validate incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'catagory_id'=> 'required|string|max:255'
         ]);
-
+        // dd($validatedData);
         // Create a new post instance
-        $post = new  Breed();
-        $post->name = $validatedData['name'];
-        //  dd($post);
-        $post->save();
+        $breed = new  Breed();
+        $breed->name = $validatedData['name'];
+        $breed->category_id =$validatedData['catagory_id'];
+        //  dd($breed);
+        $breed->save();
 
 
         // Redirect to a success page or route

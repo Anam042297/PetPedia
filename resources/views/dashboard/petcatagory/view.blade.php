@@ -18,13 +18,13 @@
 
         <div class="card">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header py-5">
                     <div class="row">
                         <div class="col">
-                            <h4 class="text-center text-success mt-5 mb-5"><b>Category Table</b></h4>
+                            <h4 class="text-center" style="color: #4B49AC;"><b>Category Table</b></h4>
                         </div>
-                        <div class="col d-flex justify-content-end align-items-center"> <!-- Adjusted column for button -->
-                            <a href="{{ route('Catagory.create') }}" class="btn btn-success">
+                        <div class="col-auto d-flex justify-content-end">
+                            <a href="{{ route('Catagory.create') }}" class="btn" style="background-color: #4B49AC; border-color: #413f99; color: #ffffff;">
                                 <i class="fa fa-plus"></i>
                                 Add Category
                             </a>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,34 +83,36 @@
                 {{ session('success') }}
             </div>
         @endif
-        <form  id="contactForm" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+        <form id="contactForm" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
                 <label for="catagory">Select Catagory</label>
                 <select class="form-control" id="catagory" name="catagory_id">
-                    @foreach($categories as $catagory)
-                    <option value="{{ $catagory->id }}">{{ $catagory->name }}</option>
-                @endforeach
+                    <option value="">Select category</option>
+                    @foreach ($categories as $catagory)
+                        <option value="{{ $catagory->id }}">{{ $catagory->name }}</option>
+                    @endforeach
                 </select>
                 <span class="text-danger">
                     @error('catagory_id')
                         {{ $message }}
                     @enderror
-                </span>
+                    </span>
             </div>
             <div class="form-group">
                 <label for="$breeds">Select Breed</label>
                 <select class="form-control" id="breed" name="breed_id">
-                    @foreach($breeds as $breed)
+                    {{-- <option value="">Select breed</option> --}}
+                    {{-- @foreach ($breeds as $breed)
                     <option value="{{ $breed->id }}">{{ $breed->name }}</option>
-                @endforeach
+                @endforeach --}}
                 </select>
                 <span class="text-danger">
                     @error('breed_id')
                         {{ $message }}
                     @enderror
-                </span>
+                    </span>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Pet Name</label>
@@ -120,17 +121,17 @@
                     @error('pet_name')
                         {{ $message }}
                     @enderror
-                </span>
+                    </span>
             </div>
             <div class="form-group">
-                <label for="formGroupExampleInput">Pet Age</label>
+                <label for="formGroupExampleInput">Pet Age (in months)</label>
                 <input type="number" id="age" name="age" class="form-control" min="0" required>
                 <span class="text-danger">
                     @error('age')
                         {{ $message }}
                     @enderror
-                </span>
-             </div>
+                    </span>
+            </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Description</label>
                 <textarea class="form-control" id="description" name='description' rows="3"></textarea>
@@ -138,7 +139,7 @@
                     @error('description')
                         {{ $message }}
                     @enderror
-                </span>
+                    </span>
             </div>
             <div class="form-group">Choose images</label>
                 <input type="file" class="form-control p-4"name="images[]" id="image_id"name="image_id" multiple>
@@ -146,7 +147,7 @@
                     @error('image')
                         {{ $message }}
                     @enderror
-                </span>
+                    </span>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -155,7 +156,33 @@
     </div>
     <div class="container">
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#catagory').change(function() {
+                var categoryId = $(this).val();
+                if (categoryId) {
+                    $.ajax({
+                        // dd(categoryId);
+                        url: '/admin/get-breeds/' + categoryId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#breed').empty();
+                            $('#breed').append('<option value="">Select Breed</option>');
+                            $.each(data, function(key, value) {
+                                $('#breed').append('<option value="' + value.id + '">' +
+                                    value.name + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#breed').empty();
+                    $('#breed').append('<option value="">Select Breed</option>');
+                }
+            });
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
@@ -165,6 +192,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </body>
 
 </html>
