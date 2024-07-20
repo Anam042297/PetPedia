@@ -9,6 +9,8 @@ use App\Models\Image;
 use App\Models\User;
 use App\Models\Catagory;
 use App\Models\Breed;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -23,7 +25,7 @@ class PostController extends Controller
         // dd($request->all());
         // Validate incoming request data
         $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
+
             'catagory_id' => 'required|exists:catagories,id',
             'breed_id' => 'required|exists:breeds,id',
             'name' => 'required|string|max:255',
@@ -31,21 +33,23 @@ class PostController extends Controller
             'description' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image file
         ]);
+        $user_id = Auth::id();
+        // dd($user_id);
 
         // Create a new post instance
         $post = new Post();
-        $post->user_id = Auth::id(); // Assuming authenticated user
+        $post->user_id =$user_id;
         $post->catagory_id = $validatedData['catagory_id'];
         $post->breed_id = $validatedData['breed_id'];
         $post->name = $validatedData['name'];
         $post->age = $validatedData['age'];
         $post->description = $validatedData['description'];
-         dd($post);
+        //  dd($post);
         $post->save();
-
+// dd($request->hasFile('images'));
         // Handle uploading and associating images
-        if ($validatedData->hasFile('images')) {
-            foreach ($validatedData->file('images') as $image) {
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
                $filename = time() . '.' . $image->getClientOriginalExtension();
                $path = $image->storeAs('public/images', $filename);
                $url = Storage::url($path);
@@ -58,6 +62,6 @@ class PostController extends Controller
         }
 
         // Redirect to a success page or route
-        return redirect()->route('posts.create');
+        return redirect('/createpost')->with('success', 'Post created successfully!');
     }
 }
