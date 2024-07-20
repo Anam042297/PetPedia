@@ -26,7 +26,7 @@ class PostController extends Controller
                 ->addColumn('images', function ($row) {
                     $images = '';
                     foreach ($row->images as $image) {
-                        $images .= '<img src="' . asset('storage/images/' . $image->path) . '" class="img-thumbnail" width="100">';
+                        $images .= '<img src="' . asset('storage/public/images/' . $image->path) . '" class="img-thumbnail" width="100">';
                     }
                     return $images;
                 })
