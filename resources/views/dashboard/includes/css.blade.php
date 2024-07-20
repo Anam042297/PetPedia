@@ -4,30 +4,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"> --}}
 <style>
-    .header
-    {
-        background-color:#ffffff3a ;
-    }
-    .footer
-    {
-        background-color:#ffffff3a  ;
-    }
 
-    .sidecontent
-    {
-        color: #191645;
-    }
-    .sidecontent:hover
-    {
-        color: #191645;
-    }
-    .adminame
-    {
-        color: #191645;
-    }
-    .adminame:hover
-    {
-        color:#191645 ;
-    }
+/* .sb-sidenav-dark {
+  background: linear-gradient(to bottom, #ff99b6, #af99ff);
+}
+
+.navigation_bar{
+    background: linear-gradient(to bottom, #ff99b6, #af99ff);
+} */
 
 </style>

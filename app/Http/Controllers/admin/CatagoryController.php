@@ -13,16 +13,9 @@ class CatagoryController extends Controller
     if ($request->ajax()) {
         $data = Catagory::latest()->get();
         return Datatables::of($data)
-                ->addColumn('action', function($row){
-                    $editUrl = route('Catagory.edit', $row->id);
-                    $deleteUrl = route('Catagory.destroy', $row->id);
-                    $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
-                    $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
-                    $buttons .= csrf_field();
-                    $buttons .= method_field('DELETE');
-                    $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
-                    return $buttons;
-                })
+        ->addColumn('action', function ($row) {
+            return '<button class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+        })
 
                 ->addIndexColumn()
                 ->rawColumns(['action'])
@@ -60,17 +53,17 @@ class CatagoryController extends Controller
                 $catagory = Catagory::find($id);
                 return view('catagory.edit', compact('catagory'));
             }
-            public function destroy($id)
-            {
-                $catagory = Catagory::find($id);
+            // public function destroy($id)
+            // {
+            //     $catagory = Catagory::find($id);
 
-                if (!$catagory) {
-                    return redirect()->route('Catagory.display');
-                }
+            //     if (!$catagory) {
+            //         return redirect()->route('Catagory.display');
+            //     }
 
-                $catagory->delete();
+            //     $catagory->delete();
 
-                return redirect()->route('Catagory.display');
-            }
+            //     return redirect()->route('Catagory.display');
+            // }
     }
 
