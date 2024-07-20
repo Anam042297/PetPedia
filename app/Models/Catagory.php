@@ -13,4 +13,8 @@ class Catagory extends Model
     {
         return $this->hasMany(Post::class);
     }
+    public function breeds()
+    {
+        return $this->hasMany(Breed::class);
+    }
 }

@@ -1,3 +1,5 @@
+@extends('dashboard.master')
+@section('content')
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,18 +19,18 @@
 
     <div class="container">
         <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col">
-                        <h4 class="text-center text-success mt-5 mb-5"><b>Breed Table</b></h4>
+            <div class="card-header py-5">
+                 <div class="row">
+                        <div class="col">
+                            <h4 class="text-center" style="color: #4B49AC;"><b>Breed Table</b></h4>
+                        </div>
+                        <div class="col-auto d-flex justify-content-end">
+                            <a href="{{ route('breed.create') }}" class="btn" style="background-color: #4B49AC; border-color: #413f99; color: #ffffff;">
+                                <i class="fa fa-plus"></i>
+                                Add Breed
+                            </a>
+                        </div>
                     </div>
-                    <div class="col d-flex justify-content-end align-items-center"> <!-- Adjusted column for button -->
-                        <a href="{{ route('breed.create') }}" class="btn btn-success">
-                            <i class="fa fa-plus"></i>
-                            Add Breed
-                        </a>
-                    </div>
-                </div>
             </div>
             <!-- Rest of your card content -->
 
@@ -53,7 +55,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "/indexbreed",
+                url: "/admin/indexbreed",
             },
             columns: [
                 { data: 'name', name: 'name' },
@@ -64,3 +66,4 @@
 </script>
 </body>
 </html>
+@endsection

@@ -37,7 +37,7 @@ class LoginController extends Controller
         }
         else
         {
-            return view('frontend.home');
+            return view('frontend.login');
         }
     }
 

@@ -12,7 +12,19 @@
         <div class="row justify-content-center">
             <div class="col-12 col-sm-8 mb-5">
                 <div class="contact-form">
-                    <div id="success"></div>
+                    <div id="success">
+                        @if (session('error'))
+                        <div class="alert alert-success">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    </div>
                     <form name="sentMessage" id="contactForm" novalidate="novalidate" action="{{ route('form.submit') }}"
                         method="POST">
                         @csrf

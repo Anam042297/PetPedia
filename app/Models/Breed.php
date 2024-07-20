@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Breed extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name' , 'catagory_id'];
 
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+    public function catagory()
+    {
+        return $this->belongsTo(Catagory::class);
     }
 }

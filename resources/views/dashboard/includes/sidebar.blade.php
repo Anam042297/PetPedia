@@ -17,9 +17,9 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route('usertable') }}">Users</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Products</a>
-                        <a class="nav-link" href="{{ route('post.create') }}"> Pet Posts</a>
+                        <a class="nav-link" href="/admin/viewpost"> Pet Posts</a>
                         <a class="nav-link" href="/admin/displaycatagory"> Pet Category</a>
-                        <a class="nav-link" href="/displaybreed">Pet Breed</a>
+                        <a class="nav-link" href="/admin/displaybreed">Pet Breed</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
