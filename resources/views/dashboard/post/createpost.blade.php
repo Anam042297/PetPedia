@@ -8,7 +8,7 @@
     <title>Document</title>
     <style>
         body {
-            background: linear-gradient(to right, #F5F7FF, #F5F7FF);
+            background: linear-gradient(to right, #ffffff, #ffffff);
             font-family: Arial, sans-serif;
             height: 100%;
             background-position: right;
@@ -41,7 +41,7 @@
         .login-container button {
             width: 100%;
             padding: 10px;
-            background: #4B49AC;
+            background: #ff99b6;
             border: none;
             border-radius: 5px;
             color: white;
@@ -50,16 +50,9 @@
         }
 
         .login-container button:hover {
-            background: #7978E9;
+            background: #ffb8cc;
         }
 
-        .forgot-password {
-            text-align: center;
-            display: block;
-            margin-top: 20px;
-            color: #6D5BBA;
-            text-decoration: none;
-        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -69,7 +62,7 @@
     <div class="login-container">
 
         <div>
-            <h3 style="color:#4B49AC ;text-align:center">Create Post</h3>
+            <h3 style="color:#af99ff ;text-align:center">Create Post</h3>
         </div>
         @if (session('error'))
             <div class="alert alert-success">

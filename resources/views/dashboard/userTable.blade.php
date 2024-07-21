@@ -13,11 +13,12 @@
 <body>
     <div class="container">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header py-5">
                 <div class="row">
-                    <div class="col col-9">
-                        <h4 class="text-center text-success mt-5 mb-5"><b>User Data</b></h4>
+                    <div class="col">
+                        <h4 class="text-center" style="color: #4B49AC;"><b>User Table</b></h4>
                     </div>
+
                 </div>
             </div>
             <div class="card-body">

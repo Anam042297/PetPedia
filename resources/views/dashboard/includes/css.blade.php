@@ -5,12 +5,17 @@
 {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"> --}}
 <style>
 
-/* .sb-sidenav-dark {
+ .sb-sidenav-dark {
   background: linear-gradient(to bottom, #ff99b6, #af99ff);
 }
 
-.navigation_bar{
-    background: linear-gradient(to bottom, #ff99b6, #af99ff);
-} */
-
+.sb-topnav{
+    background: linear-gradient(to right, #ff99b6, #af99ff);
+}
+.text_colour{
+    color: black;
+}
+ body{
+    background: linear-gradient(to right, #ffb5ca, #ffc2e2);
+}
 </style>
