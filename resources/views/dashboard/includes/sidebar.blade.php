@@ -6,11 +6,11 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <a class="nav-link" href="{{ route('admin.index') }}">
-                        <div class="sb-nav-link-icon"><div class="text_colour"><i class="fas fa-tachometer-alt"></i></div></div>
+                        <div class="sb-nav-link-icon"><div class="text_colour"> <i class="fas fa-tachometer-alt"></i></div></div>
                         <div class="text_colour">Dashboard</div>
                     </a>
                     <a class="nav-link" href="{{ route('usertable') }}">
-                        <div class="sb-nav-link-icon"><div class="text_colour"><i class="fas fa-tachometer-alt"></i></div></div>
+                        <div class="sb-nav-link-icon"><div class="text_colour"><i class="fas fa-user"></i></div></div>
                         <div class="text_colour"> Users</div>
                     </a>
                     <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
