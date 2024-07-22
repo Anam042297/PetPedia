@@ -69,22 +69,6 @@
                         },
                     ]
                 });
-                $(document).on('click', '.delete', function() {
-                    var id = $(this).data('id');
-                    if (confirm("Are you sure you want to delete this post?")) {
-                        $.ajax({
-                            url: '/catagory/' + id,
-                            method: 'DELETE',
-                            data: {
-                                _token: '{{ csrf_token() }}'
-                            },
-                            success: function(response) {
-                                $('#catagory_table').DataTable().ajax.reload();
-                            }
-                        });
-                    }
-
-                });
             });
         </script>
 </body>
