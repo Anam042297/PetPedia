@@ -1,5 +1,5 @@
-@extends('dashboard.master')
-@section('content')
+{{-- @extends('dashboard.master')
+@section('content') --}}
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,4 +66,4 @@
 </script>
 </body>
 </html>
-@endsection
+{{-- @endsection --}}

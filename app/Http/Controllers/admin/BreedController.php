@@ -64,9 +64,26 @@ public function viewbreed(){
             }
             public function edit($id)
             {
-                $breed = Breed::find($id);
-                return view('breed.edit', compact('breed'));
+                $breed = Breed::findOrFail($id);
+                $categories = Catagory::all();
+                return view('dashboard.petbreed.create', compact('breed', 'categories'));
             }
+            public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+
+            'name' => 'required|string|max:255',
+            'catagory_id' => 'required|exists:catagories,id',
+        ]);
+
+        $breed = Breed::findOrFail($id);
+        $breed->name = $validatedData['name'];
+        $breed->category_id = $validatedData['catagory_id'];
+
+        $breed->save();
+
+        return redirect()->route('breed.view')->with('success', 'Breed updated successfully.');
+    }
             public function destroy($id)
             {
                 $breed = Breed::find($id);
