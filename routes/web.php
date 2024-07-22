@@ -1,16 +1,16 @@
 <?php
-//user side routes
+//frontend routes
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\MartController;
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\AdminController;
-//admin side routes
-use App\Http\Controllers\UserTableController;
+use App\Http\Controllers\frontend\RegisterController;
+use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\LoginController;
+use App\Http\Controllers\frontend\BookingController;
+use App\Http\Controllers\frontend\BlogController;
+use App\Http\Controllers\frontend\MartController;
+use App\Http\Controllers\frontend\AboutController;
+use App\Http\Controllers\frontend\AdminController;
+// user route
+use App\Http\Controllers\admin\UserTableController;
 //blog post routes
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\CatagoryController;
@@ -20,7 +20,7 @@ use App\Http\Controllers\admin\CommunitypostControllers\ThreadController;
 use App\Http\Controllers\admin\CommunitypostControllers\CommunityPostController;
 use App\Http\Controllers\admin\CommunitypostControllers\ReplyController;
 use App\Http\Controllers\admin\CommunitypostControllers\ReactionController;
-//user side routes
+//frontend routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog',[BlogController::class,'index'])->name('blog');
 Route::get('/booking',[BookingController::class,'index'])->name('booking');
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/get-breeds/{catagory_id}', [PostController::class, 'getBreeds']);
 
 
-    //admin side routes
+    //user routes
     Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
     Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
     Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
