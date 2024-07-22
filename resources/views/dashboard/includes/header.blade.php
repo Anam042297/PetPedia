@@ -1,7 +1,14 @@
 <nav class="sb-topnav navbar ">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">PetPedia</a>
+    <a class="navbar-brand ps-3">PetPedia</a>
     <!-- Sidebar Toggle-->
+    <div class="hamburger" onclick="toggleSidebar()">
+        &#9776;
+    </div>
+    {{-- <div id="content" class="content">
+        <h1>Main Content</h1>
+        <p>Click the hamburger icon to toggle the sidebar.</p>
+    </div> --}}
     {{-- <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button> --}}
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -25,3 +32,21 @@
         </li>
     </ul>
 </nav>
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+
+            if (sidebar.style.left === '0px') {
+                sidebar.style.left = '-250px';
+                content.style.marginLeft = '0';
+            } else {
+                sidebar.style.left = '0px';
+                content.style.marginLeft = '250px';
+            }
+        }
+
+        document.querySelector('.hamburger').addEventListener('click', toggleSidebar);
+    });
+</script> --}}
