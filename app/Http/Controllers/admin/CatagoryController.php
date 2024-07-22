@@ -14,7 +14,14 @@ class CatagoryController extends Controller
         $data = Catagory::latest()->get();
         return Datatables::of($data)
         ->addColumn('action', function ($row) {
-            return '<button class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+            $editUrl = route('Catagory.edit', $row->id);
+            $deleteUrl = route('Catagory.destroy', $row->id);
+            $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
+            $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
+            $buttons .= csrf_field();
+            $buttons .= method_field('DELETE');
+            $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
+            return $buttons;
         })
 
                 ->addIndexColumn()
@@ -49,21 +56,39 @@ class CatagoryController extends Controller
 
             }
             public function edit($id)
+{
+    $category = Catagory::findOrFail($id);
+    return view('dashboard.petcatagory.create', compact('category'));
+}
+
+            // CategoryController.php
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        // Add other validation rules as needed
+    ]);
+
+    $category = Catagory::findOrFail($id);
+    $category->name = $request->input('name');
+    // Update other fields as needed
+    $category->save();
+
+    return redirect()->route('Catagory.display')->with('success', 'Category updated successfully.');
+}
+
+            public function destroy($id)
             {
                 $catagory = Catagory::find($id);
-                return view('catagory.edit', compact('catagory'));
+
+                if (!$catagory) {
+                    return redirect()->route('Catagory.display');
+                }
+
+                $catagory->delete();
+
+                return redirect()->route('Catagory.display');
             }
-            // public function destroy($id)
-            // {
-            //     $catagory = Catagory::find($id);
-
-            //     if (!$catagory) {
-            //         return redirect()->route('Catagory.display');
-            //     }
-
-            //     $catagory->delete();
-
-            //     return redirect()->route('Catagory.display');
-            // }
     }
 

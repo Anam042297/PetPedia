@@ -19,9 +19,9 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <div class="text_colour"><a class="nav-link" href="/admin/viewpost">Posts</a></div>
-                        <div class="text_colour"><a class="nav-link" href="/admin/displaycatagory">Category</a></div>
-                        <div class="text_colour"><a class="nav-link" href="/admin/displaybreed">Breed</a></div>
+                        <a class="nav-link" href="/admin/viewpost">Posts</a>
+                        <a class="nav-link" href="/admin/displaycatagory">Category</a>
+                        <a class="nav-link" href="/admin/displaybreed">Breed</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseLayout"

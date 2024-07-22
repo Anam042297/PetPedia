@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::any('/storecatagory', [CatagoryController::class, 'store'])->name('Catagory.store');
     Route::get('/displaycatagory', [CatagoryController::class, 'viewcatagory'])->name('Catagory.display');
     Route::get('/editcatagory/{id}', [CatagoryController::class, 'edit'])->name('Catagory.edit');
+    Route::put('/categories/{id}', [CatagoryController::class, 'update'])->name('Catagory.update');
     Route::delete('/destroycatagory/{id}', [CatagoryController::class, 'destroy'])->name('Catagory.destroy');
 
     //Pet Breed routes
