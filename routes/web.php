@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::any('/displaybreed', [BreedController::class, 'viewbreed'])->name('breed.view');
     Route::any('/indexbreed', [BreedController::class, 'index'])->name('breed.index');
     Route::get('/breed/{id}/edit', [BreedController::class, 'edit'])->name('breed.edit');
+    Route::put('/breed/{id}/update', [BreedController::class, 'update'])->name('breed.update');
     Route::delete('/breed/{id}', [BreedController::class, 'destroy'])->name('breed.destroy');
 
     //post routes

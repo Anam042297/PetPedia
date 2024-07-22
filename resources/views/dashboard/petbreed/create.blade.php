@@ -62,10 +62,13 @@
     <div class="login-container">
 
         <div>
-            <h3 style="color:#af99ff ;text-align:center">Create Breed</h3>
+            <h3 style="color:#af99ff; text-align:center;">
+                {{ isset($breed) ? 'Edit Breed' : 'Create Breed' }}
+            </h3>
         </div>
+
         @if (session('error'))
-            <div class="alert alert-success">
+            <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
@@ -75,38 +78,43 @@
                 {{ session('success') }}
             </div>
         @endif
-        <form  id="contactForm" action="{{ route('breed.store') }}" method="POST" enctype="multipart/form-data">
+
+        <form id="contactForm" action="{{ isset($breed) ? route('breed.update', $breed->id) : route('breed.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @if (isset($breed))
+                @method('PUT')
+            @endif
             <div class="form-group">
-                <label for="catagory">Select Catagory</label>
+                <label for="catagory">Select Category</label>
                 <select class="form-control" id="catagory" name="catagory_id">
                     <option value="">Select category</option>
-                    @foreach($categories as $catagory)
-
-                    <option value="{{ $catagory->id }}">{{ $catagory->name }}</option>
-                @endforeach
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ isset($breed) && $breed->catagory_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
                 </select>
                 <span class="text-danger">
                     @error('catagory_id')
                         {{ $message }}
                     @enderror
-                </span>
+                </span>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">
-                    Breed Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <label for="exampleFormControlSelect1">Breed Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ isset($breed) ? $breed->name : old('name') }}">
                 <span class="text-danger">
                     @error('name')
                         {{ $message }}
                     @enderror
-                </span>
+                </span>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">
+                {{ isset($breed) ? 'Update' : 'Submit' }}
+            </button>
         </form>
-
-
     </div>
+
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
