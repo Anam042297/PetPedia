@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetPedia</title>
     @include('dashboard.includes.css')
+@yield('css')
    </head>
 
 <body class="sb-nav-fixed">
