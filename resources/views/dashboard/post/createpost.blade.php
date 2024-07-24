@@ -10,7 +10,7 @@
     <title>Document</title>
     <style>
         body {
-            background: linear-gradient(to right, #ffffff, #ffffff);
+            background: linear-gradient(to right, #ffb5ca, #ffc2e2);
             font-family: Arial, sans-serif;
             height: 100%;
             background-position: right;
@@ -20,6 +20,7 @@
         }
 
         .login-container {
+            background: linear-gradient(to right,  #ffffff,#ffffff);
             width: 700px;
             margin: auto;
             padding: 50px;
@@ -61,7 +62,7 @@
 </head>
 
 <body>
-    <div class="login-container">
+    <div class="login-container" >
 
         <div>
             <h3 style="color:#af99ff ;text-align:center">Create Post</h3>
