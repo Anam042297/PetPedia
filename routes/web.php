@@ -56,6 +56,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
     Route::get('/viewpost', [PostController::class, 'viewpost'])->name('post.view');
     Route::get('/get-breeds/{catagory_id}', [PostController::class, 'getBreeds']);
+    Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('/posts/{id}', [PostController::class, 'update'])->name('post.update');
 
 
     //user routes

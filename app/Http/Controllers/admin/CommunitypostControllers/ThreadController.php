@@ -12,7 +12,7 @@ class ThreadController extends Controller
     // {return 'thread is working';
         $threads = Thread::with(['user', 'posts.replies.user', 'posts.reactions'])->latest()->paginate(10);
         // dd($threads);
-        return view('frontend.blog', ['threads'=>$threads]);
+        return view('frontend.blog',compact('threads'));
     }
 
     public function store(Request $request)

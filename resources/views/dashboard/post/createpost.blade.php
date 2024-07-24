@@ -10,7 +10,7 @@
     <title>Document</title>
     <style>
         body {
-            background: linear-gradient(to right, #ffffff, #ffffff);
+            background: linear-gradient(to right, #ffb5ca, #ffc2e2);
             font-family: Arial, sans-serif;
             height: 100%;
             background-position: right;
@@ -20,6 +20,7 @@
         }
 
         .login-container {
+            background: linear-gradient(to right,  #ffffff,#ffffff);
             width: 700px;
             margin: auto;
             padding: 50px;
@@ -64,10 +65,13 @@
     <div class="login-container">
 
         <div>
-            <h3 style="color:#af99ff ;text-align:center">Create Post</h3>
+            <h3 style="color:#af99ff; text-align:center;">
+                {{ isset($post) ? 'Edit Post' : 'Create Post' }}
+            </h3>
         </div>
+
         @if (session('error'))
-            <div class="alert alert-success">
+            <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
@@ -77,77 +81,95 @@
                 {{ session('success') }}
             </div>
         @endif
-        <form id="contactForm" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+
+        <form id="contactForm" action="{{ isset($post) ? route('post.update', $post->id) : route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @if (isset($post))
+                @method('PUT')
+            @endif
 
             <div class="form-group">
-                <label for="catagory">Select Catagory</label>
+                <label for="catagory">Select Category</label>
                 <select class="form-control" id="catagory" name="catagory_id">
                     <option value="">Select category</option>
-                    @foreach ($categories as $catagory)
-                        <option value="{{ $catagory->id }}">{{ $catagory->name }}</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ isset($post) && $post->catagory_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
                     @endforeach
                 </select>
                 <span class="text-danger">
                     @error('catagory_id')
                         {{ $message }}
                     @enderror
-                    </span>
+                </span>
             </div>
+
             <div class="form-group">
-                <label for="$breeds">Select Breed</label>
+                <label for="breed">Select Breed</label>
                 <select class="form-control" id="breed" name="breed_id">
-                    {{-- <option value="">Select breed</option> --}}
-                    {{-- @foreach ($breeds as $breed)
-                    <option value="{{ $breed->id }}">{{ $breed->name }}</option>
-                @endforeach --}}
+                    <option value="">Select breed</option>
+                    @foreach ($breeds as $breed)
+                        <option value="{{ $breed->id }}" {{ isset($post) && $post->breed_id == $breed->id ? 'selected' : '' }}>
+                            {{ $breed->name }}
+                        </option>
+                    @endforeach
                 </select>
                 <span class="text-danger">
                     @error('breed_id')
                         {{ $message }}
                     @enderror
-                    </span>
+                </span>
             </div>
+
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Pet Name</label>
-                <input type="text" class="form-control" id="pet_name" name="name" placeholder="Pet Name">
+                <label for="pet_name">Pet Name</label>
+                <input type="text" class="form-control" id="pet_name" name="name" placeholder="Pet Name" value="{{ isset($post) ? $post->name : old('name') }}">
                 <span class="text-danger">
-                    @error('pet_name')
+                    @error('name')
                         {{ $message }}
                     @enderror
-                    </span>
+                </span>
             </div>
+
             <div class="form-group">
-                <label for="formGroupExampleInput">Pet Age (in months)</label>
-                <input type="number" id="age" name="age" class="form-control" min="0" required>
+                <label for="age">Pet Age (in months)</label>
+                <input type="number" id="age" name="age" class="form-control" min="0" value="{{ isset($post) ? $post->age : old('age') }}" required>
                 <span class="text-danger">
                     @error('age')
                         {{ $message }}
                     @enderror
-                    </span>
+                </span>
             </div>
+
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" id="description" name='description' rows="3"></textarea>
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ isset($post) ? $post->description : old('description') }}</textarea>
                 <span class="text-danger">
                     @error('description')
                         {{ $message }}
                     @enderror
-                    </span>
+                </span>
             </div>
-            <div class="form-group">Choose images</label>
-                <input type="file" class="form-control p-4"name="images[]" id="image_id"name="image_id" multiple>
+
+            <div class="form-group">
+                <label for="images">Choose images</label>
+                <input type="file" class="form-control p-4" name="images[]" id="images" multiple>
                 <span class="text-danger">
-                    @error('image')
+                    @error('images')
                         {{ $message }}
                     @enderror
-                    </span>
+                </span>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <button type="submit" class="btn btn-primary">
+                {{ isset($post) ? 'Update' : 'Submit' }}
+            </button>
         </form>
 
-
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
