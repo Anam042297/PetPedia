@@ -1,23 +1,17 @@
-{{-- @extends('dashboard.master')
-@section('content') --}}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Breed</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+@extends('dashboard.master')
+@section('css')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+ <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+@endsection
+@section('content')
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-
-</head>
-<body>
-
-    <div class="container">
+    <div class="container" style="margin-top: 20px;">
         <div class="card">
             <div class="card-header py-5">
                  <div class="row">
@@ -48,8 +42,10 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $(function () {
         var table = $('#breed_table').DataTable({
             processing: true,
@@ -64,6 +60,4 @@
         });
     });
 </script>
-</body>
-</html>
-{{-- @endsection --}}
+@endsection
