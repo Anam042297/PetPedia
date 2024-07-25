@@ -83,4 +83,9 @@
     .show {
       display: block;
     }
+    .carousel-item img {
+            width: 100%;
+            height: 200px; /* Fixed height */
+            object-fit: cover; /* Ensures the image covers the container */
+        }
     </style>

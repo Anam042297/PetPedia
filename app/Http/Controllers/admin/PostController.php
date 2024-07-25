@@ -27,12 +27,13 @@ class PostController extends Controller
                        ' <button class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
             })
             ->addColumn('images', function ($row) {
-                $images = '';
-                foreach ($row->images as $image) {
-                    $images .= '<img src="' . asset('storage/images/' . $image->path) . '" class="img-thumbnail" width="100">';
+                if ($row->images->isEmpty()) {
+                    return ''; // Return empty if there are no images
                 }
-                return $images;
+                $firstImage = $row->images->first();
+                return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
             })
+
             ->rawColumns(['images', 'action'])
             ->make(true);
     }

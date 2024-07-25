@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\CommunitypostControllers\ReactionController;
 //frontend routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog',[BlogController::class,'index'])->name('blog');
+Route::get('/blogsingle/{id}',[BlogController::class,'show'])->name('blog.readmore');
 Route::get('/booking',[BookingController::class,'index'])->name('booking');
 Route::get('/mart',[MartController::class,'index'])->name('mart');
 Route::get('/about',[AboutController::class,'index'])->name('about');
