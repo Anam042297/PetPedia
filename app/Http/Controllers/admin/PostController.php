@@ -16,36 +16,38 @@ use DataTables;
 class PostController extends Controller
 {
     public function index(Request $request)
-{
-    if ($request->ajax()) {
-        $posts = Post::with(['catagory', 'breed', 'images', 'user'])->select('posts.*');
-        return DataTables::of($posts)
-            ->addColumn('action', function ($row) {
-                $editUrl = route('post.edit', $row->id);
-                // $deleteUrl = route('post.destroy', $row->id);
-                return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' .
-                       ' <button class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
-            })
-            ->addColumn('images', function ($row) {
-                if ($row->images->isEmpty()) {
-                    return ''; // Return empty if there are no images
-                }
-                $firstImage = $row->images->first();
-                return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
-            })
+    {
+        if ($request->ajax()) {
+            $posts = Post::with(['catagory', 'breed', 'images', 'user'])->select('posts.*');
+            return DataTables::of($posts)
+                ->addColumn('action', function ($row) {
+                    $editUrl = route('post.edit', $row->id);
+                    // $deleteUrl = route('post.destroy', $row->id);
+                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' .
+                        ' <button class="btn btn-danger btn-sm delete" data-id="' . $row->id . '">Delete</button>';
+                })
+                ->addColumn('images', function ($row) {
+                    if ($row->images->isEmpty()) {
+                        return ''; // Return empty if there are no images
+                    }
+                    $firstImage = $row->images->first();
+                    return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
+                })
 
-            ->rawColumns(['images', 'action'])
-            ->make(true);
-    }
-    return view('dashboard.post.viewpost');
-}
-    public function viewpost(){
+                ->rawColumns(['images', 'action'])
+                ->make(true);
+        }
         return view('dashboard.post.viewpost');
     }
-    public function create(){
+    public function viewpost()
+    {
+        return view('dashboard.post.viewpost');
+    }
+    public function create()
+    {
         $categories = Catagory::all();
         $breeds = Breed::all();
-        return view('dashboard.post.createpost',compact('categories', 'breeds'));
+        return view('dashboard.post.createpost', compact('categories', 'breeds'));
     }
     public function store(Request $request)
     {
@@ -65,7 +67,7 @@ class PostController extends Controller
 
         // Create a new post instance
         $post = new Post();
-        $post->user_id =$user_id;
+        $post->user_id = $user_id;
         $post->catagory_id = $validatedData['catagory_id'];
         $post->breed_id = $validatedData['breed_id'];
         $post->name = $validatedData['name'];
@@ -73,17 +75,17 @@ class PostController extends Controller
         $post->description = $validatedData['description'];
         //  dd($post);
         $post->save();
-// dd($request->hasFile('images'));
+        // dd($request->hasFile('images'));
         // Handle uploading and associating images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-               $filename = time() . '.' . $image->getClientOriginalExtension();
-               $path = $image->storeAs('public/images', $filename);
-               $url = Storage::url($path);
-               Image::create([
-              'post_id' => $post->id,
-              'url' => $url,
-           ]);
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('public/images', $filename);
+                $url = Storage::url($path);
+                Image::create([
+                    'post_id' => $post->id,
+                    'url' => $url,
+                ]);
 
             }
         }
@@ -92,45 +94,45 @@ class PostController extends Controller
         return redirect('/admin/viewpost')->with('success', 'Post created successfully!');
     }
     public function getBreeds($category_id)
-{
-    $breeds = Breed::where('category_id', $category_id)->get();
-    return response()->json($breeds);
-}
+    {
+        $breeds = Breed::where('category_id', $category_id)->get();
+        return response()->json($breeds);
+    }
 
-public function edit($id)
-{
-    $post = Post::findOrFail($id);
-    $categories = Catagory::all();
-    $breeds = Breed::all();
-    return view('dashboard.post.createpost', compact('post', 'categories', 'breeds'));
-}
-public function update(Request $request, $id)
-{
-    $validatedData = $request->validate([
-        'catagory_id' => 'required|exists:catagories,id',
-        'breed_id' => 'required|exists:breeds,id',
-        'name' => 'required|string|max:255',
-        'age' => 'required|integer|min:0',
-        'description' => 'nullable|string',
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    public function edit($id)
+    {
+        $post = Post::findOrFail($id);
+        $categories = Catagory::all();
+        $breeds = Breed::all();
+        return view('dashboard.post.createpost', compact('post', 'categories', 'breeds'));
+    }
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'catagory_id' => 'required|exists:catagories,id',
+            'breed_id' => 'required|exists:breeds,id',
+            'name' => 'required|string|max:255',
+            'age' => 'required|integer|min:0',
+            'description' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    $post = Post::findOrFail($id);
-    $post->catagory_id = $validatedData['catagory_id'];
-    $post->breed_id = $validatedData['breed_id'];
-    $post->name = $validatedData['name'];
-    $post->age = $validatedData['age'];
-    $post->description = $validatedData['description'];
+        $post = Post::findOrFail($id);
+        $post->catagory_id = $validatedData['catagory_id'];
+        $post->breed_id = $validatedData['breed_id'];
+        $post->name = $validatedData['name'];
+        $post->age = $validatedData['age'];
+        $post->description = $validatedData['description'];
         // Handle file uploads if any
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-               $filename = time() . '.' . $image->getClientOriginalExtension();
-               $path = $image->storeAs('public/images', $filename);
-               $url = Storage::url($path);
-               Image::create([
-              'post_id' => $post->id,
-              'url' => $url,
-           ]);
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('public/images', $filename);
+                $url = Storage::url($path);
+                Image::create([
+                    'post_id' => $post->id,
+                    'url' => $url,
+                ]);
 
             }
         }

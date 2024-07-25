@@ -10,12 +10,13 @@ use DataTables;
 
 class BreedController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
-    if ($request->ajax()) {
-        $data = Breed::latest()->get();
-        return Datatables::of($data)
-                ->addColumn('action', function($row){
+        if ($request->ajax()) {
+            $data = Breed::latest()->get();
+            return Datatables::of($data)
+                ->addColumn('action', function ($row) {
                     $editUrl = route('breed.edit', $row->id);
                     $deleteUrl = route('breed.destroy', $row->id);
                     $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
@@ -29,30 +30,34 @@ class BreedController extends Controller
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->make(true);
+        }
+        return view('dashboard.petbreed.view');
     }
-    return view('dashboard.petbreed.view');
-}
-public function viewbreed(){
-    return view('dashboard.petbreed.view');
-}
 
-    public function create(){
-        $categories=Catagory::all();
+    public function viewbreed()
+    {
+        return view('dashboard.petbreed.view');
+    }
+
+    public function create()
+    {
+        $categories = Catagory::all();
         // dd($categories);
         return view('dashboard.petbreed.create', compact(['categories']));
     }
-    public function store(Request $request){
-//    dd($request->all());
-       // Validate incoming request data
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        // Validate incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'catagory_id'=> 'required|string|max:255'
+            'catagory_id' => 'required|string|max:255'
         ]);
         // dd($validatedData);
         // Create a new post instance
-        $breed = new  Breed();
+        $breed = new Breed();
         $breed->name = $validatedData['name'];
-        $breed->category_id =$validatedData['catagory_id'];
+        $breed->category_id = $validatedData['catagory_id'];
         //  dd($breed);
         $breed->save();
 
@@ -61,14 +66,14 @@ public function viewbreed(){
         return redirect()->route('breed.view');
 
 
-            }
-            public function edit($id)
-            {
-                $breed = Breed::findOrFail($id);
-                $categories = Catagory::all();
-                return view('dashboard.petbreed.create', compact('breed', 'categories'));
-            }
-            public function update(Request $request, $id)
+    }
+    public function edit($id)
+    {
+        $breed = Breed::findOrFail($id);
+        $categories = Catagory::all();
+        return view('dashboard.petbreed.create', compact('breed', 'categories'));
+    }
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
 
@@ -84,16 +89,16 @@ public function viewbreed(){
 
         return redirect()->route('breed.view')->with('success', 'Breed updated successfully.');
     }
-            public function destroy($id)
-            {
-                $breed = Breed::find($id);
+    public function destroy($id)
+    {
+        $breed = Breed::find($id);
 
-                if (!$breed) {
-                    return redirect()->route('breed.view');
-                }
+        if (!$breed) {
+            return redirect()->route('breed.view');
+        }
 
-                $breed->delete();
+        $breed->delete();
 
-                return redirect()->route('breed.view');
-            }
+        return redirect()->route('breed.view');
+    }
 }
