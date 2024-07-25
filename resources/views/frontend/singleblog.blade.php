@@ -3,7 +3,6 @@
     <div class="container py-5">
         <div class="row pt-5">
             <div class="col-lg-8">
-                <!-- Post Title and Details -->
                 <div class="d-flex flex-column text-left mb-4">
                     <h4 class="text-secondary mb-3">Blog Detail</h4>
                     <h1 class="mb-3">{{ $post->name }}</h1>
@@ -60,21 +59,10 @@
 
 
                     </div>
-                </div>
-
-                <!-- Image Carousel -->
-
-
-                <!-- Post Content -->
-                <div class="mb-5">
-                    <p>{{ $post->content }}</p>
-                </div>
-
                 <!-- Back Button -->
                 <a href="{{ route('blog') }}" class="btn btn-primary">Back to Blog Page</a>
             </div>
         </div>
     </div>
-
-    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 @endsection

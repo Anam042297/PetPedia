@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class UserTableController extends Controller
 
 
             return DataTables::of($data)
-                ->addColumn('action', function($row){
+                ->addColumn('action', function ($row) {
                     $editUrl = route('users.edit', $row->id);
                     $deleteUrl = route('users.destroy', $row->id);
                     $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
