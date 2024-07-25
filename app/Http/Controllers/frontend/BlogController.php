@@ -14,4 +14,8 @@ class BlogController extends Controller
         $threads = Thread::with(['user', 'posts.replies.user', 'posts.reactions'])->latest()->paginate(10);
         return view('frontend.blog', compact('posts','threads'));
     }
+    public function show($id){
+        $post = Post::with(['catagory', 'breed', 'images'])->findOrFail($id);
+        return view('frontend.singleblog', compact('post'));
+    }
 }
