@@ -10,7 +10,7 @@
     <title>Document</title>
     <style>
         body {
-            background: linear-gradient(to right, #ffb5ca, #ffc2e2);
+            background: linear-gradient(to right, #ffffff,#ffffff);
             font-family: Arial, sans-serif;
             height: 100%;
             background-position: right;
@@ -20,7 +20,6 @@
         }
 
         .login-container {
-            background: linear-gradient(to right,  #ffffff,#ffffff);
             width: 700px;
             margin: auto;
             padding: 50px;
@@ -134,7 +133,7 @@
 
             <div class="form-group">
                 <label for="age">Pet Age (in months)</label>
-                <input type="number" id="age" name="age" class="form-control" min="0" value="{{ isset($post) ? $post->age : old('age') }}" required>
+                <input type="number" id="age" name="age" class="form-control" min="0" placeholder="Age"value="{{ isset($post) ? $post->age : old('age') }}" required>
                 <span class="text-danger">
                     @error('age')
                         {{ $message }}
@@ -144,7 +143,7 @@
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3">{{ isset($post) ? $post->description : old('description') }}</textarea>
+                <textarea class="form-control" id="description" name="description" placeholder="Add Description here..." rows="3">{{ isset($post) ? $post->description : old('description') }}</textarea>
                 <span class="text-danger">
                     @error('description')
                         {{ $message }}
@@ -154,7 +153,7 @@
 
             <div class="form-group">
                 <label for="images">Choose images</label>
-                <input type="file" class="form-control p-4" name="images[]" id="images" multiple>
+                <input type="file" class="form-control" name="images[]" id="images" multiple>
                 <span class="text-danger">
                     @error('images')
                         {{ $message }}
