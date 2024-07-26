@@ -19,9 +19,8 @@ class UserTableController extends Controller
 
             return DataTables::of($data)
                 ->addColumn('action', function ($row) {
-                    $editUrl = route('users.edit', $row->id);
                     $deleteUrl = route('users.destroy', $row->id);
-                    $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
+                    $buttons = '';
                     $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
                     $buttons .= csrf_field();
                     $buttons .= method_field('DELETE');

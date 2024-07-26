@@ -60,9 +60,8 @@
 
                     </div>
                 <!-- Back Button -->
-                <a href="{{ route('blog') }}" class="btn btn-primary">Back to Blog Page</a>
+                <a href="{{ route('blog') }}" class="btn btn-primary">Back to Posts</a>
             </div>
         </div>
     </div>
-     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 @endsection

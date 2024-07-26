@@ -16,7 +16,7 @@
                         <div id="{{ $carouselId }}" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 @foreach ($post->images as $index => $image)
-                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}" style=" width: 100%;height: 200px;object-fit: cover;">
                                         <img src="{{ $image->url }}" class="d-block w-100" alt="Image">
                                     </div>
                                 @endforeach
@@ -63,7 +63,7 @@
 
                             {{-- <p class="card-text">{{ $post->description }}</p> --}}
 
-                            <a class="font-weight-bold" href="{{ route('blog.readmore', $post->id) }}">Read More</a>
+                            <a class="font-weight-bold" href="{{ route('blog.readmore', $post->id) }}">View Details</a>
                         </div>
 
 
