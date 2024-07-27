@@ -12,7 +12,6 @@ class ReplyController extends Controller
         $validated = $request->validate([
             'message' => 'required|string',
         ]);
-
         $post->replies()->create([
             'message' => $validated['message'],
             'user_id' => auth()->id(),
