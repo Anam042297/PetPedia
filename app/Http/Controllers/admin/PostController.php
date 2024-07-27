@@ -59,7 +59,6 @@ class PostController extends Controller
             'breed_id' => 'required|exists:breeds,id',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
-            'description' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image file
         ]);
         $user_id = Auth::id();
@@ -72,7 +71,6 @@ class PostController extends Controller
         $post->breed_id = $validatedData['breed_id'];
         $post->name = $validatedData['name'];
         $post->age = $validatedData['age'];
-        $post->description = $validatedData['description'];
         //  dd($post);
         $post->save();
         // dd($request->hasFile('images'));

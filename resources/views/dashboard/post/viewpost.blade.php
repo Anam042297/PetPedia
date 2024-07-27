@@ -27,7 +27,6 @@
                             <th>Breed</th>
                             <th>Pet Name</th>
                             <th>Age (months)</th>
-                            <th>Description</th>
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -55,7 +54,6 @@
                 { data: 'breed.name', name: 'breed.name' },
                 { data: 'name', name: 'name' },
                 { data: 'age', name: 'age' },
-                { data: 'description', name: 'description' },
                 { data: 'images', name: 'images', orderable: false, searchable: false },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
