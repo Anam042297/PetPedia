@@ -1,16 +1,13 @@
 @include('frontend.includes.css')
-
-@include('frontend.includes.css')
-
+@include('frontend.includes.header')
 <!-- Contact Start -->
 <div class="container-fluid pt-5">
-    <div class="d-flex flex-column text-center mb-5 pt-5">
-
-        <h1 class="display-4 m-0">Log<span class="text-primary">In</span></h1>
+    <div class="d-flex flex-column text-center mb-4 pt-4">
+    <h1 class="display-4 m-0">Log<span class="text-primary">In</span></h1>
     </div>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-sm-8 mb-5">
+            <div class="col-12 col-sm-7 mb-5">
                 <div class="contact-form">
                     <div id="success">
                         @if (session('error'))
@@ -18,7 +15,6 @@
                             {{ session('error') }}
                         </div>
                     @endif
-
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -36,8 +32,7 @@
                                         {{ $message }}
                                     @enderror
                                 </span>
-                            <p class="help-block text-danger"></p>
-                           
+                            <p class="help-block text-danger"></p>      
                         </div>
                         <div class="container">
                             <input type="password" name="password" class="form-control p-4" id="pwd"
@@ -49,12 +44,12 @@
                                 </span>
                         </div>
                         <div>
-                            <br>
                         </div>
                         <div class="text-center">
                             <button class="btn btn-primary py-2 px-5" type="submit"
                                 id="sendMessageButton">Submit</button>
                         </div>
+                        <br>
                         <div>Don't have account <a href="{{ route('register') }}">Register?</a></div>
                     </form>
                 </div>

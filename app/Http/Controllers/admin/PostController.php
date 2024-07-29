@@ -22,9 +22,9 @@ class PostController extends Controller
             return DataTables::of($posts)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('post.edit', $row->id);
-                    // $deleteUrl = route('post.destroy', $row->id);
-                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' .
-                        ' <button class="btn btn-danger btn-sm delete" data-id="' . $row->id . '">Delete</button>';
+                    $deleteUrl = route('post.destroy', $row->id);
+                    $deleteButton = '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> Delete</button>';
+                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' . $deleteButton;
                 })
                 ->addColumn('images', function ($row) {
                     if ($row->images->isEmpty()) {
@@ -33,11 +33,31 @@ class PostController extends Controller
                     $firstImage = $row->images->first();
                     return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
                 })
-
+    
                 ->rawColumns(['images', 'action'])
                 ->make(true);
         }
         return view('dashboard.post.viewpost');
+    }
+    public function destroy($id)
+    {
+        try
+        {
+            // Find the category by its ID with properties eager loaded
+            $category = post::with('post')->findOrFail($id);
+
+            if ($category->post()->count() > 0) {
+                return response()->json(['error' => 'Category is not deleted because it has related properties']);
+            }
+
+            $category->delete();
+
+            return response()->json(['success' => 'Category deleted successfully']);
+        }
+        catch (\Exception $e)
+        {
+            return response()->json(['error' => 'Failed to delete category: ' . $e->getMessage()], 500);
+        }
     }
     public function viewpost()
     {
@@ -59,6 +79,7 @@ class PostController extends Controller
             'breed_id' => 'required|exists:breeds,id',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
+            'description' => 'nullable|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image file
         ]);
         $user_id = Auth::id();
@@ -71,6 +92,7 @@ class PostController extends Controller
         $post->breed_id = $validatedData['breed_id'];
         $post->name = $validatedData['name'];
         $post->age = $validatedData['age'];
+        $post->description = $validatedData['description'];
         //  dd($post);
         $post->save();
         // dd($request->hasFile('images'));

@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('breeds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
+            // If you have a categories table and want to add a foreign key constraint:
+            $table->foreign('category_id')->references('id')->on('catagories')->onDelete('cascade');
             $table->timestamps();
         });
     }

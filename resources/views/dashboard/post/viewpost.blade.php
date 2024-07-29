@@ -2,7 +2,6 @@
 @section('content')
 
     <div class="container"   style="margin-top: 20px;">
-
         <div class="card">
             <div class="card">
                 <div class="card-header py-5">
@@ -39,13 +38,21 @@
     </div>
 @endsection
 @section("script")
+<script>
+    @if(session('success'))
+        toastr.success('{{ session('success') }}');
+    @endif
+    @if(session('error'))
+        toastr.error('{{ session('error') }}');
+    @endif
+</script>
 <script type="text/javascript">
     $(function () {
         var table = $('#post_table').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: "/admin/indexpost",
+                url: "/admin/indexpost" ,
             },
             columns: [
 
@@ -58,21 +65,41 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
-        $(document).on('click', '.delete', function() {
-            var id = $(this).data('id');
-            if (confirm("Are you sure you want to delete this post?")) {
-                $.ajax({
-                    url: '/posts/' + id,
-                    method: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        $('#posts-table').DataTable().ajax.reload();
+        $(document).on('click', 'button.delete_cat_button', function() {
+                swal({
+                    title: 'Sure',
+                    text: 'Confirm Delete Catagory',
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        var href = $(this).data('href');
+                        var data = {
+                            _token: '{{ csrf_token() }}' // Ensure the CSRF token is included
+                        };
+
+                        $.ajax({
+                            method: "DELETE",
+                            url: href,
+                            dataType: "json",
+                            data: data,
+                            success: function(result) {
+                                if (result.success) {
+                                    toastr.success(result.success);
+                                    category_table.ajax.reload();
+                                } else {
+                                    toastr.error(result.error);
+                                }
+                            },
+                            error: function(result) {
+                                toastr.error(
+                                    'An error occurred while deleting the Catagory.');
+                            }
+                        });
                     }
                 });
-            }
-        });
+            });
     });
 </script>
 @endsection

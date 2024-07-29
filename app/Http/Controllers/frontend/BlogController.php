@@ -11,8 +11,8 @@ class BlogController extends Controller
 
     public function index(){
         $posts = Post::with(['catagory', 'breed', 'images'])->get();
-        $threads = Thread::with(['user', 'posts.replies.user', 'posts.reactions'])->latest()->paginate(10);
-        return view('frontend.blog', compact('posts','threads'));
+      
+        return view('frontend.blog', compact('posts'));
     }
     public function show($id){
         $post = Post::with(['catagory', 'breed', 'images'])->findOrFail($id);
