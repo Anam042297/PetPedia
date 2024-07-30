@@ -1,3 +1,5 @@
+@extends('dashboard.master')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +10,7 @@
     <title>Create Categary</title>
     <style>
         body {
-            background: linear-gradient(to right, #F5F7FF, #F5F7FF);
+            background: linear-gradient(to right, #ffffff, #ffffff);
             font-family: Arial, sans-serif;
             height: 100%;
             background-position: right;
@@ -41,7 +43,7 @@
         .login-container button {
             width: 100%;
             padding: 10px;
-            background: #4B49AC;
+            background: #ff99b6;
             border: none;
             border-radius: 5px;
             color: white;
@@ -50,16 +52,9 @@
         }
 
         .login-container button:hover {
-            background: #7978E9;
+            background:  #ffb8cc;
         }
 
-        .forgot-password {
-            text-align: center;
-            display: block;
-            margin-top: 20px;
-            color: #6D5BBA;
-            text-decoration: none;
-        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -67,12 +62,14 @@
 
 <body>
     <div class="login-container">
-
         <div>
-            <h3 style="color:#4B49AC ;text-align:center">Create Category</h3>
+            <h3 style="color:#af99ff ;text-align:center">
+                {{ isset($category) ? 'Edit Category' : 'Create Category' }}
+            </h3>
         </div>
+
         @if (session('error'))
-            <div class="alert alert-success">
+            <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
@@ -82,25 +79,29 @@
                 {{ session('success') }}
             </div>
         @endif
-        <form  id="contactForm" action="{{ route('Catagory.store') }}" method="POST" enctype="multipart/form-data">
+
+        <form id="contactForm" action="{{ isset($category) ? route('Catagory.update', $category->id) : route('Catagory.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @if (isset($category))
+                @method('PUT')
+            @endif
             <div class="form-group">
                 <label for="exampleFormControlSelect1">
-                    Category Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                    Category Name
+                </label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ isset($category) ? $category->name : old('name') }}">
                 <span class="text-danger">
                     @error('name')
                         {{ $message }}
                     @enderror
-                </span>
+                </span>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">
+                {{ isset($category) ? 'Update' : 'Submit' }}
+            </button>
         </form>
-
-
     </div>
-    <div class="container">
-    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -114,3 +115,4 @@
 </body>
 
 </html>
+@endsection

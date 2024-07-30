@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\frontend;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -22,7 +22,7 @@ class LoginController extends Controller
             [
                 "name"=> 'required|string|max:255|regex:/^[a-zA-Z]+$/u',
                 'email' => 'required|string|max:255|email|regex:/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/',
-                'password' => 'required|min:8',
+                'password' => 'required|min:8|max:20|confirmed|regex:/[A-Za-z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
             ]
             );
        $dataEntered= User::create([
@@ -37,7 +37,7 @@ class LoginController extends Controller
         }
         else
         {
-            return view('frontend.home');
+            return view('frontend.login');
         }
     }
 

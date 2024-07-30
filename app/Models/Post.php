@@ -19,9 +19,9 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function catagory()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Catagory::class);
     }
 
     public function breed()

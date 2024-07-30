@@ -9,54 +9,155 @@ use App\Models\Image;
 use App\Models\User;
 use App\Models\Catagory;
 use App\Models\Breed;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use DataTables;
 
 class PostController extends Controller
 {
-    public function create(){
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $posts = Post::with(['catagory', 'breed', 'images', 'user'])->select('posts.*');
+            return DataTables::of($posts)
+                ->addColumn('action', function ($row) {
+                    $editUrl = route('post.edit', $row->id);
+                    $deleteUrl = route('post.destroy', $row->id);
+                    $deleteButton = '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> Delete</button>';
+                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' . $deleteButton;
+                })
+                ->addColumn('images', function ($row) {
+                    if ($row->images->isEmpty()) {
+                        return ''; // Return empty if there are no images
+                    }
+                    $firstImage = $row->images->first();
+                    return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
+                })
+    
+                ->rawColumns(['images', 'action'])
+                ->make(true);
+        }
+        return view('dashboard.post.viewpost');
+    }
+    public function destroy($id)
+    {
+        try
+        {
+            // Find the category by its ID with properties eager loaded
+            $category = post::with('post')->findOrFail($id);
+
+            if ($category->post()->count() > 0) {
+                return response()->json(['error' => 'Category is not deleted because it has related properties']);
+            }
+
+            $category->delete();
+
+            return response()->json(['success' => 'Category deleted successfully']);
+        }
+        catch (\Exception $e)
+        {
+            return response()->json(['error' => 'Failed to delete category: ' . $e->getMessage()], 500);
+        }
+    }
+    public function viewpost()
+    {
+        return view('dashboard.post.viewpost');
+    }
+    public function create()
+    {
         $categories = Catagory::all();
         $breeds = Breed::all();
-        return view('dashboard.post.createpost',['categories' => $categories,
-                                                'breeds' => $breeds]);
+        return view('dashboard.post.createpost', compact('categories', 'breeds'));
     }
     public function store(Request $request)
     {
         // dd($request->all());
         // Validate incoming request data
         $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
+
             'catagory_id' => 'required|exists:catagories,id',
             'breed_id' => 'required|exists:breeds,id',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image file
         ]);
+        $user_id = Auth::id();
+        // dd($user_id);
 
         // Create a new post instance
         $post = new Post();
-        $post->user_id = Auth::id(); // Assuming authenticated user
-        $post->catagory_id = $request->catagory_id;
-        $post->breed_id = $request->breed_id;
-        $post->name = $request->name;
-        $post->age = $request->age;
-        $post->description = $request->description;
+        $post->user_id = $user_id;
+        $post->catagory_id = $validatedData['catagory_id'];
+        $post->breed_id = $validatedData['breed_id'];
+        $post->name = $validatedData['name'];
+        $post->age = $validatedData['age'];
+        $post->description = $validatedData['description'];
+        //  dd($post);
         $post->save();
-
+        // dd($request->hasFile('images'));
         // Handle uploading and associating images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-               $filename = time() . '.' . $image->getClientOriginalExtension();
-               $path = $image->storeAs('public/images', $filename);
-               $url = Storage::url($path);
-               Image::create([
-              'post_id' => $post->id,
-              'url' => $url,
-           ]);
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('public/images', $filename);
+                $url = Storage::url($path);
+                Image::create([
+                    'post_id' => $post->id,
+                    'url' => $url,
+                ]);
 
             }
         }
 
         // Redirect to a success page or route
-        return redirect()->route('posts.store');
+        return redirect('/admin/viewpost')->with('success', 'Post created successfully!');
+    }
+    public function getBreeds($category_id)
+    {
+        $breeds = Breed::where('category_id', $category_id)->get();
+        return response()->json($breeds);
+    }
+
+    public function edit($id)
+    {
+        $post = Post::findOrFail($id);
+        $categories = Catagory::all();
+        $breeds = Breed::all();
+        return view('dashboard.post.createpost', compact('post', 'categories', 'breeds'));
+    }
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'catagory_id' => 'required|exists:catagories,id',
+            'breed_id' => 'required|exists:breeds,id',
+            'name' => 'required|string|max:255',
+            'age' => 'required|integer|min:0',
+            'description' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post->catagory_id = $validatedData['catagory_id'];
+        $post->breed_id = $validatedData['breed_id'];
+        $post->name = $validatedData['name'];
+        $post->age = $validatedData['age'];
+        $post->description = $validatedData['description'];
+        // Handle file uploads if any
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('public/images', $filename);
+                $url = Storage::url($path);
+                Image::create([
+                    'post_id' => $post->id,
+                    'url' => $url,
+                ]);
+
+            }
+        }
+        $post->save();
+
+        return redirect()->route('post.index')->with('success', 'Post updated successfully.');
     }
 }

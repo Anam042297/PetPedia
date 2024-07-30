@@ -1,9 +1,8 @@
 @include('frontend.includes.css')
-
+@include('frontend.includes.header')
     <!-- Contact Start -->
     <div class="container-fluid pt-5">
-        <div class="d-flex flex-column text-center mb-5 pt-5">
-
+        <div class="d-flex flex-column text-center mb-4 pt-4">
             <h1 class="display-4 m-0">Register  <span class="text-primary">Now</span></h1>
         </div>
         <div class="container">
@@ -32,7 +31,6 @@
                                         @enderror
                                     </span>
                             </div>
-
                             <div class="container">
                                 <input type="password" class="form-control p-4" id="pwd" name="password"
                                     placeholder="Your Password" />
@@ -43,20 +41,17 @@
                                 </span>
                             </div>
                             <div>
-                                <br>
                             </div>
                             <div class="container">
-
                                 <input id="password-confirm" class="form-control p-4"
                                     type="password"placeholder="Confirm Password" name="password_confirmation"/>
                             </div>
                             <div>
                                 <br>
                             </div>
-
                             <div class="text-center">
                                 <button class="btn btn-primary py-2 px-5" type="submit"
-                                    id="sendMessageButton">Submit</button>
+                                  id="sendMessageButton">Submit</button>
                             </div>
                         </form>
                     </div>

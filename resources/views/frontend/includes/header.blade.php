@@ -7,6 +7,7 @@
                 <a href="{{ route('home') }}" class="nav-item nav-link">Home</a>
                 <a href="{{ route('mart') }}" class="nav-item nav-link">Mart</a>
                 <a href="{{ route('booking') }}" class="nav-item nav-link">Booking</a>
+                <a href="{{ route('booking') }}" class="nav-item nav-link">ChatBot</a>
                 <a href="{{ route('blog') }}" class="nav-item nav-link">Blog</a>
                 <a href="{{ route('about') }}" class="nav-item nav-link">About Us</a>
             </div>
@@ -21,7 +22,7 @@
         @else
         <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle"  role="button" data-toggle="dropdown">
-                {{ Auth::user()->name }} <span class="caret"></span>
+                <i class="fas fa-user fa-fw"></i>{{ Auth::user()->name }} <span class="caret"></span>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

@@ -27,10 +27,6 @@ class AdminMiddleware
        return redirect('/');
 
    }
-
-   // If the user is not an admin, but the route is not an admin route, allow them to proceed
-
-
    // If the user is not an admin and is trying to access an admin route, redirect them
    return redirect('home')->with('error', 'You do not have permission to access this page.');
    }
