@@ -2,7 +2,6 @@
 @section('content')
 
     <div class="container"   style="margin-top: 20px;">
-
         <div class="card">
             <div class="card">
                 <div class="card-header py-5">
@@ -39,23 +38,34 @@
     </div>
 @endsection
 @section("script")
+<script>
+    @if(session('success'))
+        toastr.success('{{ session('success') }}');
+    @endif
+    @if(session('error'))
+        toastr.error('{{ session('error') }}');
+    @endif
+</script>
 <script type="text/javascript">
- $(function () {
-    var table = $('#post_table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "/admin/indexpost",
-        columns: [
-            { data: 'user.name', name: 'user.name' },
-            { data: 'catagory.name', name: 'catagory.name' },
-            { data: 'breed.name', name: 'breed.name' },
-            { data: 'name', name: 'name' },
-            { data: 'age', name: 'age' },
-            { data: 'images', name: 'images', orderable: false, searchable: false },
-            { data: 'action', name: 'action', orderable: false, searchable: false }
-        ]
-    });
-    $(document).on('click', 'button.delete_cat_button', function() {
+    $(function () {
+        var table = $('#post_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "/admin/indexpost" ,
+            },
+            columns: [
+
+                { data: 'user.name', name: 'user.name' },
+                { data: 'catagory.name', name: 'cataory.name' },
+                { data: 'breed.name', name: 'breed.name' },
+                { data: 'name', name: 'name' },
+                { data: 'age', name: 'age' },
+                { data: 'images', name: 'images', orderable: false, searchable: false },
+                { data: 'action', name: 'action', orderable: false, searchable: false }
+            ]
+        });
+        $(document).on('click', 'button.delete_cat_button', function() {
                 swal({
                     title: 'Sure',
                     text: 'Confirm Delete Catagory',
@@ -90,8 +100,7 @@
                     }
                 });
             });
-});
-
+    });
 </script>
 @endsection
 
