@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/get-breeds/{catagory_id}', [PostController::class, 'getBreeds']);
     Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::put('/posts/{id}', [PostController::class, 'update'])->name('post.update');
+    Route::any('/deletepost/{id}',[PostController::class,'destroy'])->name('post.destroy');
 
 
     //user routes

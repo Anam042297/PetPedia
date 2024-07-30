@@ -20,12 +20,12 @@ class PostController extends Controller
         if ($request->ajax()) {
             $posts = Post::with(['catagory', 'breed', 'images', 'user'])->select('posts.*');
             return DataTables::of($posts)
-                ->addColumn('action', function ($row) {
-                    $editUrl = route('post.edit', $row->id);
-                    // $deleteUrl = route('post.destroy', $row->id);
-                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' .
-                        ' <button class="btn btn-danger btn-sm delete" data-id="' . $row->id . '">Delete</button>';
-                })
+            ->addColumn('action', function ($row) {
+                $editUrl = route('post.edit', $row->id);
+                $deleteUrl = route('post.destroy', $row->id);
+                $deleteButton = '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> Delete</button>';
+                return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' . $deleteButton;
+            })
                 ->addColumn('images', function ($row) {
                     if ($row->images->isEmpty()) {
                         return ''; // Return empty if there are no images
@@ -33,7 +33,7 @@ class PostController extends Controller
                     $firstImage = $row->images->first();
                     return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
                 })
-
+                ->removeColumn('id')
                 ->rawColumns(['images', 'action'])
                 ->make(true);
         }
@@ -137,5 +137,27 @@ class PostController extends Controller
         $post->save();
 
         return redirect()->route('post.index')->with('success', 'Post updated successfully.');
+      
     }
+    public function destroy($id)
+    {
+        try
+        {
+            // Find the category by its ID with properties eager loaded
+            $category = post::with('post')->findOrFail($id);
+
+            if ($category->post()->count() > 0) {
+                return response()->json(['error' => 'Category is not deleted because it has related properties']);
+            }
+
+            $category->delete();
+
+            return response()->json(['success' => 'Category deleted successfully']);
+        }
+        catch (\Exception $e)
+        {
+            return response()->json(['error' => 'Failed to delete category: ' . $e->getMessage()], 500);
+        }
+    }
+    
 }
