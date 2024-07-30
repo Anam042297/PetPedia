@@ -14,7 +14,9 @@ class BreedController extends Controller
     {
 
         if ($request->ajax()) {
-            $data = Breed::latest()->get();
+            // $data = Breed::latest()->get();
+            $data  = Breed::select('breeds.*', 'catagories.name as category_name')
+        ->join('catagories', 'breeds.category_id', '=', 'catagories.id');
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('breed.edit', $row->id);

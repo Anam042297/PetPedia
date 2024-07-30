@@ -65,41 +65,41 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
-        $(document).on('click', 'button.delete_cat_button', function() {
-                swal({
-                    title: 'Sure',
-                    text: 'Confirm Delete Catagory',
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        var href = $(this).data('href');
-                        var data = {
-                            _token: '{{ csrf_token() }}' // Ensure the CSRF token is included
-                        };
+        // $(document).on('click', 'button.delete_post_button', function() {
+        //         swal({
+        //             title: 'Sure',
+        //             text: 'Confirm Delete Post',
+        //             icon: "warning",
+        //             buttons: true,
+        //             dangerMode: true,
+        //         }).then((willDelete) => {
+        //             if (willDelete) {
+        //                 var href = $(this).data('href');
+        //                 var data = {
+        //                     _token: '{{ csrf_token() }}' // Ensure the CSRF token is included
+        //                 };
 
-                        $.ajax({
-                            method: "DELETE",
-                            url: href,
-                            dataType: "json",
-                            data: data,
-                            success: function(result) {
-                                if (result.success) {
-                                    toastr.success(result.success);
-                                    category_table.ajax.reload();
-                                } else {
-                                    toastr.error(result.error);
-                                }
-                            },
-                            error: function(result) {
-                                toastr.error(
-                                    'An error occurred while deleting the Catagory.');
-                            }
-                        });
-                    }
-                });
-            });
+        //                 $.ajax({
+        //                     method: "DELETE",
+        //                     url: href,
+        //                     dataType: "json",
+        //                     data: data,
+        //                     success: function(result) {
+        //                         if (result.success) {
+        //                             toastr.success(result.success);
+        //                             category_table.ajax.reload();
+        //                         } else {
+        //                             toastr.error(result.error);
+        //                         }
+        //                     },
+        //                     error: function(result) {
+        //                         toastr.error(
+        //                             'An error occurred while deleting the Post.');
+        //                     }
+        //                 });
+        //             }
+        //         });
+        //     });
     });
 </script>
 @endsection
