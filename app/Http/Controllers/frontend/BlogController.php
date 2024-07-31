@@ -15,6 +15,9 @@ class BlogController extends Controller
         return view('frontend.blog', compact('posts'));
     }
     public function show($id){
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
         $post = Post::with(['catagory', 'breed', 'images'])->findOrFail($id);
         return view('frontend.singleblog', compact('post'));
     }

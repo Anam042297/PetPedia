@@ -22,6 +22,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Type</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -44,6 +45,7 @@
             },
             columns: [
                 { data: 'name', name: 'name' },
+                { data: 'category_name', name: 'category_name' }, 
                 { data: 'action', name: 'action', orderable: false, searchable: false },
             ]
         });
