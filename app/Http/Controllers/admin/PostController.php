@@ -24,7 +24,7 @@ class PostController extends Controller
                     $editUrl = route('post.edit', $row->id);
                     $deleteUrl = route('post.destroy', $row->id);
                     $deleteButton = '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> Delete</button>';
-                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' . $deleteButton;
+                    return '<a button data-href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' . $deleteButton;
                 })
                 ->addColumn('images', function ($row) {
                     if ($row->images->isEmpty()) {

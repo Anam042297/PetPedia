@@ -65,10 +65,10 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
-        $(document).on('click', 'button.delete_cat_button', function() {
+        $(document).on('click', 'button.Post_button', function() {
                 swal({
                     title: 'Sure',
-                    text: 'Confirm Delete Catagory',
+                    text: 'Confirm Delete Post',
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -89,7 +89,7 @@
                                     toastr.success(result.success);
                                     category_table.ajax.reload();
                                 } else {
-                                    toastr.error(result.error);
+                                    toastr.error(result.error); 
                                 }
                             },
                             error: function(result) {
