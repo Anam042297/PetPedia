@@ -35,7 +35,7 @@ class PostController extends Controller
                     $firstImage = $row->images->first();
                     return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
                 })
-                ->removeColumn('id')
+    
                 ->rawColumns(['images', 'action'])
                 ->make(true);
         }
