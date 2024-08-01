@@ -68,19 +68,6 @@
                 {{ isset($post) ? 'Edit Post' : 'Create Post' }}
             </h3>
         </div>
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
         <form id="contactForm" action="{{ isset($post) ? route('post.update', $post->id) : route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @if (isset($post))

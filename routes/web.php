@@ -74,16 +74,3 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
- // Community Post Routes
- // Thread Routes
-Route::get('/threadsindex', [ThreadController::class, 'index'])->name('threads.index');
-Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
-Route::delete('/threads/{thread}', [ThreadController::class, 'destroy'])->name('threads.destroy');
-
-// CommunityPost Routes
-Route::post('/threads/{thread}/community-posts', [CommunityPostController::class, 'store'])->name('communityposts.store');
-Route::delete('/community-posts/{communityPost}', [CommunityPostController::class, 'destroy'])->name('communityposts.destroy');
-
-// Reply Routes
-Route::post('/community-posts/{communityPost}/replies', [ReplyController::class, 'store'])->name('replies.store');
-Route::delete('/replies/{reply}', [ReplyController::class, 'destroy'])->name('replies.destroy');

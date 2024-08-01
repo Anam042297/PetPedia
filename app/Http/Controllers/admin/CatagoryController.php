@@ -26,6 +26,7 @@ class CatagoryController extends Controller
                     return $buttons;
                 })
 
+                ->removeColumn('id')
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->make(true);

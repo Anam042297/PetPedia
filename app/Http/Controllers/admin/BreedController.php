@@ -29,6 +29,7 @@ class BreedController extends Controller
                     return $buttons;
                 })
 
+                ->removeColumn('id')
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->make(true);
