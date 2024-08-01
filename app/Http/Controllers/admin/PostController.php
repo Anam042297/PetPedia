@@ -15,6 +15,7 @@ use DataTables;
 
 class PostController extends Controller
 {
+    // data table
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -41,16 +42,19 @@ class PostController extends Controller
         }
         return view('dashboard.post.viewpost');
     }
+    //view blade for data table
     public function viewpost()
     {
         return view('dashboard.post.viewpost');
     }
+    //create post
     public function create()
     {
         $categories = Catagory::all();
         $breeds = Breed::all();
         return view('dashboard.post.createpost', compact('categories', 'breeds'));
     }
+    //store the created post
     public function store(Request $request)
     {
         // dd($request->all());
@@ -95,12 +99,14 @@ class PostController extends Controller
         // Redirect to a success page or route
         return redirect('/admin/viewpost')->with('success', 'Post created successfully!');
     }
+    //get breed info as per catagory
     public function getBreeds($category_id)
     {
         $breeds = Breed::where('category_id', $category_id)->get();
         return response()->json($breeds);
     }
 
+    //edit post
     public function edit($id)
     {
         $post = Post::findOrFail($id);
@@ -108,6 +114,7 @@ class PostController extends Controller
         $breeds = Breed::all();
         return view('dashboard.post.createpost', compact('post', 'categories', 'breeds'));
     }
+    //update post
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -143,6 +150,7 @@ class PostController extends Controller
         return redirect()->route('post.index')->with('success', 'Post updated successfully.');
 
     }
+    //delete post
     public function destroy(string $id)
     {
         // dd(123);

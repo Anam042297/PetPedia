@@ -9,7 +9,7 @@ use App\Models\Catagory;
 use DataTables;
 
 class BreedController extends Controller
-{
+{// data table function
     public function index(Request $request)
     {
 
@@ -34,18 +34,19 @@ class BreedController extends Controller
         }
         return view('dashboard.petbreed.view');
     }
-
+// data table view blade
     public function viewbreed()
     {
         return view('dashboard.petbreed.view');
     }
-
+//create breed
     public function create()
     {
         $categories = Catagory::all();
         // dd($categories);
         return view('dashboard.petbreed.create', compact(['categories']));
     }
+    //store breed
     public function store(Request $request)
     {
         // dd($request->all());
@@ -68,12 +69,14 @@ class BreedController extends Controller
 
 
     }
+    // edit  view breed
     public function edit($id)
     {
         $breed = Breed::findOrFail($id);
         $categories = Catagory::all();
         return view('dashboard.petbreed.create', compact('breed', 'categories'));
     }
+    // update breed  data  table
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -90,6 +93,7 @@ class BreedController extends Controller
 
         return redirect()->route('breed.view')->with('success', 'Breed updated successfully.');
     }
+    // delete breed  data  table
     public function destroy($id)
     {
         // dd(123);
