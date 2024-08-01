@@ -11,6 +11,7 @@ use DataTables;
 
 class UserTableController extends Controller
 {
+    //data table function
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -31,11 +32,13 @@ class UserTableController extends Controller
         }
         return view('dashboard.userTable');
     }
+    //edit  function
     public function edit($id)
     {
         $user = User::find($id);
         return view('users.edit', compact('user'));
     }
+    //delete function
     public function destroy($id)
     {
         //  dd(123);
