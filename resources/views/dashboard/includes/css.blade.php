@@ -19,6 +19,42 @@
     }
 
     body {
-        background: linear-gradient(to right, #ffb5ca, #ffc2e2);
+        background: linear-gradient(to right, #ffdfe8, #ffdfe8);
     }
+
+    
 </style>
+<style>
+    .login-container {
+        width: 700px;
+        margin: auto;
+        padding: 50px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+
+    .login-container input[type="text"]{
+        width: 100%;
+        padding: 10px;
+        margin: 20px 0;
+    }
+   .login-container button {
+        width: 100%;
+        padding: 10px;
+        background: #ff99b6;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+
+    }
+
+    .login-container button:hover {
+        background:  #ffb8cc;
+    }
+
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
