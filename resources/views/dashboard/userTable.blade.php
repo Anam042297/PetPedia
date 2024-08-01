@@ -27,9 +27,17 @@
     </div>
     @endsection
     @section("script")
+    <script>
+        @if(session('success'))
+            toastr.success('{{ session('success') }}');
+        @endif
+        @if(session('error'))
+            toastr.error('{{ session('error') }}');
+        @endif
+    </script>
     <script type="text/javascript">
         $(function () {
-            var table = $('#user_table').DataTable({
+            var user_table = $('#user_table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -40,6 +48,41 @@
                     {data: 'email', name: 'email'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
+            });
+            $(document).on('click', 'button.delete_button', function() {
+                swal({
+                    title: 'Sure',
+                    text: 'Confirm Delete Post',
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        var href = $(this).data('href');
+                        var data = {
+                            _token: '{{ csrf_token() }}' // Ensure the CSRF token is included
+                        };
+
+                        $.ajax({
+                            method: "DELETE",
+                            url: href,
+                            dataType: "json",
+                            data: data,
+                            success: function(result) {
+                                if (result.success) {
+                                    toastr.success(result.success);
+                                    user_table.ajax.reload();
+                                } else {
+                                    toastr.error(result.error);
+                                }
+                            },
+                            error: function(result) {
+                                toastr.error(
+                                    'An error occurred while deleting.');
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>

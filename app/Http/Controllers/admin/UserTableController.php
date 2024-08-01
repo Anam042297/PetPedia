@@ -20,12 +20,9 @@ class UserTableController extends Controller
             return DataTables::of($data)
                 ->addColumn('action', function ($row) {
                     $deleteUrl = route('users.destroy', $row->id);
-                    $buttons = '';
-                    $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
-                    $buttons .= csrf_field();
-                    $buttons .= method_field('DELETE');
-                    $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
-                    return $buttons;
+                    $action = '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"> Delete</button>';
+
+                    return $action;
                 })
                 ->removeColumn('id')
                 ->addIndexColumn()
@@ -41,14 +38,13 @@ class UserTableController extends Controller
     }
     public function destroy($id)
     {
+        //  dd(123);
         $user = User::find($id);
-
+        // dd($user);
         if (!$user) {
-            return redirect()->route('usertable')->with('error', 'User not found.');
+            return response()->json(['error' => 'user not found ".'], 404);
         }
-
         $user->delete();
-
-        return redirect()->route('usertable')->with('success', 'User deleted successfully.');
+        return response()->json(['success' => 'Record deleted successfully.']);
     }
 }

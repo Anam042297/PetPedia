@@ -43,9 +43,17 @@
         toastr.error('{{ session('error') }}');
     @endif
 </script>
+<script>
+    @if(session('success'))
+        toastr.success('{{ session('success') }}');
+    @endif
+    @if(session('error'))
+        toastr.error('{{ session('error') }}');
+    @endif
+</script>
 <script type="text/javascript">
     $(function() {
-        var table = $('#catagory_table').DataTable({
+        var catagory_table = $('#catagory_table').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -63,6 +71,41 @@
                 },
             ]
         });
+        $(document).on('click', 'button.delete_button', function() {
+                swal({
+                    title: 'Sure',
+                    text: 'Confirm Delete Post',
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        var href = $(this).data('href');
+                        var data = {
+                            _token: '{{ csrf_token() }}' // Ensure the CSRF token is included
+                        };
+
+                        $.ajax({
+                            method: "DELETE",
+                            url: href,
+                            dataType: "json",
+                            data: data,
+                            success: function(result) {
+                                if (result.success) {
+                                    toastr.success(result.success);
+                                    catagory_table.ajax.reload();
+                                } else {
+                                    toastr.error(result.error);
+                                }
+                            },
+                            error: function(result) {
+                                toastr.error(
+                                    'An error occurred while deleting.');
+                            }
+                        });
+                    }
+                });
+            });
     });
 </script>
 @endsection

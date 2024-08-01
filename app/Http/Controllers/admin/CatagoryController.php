@@ -15,16 +15,14 @@ class CatagoryController extends Controller
         if ($request->ajax()) {
             $data = Catagory::latest()->get();
             return Datatables::of($data)
-                ->addColumn('action', function ($row) {
-                    $editUrl = route('Catagory.edit', $row->id);
-                    $deleteUrl = route('Catagory.destroy', $row->id);
-                    $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
-                    $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
-                    $buttons .= csrf_field();
-                    $buttons .= method_field('DELETE');
-                    $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
-                    return $buttons;
-                })
+            ->addColumn('action', function ($row) {
+                $editUrl = route('Catagory.edit', $row->id);
+                $deleteUrl = route('Catagory.destroy', $row->id);
+                $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
+                .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"> Delete</button>';
+
+                return $action;
+            })
 
                 ->removeColumn('id')
                 ->addIndexColumn()
@@ -88,13 +86,11 @@ class CatagoryController extends Controller
     {
         $catagory = Catagory::find($id);
 
-        if (!$catagory) {
-            return redirect()->route('Catagory.display');
+        if (!$catagory ) {
+            return response()->json(['error' => 'user not found ".'], 404);
         }
-
-        $catagory->delete();
-
-        return redirect()->route('Catagory.display');
+        $catagory ->delete();
+        return response()->json(['success' => 'Record deleted successfully.']);
     }
 }
 
