@@ -27,6 +27,7 @@ class UserTableController extends Controller
                     $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
                     return $buttons;
                 })
+                ->removeColumn('id')
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->make(true);

@@ -22,6 +22,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Type</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -33,7 +34,14 @@
     </div>
 @endsection
 @section('script')
-
+<script>
+    @if(session('success'))
+        toastr.success('{{ session('success') }}');
+    @endif
+    @if(session('error'))
+        toastr.error('{{ session('error') }}');
+    @endif
+</script>
 <script type="text/javascript">
     $(function () {
         var table = $('#breed_table').DataTable({
@@ -44,6 +52,7 @@
             },
             columns: [
                 { data: 'name', name: 'name' },
+                { data: 'category_name', name: 'category_name' }, 
                 { data: 'action', name: 'action', orderable: false, searchable: false },
             ]
         });

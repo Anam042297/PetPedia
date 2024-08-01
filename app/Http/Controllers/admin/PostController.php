@@ -23,8 +23,10 @@ class PostController extends Controller
                 ->addColumn('action', function ($row) {
                     $editUrl = route('post.edit', $row->id);
                     $deleteUrl = route('post.destroy', $row->id);
-                    $deleteButton = '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> Delete</button>';
-                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>' . $deleteButton;
+                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
+                    .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> Delete</button>';
+
+                    return $action;
                 })
                 ->addColumn('images', function ($row) {
                     if ($row->images->isEmpty()) {
@@ -38,26 +40,6 @@ class PostController extends Controller
                 ->make(true);
         }
         return view('dashboard.post.viewpost');
-    }
-    public function destroy($id)
-    {
-        try
-        {
-            // Find the category by its ID with properties eager loaded
-            $category = post::with('post')->findOrFail($id);
-
-            if ($category->post()->count() > 0) {
-                return response()->json(['error' => 'Category is not deleted because it has related properties']);
-            }
-
-            $category->delete();
-
-            return response()->json(['success' => 'Category deleted successfully']);
-        }
-        catch (\Exception $e)
-        {
-            return response()->json(['error' => 'Failed to delete category: ' . $e->getMessage()], 500);
-        }
     }
     public function viewpost()
     {
@@ -159,5 +141,19 @@ class PostController extends Controller
         $post->save();
 
         return redirect()->route('post.index')->with('success', 'Post updated successfully.');
+
     }
+    public function destroy(string $id)
+    {
+        // dd(123);
+        $data = Post::with('images')->findorfail($id);
+// dd($data);
+        if (!$data) {
+            return response()->json(['error' => 'post not found ".'], 404);
+        }
+        $data->delete();
+        return response()->json(['success' => 'Record deleted successfully.']);
+    }
+    
+
 }

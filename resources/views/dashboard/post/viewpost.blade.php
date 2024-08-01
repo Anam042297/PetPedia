@@ -48,7 +48,7 @@
 </script>
 <script type="text/javascript">
     $(function () {
-        var table = $('#post_table').DataTable({
+        var post_table = $('#post_table').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -65,10 +65,10 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
-        $(document).on('click', 'button.delete_cat_button', function() {
+        $(document).on('click', 'button.delete_post_button', function() {
                 swal({
                     title: 'Sure',
-                    text: 'Confirm Delete Catagory',
+                    text: 'Confirm Delete Post',
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -87,14 +87,14 @@
                             success: function(result) {
                                 if (result.success) {
                                     toastr.success(result.success);
-                                    category_table.ajax.reload();
+                                    post_table.ajax.reload();
                                 } else {
                                     toastr.error(result.error);
                                 }
                             },
                             error: function(result) {
                                 toastr.error(
-                                    'An error occurred while deleting the Catagory.');
+                                    'An error occurred while deleting the Post.');
                             }
                         });
                     }

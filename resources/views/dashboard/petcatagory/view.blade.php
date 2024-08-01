@@ -35,6 +35,14 @@
         </div>
 @endsection
 @section("script")
+<script>
+    @if(session('success'))
+        toastr.success('{{ session('success') }}');
+    @endif
+    @if(session('error'))
+        toastr.error('{{ session('error') }}');
+    @endif
+</script>
 <script type="text/javascript">
     $(function() {
         var table = $('#catagory_table').DataTable({
