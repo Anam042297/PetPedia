@@ -15,19 +15,17 @@ class BreedController extends Controller
 
         if ($request->ajax()) {
             // $data = Breed::latest()->get();
-            $data  = Breed::select('breeds.*', 'catagories.name as category_name')
-        ->join('catagories', 'breeds.category_id', '=', 'catagories.id');
+            $data = Breed::select('breeds.*', 'catagories.name as category_name')
+                ->join('catagories', 'breeds.category_id', '=', 'catagories.id');
             return Datatables::of($data)
-                ->addColumn('action', function ($row) {
-                    $editUrl = route('breed.edit', $row->id);
-                    $deleteUrl = route('breed.destroy', $row->id);
-                    $buttons = '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>';
-                    $buttons .= ' <form action="' . $deleteUrl . '" method="POST" style="display: inline;">';
-                    $buttons .= csrf_field();
-                    $buttons .= method_field('DELETE');
-                    $buttons .= '<button type="submit" class="btn btn-sm btn-danger">Delete</button></form>';
-                    return $buttons;
-                })
+            ->addColumn('action', function ($row) {
+                $editUrl = route('breed.edit', $row->id);
+                $deleteUrl = route('breed.destroy', $row->id);
+                $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
+                .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_breed_button"> Delete</button>';
+
+                return $action;
+            })
 
                 ->removeColumn('id')
                 ->addIndexColumn()
@@ -94,14 +92,13 @@ class BreedController extends Controller
     }
     public function destroy($id)
     {
+        // dd(123);
         $breed = Breed::find($id);
-
+        // dd($breed);
         if (!$breed) {
-            return redirect()->route('breed.view');
+            return response()->json(['error' => 'breed not found ".'], 404);
         }
-
         $breed->delete();
-
-        return redirect()->route('breed.view');
+        return response()->json(['success' => 'Record deleted successfully.']);
     }
 }

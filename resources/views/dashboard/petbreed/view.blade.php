@@ -44,7 +44,7 @@
 </script>
 <script type="text/javascript">
     $(function () {
-        var table = $('#breed_table').DataTable({
+        var breed_table = $('#breed_table').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -56,6 +56,41 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false },
             ]
         });
+        $(document).on('click', 'button.delete_breed_button', function() {
+                swal({
+                    title: 'Sure',
+                    text: 'Confirm Delete',
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        var href = $(this).data('href');
+                        var data = {
+                            _token: '{{ csrf_token() }}' // Ensure the CSRF token is included
+                        };
+
+                        $.ajax({
+                            method: "DELETE",
+                            url: href,
+                            dataType: "json",
+                            data: data,
+                            success: function(result) {
+                                if (result.success) {
+                                    toastr.success(result.success);
+                                    breed_table.ajax.reload();
+                                } else {
+                                    toastr.error(result.error);
+                                }
+                            },
+                            error: function(result) {
+                                toastr.error(
+                                    'An error occurred while deleting.');
+                            }
+                        });
+                    }
+                });
+            });
     });
 </script>
 @endsection
