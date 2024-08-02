@@ -1,10 +1,20 @@
 @extends('frontend.master')
 @section('content')
-    <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search...">
-        <button type="submit" class="search-button">Search</button>
+    <div class="container">
+        <div class="row pb-3">
+            @foreach ($categories as $category)
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body bg-light p-4">
+                            <h4 class="card-title text-truncate">
+                                <a class="card-title text-truncate" href="{{ route('blog.category', $category->id) }}">{{ $category->name }}</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
-
     <!-- Blog Start -->
     <div class="container">
         <div class="row pb-3">
@@ -67,29 +77,6 @@
                     </div>
                 </div>
             @endforeach
-        </div>
-    </div>
-    <div class="container pt-5">
-        <div class="row pb-3">
-            <div class="col-lg-12">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center mb-4">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo; Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">Next &raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
         </div>
     </div>
     <!-- Blog End -->
