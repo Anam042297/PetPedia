@@ -15,14 +15,10 @@ use App\Http\Controllers\admin\UserTableController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\CatagoryController;
 use App\Http\Controllers\admin\BreedController;
- // Community Post Routes
-use App\Http\Controllers\admin\CommunitypostControllers\ThreadController;
-use App\Http\Controllers\admin\CommunitypostControllers\CommunityPostController;
-use App\Http\Controllers\admin\CommunitypostControllers\ReplyController;
-use App\Http\Controllers\admin\CommunitypostControllers\ReactionController;
 //frontend routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog',[BlogController::class,'index'])->name('blog');
+Route::get('/blogcategory/{id}',[BlogController::class,'showbycategory'])->name('blog.category');
 Route::get('/blogsingle/{id}',[BlogController::class,'show'])->name('blog.readmore');
 Route::get('/booking',[BookingController::class,'index'])->name('booking');
 Route::get('/mart',[MartController::class,'index'])->name('mart');

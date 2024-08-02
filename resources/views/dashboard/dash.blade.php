@@ -64,26 +64,6 @@
                     </div>
                 </div>
             </div>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    DataTable Example
-                </div>
-                <div class="card-body">
-                    <table id="myTable">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
         </div>
     </main>
 @endsection
