@@ -9,6 +9,7 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
      @include('frontend.includes.css')
+     @yield('css')
 </head>
 
 <body>
