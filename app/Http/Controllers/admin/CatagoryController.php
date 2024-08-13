@@ -19,8 +19,8 @@ class CatagoryController extends Controller
                 ->addColumn('action', function ($row) {
                     $editUrl = route('Catagory.edit', $row->id);
                     $deleteUrl = route('Catagory.destroy', $row->id);
-                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
-                        . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"> Delete</button>';
+                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> &nbsp'
+                        . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"> <i class="fas fa-trash-alt"></i></button>';
 
                     return $action;
                 })

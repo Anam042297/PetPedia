@@ -21,7 +21,7 @@ class UserTableController extends Controller
             return DataTables::of($data)
                 ->addColumn('action', function ($row) {
                     $deleteUrl = route('users.destroy', $row->id);
-                    $action = '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"> Delete</button>';
+                    $action = '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button">  <i class="fas fa-trash-alt"></i></button>';
 
                     return $action;
                 })
@@ -31,12 +31,6 @@ class UserTableController extends Controller
                 ->make(true);
         }
         return view('dashboard.userTable');
-    }
-    //edit  function
-    public function edit($id)
-    {
-        $user = User::find($id);
-        return view('users.edit', compact('user'));
     }
     //delete function
     public function destroy($id)

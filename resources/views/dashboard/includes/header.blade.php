@@ -11,50 +11,7 @@
     </div> --}}
     {{-- <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button> --}}
     <!-- Navbar Search-->
-    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
-                aria-describedby="btnNavbarSearch" />
-            <button class="btn" style="color: #4B49AC;"id="btnNavbarSearch" type="button"><i
-                    class="fas fa-search"></i></button>
-        </div>
-    </form>
-    <!-- Navbar-->
-    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                <i class="fas fa-user fa-fw"></i>{{ Auth::user()->name }} <span class="caret"></span>
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
-                    @csrf
-                </form>
-            </div>
-        </li>
-    </ul>
+    
+    
 
 </nav>
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const content = document.getElementById('content');
-
-            if (sidebar.style.left === '0px') {
-                sidebar.style.left = '-250px';
-                content.style.marginLeft = '0';
-            } else {
-                sidebar.style.left = '0px';
-                content.style.marginLeft = '250px';
-            }
-        }
-
-        document.querySelector('.hamburger').addEventListener('click', toggleSidebar);
-    });
-</script> --}}

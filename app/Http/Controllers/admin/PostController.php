@@ -19,13 +19,13 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $posts = Post::with(['catagory', 'breed', 'images', 'user'])->select('posts.*');
+            $posts = Post::with(['catagory', 'breed', 'images', 'user'])->get();
             return DataTables::of($posts)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('post.edit', $row->id);
                     $deleteUrl = route('post.destroy', $row->id);
-                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
-                    .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> Delete</button>';
+                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> &nbsp'
+                    .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> <i class="fas fa-trash-alt"></i></button>';
 
                     return $action;
                 })

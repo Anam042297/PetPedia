@@ -12,17 +12,18 @@ class BreedController extends Controller
 {// data table function
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
             // $data = Breed::latest()->get();
-            $data = Breed::select('breeds.*', 'catagories.name as category_name')
-                ->join('catagories', 'breeds.category_id', '=', 'catagories.id');
+            $data = Breed::with(['catagory'])->get();
             return Datatables::of($data)
+            ->addColumn('category_name', function (Breed $data) {
+                return $data->catagory ? $data->catagory->name : 'No Category';
+            })
             ->addColumn('action', function ($row) {
                 $editUrl = route('breed.edit', $row->id);
                 $deleteUrl = route('breed.destroy', $row->id);
-                $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
-                .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_breed_button"> Delete</button>';
+                $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> &nbsp'
+                .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_breed_button">  <i class="fas fa-trash-alt"></i></button>';
 
                 return $action;
             })
