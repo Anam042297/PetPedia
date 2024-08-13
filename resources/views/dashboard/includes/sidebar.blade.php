@@ -54,7 +54,34 @@
 
                 </div>
             </div>
-
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <div class="text_colour">
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user fa-fw"></i>{{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+                
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('admin.view') }}">
+                            View Profile
+                        </a>
+                        <a class="dropdown-item" href="{{ route('admin.edit') }}">
+                            Edit Profile
+                        </a>
+                        
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+            
+                        <form id="logout-form" action="{{ route('logout') }}" method="Get" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            </div>
+            </ul>
         </nav>
+        
     </div>
 </div>

@@ -11,7 +11,7 @@
     }
 
     .sb-topnav {
-        background: linear-gradient(to right, #ff99b6, #af99ff);
+        background: linear-gradient(135deg, #ff99b6, #af99ff);
     }
 
     .text_colour {
@@ -19,42 +19,47 @@
     }
 
     body {
-        background: linear-gradient(to right, #ffdfe8, #ffdfe8);
+        background: linear-gradient(135deg, #fdc1d2, #fdc1d2);
     }
 
     
 </style>
 <style>
-    .login-container {
-        width: 700px;
-        margin: auto;
-        padding: 50px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    .account-card {
+        background: linear-gradient(135deg, #ff99b6, #af99ff);
+        color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    .account-card-header {
+        text-align: center;
+        margin: 0;
+        padding: 15px;
+        font-size: 1.5rem;
+        color: #ffffff;
+    }
+
+
+    .account-card-body {
+        padding: 30px;
     }
     
-
-    .login-container input[type="text"]{
-        width: 100%;
+    .custom-btn {
+        background-color:#ff99b6;
+        border-color: #ff99b6;
+        width: 30%;
         padding: 10px;
-        margin: 20px 0;
-    }
-   .login-container button {
-        width: 100%;
-        padding: 10px;
-        background: #ff99b6;
-        border: none;
         border-radius: 5px;
         color: white;
         cursor: pointer;
-
-    }
-
-    .login-container button:hover {
-        background:  #ffb8cc;
+        float: right; 
+        margin-top: -10px;
     }
 
 </style>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
