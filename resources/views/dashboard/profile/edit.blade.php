@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="account-card">
-                <div class="account-card-header text-center">
-                    <img src="\backend\Universal_(588).jpg" alt="Profile Photo" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
-                    <h3 style="color: #ffffff;">
-                        Update Profile
+                <div class="account-card-header d-flex align-items-center justify-content-center">
+                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <h3 style="color: #fcfcfc; margin: 0;">
+                        Edit Profile
                     </h3>
                 </div>
 

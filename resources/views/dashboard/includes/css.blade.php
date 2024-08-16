@@ -25,6 +25,34 @@
     
 </style>
 <style>
+/* Custom CSS for DataTables Processing Block */
+.dataTables_processing {
+    color:black;
+}
+
+
+
+ .table {
+        border: 2px solid #af99ff;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .table th {
+        text-align: center;
+    }
+
+    .table td {
+        border: 1px solid  #af99ff;
+        padding: 10px;
+        text-align: center;
+    }
+    .table-bordered th, .table-bordered td {
+        padding: 10px!important;
+        text-align: center!important;
+        background-color: #ffcfdd !important;
+        border-color: #ff99b6 !important;
+    }
     .account-card {
         background: linear-gradient(135deg, #ff99b6, #af99ff);
         color: #fff;

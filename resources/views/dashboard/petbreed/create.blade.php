@@ -4,9 +4,12 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="account-card">
-                <div class="account-card-header">
-                    <h3>{{ isset($breed) ? 'Edit Breed' : 'Create Breed' }}</h3>
+               <div class="account-card">
+                <div class="account-card-header d-flex align-items-center justify-content-center">
+                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <h3 style="color: #fcfcfc; margin: 0;">
+                        <h3>{{ isset($breed) ? 'Edit Breeed' : 'Create Breed' }}</h3>
+                    </h3>
                 </div>
                 <div class="account-card-body">
                     @if (session('error'))
