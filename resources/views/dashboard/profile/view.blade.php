@@ -5,7 +5,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="account-card">
                 <div class="account-card-header text-center">
-                    <img src="\backend\viewprofile.jpg" alt="Profile Photo"  style="width: 150px; height: 150px;">
+                    <img src="\backend\viewprofile.jpg" alt="Profile Photo" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
                     <h3 style="color: #fcfcfc;">
                         Account Information
                     </h3>
