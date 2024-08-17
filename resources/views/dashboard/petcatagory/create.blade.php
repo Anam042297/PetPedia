@@ -4,8 +4,11 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="account-card">
-                <div class="account-card-header">
-                    <h3>{{ isset($category) ? 'Edit Category' : 'Create Category' }}</h3>
+                <div class="account-card-header d-flex align-items-center justify-content-center">
+                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <h3 style="color: #fcfcfc; margin: 0;">
+                        <h3>{{ isset($category) ? 'Edit Category' : 'Create Category' }}</h3>
+                    </h3>
                 </div>
                 <div class="account-card-body">
                     @if (session('error'))
@@ -33,6 +36,16 @@
                             <input type="text" class="form-control" id="name" name="name" value="{{ isset($category) ? $category->name : old('name') }}">
                             <span class="text-danger">
                                 @error('name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="images">Choose images</label>
+                            <input type="file" class="form-control" name="images" id="images">
+                            <span class="text-danger">
+                                @error('images')
                                     {{ $message }}
                                 @enderror
                             </span>

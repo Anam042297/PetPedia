@@ -5,7 +5,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="account-card">
                 <div class="account-card-header text-center">
-                    <img src="\backend\vecteezy_personal-personalization-profile-user-flat-color-icon_18025035.jpg" alt="Profile Photo" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                    <img src="\backend\viewprofile.jpg" alt="Profile Photo" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
                     <h3 style="color: #fcfcfc;">
                         Account Information
                     </h3>
@@ -15,13 +15,11 @@
                     <form id="adminForm">
                         <div class="card-body account-card-body">
                             <div class="account-info">
-                                <label for="name">Name:</label>
-                                <p id="name">{{ auth()->user()->name }}</p>
+                                <label for="name"><b>Name: &nbsp </b> {{ auth()->user()->name }}</label>
                             </div>
     
                             <div class="account-info">
-                               <label for="email">Email:</label>
-                               <p id="email">{{ auth()->user()->email }}</p>
+                               <label for="email"><b>Email: &nbsp </b> {{ auth()->user()->email }}</label>
                             </div>
                         </div>
                         <a href="{{ route('admin.edit') }}" class="btn" style=" background-color:#ff99b6;border-color: #ff99b6;width: 30%; padding: 10px;border-radius: 5px;color: white;cursor: pointer;float: right;margin-top: -10px;">

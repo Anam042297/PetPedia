@@ -1,30 +1,30 @@
 @extends('dashboard.master')
 @section('content')
-    <div class="container" style="margin-top: 20px;">
-        <div class="card">
-            <div class="card-header py-5">
-                <div class="row">
-                    <div class="col">
-                        <h4 class="text-center" style="color: #4B49AC;"><b>User Table</b></h4>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered" id="user_table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+<div class="container mt-5">
+    <div class="account-card">
+        <div class="account-card-header d-flex align-items-center justify-content-center">
+            <img src="\backend\tables.jpg" alt="Profile Photo" style="width: 60px;
+             height: 60px; margin-right: 20px;">
+            <h3 style="color: #fcfcfc; margin: 0;">
+                <h3>User Table</h3>
+            </h3>
+        </div>
+        <div class="account-card-body">
+            <table class="table table-bordered" id="user_table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic content will be inserted here -->
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
     @endsection
     @section("script")
     <script>

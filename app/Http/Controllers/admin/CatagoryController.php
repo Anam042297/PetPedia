@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catagory;
+use Illuminate\Support\Facades\Storage;
 use DataTables;
 
 class CatagoryController extends Controller
@@ -16,6 +17,14 @@ class CatagoryController extends Controller
         if ($request->ajax()) {
             $data = Catagory::latest()->get();
             return Datatables::of($data)
+                ->addColumn('images', function ($row) {
+                    if ($row->image) {
+                        $imageUrl = $row->image;
+                        return '<img src="' . $imageUrl . '" class="img-thumbnail" style="max-width: 80px;" alt="Image">';
+                       
+                    }
+                    return '<span>No Image</span>';
+                })
                 ->addColumn('action', function ($row) {
                     $editUrl = route('Catagory.edit', $row->id);
                     $deleteUrl = route('Catagory.destroy', $row->id);
@@ -25,9 +34,10 @@ class CatagoryController extends Controller
                     return $action;
                 })
 
+
                 ->removeColumn('id')
                 ->addIndexColumn()
-                ->rawColumns(['action'])
+                ->rawColumns(['images', 'action'])
                 ->make(true);
         }
         return view('dashboard.petcatagory.view');
@@ -45,24 +55,31 @@ class CatagoryController extends Controller
     // store catagory data
     public function store(Request $request)
     {
-        //    dd($request->all());
         // Validate incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        // Create a new post instance
-        $post = new Catagory();
-        $post->name = $validatedData['name'];
-        //  dd($post);
-        $post->save();
+        // Create a new category instance
+        $category = new Catagory();
+        $category->name = $validatedData['name'];
+        $category->save();
 
+        // Check if an image file was uploaded
+        if ($request->hasFile('images')) {
+            $image = $request->file('images');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/images', $filename);
+            $url = Storage::url($path);
+            $category->image = $url;
+            $category->save();
+        }
 
         // Redirect to a success page or route
         return redirect()->route('Catagory.display');
-
-
     }
+
     // edit view catagory data
     public function edit($id)
     {
@@ -76,13 +93,22 @@ class CatagoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            // Add other validation rules as needed
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $category = Catagory::findOrFail($id);
         $category->name = $request->input('name');
         // Update other fields as needed
         $category->save();
+         // Check if an image file was uploaded
+         if ($request->hasFile('images')) {
+            $image = $request->file('images');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/images', $filename);
+            $url = Storage::url($path);
+            $category->image = $url;
+            $category->save();
+        }
 
         return redirect()->route('Catagory.display')->with('success', 'Category updated successfully.');
     }

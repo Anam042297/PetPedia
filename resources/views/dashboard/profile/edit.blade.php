@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="account-card">
-                <div class="account-card-header text-center">
-                    <img src="\backend\Universal_(588).jpg" alt="Profile Photo" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
-                    <h3 style="color: #ffffff;">
-                        Update Profile
+                <div class="account-card-header d-flex align-items-center justify-content-center">
+                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <h3 style="color: #fcfcfc; margin: 0;">
+                        Edit Profile
                     </h3>
                 </div>
 
@@ -48,7 +48,7 @@
                             </span>
                         </div>
 
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="password">Password (If you do not want to change make it empty)</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Leave blank if you don't want to change">
                             <span class="text-danger">
@@ -65,7 +65,7 @@
                                     {{ $message }}
                                 @enderror
                             </span>
-                        </div> --}}
+                        </div>
 
                         <button type="submit" class="custom-btn">
                             Update Profile

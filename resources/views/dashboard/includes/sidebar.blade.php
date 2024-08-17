@@ -1,3 +1,4 @@
+{{-- <div class="collapse navbar-collapse" id="navbarNav"> --}}
 <div id="sidebar" class="sidebar">
     <!-- Sidebar content -->
     <div id="layoutSidenav_nav">
@@ -85,3 +86,4 @@
         
     </div>
 </div>
+{{-- </div> --}}

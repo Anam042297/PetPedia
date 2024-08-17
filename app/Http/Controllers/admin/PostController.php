@@ -63,6 +63,7 @@ class PostController extends Controller
 
             'catagory_id' => 'required|exists:catagories,id',
             'breed_id' => 'required|exists:breeds,id',
+            'gender' => 'required',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
             'description' => 'nullable|string',
@@ -76,6 +77,7 @@ class PostController extends Controller
         $post->user_id = $user_id;
         $post->catagory_id = $validatedData['catagory_id'];
         $post->breed_id = $validatedData['breed_id'];
+        $post->gender = $validatedData['gender'];
         $post->name = $validatedData['name'];
         $post->age = $validatedData['age'];
         $post->description = $validatedData['description'];
@@ -120,6 +122,7 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'catagory_id' => 'required|exists:catagories,id',
             'breed_id' => 'required|exists:breeds,id',
+            'gender' => 'required',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
             'description' => 'nullable|string',
@@ -129,6 +132,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->catagory_id = $validatedData['catagory_id'];
         $post->breed_id = $validatedData['breed_id'];
+        $post->gender = $validatedData['gender'];
         $post->name = $validatedData['name'];
         $post->age = $validatedData['age'];
         $post->description = $validatedData['description'];

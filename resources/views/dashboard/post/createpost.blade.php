@@ -5,9 +5,13 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="account-card">
-                <div class="account-card-header">
-                    <h3>{{ isset($post) ? 'Edit Post' : 'Create Post' }}</h3>
+       
+                <div class="account-card">
+                <div class="account-card-header d-flex align-items-center justify-content-center">
+                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <h3 style="color: #fcfcfc; margin: 0;">
+                        <h3>{{ isset($post) ? 'Edit Post' : 'Create Post' }}</h3>
+                    </h3>
                 </div>
                 <div class="account-card-body">
                     <form id="contactForm" action="{{ isset($post) ? route('post.update', $post->id) : route('post.store') }}" method="POST" enctype="multipart/form-data">
@@ -45,6 +49,22 @@
                             </select>
                             <span class="text-danger">
                                 @error('breed_id')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="breed">Select Gender</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="unknown">Unknown</option>
+                                
+                            </select>
+                            <span class="text-danger">
+                                @error('gender')
                                     {{ $message }}
                                 @enderror
                             </span>
