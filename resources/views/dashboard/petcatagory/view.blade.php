@@ -28,7 +28,9 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Image</th>
                         <th>Actions</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -69,12 +71,17 @@
                     data: 'name',
                     name: 'name'
                 },
+                { data: 'images', 
+                  name: 'images', 
+                  orderable: false,
+                  searchable: false },
                 {
                     data: 'action',
                     name: 'action',
                     orderable: false,
                     searchable: false
                 },
+                
             ]
         });
         $(document).on('click', 'button.delete_button', function() {

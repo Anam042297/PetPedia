@@ -27,6 +27,7 @@
                         <th>Created By</th>
                         <th>Category</th>
                         <th>Breed</th>
+                        <th>Gender</th>
                         <th>Pet Name</th>
                         <th>Age (months)</th>
                         <th>Image</th>
@@ -64,6 +65,7 @@
                 { data: 'user.name', name: 'user.name' },
                 { data: 'catagory.name', name: 'cataory.name' },
                 { data: 'breed.name', name: 'breed.name' },
+                { data: 'gender', name: 'gender' },
                 { data: 'name', name: 'name' },
                 { data: 'age', name: 'age' },
                 { data: 'images', name: 'images', orderable: false, searchable: false },

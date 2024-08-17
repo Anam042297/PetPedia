@@ -40,6 +40,16 @@
                                 @enderror
                             </span>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="images">Choose images</label>
+                            <input type="file" class="form-control" name="images" id="images">
+                            <span class="text-danger">
+                                @error('images')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
 
                         <button type="submit" class="custom-btn">
                             {{ isset($category) ? 'Update' : 'Submit' }}

@@ -55,6 +55,22 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="breed">Select Gender</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="unknown">Unknown</option>
+                                
+                            </select>
+                            <span class="text-danger">
+                                @error('gender')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+
+                        <div class="form-group">
                             <label for="pet_name">Pet Name</label>
                             <input type="text" class="form-control" id="pet_name" name="name" placeholder="Pet Name" value="{{ isset($post) ? $post->name : old('name') }}">
                             <span class="text-danger">
