@@ -61,6 +61,7 @@
                     </div>
                 </div>
             </div> --}}
+            <img src="\backend\dash.png" alt="Profile Photo"  style="width: 150px; height: 150px;">
             <div class="container mt-4">
                 <div class="row">
                     <!-- Summary Cards -->

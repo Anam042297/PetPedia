@@ -59,6 +59,7 @@
         border-radius: 15px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         padding: 20px;
+        margin-bottom: 50px;
     }
 
     .account-card-header {
