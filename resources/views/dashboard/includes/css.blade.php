@@ -20,6 +20,7 @@
 
     body {
         background: linear-gradient(135deg, #fdc1d2, #fdc1d2);
+        overflow-x: hidden; 
     }
 
     

@@ -9,42 +9,52 @@
                     <div class="row">
                         <!-- Summary Cards -->
                         <div class="col-md-12 d-flex justify-content-between">
-                            <div class="account-card mb-3" style="width: 23%; height: 200px;">
-                                <div class="account-card-header d-flex align-items-center">
-                                    <i class="fas fa-file-alt mr-2"></i>
-                                    <span>Total Posts</span>
+                            <div class="account-card mb-3">
+                                <div class="account-card-header d-flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ddd;">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-file-alt mr-2"></i>
+                                        <span>Total Posts</span>
+                                    </div>
                                 </div>
-                                <div class="account-card-body">
-                                    <h5 class="card-title">{{ $totalPosts }}</h5>
-                                </div>
-                            </div>
-                            
-                            <div class="account-card mb-3" style="width: 23%; height: 200px;">
-                                <div class="account-card-header d-flex align-items-center">
-                                    <i class="fas fa-box mr-2"></i>
-                                    <span>Total Accessories</span>
-                                </div>
-                                <div class="account-card-body">
-                                    <h5 class="card-title">{{ $totalPosts }}</h5>
-                                </div>
-                            </div>
-                            <div class="account-card mb-3" style="width: 23%; height: 200px;">
-                                <div class="account-card-header d-flex align-items-center">
-                                    <i class="fas fa-box mr-2"></i>
-                                    <span>Total Accessories</span>
-                                </div>
-                                <div class="account-card-body">
-                                    <h5 class="card-title">{{ $totalPosts }}</h5>
+                                <div class="account-card-body d-flex justify-content-center align-items-center" style="height: calc(100% - 40px);">
+                                    <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
                                 </div>
                             </div>
                             
-                            <div class="account-card mb-3" style="width: 23%; height: 200px;">
-                                <div class="account-card-header d-flex align-items-center">
-                                    <i class="fas fa-users mr-2"></i>
-                                    <span>Logined Users</span>
+                            
+                            <div class="account-card mb-3">
+                                <div class="account-card-header d-flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ddd;">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-file-alt mr-2"></i>
+                                        <span>Total Accesories</span>
+                                    </div>
                                 </div>
-                                <div class="account-card-body">
-                                    <h5 class="card-title">{{ $activeUsers }}</h5>
+                                <div class="account-card-body d-flex justify-content-center align-items-center" style="height: calc(100% - 40px);">
+                                    <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
+                                </div>
+                            </div>
+
+                             <div class="account-card mb-3">
+                                <div class="account-card-header d-flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ddd;">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-file-alt mr-2"></i>
+                                        <span>Total Food</span>
+                                    </div>
+                                </div>
+                                <div class="account-card-body d-flex justify-content-center align-items-center" style="height: calc(100% - 40px);">
+                                    <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
+                                </div>
+                            </div>
+                            
+                            <div class="account-card mb-3">
+                                <div class="account-card-header d-flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ddd;">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-file-alt mr-2"></i>
+                                        <span>Total Users</span>
+                                    </div>
+                                </div>
+                                <div class="account-card-body d-flex justify-content-center align-items-center" style="height: calc(100% - 40px);">
+                                    <h5 class="card-title mb-0">{{ $activeUsers }}</h5>
                                 </div>
                             </div>
                         </div>
