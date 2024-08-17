@@ -48,7 +48,7 @@
                             </span>
                         </div>
 
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="password">Password (If you do not want to change make it empty)</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Leave blank if you don't want to change">
                             <span class="text-danger">
@@ -65,7 +65,7 @@
                                     {{ $message }}
                                 @enderror
                             </span>
-                        </div> --}}
+                        </div>
 
                         <button type="submit" class="custom-btn">
                             Update Profile
