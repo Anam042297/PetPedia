@@ -1,6 +1,6 @@
 @extends('frontend.master')
 @section('content')
-
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <!-- About Start -->
     <div class="container py-5">
         <div class="row py-5">
@@ -76,5 +76,17 @@
         </div>
     </div>
     <!-- Features End -->
-
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css"> --}}
+    <script>
+        var botmanWidget = {
+            aboutText: 'ask anything about your pet.',
+            introMessage: "WELCOME TO PETBOT",
+            mainColor: "#ED6436",
+        bubbleBackground: "#ED6436",
+        bubbleAvatarUrl: "", // URL to your custom avatar image
+        };
+    </script>
+   
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+       
     @endsection

@@ -36,6 +36,10 @@ Route::get('/login',[LoginController::class,'index'])->name('login');
 // admin middleware
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/edit', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::put('/update', [AdminController::class, 'update'])->name('admin.update');
+    Route::get('/view', [AdminController::class, 'view'])->name('admin.view');
+
     //Pet Catagory routes
     Route::get('/indexcatagory', [CatagoryController::class, 'index'])->name('Catagory.index');
     Route::get('/createcatagory', [CatagoryController::class, 'create'])->name('Catagory.create');
@@ -118,3 +122,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
+use App\Http\Controllers\ChatBotController;
+Route::match(['get', 'post'], '/botman', [ChatBotController::class, 'handle']);
+Route::get('/debug-env', function () {
+    return env('OPENAI_API_KEY');
+});

@@ -19,13 +19,13 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $posts = Post::with(['catagory', 'breed', 'images', 'user'])->select('posts.*');
+            $posts = Post::with(['catagory', 'breed', 'images', 'user'])->get();
             return DataTables::of($posts)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('post.edit', $row->id);
                     $deleteUrl = route('post.destroy', $row->id);
-                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
-                    .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> Delete</button>';
+                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> &nbsp'
+                    .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> <i class="fas fa-trash-alt"></i></button>';
 
                     return $action;
                 })
@@ -63,6 +63,7 @@ class PostController extends Controller
 
             'catagory_id' => 'required|exists:catagories,id',
             'breed_id' => 'required|exists:breeds,id',
+            'gender' => 'required',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
             'description' => 'nullable|string',
@@ -76,6 +77,7 @@ class PostController extends Controller
         $post->user_id = $user_id;
         $post->catagory_id = $validatedData['catagory_id'];
         $post->breed_id = $validatedData['breed_id'];
+        $post->gender = $validatedData['gender'];
         $post->name = $validatedData['name'];
         $post->age = $validatedData['age'];
         $post->description = $validatedData['description'];
@@ -120,6 +122,7 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'catagory_id' => 'required|exists:catagories,id',
             'breed_id' => 'required|exists:breeds,id',
+            'gender' => 'required',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
             'description' => 'nullable|string',
@@ -129,6 +132,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->catagory_id = $validatedData['catagory_id'];
         $post->breed_id = $validatedData['breed_id'];
+        $post->gender = $validatedData['gender'];
         $post->name = $validatedData['name'];
         $post->age = $validatedData['age'];
         $post->description = $validatedData['description'];

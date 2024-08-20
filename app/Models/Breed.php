@@ -16,6 +16,6 @@ class Breed extends Model
     }
     public function catagory()
     {
-        return $this->belongsTo(Catagory::class);
+        return $this->belongsTo(Catagory::class,'category_id');
     }
 }
