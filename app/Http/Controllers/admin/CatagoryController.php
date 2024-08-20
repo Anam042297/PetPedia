@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catagory;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class CatagoryController extends Controller
 {
@@ -15,7 +15,7 @@ class CatagoryController extends Controller
 
         if ($request->ajax()) {
             $data = Catagory::latest()->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('Catagory.edit', $row->id);
                     $deleteUrl = route('Catagory.destroy', $row->id);
