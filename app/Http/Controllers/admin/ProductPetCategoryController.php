@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\PetCategory;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProductPetCategoryController extends Controller
