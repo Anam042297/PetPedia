@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ApiUserController;
+use App\Http\Controllers\API\ApiUserController;
+use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\categoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,3 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('Register',[ApiUserController::class,'register']);
 Route::post('Login',[ApiUserController::class,'login']);
+
+Route::get('showpost',[PostController::class,'getAllPosts']);
+Route::get('showpost/{id}',[PostController::class,'getPostById']);
+
+Route::get('categories', [categoryController::class, 'getAllCategories']);

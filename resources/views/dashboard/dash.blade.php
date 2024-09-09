@@ -1,72 +1,57 @@
 @extends('dashboard.master')
 @section('content')
-    <main>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4">Dashboard</h1>
-            <img src="\backend\dashboard.jpg" alt="Profile Photo"  style="width: 1080px; height: 350px;">
-            <div class="container mt-4">
-                <div class="container mt-4">
-                    <div class="row">
-                        <!-- Summary Cards -->
-                        <div class="col-md-12 d-flex justify-content-between">
-                            <div class="account-card mb-3">
-                                <div class="account-card-header d-flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ddd;">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-file-alt mr-2"></i>
-                                        <span>Total Posts</span>
-                                    </div>
-                                </div>
-                                <div class="account-card-body d-flex justify-content-center align-items-center" style="height: calc(100% - 40px);">
-                                    <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="account-card mb-3">
-                                <div class="account-card-header d-flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ddd;">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-file-alt mr-2"></i>
-                                        <span>Total Accesories</span>
-                                    </div>
-                                </div>
-                                <div class="account-card-body d-flex justify-content-center align-items-center" style="height: calc(100% - 40px);">
-                                    <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
-                                </div>
-                            </div>
+<img src="\backend\dashboard.jpg" alt="Profile Photo" style="width: 1080px; height: 350px;">
 
-                             <div class="account-card mb-3">
-                                <div class="account-card-header d-flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ddd;">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-file-alt mr-2"></i>
-                                        <span>Total Food</span>
-                                    </div>
-                                </div>
-                                <div class="account-card-body d-flex justify-content-center align-items-center" style="height: calc(100% - 40px);">
-                                    <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
-                                </div>
-                            </div>
-                            
-                            <div class="account-card mb-3">
-                                <div class="account-card-header d-flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ddd;">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-file-alt mr-2"></i>
-                                        <span>Total Users</span>
-                                    </div>
-                                </div>
-                                <div class="account-card-body d-flex justify-content-center align-items-center" style="height: calc(100% - 40px);">
-                                    <h5 class="card-title mb-0">{{ $activeUsers }}</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="d-flex justify-content-between">
+            <div class="account-card ">
+                <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
+                    <i class="fas fa-paw mr-2"></i>
+                        <span>Total Posts</span>
                 </div>
-                
+                <div class="account-card-body">
+                    <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
+                </div>
+            </div>
+            <div class="account-card ">
+                <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
+                    <i class="fas fa-list-ul mr-2"></i>
+                        <span>Total Orders</span>
+                </div>
+                <div class="account-card-body">
+                    <h5 class="card-title mb-0">{{  $totalPosts  }}</h5>
+                </div>
+            </div>
+            <div class="account-card ">
+                <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
+                        <i class="fas fa-drumstick-bite mr-2"></i>
+                        <span>Total Products</span>
+                </div>
+                <div class="account-card-body">
+                    <h5 class="card-title mb-0">{{  $totalPosts  }}</h5>
+                </div>
+            </div>
+            <div class="account-card ">
+                <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
+                        <i class="fas fa-users mr-2"></i>
+                        <span>Total Users</span>
+                </div>
+                <div class="account-card-body">
+                    <h5 class="card-title mb-0">{{ $activeUsers }}</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+          
             
-                <!-- Recent Posts -->
+                {{-- <!-- Recent Posts -->
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-6" >
                         <h3 class="mb-3">Recent Posts</h3>
-                        <div class="list-group">
+                        <div class="list-group" >
                             @foreach ($recentPosts as $post)
                                 <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                     {{ $post->name }}
@@ -102,11 +87,5 @@
                             @endforeach
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            
-            
-            
-    </main>
+                </div> --}}
 @endsection
