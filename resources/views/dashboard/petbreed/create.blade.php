@@ -2,7 +2,6 @@
 @extends('dashboard.master')
 @section('content')
 <div class="container mt-5">
-    <div class="row">
         <div class="col-md-8 offset-md-2">
                <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
@@ -64,7 +63,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 @endsection
