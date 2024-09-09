@@ -1,11 +1,10 @@
 @extends('dashboard.master')
 @section('content')
 <div class="container mt-5">
-    <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
-                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <img src="\backend\edit.jpg" alt="Edit Photo" style="width: 80px; height: 80px; margin-right: 20px;">
                     <h3 style="color: #fcfcfc; margin: 0;">
                         <h3>{{ isset($category) ? 'Edit Category' : 'Create Category' }}</h3>
                     </h3>
@@ -58,7 +57,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 

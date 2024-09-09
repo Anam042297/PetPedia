@@ -3,11 +3,10 @@
 
 
 <div class="container mt-5">
-    <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
-                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <img src="\backend\edit.jpg" alt="Edit Photo" style="width: 80px; height: 80px; margin-right: 20px;">
                     <h3 style="color: #fcfcfc; margin: 0;">
                         {{ isset($post) ? 'Edit Post' : 'Create Post' }}
                     </h3>
@@ -130,36 +129,35 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#catagory').change(function() {
-                var categoryId = $(this).val();
-                if (categoryId) {
-                    $.ajax({
-                        // dd(categoryId);
-                        url: '/admin/get-breeds/' + categoryId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#breed').empty();
-                            $('#breed').append('<option value="">Select Breed</option>');
-                            $.each(data, function(key, value) {
-                                $('#breed').append('<option value="' + value.id + '">' +
-                                    value.name + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#breed').empty();
-                    $('#breed').append('<option value="">Select Breed</option>');
-                }
-            });
+@endsection
+@section("script")
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#catagory').change(function() {
+            var categoryId = $(this).val();
+            if (categoryId) {
+                $.ajax({
+                    // dd(categoryId);
+                    url: '/admin/get-breeds/' + categoryId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#breed').empty();
+                        $('#breed').append('<option value="">Select Breed</option>');
+                        $.each(data, function(key, value) {
+                            $('#breed').append('<option value="' + value.id + '">' +
+                                value.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#breed').empty();
+                $('#breed').append('<option value="">Select Breed</option>');
+            }
         });
-    </script>
+    });
+</script>
 @endsection

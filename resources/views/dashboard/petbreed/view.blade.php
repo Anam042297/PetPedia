@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="account-card">
         <div class="account-card-header d-flex align-items-center justify-content-center">
-            <img src="\backend\tables.jpg" alt="Profile Photo" style="width: 60px;
+            <img src="\backend\tables.jpg" alt="Photo" style="width: 60px;
              height: 60px; margin-right: 20px;">
             <h3 style="color: #fcfcfc; margin: 0;">
                 <h3>Breed Table</h3>
@@ -11,7 +11,7 @@
         </div>
         <div class="account-card-body">
             <div class="row mb-3">
-                <div class="col text-end">
+                <div>
                     <a href="{{ route('breed.create') }}" class="btn custom-btn"  style="background-color:
                      #ff99b6; border-color: #ff99b6; width: 15%; padding: 10px; border-radius: 5px; color:
                       white; cursor: pointer; float: right; margin-top: -10px;">
@@ -28,9 +28,6 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Dynamic content will be inserted here -->
-                </tbody>
             </table>
         </div>
     </div>

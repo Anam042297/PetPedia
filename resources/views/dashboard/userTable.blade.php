@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="account-card">
         <div class="account-card-header d-flex align-items-center justify-content-center">
-            <img src="\backend\tables.jpg" alt="Profile Photo" style="width: 60px;
+            <img src="\backend\tables.jpg" alt="Photo" style="width: 60px;
              height: 60px; margin-right: 20px;">
             <h3 style="color: #fcfcfc; margin: 0;">
                 <h3>User Table</h3>
@@ -18,9 +18,6 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Dynamic content will be inserted here -->
-                </tbody>
             </table>
         </div>
     </div>

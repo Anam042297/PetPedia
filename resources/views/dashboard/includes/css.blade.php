@@ -37,7 +37,6 @@
 }
 
 .table {
-        border: 2px solid #af99ff;
         border-radius: 10px;
         overflow: hidden;
     }
@@ -47,7 +46,6 @@
     }
     
     .table td {
-        border: 1px solid  #af99ff;
         padding: 10px;
         text-align: center;
     }
@@ -55,7 +53,7 @@
     .table-bordered th, .table-bordered td {
         padding: 10px!important;
         text-align: center!important;
-        background-color: #ffcfdd !important;
+        background-color: #ffffff !important;
         border-color: #ff99b6 !important;
     }
     
