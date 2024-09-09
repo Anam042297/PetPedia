@@ -25,7 +25,7 @@ class PostController extends Controller
                     $editUrl = route('post.edit', $row->id);
                     $deleteUrl = route('post.destroy', $row->id);
                     $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> &nbsp'
-                    .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> <i class="fas fa-trash-alt"></i></button>';
+                        . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_post_button"> <i class="fas fa-trash-alt"></i></button>';
 
                     return $action;
                 })
@@ -36,7 +36,7 @@ class PostController extends Controller
                     $firstImage = $row->images->first();
                     return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
                 })
-    
+
                 ->rawColumns(['images', 'action'])
                 ->make(true);
         }
@@ -58,21 +58,24 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        // Validate incoming request data
-        $validatedData = $request->validate([
+        // dd(123);
+        try {
+            $validatedData = $request->validate([
+                'catagory_id' => 'required|exists:catagories,id',
+                'breed_id' => 'required|exists:breeds,id',
+                'gender' => 'required|string',
+                'name' => 'required|string|max:255',
+                'age' => 'required|integer|min:0',
+                'description' => 'nullable|string',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif',
+            ]);
 
-            'catagory_id' => 'required|exists:catagories,id',
-            'breed_id' => 'required|exists:breeds,id',
-            'gender' => 'required',
-            'name' => 'required|string|max:255',
-            'age' => 'required|integer|min:0',
-            'description' => 'nullable|string',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image file
-        ]);
+            // dd($validatedData); 
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // dd($e->errors());
+        }
         $user_id = Auth::id();
         // dd($user_id);
-
-        // Create a new post instance
         $post = new Post();
         $post->user_id = $user_id;
         $post->catagory_id = $validatedData['catagory_id'];
@@ -84,7 +87,6 @@ class PostController extends Controller
         //  dd($post);
         $post->save();
         // dd($request->hasFile('images'));
-        // Handle uploading and associating images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $filename = time() . '.' . $image->getClientOriginalExtension();
@@ -119,10 +121,11 @@ class PostController extends Controller
     //update post
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $validatedData = $request->validate([
             'catagory_id' => 'required|exists:catagories,id',
             'breed_id' => 'required|exists:breeds,id',
-            'gender' => 'required',
+            'gender' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
             'description' => 'nullable|string',
@@ -159,13 +162,13 @@ class PostController extends Controller
     {
         // dd(123);
         $data = Post::with('images')->findorfail($id);
-// dd($data);
+        // dd($data);
         if (!$data) {
             return response()->json(['error' => 'post not found ".'], 404);
         }
         $data->delete();
         return response()->json(['success' => 'Record deleted successfully.']);
     }
-    
+
 
 }

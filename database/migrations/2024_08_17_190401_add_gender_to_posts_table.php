@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('gender')->nullable(); // Add the gender column, nullable if not required
+            $table->string('gender')->after('breed_id');
         });
     }
 
