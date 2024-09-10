@@ -113,6 +113,8 @@ $validateData['serial_number'] =  $randomNumber;
     public function edit(PetProduct $product, $id)
     {
         // dd($product);
+        // $product = PetProduct::with('Category')->findOrFail($id);
+        // dd($product);
         $product = PetProduct::findOrFail($id);
         $categories = PetCategory::all();
         return view('dashboard.petproducts.editproduct', compact('product', 'categories'));
@@ -156,16 +158,11 @@ $validateData['serial_number'] =  $randomNumber;
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully!');
     }
-
-    // Show the mart view with all products
-    public function showMart()
-{
-    // Retrieve all products with related categories and images
-    $products = PetProduct::with(['category', 'images'])->get();
-
-    // Return the mart view with products data
-    return view('frontend.includes.Mart.index', compact('products'));
-}
+    public function showProductPage($id)
+    {
+        $petproduct = PetProduct::findOrFail($id); // Fetch the product based on ID
+        return view('frontend.product_page', compact('petproduct')); // Pass the product to the view
+    }
 
     // Remove the specified product from the database
     public function destroy(string $id)

@@ -1,13 +1,18 @@
 @extends('dashboard.master')
 @section('content')
-<div class="login-container" style="background: linear-gradient(to right, #c749c7, #c78fec)">
 
-    <div>
-        <h3 style="color:#e242b0; text-align:center;">
-        </h3>
-    </div>
-    <div class="container">
-        <h1>Create Product</h1>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+       
+                <div class="account-card">
+                <div class="account-card-header d-flex align-items-center justify-content-center">
+                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <h3 style="color: #fcfcfc; margin: 0;">
+                        <h1>Create Product</h1>
+                    </h3>
+                </div>
 
         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf

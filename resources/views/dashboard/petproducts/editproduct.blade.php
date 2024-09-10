@@ -1,15 +1,17 @@
 @extends('dashboard.master')
-
 @section('content')
 
-<div class="login-container" style="background: linear-gradient(to right, #dd85dd, #c78fec)">
-    <div>
-        <h3 style="color:#ff99e4; text-align:center;">
-        </h3>
-    </div>
-    <div class="container">
-        <h1>Edit Product</h1>
-
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+       
+                <div class="account-card">
+                <div class="account-card-header d-flex align-items-center justify-content-center">
+                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <h3 style="color: #fcfcfc; margin: 0;">
+                        <h1>Edit Product</h1>
+                    </h3>
+                </div>
             <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -47,8 +49,8 @@
             </div>
 
             <div class="form-group">
-                <label for="pet_category_id">Pet Category</label>
-                <select name="pet_category_id" class="form-control" id="pet_category_id" required>
+                {{-- <label for="pet_category_id">Pet Category</label>
+                <select name="pet_category_id" class="form-control" id="pet_category_id">
                     <option value="">Select Pet Category</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ $product->category_id === $category->id ? 'selected' : '' }}>
@@ -60,7 +62,15 @@
                     @error('Pet category')
                         {{ $message }}
                     @enderror
-                </span>
+                </span> --}}
+                <label for="pet_category_id">Pet Category</label>
+                <select name="pet_category_id" class="form-control">
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ $product->pet_category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
   <!-- Weight field, only shown if 'food' is selected -->
   <div class="form-group" id="weight-group" style="display: none;">

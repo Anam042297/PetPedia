@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class OrderItem extends Model
 {
     use HasFactory;
-    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -35,6 +34,6 @@ class OrderItem extends Model
      */
     public function petProduct()
     {
-        return $this->belongsTo(PetProduct::class);
+        return $this->belongsTo(PetProduct::class, 'pet_product_id');
     }
 }

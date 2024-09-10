@@ -50,5 +50,9 @@ class User extends Authenticatable
 {
     return $this->hasMany(PetProduct::class);
 }
+public function cart()
+{
+    return $this->hasOne(Cart::class);
+}
 
 }

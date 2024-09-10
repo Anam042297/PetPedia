@@ -1,25 +1,26 @@
 @extends('dashboard.master')
 @section('content')
-
-    <div class="container"  style="margin-top: 20px;">
-
-        <div class="card">
-            <div class="card">
-                <div class="card-header py-5">
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="text-center" style="color: #4B49AC;"><b>Pet_Category Table</b></h4>
-                        </div>
-                        <div class="col-auto d-flex justify-content-end">
-                            <a href="{{ route('PetCategory.create') }}" class="btn"
-                                style="background-color: #4B49AC; border-color: #413f99; color: #ffffff;">
-                                <i class="fa fa-plus"></i>
-                                Add Pet_Category
-                            </a>
-                        </div>
-                    </div>
+<div class="container mt-5">
+    <div class="account-card">
+        <div class="account-card-header d-flex align-items-center justify-content-center">
+            <img src="\backend\tables.jpg" alt="Profile Photo" style="width: 60px; 
+            height: 60px; margin-right: 20px;">
+            <h3 style="color: #fcfcfc; margin: 0;">
+                <h3>Pet_Category Table</h3>
+            </h3>
+        </div>
+        <div class="account-card-body">
+            <div class="row mb-3">
+                <div class="col text-end">
+                    <a href="{{ route('PetCategory.create') }}" style="background-color: #ff99b6;
+                     border-color: #ff99b6; width: 15%; padding: 10px; border-radius: 5px; 
+                     color: white; cursor: pointer; float: right; margin-top: -10px;" 
+                     class="btn custom-btn">
+                        <i class="fa fa-plus"></i>
+                        Add Category
+                    </a>
                 </div>
-                <div class="card-body">
+            </div>
                     <table class="table table-bordered" id="petcategory_table">
                         <thead>
                             <tr>

@@ -17,12 +17,12 @@ class MartController extends Controller
       $products = PetProduct::with('images', 'category')->get();
       $categories = PetCategory::all();
       // Pass products to the frontend view
-      return view('frontend.includes.Mart.index', compact('products'));
+      return view('frontend.Mart.index', compact('products'));
     }
     public function show($id)
 {
     $product = PetProduct::with('images', 'category')->findOrFail($id);
-    return view('frontend.includes.Mart.show', compact('product'));
+    return view('frontend.Mart.show', compact('product'));
 }
   
 }

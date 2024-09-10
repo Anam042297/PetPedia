@@ -12,7 +12,7 @@ class CartItem extends Model
 
     public function cart()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(Cart::class,'cart_id');
     }
 
     public function product()
@@ -20,3 +20,6 @@ class CartItem extends Model
         return $this->belongsTo(PetProduct::class,'pet_product_id');
 }
 }
+
+
+ 

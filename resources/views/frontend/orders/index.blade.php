@@ -1,54 +1,29 @@
 @extends('frontend.master')
 
 @section('content')
-<div class="container">
-    <h1>My Orders</h1>
+    <h1>Your Orders</h1>
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+    @foreach ($orders as $order)
+        <div class="order">
+            <h2>Order #{{ $order->id }} ({{ $order->status }})</h2>
+            <p>Address: {{ $order->address }}</p>
+            <ul>
+                @foreach ($order->orderItems as $item)
+                    <li>{{ $item->petProduct->name }} - Quantity: {{ $item->quantity }} - Serial: {{ $item->serial_number }}</li>
+                @endforeach
+            </ul>
+            
+            @if ($order->status == 'pending')
+                <form action="{{ route('orders.receive', $order->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Mark as Received</button>
+                </form>
+                <form action="{{ route('orders.cancel', $order->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Cancel Order</button>
+                </form>
+            @endif
         </div>
-    @endif
+    @endforeach
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Address</th>
-                <th>Status</th>
-                <th>Items</th>
-                <th>Total Quantity</th>
-                <th>Total Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($orders as $order)
-                <tr>
-                    <td>{{ $order->id }}</td>
-                    <td>{{ $order->address }}</td>
-                    <td>{{ ucfirst($order->status) }}</td>
-                    <td>
-                        <ul>
-                            @foreach ($order->orderItems as $item)
-                                <li>
-                                    Product: {{ $item->product->name }}<br>
-                                    Quantity: {{ $item->quantity }}<br>
-                                    Serial Number: {{ $item->serial_number }}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </td>
-                    <td>{{ $order->orderItems->sum('quantity') }}</td>
-                    <td>${{ $order->orderItems->sum(function($item) {
-                        return $item->quantity * $item->product->price;
-                    }) }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6">You have no orders.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
 @endsection

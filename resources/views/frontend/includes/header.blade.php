@@ -11,6 +11,41 @@
                 <a href="{{ route('blog') }}" class="nav-item nav-link">Blog</a>
                 <a href="{{ route('about') }}" class="nav-item nav-link">About Us</a>
             </div>
+{{-- 
+   @php
+  $query= \App\Models\CartItem::with('cart')->get()->function('user_id'){
+    $query->where('user_id', auth()->id())
+  };    
+//   dd($test->cart->user_id);
+   @endphp --}}
+     
+       
+   
+   
+<!-- Cart Icon with link to the cart page -->
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('cart.index') }}">
+            <i class="fas fa-shopping-cart"></i> 
+            <div class="cart-icon">
+                @if(auth()->check())
+                    @php
+                        // Check if the user has a cart and if it has items
+                        $cart = auth()->user()->cart;
+                        $cartItemCount = $cart && $cart->items ? $cart->items->sum('quantity') : 0;
+                    @endphp
+                    <span id="cart-icon">{{ $cartItemCount }}</span>
+                @else
+                    <!-- If user is not logged in, show 0 -->
+                    <span id="cart-icon">0</span>
+                @endif
+            </div>
+        </a>
+    </li>
+</ul>
+
+
+
           <!-- Other navigation items -->
         </div>
         @guest

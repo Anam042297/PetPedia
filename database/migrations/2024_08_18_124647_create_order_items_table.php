@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->foreignId('pet_product_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
-            $table->string('serial_number');
             $table->timestamps();
         });
     }

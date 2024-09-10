@@ -23,6 +23,7 @@ class ProductPetCategoryController extends Controller
                     $editUrl = route('PetCategory.edit', $row->id);
                     $deleteUrl = route('PetCategory.destroy', $row->id);
                     $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
+                   
                         . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"> Delete</button>';
 
                     return $action;

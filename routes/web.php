@@ -84,29 +84,34 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
    Route::get('/get-product_category/{petcategory_id}', [PetProductController::class, 'getproduct_category']);
    Route::get('/product/{id}/edit', [PetProductController::class, 'edit'])->name('products.edit');
    Route::put('/product/{id}', [PetProductController::class, 'update'])->name('products.update');
-//   
+ Route::get('/product/{id}', [PetProductController::class, 'showProductPage'])->name('product.page');
    Route::delete('/deleteproduct/{id}', [PetProductController::class, 'destroy'])->name('products.destroy');
    Route::put('/martproduct/{id}', [PetProductController::class, 'update'])->name('products.show');
- //  Route::get('/mart', [PetProductController::class, 'showMart'])->name('mart.show');
- 
- // cart routes
- 
-     Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
-    Route::put('/cart/update/{cartItemId}', [CartController::class, 'updateCartItem'])->name('cart.update');
-    Route::delete('/cart/remove/{cartItemId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-    Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
-  
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-    
-    // Route to place an order
-    Route::post('/orders/place', [OrderController::class, 'placeOrder'])->name('orders.place');
 
-    // Route to display a list of orders
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    
 
-   
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::patch('/cart/update', [CartController::class, 'updateCartItem'])->name('cart.update');
+Route::delete('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+
+
+
+Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+// Show the order form for a specific product
+Route::get('/orders/create/{product}', [OrderController::class, 'create'])->name('orders.create');
+
+// Handle the form submission
+Route::post('/orders/{product}', [OrderController::class, 'store'])->name('orders.store');
+
+// Display a list of the user's orders
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+Route::post('/orders/{orderId}/receive', [OrderController::class, 'markAsReceived'])->name('orders.receive');
+Route::post('/orders/{orderId}/cancel', [OrderController::class, 'cancelOrder'])->name('orders.cancel');
+
+
  //user routes
  Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
  Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
