@@ -123,7 +123,8 @@
                         </div>
 
                         <button type="submit" class="custom-btn">
-                            {{ isset($post) ? 'Update' : 'Submit' }}
+                            <i class="fas fa-check"></i> 
+                            {{ isset($post) ? 'Update' : 'Create' }}
                         </button>
                     </form>
                 </div>

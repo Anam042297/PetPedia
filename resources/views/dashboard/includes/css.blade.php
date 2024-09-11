@@ -78,13 +78,13 @@
     .custom-btn {
         background-color:#ff99b6;
         border-color: #ff99b6;
-        width: 30%;
+        width: 150px; 
         padding: 10px;
         border-radius: 5px;
         color: white;
         cursor: pointer;
-        float: right; 
-        margin-top: -10px;
+        float: right;
+        margin-top: -10px; 
     }
 
 </style>
