@@ -1,15 +1,15 @@
 {{-- <div class="collapse navbar-collapse" id="navbarNav"> --}}
-<div id="sidebar" class="sidebar">
+{{-- <div id="sidebar" >
     <!-- Sidebar content -->
     <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <nav class="sb-sidenav" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
-                <div class="nav">
+                <div class="nav ">
                     <a class="nav-link" href="{{ route('admin.index') }}">
                         <div class="sb-nav-link-icon">
                             <div class="text_colour"> <i class="fas fa-tachometer-alt"></i></div>
                         </div>
-                        <div class="text_colour">Dashboard</div>
+                        <div >Dashboard</div>
                     </a>
                     <a class="nav-link" href="{{ route('usertable') }}">
                         <div class="sb-nav-link-icon">
@@ -58,5 +58,87 @@
         </nav>
         
     </div>
-</div>
+</div> --}}
 {{-- </div> --}}
+<div id="sidebar">
+    <!-- Sidebar content -->
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <ul class="nav">
+                    <!-- Dashboard Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.index') }}" style="color: black;">
+                            <i class="fas fa-tachometer-alt" style="margin-right: 8px;"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <!-- Users Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('usertable') }}" style="color: black;">
+                            <i class="fas fa-users" style="margin-right: 8px;"></i>
+                            Users
+                        </a>
+                    </li>
+
+                    <!-- Post Tables Section -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" style="color: black;">
+                            <i class="fas fa-columns" style="margin-right: 8px;"></i>
+                            Post Tables
+                            <i class="fas fa-angle-down"></i>
+                        </a>
+                        <div class="collapse" id="collapseLayouts">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/viewpost" style="color: black;">
+                                        <i class="fas fa-file-alt" style="margin-right: 8px;"></i>
+                                        Posts
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/displaycatagory" style="color: black;">
+                                        <i class="fas fa-tag" style="margin-right: 8px;"></i>
+                                        Category
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/displaybreed" style="color: black;">
+                                        <i class="fas fa-dog" style="margin-right: 8px;"></i>
+                                        Breed
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Product Tables Section -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProductTables" aria-expanded="false" style="color: black;">
+                            <i class="fas fa-columns" style="margin-right: 8px;"></i>
+                            Product Tables
+                            <i class="fas fa-angle-down"></i>
+                        </a>
+                        <div class="collapse" id="collapseProductTables">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" style="color: black;">
+                                        <i class="fas fa-utensils" style="margin-right: 8px;"></i>
+                                        Food
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" style="color: black;">
+                                        <i class="fas fa-cube" style="margin-right: 8px;"></i>
+                                        Accessories
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>

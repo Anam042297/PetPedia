@@ -24,13 +24,12 @@
             <table class="table table-bordered" id="post_table">
                 <thead>
                     <tr>
-                        <th>Created By</th>
                         <th>Category</th>
                         <th>Breed</th>
                         <th>Gender</th>
                         <th>Pet Name</th>
-                        <th>Age (months)</th>
-                        <th>Image</th>
+                        <th>Age(months)</th>
+                        <th>Photo</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -58,8 +57,6 @@
                 url: "/admin/indexpost" ,
             },
             columns: [
-
-                { data: 'user.name', name: 'user.name' },
                 { data: 'catagory.name', name: 'cataory.name' },
                 { data: 'breed.name', name: 'breed.name' },
                 { data: 'gender', name: 'gender' },
