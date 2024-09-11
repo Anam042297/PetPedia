@@ -11,16 +11,12 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
 <style>
-    .sb-sidenav-dark {
+    .sb-sidenav {
         background: linear-gradient(to bottom, #ff99b6, #af99ff);
     }
 
     .sb-topnav {
         background: linear-gradient(135deg, #ff99b6, #af99ff);
-    }
-
-    .text_colour {
-        color: black;
     }
 
     body {
