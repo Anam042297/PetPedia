@@ -5,9 +5,10 @@
 <div class="container mt-4">
     <div class="row">
         <div class="d-flex justify-content-between">
-            <div class="account-card ">
+           
+             <div class="account-card ">
                 <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
-                    <i class="fas fa-paw mr-2"></i>
+                    <i class="fas fa-paw"></i>
                         <span>Total Posts</span>
                 </div>
                 <div class="account-card-body">
@@ -16,7 +17,17 @@
             </div>
             <div class="account-card ">
                 <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
-                    <i class="fas fa-list-ul mr-2"></i>
+                    <i class="fas fa-paw"></i>
+                        <span>Total Posts</span>
+                </div>
+                <div class="account-card-body">
+                    <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
+                </div>
+            </div>
+        
+            <div class="account-card ">
+                <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
+                    <i class="fas fa-list-ul "></i>
                         <span>Total Orders</span>
                 </div>
                 <div class="account-card-body">
@@ -25,7 +36,7 @@
             </div>
             <div class="account-card ">
                 <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
-                        <i class="fas fa-drumstick-bite mr-2"></i>
+                        <i class="fas fa-drumstick-bite"></i>
                         <span>Total Products</span>
                 </div>
                 <div class="account-card-body">
@@ -34,7 +45,7 @@
             </div>
             <div class="account-card ">
                 <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
-                        <i class="fas fa-users mr-2"></i>
+                        <i class="fas fa-users "></i>
                         <span>Total Users</span>
                 </div>
                 <div class="account-card-body">

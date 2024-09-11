@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 @section('content')
-<div class="container mt-5">
+<div class="container mt-5"style="max-width: 900px;">
     <div class="account-card">
         <div class="account-card-header d-flex align-items-center justify-content-center">
             <img src="\backend\tables.jpg" alt="Photo" style="width: 60px;
