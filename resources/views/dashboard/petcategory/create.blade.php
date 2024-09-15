@@ -22,7 +22,7 @@
                         </div>
                     @endif
 
-                    <form id="contactForm" action="{{ isset($category) ? route('Catagory.update', $category->id) : route('Catagory.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="contactForm" action="{{ isset($category) ? route('Category.update', $category->id) : route('Category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if (isset($category))
                             @method('PUT')

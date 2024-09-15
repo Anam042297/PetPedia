@@ -13,7 +13,8 @@ class AdminController extends Controller
 
     public function index(){
             // Get the count of active users
-    $activeUsers= User::count();
+    $activeUsers= User::where('role', '!=', 'admin')->count();
+    ;
 
     // Fetch other data as needed
     $totalPosts = Post::count();
@@ -31,7 +32,7 @@ class AdminController extends Controller
         // 'totalFoodItems',
         // 'totalAccessories',
         'activeUsers',
-        'activePosts',
+        // 'activePosts',
         'recentPosts',
         // 'recentFoodItems',
         // 'recentAccessories'

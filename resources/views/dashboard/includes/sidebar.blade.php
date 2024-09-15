@@ -26,13 +26,13 @@
                             <ul class="nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/viewpost" style="color: black;">
-                                        <i class="fas fa-file-alt mr-2"></i>
+                                        <i class="fas fa-paw mr-2"></i>
                                         Posts
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/admin/displaycatagory" style="color: black;">
-                                        <i class="fas fa-tag mr-2" ></i>
+                                    <a class="nav-link" href="/admin/displaycategory" style="color: black;">
+                                        <i class="fas fa-tags mr-2" ></i>
                                         Category
                                     </a>
                                 </li>

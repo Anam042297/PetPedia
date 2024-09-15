@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('category_id')->nullable();
-            // If you have a categories table and want to add a foreign key constraint:
             $table->foreign('category_id')->references('id')->on('catagories')->onDelete('cascade');
             $table->timestamps();
         });

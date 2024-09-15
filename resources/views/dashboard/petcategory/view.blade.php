@@ -13,8 +13,8 @@
         <div class="account-card-body">
             <div class="row mb-3">
                 <div>
-                    <a href="{{ route('Catagory.create') }}" style="background-color: #ff99b6;
-                     border-color: #ff99b6; width: 15%; padding: 10px; border-radius: 5px; 
+                    <a href="{{ route('Category.create') }}" style="background-color: #ff99b6;
+                     border-color: #ff99b6; width: 20%; padding: 10px; border-radius: 5px; 
                      color: white; cursor: pointer; float: right; margin-top: -10px;" 
                      class="btn custom-btn">
                         <i class="fa fa-plus"></i>
@@ -24,7 +24,7 @@
             </div>
             
             
-            <table class="table table-bordered" id="catagory_table">
+            <table class="table table-bordered" id="category_table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -48,21 +48,13 @@
         toastr.error('{{ session('error') }}');
     @endif
 </script>
-<script>
-    @if(session('success'))
-        toastr.success('{{ session('success') }}');
-    @endif
-    @if(session('error'))
-        toastr.error('{{ session('error') }}');
-    @endif
-</script>
 <script type="text/javascript">
     $(function() {
-        var catagory_table = $('#catagory_table').DataTable({
+        var category_table = $('#category_table').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: "/admin/indexcatagory",
+                url: "/admin/indexcategory",
             },
             columns: [{
                     data: 'name',
@@ -103,7 +95,7 @@
                             success: function(result) {
                                 if (result.success) {
                                     toastr.success(result.success);
-                                    catagory_table.ajax.reload();
+                                    category_table.ajax.reload();
                                 } else {
                                     toastr.error(result.error);
                                 }
