@@ -1,8 +1,9 @@
 @extends('dashboard.master')
 @section('content')
-<img src="\backend\dashboard.jpg" alt="Profile Photo" style="width: 1080px; height: 350px;">
 
-<div class="container mt-4">
+
+<div class="container">
+    <img src="\backend\dashboard.jpg" alt="Profile Photo" style="width: 1080px; height: 350px;">
     <div class="row">
         <div class="d-flex justify-content-between">
            
