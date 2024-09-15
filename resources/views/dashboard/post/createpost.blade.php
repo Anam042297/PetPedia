@@ -21,14 +21,19 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="catagory">Select Category</label>
-                                    <select class="form-control" id="catagory" name="catagory_id">
+                                    <label for="category">Select Category</label>
+                                    <select class="form-control" id="category" name="catagory_id">
                                         <option value="">Select category</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ isset($post) && $post->catagory_id == $category->id ? 'selected' : '' }}>
+                                            <option value="{{ $category->id }}"
+                                                @if(isset($post) && $post->catagory_id == $category->id)
+                                                    selected
+                                                @endif>
                                                 {{ $category->name }}
                                             </option>
                                         @endforeach
+                                    </select>
+                                    
                                     </select>
                                     <span class="text-danger">
                                         @error('catagory_id')
@@ -137,7 +142,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#catagory').change(function() {
+        $('#category').change(function() {
             var categoryId = $(this).val();
             if (categoryId) {
                 $.ajax({

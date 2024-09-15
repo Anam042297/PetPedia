@@ -34,13 +34,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/view', [AdminController::class, 'view'])->name('admin.view');
 
     //Pet Catagory routes
-    Route::get('/indexcatagory', [CatagoryController::class, 'index'])->name('Catagory.index');
-    Route::get('/createcatagory', [CatagoryController::class, 'create'])->name('Catagory.create');
-    Route::any('/storecatagory', [CatagoryController::class, 'store'])->name('Catagory.store');
-    Route::get('/displaycatagory', [CatagoryController::class, 'viewcatagory'])->name('Catagory.display');
-    Route::get('/editcatagory/{id}', [CatagoryController::class, 'edit'])->name('Catagory.edit');
-    Route::put('/categories/{id}', [CatagoryController::class, 'update'])->name('Catagory.update');
-    Route::delete('/destroycatagory/{id}', [CatagoryController::class, 'destroy'])->name('Catagory.destroy');
+    Route::get('/indexcategory', [CatagoryController::class, 'index'])->name('Category.index');
+    Route::get('/createcategory', [CatagoryController::class, 'create'])->name('Category.create');
+    Route::any('/storecategory', [CatagoryController::class, 'store'])->name('Category.store');
+    Route::get('/displaycategory', [CatagoryController::class, 'viewcategory'])->name('Category.display');
+    Route::get('/editcategory/{id}', [CatagoryController::class, 'edit'])->name('Category.edit');
+    Route::put('/categories/{id}', [CatagoryController::class, 'update'])->name('Category.update');
+    Route::delete('/destroycategory/{id}', [CatagoryController::class, 'destroy'])->name('Category.destroy');
 
     //Pet Breed routes
     Route::get('/createbreed', [BreedController::class, 'create'])->name('breed.create');
