@@ -22,3 +22,4 @@
  
  <script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js"></script>
  <script src="https://mediafiles.botpress.cloud/26fd46f3-ea10-4ea8-b14c-811d12fb0b40/webchat/v2.1/config.js"></script>
+ <script src="{{ asset('backend/js/scripts.js') }}"></script>

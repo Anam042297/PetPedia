@@ -86,6 +86,10 @@
         float: right;
         margin-top: -10px; 
     }
+    #sidebarToggle {
+        left:225px;
+        color: black;
+    }
 
 </style>
 
