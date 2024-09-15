@@ -70,6 +70,7 @@
                     </li>
                 </ul>
             </div>
+            <div class="small">Logged in as:</div>Admin
         </nav>
     </div>
 </div>
