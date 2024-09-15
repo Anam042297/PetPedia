@@ -1,7 +1,10 @@
 {{-- <div class="collapse navbar-collapse" id="navbarNav"> --}}
 <div id="sidebar">
     <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav" id="sidenavAccordion">
+        <nav class="sb-sidenav">
+            <div class="py-3">
+                <img src="\backend\logo1.png" alt="Photo"  style="width: 150px; height: 100px;">
+            </div>
             <div class="sb-sidenav-menu">
                 <ul class="nav">
                     <li class="nav-item">
