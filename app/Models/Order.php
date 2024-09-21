@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,10 +16,14 @@ class Order extends Model
      */
     protected $fillable = [
         'user_id',
+        'name',
+        'city',
         'address',
+        'phone_no',
+        'payment_method',
         'status',
+        'total_amount',
     ];
-
     /**
      * Get the user that owns the order.
      */
@@ -32,8 +37,6 @@ class Order extends Model
      */
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(Orderitem::class);
     }
 }
-
-

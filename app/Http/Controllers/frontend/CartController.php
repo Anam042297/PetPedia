@@ -1,78 +1,134 @@
 <?php
+
 namespace App\Http\Controllers\frontend;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
-use App\Models\PetProduct;
-use Illuminate\Support\Facades\Log; 
+use App\Models\Product;
+use Illuminate\Support\Facades\Log;
+
 class CartController extends Controller
 {
-    // Display cart items
+    // // Display cart items
+    // public function index()
+    // {
+    //     $cart = Cart::where('user_id', Auth::id())->first();
+    //     $cartItems = $cart ? $cart->items : collect(); // Use collect() to ensure it's a collection
+
+    //     // Calculate the total amount
+    //     $cartTotal = $cartItems->reduce(function ($total, $item) {
+    //         if ($item->product) {
+    //             return $total + ($item->quantity * $item->product->price);
+    //         }
+    //         return $total;
+    //     }, 0);
+   
+    //         // Eager load product images and calculate total
+    //         $cartItems = CartItem::with('product.productimages')->get();
+            
+    //         $cartTotal = $cartItems->sum(function($item) {
+    //             return $item->product->price * $item->quantity;
+    //         });
+
+        
+    //     // Pass the cart items and total to the view
+    //     return view('frontend.cart.index', compact('cartItems', 'cartTotal'));
+    // }
     public function index()
-{
-    $cart = Cart::where('user_id', Auth::id())->first();
-    $cartItems = $cart ? $cart->items : collect(); // Use collect() to ensure it's a collection
-
-
-    // Calculate the total amount
-    $cartTotal = 0;
-    foreach ($cartItems as $cartItem) {
-        $cartTotal += $cartItem->quantity * $cartItem->product->price;
-    }
-
-    // Pass the cart items and total to the view
-    return view('frontend.cart.index', compact('cartItems', 'cartTotal'));
-}
-
- 
-    public function addToCart(Request $request)
-{
-    $request->validate([
-        'serial_number' => 'required|string', // Ensure serial_number is validated
-    ]);
-
-    $cart = Cart::firstOrCreate([
-        'user_id' => Auth::id(),
-    ]);
-
-    $cartItem = CartItem::create([
-        'cart_id' => $cart->id,
-        'pet_product_id' => $request->input('product_id'),
-        'quantity' => $request->input('quantity', 1),
-        'serial_number' => $request->input('serial_number')
-    ]);
-
-    return response()->json([
-        'message' => 'Product added to cart successfully!',
-        'cartItemCount' => $cart->items->count()
-    ]);
-}
-
-    // Update cart item quantity
-    public function updateCartItem(Request $request)
     {
-        $cartItem = CartItem::find($request->input('id'));
+        // Fetch the cart for the authenticated user
+        $cart = Cart::where('user_id', Auth::id())->with('items.product.productimages')->first();
+        
+        // If no cart exists, return an empty collection for cart items
+        $cartItems = $cart ? $cart->items : collect(); // Ensures it's a collection if no cart is found
     
+        // Calculate the total amount of the cart
+        $cartTotal = $cartItems->reduce(function ($total, $item) {
+            if ($item->product) {
+                return $total + ($item->quantity * $item->product->price);
+            }
+            return $total;
+        }, 0);
+    
+        // Pass the cart items and total to the view
+        return view('frontend.cart.index', compact('cartItems', 'cartTotal'));
+    }
+    
+    // Add product to cart
+    public function addToCart(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|integer|exists:products,id',
+            'serial_number' => 'required|string',
+        ]);
+
+        // Retrieve or create the user's cart
+        $cart = Cart::firstOrCreate([
+            'user_id' => Auth::id(),
+        ]);
+
+        // Check if the product is already in the cart with the same serial number
+        $cartItem = CartItem::where('cart_id', $cart->id)
+            ->where('product_id', $request->input('product_id'))
+            ->where('serial_number', $request->input('serial_number'))
+            ->first();
+
         if ($cartItem) {
-            $cartItem->update(['quantity' => $request->input('quantity')]);
-            return response()->json(['message' => 'Cart item updated successfully!']);
+            // Update the quantity if the item already exists
+            $cartItem->quantity += $request->input('quantity', 1);
+        } else {
+            // Create a new cart item if it doesn't exist
+            $cartItem = CartItem::create([
+                'cart_id' => $cart->id,
+                'product_id' => $request->input('product_id'),
+                'quantity' => $request->input('quantity', 1),
+                'serial_number' => $request->input('serial_number')
+            ]);
         }
-    
-        return response()->json(['message' => 'Cart item not found!'], 404);
-    }
-    public function removeFromCart(Request $request)
-{dd($request);
-    $cartItem = CartItem::find($request->input('id'));
 
-    if ($cartItem) {
+        $cartItem->save();
+
+        // Calculate updated total price
+        $cartTotal = $cart->items->reduce(function ($total, $item) {
+            if ($item->product) {
+                return $total + ($item->quantity * $item->product->price);
+            }
+            return $total;
+        }, 0);
+
+        return response()->json([
+            'message' => 'Product added to cart successfully!',
+            'cartItemCount' => $cart->items->count(),
+            'cartTotal' => number_format($cartTotal, 2)
+        ]);
+    }
+
+    // Update the quantity of the cart item
+    public function updateCartItem(Request $request, $id)
+    {
+        $cartItem = CartItem::findOrFail($id);
+
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $cartItem->quantity = $request->input('quantity');
+        $cartItem->save();
+
+        return redirect()->route('cart.index')->with('success', 'Cart item updated successfully.');
+    }
+
+    // Remove an item from the cart
+    public function removeFromCart($id)
+    {
+        $cartItem = CartItem::findOrFail($id);
         $cartItem->delete();
-        return response()->json(['message' => 'Item removed from cart successfully!']);
-    }
 
-    return response()->json(['message' => 'Item not found!'], 404);
-}
+        return redirect()->route('cart.index')->with('success', 'Item removed from cart successfully.');
+    }
 
     // Clear all items from the cart
     public function clearCart()
@@ -85,7 +141,5 @@ class CartController extends Controller
         return response()->json([
             'message' => 'Cart cleared successfully!'
         ]);
-    }    
-         
-  
+    }
 }

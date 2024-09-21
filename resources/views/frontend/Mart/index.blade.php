@@ -9,21 +9,28 @@
         @foreach ($products as $product)
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
-                    @if($product->images->isNotEmpty())
-                        <img src="{{ asset('storage/product_images/' . basename($product->images->first()->image_path)) }}" class="card-img-top" alt="{{ $product->name }}">
+                    @if($product->product_images && $product->product_images->isNotEmpty())
+    <img src="{{ asset('storage/productimages/' . basename($product->product_images->first()->image_path)) }}" class="card-img-top" alt="{{ $product->name }}">
+@else
+    <img src="{{ asset('images/placeholder.png') }}" class="card-img-top" alt="No Image Available">
+@endif
+
+                    {{-- @if($product->product_images->isNotEmpty())
+                        <img src="{{ asset('storage/productimages/' . basename($product->product_images->first()->image_path)) }}" class="card-img-top" alt="{{ $product->name }}">
                     @else
                         <img src="{{ asset('images/placeholder.png') }}" class="card-img-top" alt="No Image Available">
-                    @endif
+                    @endif --}}
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">
-                            Category: {{ $product->category->name }} <br>
-                            Price: {{ $product->price }} <br>
-                            @if($product->type === 'food')
-                                Weight: {{ $product->weight }} kg <br>
+                            Pet Type: {{ ucfirst($product->pet_type) }} <br> <!-- Display the pet type -->
+                   
+                            Price: {{ number_format($product->price, 2) }} <br> <!-- Format price with 2 decimal places -->
+                            @if($product->weight)
+                                Weight: {{ $product->weight }} kg <br> <!-- Show weight if available -->
                             @endif
-                            Company: {{ $product->company }} <br>
-                            Quantity: {{ $product->quantity }}
+                            Brand: {{ $product->brand ?? 'No Brand' }} <br> <!-- Show brand or "No Brand" if not set -->
+                          
                         </p>
                      
                         <form class="add-to-cart-form">
@@ -31,20 +38,16 @@
                             <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <button type="button" class="btn btn-primary add-to-cart" data-product-id="{{ $product->id }}" data-serial-number="{{ $product->serial_number }}">Add to Cart</button>
-
                         </form>
-                        <a href="{{ route('orders.create', $product->id) }}" class="btn btn-primary">Buy Now</a>
-
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
 </div>
-@endsection
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    
+<script>    
 $(document).ready(function() {
     $('.add-to-cart').click(function(e) {
         e.preventDefault();
@@ -72,7 +75,6 @@ $(document).ready(function() {
         });
     });
 });
-
 </script>
 
-
+@endsection

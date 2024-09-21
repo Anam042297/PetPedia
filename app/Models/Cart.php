@@ -10,10 +10,16 @@ class Cart extends Model
     use HasFactory;
     protected $fillable = ['user_id'];
 
-    public function Items()
+    public function items()
     {
         return $this->hasMany(CartItem::class);
     }
+    public function products()
+    {
+        return $this->belongsTo(Product::class, 'product_id'); // Use the correct foreign key
+    }
+    
 }
 
-
+ 
+    

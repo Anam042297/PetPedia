@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pet_categories', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->unsignedBigInteger('product_id'); // This should match the `id` in `pet_products`
+            $table->string('image_path');
             $table->timestamps();
+            
+            // Foreign key constraint
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+         
         });
     }
 
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pet_categories');
+        Schema::dropIfExists('product_images');
     }
 };

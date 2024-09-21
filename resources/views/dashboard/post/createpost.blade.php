@@ -54,7 +54,7 @@
                             </span>
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="breed">Select Gender</label>
                             <select class="form-control" id="gender" name="gender">
                                 <option value="">Select gender</option>
@@ -68,8 +68,22 @@
                                     {{ $message }}
                                 @enderror
                             </span>
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="gender">Select Gender</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="">Select gender</option>
+                                <option value="male" {{ isset($post) && $post->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                <option value="female" {{ isset($post) && $post->gender == 'female' ? 'selected' : '' }}>Female</option>
+                                <option value="unknown" {{ isset($post) && $post->gender == 'unknown' ? 'selected' : '' }}>Unknown</option>
+                            </select>
+                            <span class="text-danger">
+                                @error('gender')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="pet_name">Pet Name</label>
                             <input type="text" class="form-control" id="pet_name" name="name" placeholder="Pet Name" value="{{ isset($post) ? $post->name : old('name') }}">

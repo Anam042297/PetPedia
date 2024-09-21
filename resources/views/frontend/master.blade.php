@@ -11,6 +11,9 @@
      @include('frontend.includes.css')
      @yield('css')
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- Toastr CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
 </head>
 
 <body>

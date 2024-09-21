@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderItem extends Model
+class orderitem extends Model
 {
     use HasFactory;
 
@@ -16,10 +16,12 @@ class OrderItem extends Model
      */
     protected $fillable = [
         'order_id',
-        'pet_product_id',
+        'product_id',
         'quantity',
-        'serial_number',
+        'price',
+       
     ];
+
 
     /**
      * Get the order that owns the item.
@@ -32,8 +34,8 @@ class OrderItem extends Model
     /**
      * Get the product that belongs to this order item.
      */
-    public function petProduct()
+    public function Product()
     {
-        return $this->belongsTo(PetProduct::class, 'pet_product_id');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

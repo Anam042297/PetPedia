@@ -11,29 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pet_products', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('serial_number');
+            $table->string('serial_number')->unique();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-            $table->enum('type', ['food', 'accessory']);
+            // Define pet type: dog, cat, bird, etc.
+            $table->enum('pet_type', ['dog', 'cat', 'bird']);
             $table->decimal('price', 8, 2);
-            $table->unsignedBigInteger('pet_category_id');
-            $table->decimal('weight', 8, 2)->nullable();
-            $table->string('company')->nullable();
+            $table->unsignedBigInteger('product_category_id'); // Category: food/accessory
+            $table->decimal('weight', 8, 2)->nullable(); // For food items
+            $table->string('brand')->nullable();
             $table->unsignedInteger('quantity')->default(0);
             $table->timestamps();
 
-            // Define foreign key if needed
+            // Foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('pet_category_id')->references('id')->on('pet_categories')->onDelete('cascade');
+            $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('pet_products');
+        Schema::dropIfExists('products');
     }
 };
