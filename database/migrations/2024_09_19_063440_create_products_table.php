@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('serial_number')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            // Define pet type: dog, cat, bird, etc.
+            $table->enum('pet_type', ['dog', 'cat', 'bird']);
+            $table->decimal('price', 8, 2);
+            $table->unsignedBigInteger('product_category_id'); // Category: food/accessory
+            $table->decimal('weight', 8, 2)->nullable(); // For food items
+            $table->string('brand')->nullable();
+            $table->unsignedInteger('quantity')->default(0);
+            $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('products');
+    }
+};

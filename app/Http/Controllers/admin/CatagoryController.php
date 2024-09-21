@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catagory;
 use Illuminate\Support\Facades\Storage;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class CatagoryController extends Controller
 {
@@ -16,15 +16,7 @@ class CatagoryController extends Controller
 
         if ($request->ajax()) {
             $data = Catagory::latest()->get();
-            return Datatables::of($data)
-                ->addColumn('images', function ($row) {
-                    if ($row->image) {
-                        $imageUrl = $row->image;
-                        return '<img src="' . $imageUrl . '" class="img-thumbnail" style="max-width: 80px;" alt="Image">';
-                       
-                    }
-                    return '<span>No Image</span>';
-                })
+            return DataTables::of($data)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('Category.edit', $row->id);
                     $deleteUrl = route('Category.destroy', $row->id);
