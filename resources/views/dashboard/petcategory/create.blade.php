@@ -1,13 +1,12 @@
-
 @extends('dashboard.master')
 @section('content')
 <div class="container mt-5">
         <div class="col-md-8 offset-md-2">
-               <div class="account-card">
+            <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
-                    <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
+                    <img src="\backend\edit.jpg" alt="Edit Photo" style="width: 80px; height: 80px; margin-right: 20px;">
                     <h3 style="color: #fcfcfc; margin: 0;">
-                        <h3>{{ isset($breed) ? 'Edit Breeed' : 'Create Breed' }}</h3>
+                        <h3>{{ isset($category) ? 'Edit Category' : 'Create Category' }}</h3>
                     </h3>
                 </div>
                 <div class="account-card-body">
@@ -23,46 +22,42 @@
                         </div>
                     @endif
 
-                    <form id="contactForm" action="{{ isset($breed) ? route('breed.update', $breed->id) : route('breed.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="contactForm" action="{{ isset($category) ? route('Category.update', $category->id) : route('Category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @if (isset($breed))
+                        @if (isset($category))
                             @method('PUT')
                         @endif
 
                         <div class="form-group">
-                            <label for="catagory">Select Category</label>
-                            <select class="form-control" id="catagory" name="catagory_id">
-                                <option value="">Select category</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ isset($breed) && $breed->catagory_id == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <span class="text-danger">
-                                @error('catagory_id')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Breed Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ isset($breed) ? $breed->name : old('name') }}">
+                            <label for="name">
+                                Category Name
+                            </label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ isset($category) ? $category->name : old('name') }}">
                             <span class="text-danger">
                                 @error('name')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="images">Choose images</label>
+                            <input type="file" class="form-control" name="images" id="images">
+                            <span class="text-danger">
+                                @error('images')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
 
                         <button type="submit" class="custom-btn">
-                            {{ isset($breed) ? 'Update' : 'Submit' }}
+                            {{ isset($category) ? 'Update' : 'Submit' }}
                         </button>
                     </form>
                 </div>
             </div>
         </div>
 </div>
+
 
 @endsection

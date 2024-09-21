@@ -1,20 +1,28 @@
 @extends('frontend.master')
 @section('content')
-    <div class="container">
-        <div class="row pb-3">
-            @foreach ($categories as $category)
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-0 mb-2">
-                        <div class="card-body bg-light p-4">
-                            <h4 class="card-title text-truncate">
-                                <a class="card-title text-truncate" href="{{ route('blog.category', $category->id) }}">{{ $category->name }}</a>
-                            </h4>
-                        </div>
+<div class="container">
+    <div class="row pb-3">
+        @foreach ($categories as $category)
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 mb-2">
+                     <div class="card-body bg-light p-4">
+                        <a href="{{ route('blog.category', $category->id) }}">
+                            <img src="{{ $category->image }}" 
+                                 class="card-img-top" 
+                                 alt="{{ $category->name }}" 
+                                 style="height: 150px; object-fit: cover;">
+                        </a>
+                        <h4 class="card-title text-truncate">
+                            {{ $category->name }}
+                        </h4>
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
+</div>
+
+
     <!-- Blog Start -->
     <div class="container">
         <div class="row pb-3">

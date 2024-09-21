@@ -18,8 +18,8 @@ class CatagoryController extends Controller
             $data = Catagory::latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($row) {
-                    $editUrl = route('Catagory.edit', $row->id);
-                    $deleteUrl = route('Catagory.destroy', $row->id);
+                    $editUrl = route('Category.edit', $row->id);
+                    $deleteUrl = route('Category.destroy', $row->id);
                     $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> &nbsp'
                         . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"> <i class="fas fa-trash-alt"></i></button>';
 
@@ -32,17 +32,17 @@ class CatagoryController extends Controller
                 ->rawColumns(['images', 'action'])
                 ->make(true);
         }
-        return view('dashboard.petcatagory.view');
+        return view('dashboard.petcategory.view');
     }
     //view data table view blade
-    public function viewcatagory()
+    public function viewcategory()
     {
-        return view('dashboard.petcatagory.view');
+        return view('dashboard.petcategory.view');
     }
     // create catagory
     public function create()
     {
-        return view('dashboard.petcatagory.create');
+        return view('dashboard.petcategory.create')->with('success', 'Category created successfully.');
     }
     // store catagory data
     public function store(Request $request)
@@ -69,14 +69,14 @@ class CatagoryController extends Controller
         }
 
         // Redirect to a success page or route
-        return redirect()->route('Catagory.display');
+        return redirect()->route('Category.display');
     }
 
     // edit view catagory data
     public function edit($id)
     {
         $category = Catagory::findOrFail($id);
-        return view('dashboard.petcatagory.create', compact('category'));
+        return view('dashboard.petcategory.create', compact('category'));
     }
 
 
@@ -102,17 +102,17 @@ class CatagoryController extends Controller
             $category->save();
         }
 
-        return redirect()->route('Catagory.display')->with('success', 'Category updated successfully.');
+        return redirect()->route('Category.display')->with('success', 'Category updated successfully.');
     }
     //delete catagory
     public function destroy($id)
     {
-        $catagory = Catagory::find($id);
+        $category = Catagory::find($id);
 
-        if (!$catagory) {
+        if (!$category) {
             return response()->json(['error' => 'user not found ".'], 404);
         }
-        $catagory->delete();
+        $category->delete();
         return response()->json(['success' => 'Record deleted successfully.']);
     }
 }

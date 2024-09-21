@@ -28,24 +28,26 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $admin->name) }}" required>
-                            <span class="text-danger">
-                                @error('name')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $admin->name) }}" required>
+                                <span class="text-danger">
+                                    @error('name')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $admin->email) }}" required>
-                            <span class="text-danger">
-                                @error('email')
-                                    {{ $message }}
-                                @enderror
-                            </span>
+                            <div class="form-group col-md-6">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $admin->email) }}" required>
+                                <span class="text-danger">
+                                    @error('email')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -57,6 +59,7 @@
                                 @enderror
                             </span>
                         </div>
+
                         <div class="form-group">
                             <label for="password-confirm">Confirm Password</label>
                             <input id="password-confirm" class="form-control" type="password" placeholder="Confirm Password" name="password_confirmation"/>

@@ -1,12 +1,17 @@
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="{{ asset('backend/css/styles.css') }}" rel="stylesheet" />
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
 <style>
-    .sb-sidenav-dark {
+    .sb-sidenav {
         background: linear-gradient(to bottom, #ff99b6, #af99ff);
     }
 
@@ -14,12 +19,8 @@
         background: linear-gradient(135deg, #ff99b6, #af99ff);
     }
 
-    .text_colour {
-        color: black;
-    }
-
     body {
-        background: linear-gradient(135deg, #fdc1d2, #fdc1d2);
+        background: linear-gradient(135deg, #ffffff, #ffffff);
         overflow-x: hidden; 
     }
 
@@ -32,7 +33,6 @@
 }
 
 .table {
-        border: 2px solid #af99ff;
         border-radius: 10px;
         overflow: hidden;
     }
@@ -42,7 +42,6 @@
     }
     
     .table td {
-        border: 1px solid  #af99ff;
         padding: 10px;
         text-align: center;
     }
@@ -50,7 +49,7 @@
     .table-bordered th, .table-bordered td {
         padding: 10px!important;
         text-align: center!important;
-        background-color: #ffcfdd !important;
+        background-color: #ffffff !important;
         border-color: #ff99b6 !important;
     }
     
@@ -79,13 +78,17 @@
     .custom-btn {
         background-color:#ff99b6;
         border-color: #ff99b6;
-        width: 30%;
+        width: 150px; 
         padding: 10px;
         border-radius: 5px;
         color: white;
         cursor: pointer;
-        float: right; 
-        margin-top: -10px;
+        float: right;
+        margin-top: -10px; 
+    }
+    #sidebarToggle {
+        left:225px;
+        color: black;
     }
 
 </style>

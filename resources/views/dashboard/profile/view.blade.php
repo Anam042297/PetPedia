@@ -22,7 +22,7 @@
                                <label for="email"><b>Email: &nbsp </b> {{ auth()->user()->email }}</label>
                             </div>
                         </div>
-                        <a href="{{ route('admin.edit') }}" class="btn" style=" background-color:#ff99b6;border-color: #ff99b6;width: 30%; padding: 10px;border-radius: 5px;color: white;cursor: pointer;float: right;margin-top: -10px;">
+                        <a href="{{ route('admin.edit') }}" class="custom-btn">
                             <i class="fas fa-edit"></i>  Update Profile
                         </a>
                     </form>
