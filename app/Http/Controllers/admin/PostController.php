@@ -67,6 +67,7 @@ class PostController extends Controller
                 'name' => 'required|string|max:255',
                 'age' => 'required|integer|min:0',
                 'description' => 'nullable|string',
+                'images' => 'required',
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif',
             ]);
 
@@ -128,8 +129,8 @@ class PostController extends Controller
             'gender' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
-            'description' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $post = Post::findOrFail($id);
