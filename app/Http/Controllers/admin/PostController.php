@@ -31,7 +31,7 @@ class PostController extends Controller
                 })
                 ->addColumn('images', function ($row) {
                     if ($row->images->isEmpty()) {
-                        return ''; // Return empty if there are no images
+                        return '';
                     }
                     $firstImage = $row->images->first();
                     return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
@@ -59,21 +59,22 @@ class PostController extends Controller
     {
         // dd($request->all());
         // dd(123);
-        try {
-            $validatedData = $request->validate([
-                'catagory_id' => 'required|exists:catagories,id',
-                'breed_id' => 'required|exists:breeds,id',
-                'gender' => 'required|string',
-                'name' => 'required|string|max:255',
-                'age' => 'required|integer|min:0',
-                'description' => 'nullable|string',
-                'images.*' => 'image|mimes:jpeg,png,jpg,gif',
-            ]);
+        // try {
+        $validatedData = $request->validate([
+            'catagory_id' => 'required|exists:catagories,id',
+            'breed_id' => 'required|exists:breeds,id',
+            'gender' => 'required|string',
+            'name' => 'required|string|max:255',
+            'age' => 'required|integer|min:0',
+            'description' => 'required|string',
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif',
+        ]);
 
-            // dd($validatedData); 
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // dd($e->errors());
-        }
+        // dd($validatedData); 
+        // } catch (\Illuminate\Validation\ValidationException $e) {
+        //     // dd($e->errors());
+        // }
         $user_id = Auth::id();
         // dd($user_id);
         $post = new Post();
@@ -121,17 +122,17 @@ class PostController extends Controller
     //update post
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        dd($request->all());
         $validatedData = $request->validate([
             'catagory_id' => 'required|exists:catagories,id',
             'breed_id' => 'required|exists:breeds,id',
             'gender' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
-            'description' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        //  dd($validatedData);
         $post = Post::findOrFail($id);
         $post->catagory_id = $validatedData['catagory_id'];
         $post->breed_id = $validatedData['breed_id'];
@@ -141,17 +142,24 @@ class PostController extends Controller
         $post->description = $validatedData['description'];
         // Handle file uploads if any
         if ($request->hasFile('images')) {
+            // dd(vars: $request->images);
             foreach ($request->file('images') as $image) {
                 $filename = time() . '.' . $image->getClientOriginalExtension();
+            //    dd($filename);
                 $path = $image->storeAs('public/images', $filename);
+            //  dd($path);
                 $url = Storage::url($path);
-                Image::create([
-                    'post_id' => $post->id,
+                // dd($id);
+                Image::update([
+                    'post_id' => $id,
                     'url' => $url,
                 ]);
 
             }
         }
+
+
+
         $post->save();
 
         return redirect()->route('post.index')->with('success', 'Post updated successfully.');

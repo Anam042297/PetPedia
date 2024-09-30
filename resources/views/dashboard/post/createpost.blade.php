@@ -1,9 +1,14 @@
 @extends('dashboard.master')
 @section('content')
 
-
 <div class="container mt-5">
-        <div class="col-md-8 offset-md-2">
+    <div class="row">
+        <!-- Image Column -->
+        <div class="col-md-2 d-flex align-items-center">
+            <img src="\backend\hello.jpg" alt="Edit Photo" style="width: 300px; height: 350px; margin-right: 20px;">
+        </div>
+        <!-- Form Column -->
+        <div class="col-md-10">
             <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
                     <img src="\backend\edit.jpg" alt="Edit Photo" style="width: 80px; height: 80px; margin-right: 20px;">
@@ -22,7 +27,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="category">Select Category</label>
-                                    <select class="form-control" id="category" name="catagory_id">
+                                    <select class="form-control" id="catagory_id" name="catagory_id" >
                                         <option value="">Select category</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
@@ -32,8 +37,6 @@
                                                 {{ $category->name }}
                                             </option>
                                         @endforeach
-                                    </select>
-                                    
                                     </select>
                                     <span class="text-danger">
                                         @error('catagory_id')
@@ -45,7 +48,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="breed">Select Breed</label>
-                                    <select class="form-control" id="breed" name="breed_id">
+                                    <select class="form-control" id="breed_id" name="breed_id">
                                         <option value="">Select breed</option>
                                         @foreach ($breeds as $breed)
                                             <option value="{{ $breed->id }}" {{ isset($post) && $post->breed_id == $breed->id ? 'selected' : '' }}>
@@ -82,7 +85,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="pet_name">Pet Name</label>
-                                    <input type="text" class="form-control" id="pet_name" name="name" placeholder="Pet Name" value="{{ isset($post) ? $post->name : old('name') }}">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Pet Name" value="{{ isset($post) ? $post->name : old('name') }}">
                                     <span class="text-danger">
                                         @error('name')
                                             {{ $message }}
@@ -107,7 +110,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="images">Choose images</label>
-                                    <input type="file" class="form-control" name="images[]" id="images" multiple>
+                                    <input type="file" class="form-control" name="images[]" id="images" multiple >
                                     <span class="text-danger">
                                         @error('images')
                                             {{ $message }}
@@ -128,14 +131,16 @@
                         </div>
 
                         <button type="submit" class="custom-btn">
-                            <i class="fas fa-check"></i> 
+                            <i class="fas fa-check"></i>
                             {{ isset($post) ? 'Update' : 'Create' }}
                         </button>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
 </div>
+
 
 @endsection
 @section("script")

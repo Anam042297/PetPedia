@@ -1,7 +1,6 @@
 @extends('dashboard.master')
 @section('content')
 
-
 <div class="container">
     <img src="\backend\dashboard.jpg" alt="Profile Photo" style="width: 1080px; height: 350px;">
     <div class="row">
@@ -19,7 +18,7 @@
             <div class="account-card ">
                 <div class="account-card-header p-1" style="border-bottom: 1px solid #ddd;">
                     <i class="fas fa-paw"></i>
-                        <span>Total Posts</span>
+                        <span>Pending Orders</span>
                 </div>
                 <div class="account-card-body">
                     <h5 class="card-title mb-0">{{ $totalPosts }}</h5>
@@ -57,9 +56,9 @@
         </div>
     </div>
 </div>
-          
-            
-                {{-- <!-- Recent Posts -->
+{{-- <div class="container">         
+    <div class="row">     
+                <!-- Recent Posts -->
                 <div class="row mt-4">
                     <div class="col-md-6" >
                         <h3 class="mb-3">Recent Posts</h3>
@@ -89,7 +88,7 @@
                 <!-- Recent Accessories -->
                 <div class="row mt-4">
                     <div class="col-md-6">
-                        <h3 class="mb-3">Recent Accessories</h3>
+                        <h3 class="mb-3">Pending Orders</h3>
                         <div class="list-group">
                             @foreach ($recentPosts as $post)
                                 <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -99,5 +98,62 @@
                             @endforeach
                         </div>
                     </div>
-                </div> --}}
+                    <div class="col-md-6">
+                        <h3 class="mb-3">Pending Orders</h3>
+                        <div class="list-group">
+                            @foreach ($recentPosts as $post)
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    {{ $post->name }}
+                                    <span class="badge badge-primary badge-pill">{{ $post->created_at->format('d M Y') }}</span>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>  --}}
+
+
+
+      
+        <div class="container">
+            <h2>Pending Orders</h2>
+        
+            <div class="table-container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User ID</th>
+                            <th>Status</th>
+                            <th>Ordered At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($recentPosts as $index => $post)
+                            <tr>
+                                <td>{{ $post->id }}</td>
+                                <td>{{ $post->user_id }}</td>
+                                <td>{{ $post->status }}</td>
+                                <td>{{ $post->created_at->format('Y-m-d H:i') }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      
+        
+        <style>
+       
+        
+        </style>
+     
+        
+        
+        
+        
+
+        
+        
 @endsection

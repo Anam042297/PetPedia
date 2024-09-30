@@ -23,7 +23,7 @@ class AdminController extends Controller
     $activePosts = Post::count();
 
     // Fetch recent activity
-    $recentPosts = Post::latest()->take(5)->get();
+    $recentPosts = Post::orderBy('created_at', 'desc')->limit(5)->get();
     // $recentFoodItems = Food::latest()->take(5)->get();
     // $recentAccessories = Accessory::latest()->take(5)->get();
 

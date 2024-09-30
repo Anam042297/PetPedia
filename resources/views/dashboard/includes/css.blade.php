@@ -23,15 +23,25 @@
         background: linear-gradient(135deg, #ffffff, #ffffff);
         overflow-x: hidden; 
     }
-
     
 </style>
 <style>
-/* Custom CSS for DataTables Processing Block */
 .dataTables_processing {
     color:black;
 }
-
+.table-container {
+            max-height: calc(3em * 5); /* Height for 5 rows; adjust '1.5em' if needed based on your row height */
+            overflow-y: auto;
+        }
+        
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table-container th, .table-container td {
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
 .table {
         border-radius: 10px;
         overflow: hidden;
@@ -96,3 +106,4 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+    
