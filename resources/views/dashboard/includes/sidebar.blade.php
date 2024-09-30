@@ -20,6 +20,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/admin/displaycategory" style="color: black;">
+                            <i class="fas fa-tags mr-2" ></i>
+                            Pet Category
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" style="color: black;">
                             <i class="fas fa-th mr-2" ></i>
                             Post Tables
@@ -33,12 +39,7 @@
                                         Posts
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/admin/displaycategory" style="color: black;">
-                                        <i class="fas fa-tags mr-2" ></i>
-                                        Category
-                                    </a>
-                                </li>
+                             
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/displaybreed" style="color: black;">
                                         <i class="fas fa-dog mr-2" ></i>
@@ -57,15 +58,15 @@
                         <div class="collapse" id="collapseProductTables">
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color: black;">
-                                        <i class="fas fa-drumstick-bite mr-2"></i>
-                                        Food
+                                    <a class="nav-link" href="/admin/indexproduct" style="color: black;">
+                                        <i class="fa-brands fa-product-hunt"></i>
+                                        Products
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color: black;">
-                                        <i class="fas fa-cube mr-2" ></i>
-                                        Accessories
+                                    <a class="nav-link" href="/admin/indexproductcategories" style="color: black;">
+                                      <i class="fa-solid fa-layer-group"></i>
+                                        Product Category
                                     </a>
                                 </li>
                             </ul>

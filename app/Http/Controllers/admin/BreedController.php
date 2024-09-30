@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Breed;
-use App\Models\Catagory;
+use App\Models\Category;
 use DataTables;
 
 class BreedController extends Controller
@@ -14,10 +14,10 @@ class BreedController extends Controller
     {
         if ($request->ajax()) {
             // $data = Breed::latest()->get();
-            $data = Breed::with(['catagory'])->get();
+            $data = Breed::with(['category'])->get();
             return Datatables::of($data)
             ->addColumn('category_name', function (Breed $data) {
-                return $data->catagory ? $data->catagory->name : 'No Category';
+                return $data->category ? $data->category->name : 'No Category';
             })
             ->addColumn('action', function ($row) {
                 $editUrl = route('breed.edit', $row->id);
@@ -43,7 +43,7 @@ class BreedController extends Controller
 //create breed
     public function create()
     {
-        $categories = Catagory::all();
+        $categories = Category::all();
         // dd($categories);
         return view('dashboard.petbreed.create', compact(['categories']));
     }
@@ -54,13 +54,13 @@ class BreedController extends Controller
         // Validate incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'catagory_id' => 'required|string|max:255'
+            'category_id' => 'required|string|max:255'
         ]);
         // dd($validatedData);
         // Create a new post instance
         $breed = new Breed();
         $breed->name = $validatedData['name'];
-        $breed->category_id = $validatedData['catagory_id'];
+        $breed->category_id = $validatedData['category_id'];
         //  dd($breed);
         $breed->save();
 
@@ -74,7 +74,7 @@ class BreedController extends Controller
     public function edit($id)
     {
         $breed = Breed::findOrFail($id);
-        $categories = Catagory::all();
+        $categories = Category::all();
         return view('dashboard.petbreed.create', compact('breed', 'categories'));
     }
     // update breed  data  table
@@ -83,12 +83,12 @@ class BreedController extends Controller
         $validatedData = $request->validate([
 
             'name' => 'required|string|max:255',
-            'catagory_id' => 'required|exists:catagories,id',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         $breed = Breed::findOrFail($id);
         $breed->name = $validatedData['name'];
-        $breed->category_id = $validatedData['catagory_id'];
+        $breed->category_id = $validatedData['category_id'];
 
         $breed->save();
 

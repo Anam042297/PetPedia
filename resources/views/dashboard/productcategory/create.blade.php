@@ -7,7 +7,7 @@
                 <div class="account-card-header d-flex align-items-center justify-content-center">
                     <img src="{{ asset('backend/edit.jpg') }}" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
                     <h3 style="color: #fcfcfc; margin: 0;">
-                        {{ isset($category) ? 'Edit Category' : 'Create Category' }}
+                        {{ isset($productCategory) ? 'Edit Category' : 'Create Category' }}
                     </h3>
                 </div>
                 <div class="account-card-body">
@@ -29,14 +29,14 @@
                         </div>
                     @endif
 
-                    <form id="contactForm" action="{{ isset($category) ? route('ProductCategory.update', $category->id) : route('ProductCategory.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="contactForm" action="{{ isset($productCategory) ? route('ProductCategory.update',$productCategory->id) : route('ProductCategory.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @if (isset($category))
+                        @if (isset($productCategory))
                             @method('PUT')
                         @endif
                         <div class="form-group mb-3">
                             <label for="name">Category Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ isset($category) ? $category->name : old('name') }}">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ isset($productCategory) ? $productCategory->name : old('name') }}">
                             <span class="text-danger">
                                 @error('name')
                                  {{ $message }}
@@ -54,14 +54,14 @@
                             </span>
                         </div>
 
-                        @if (isset($category) && $category->icon)
-                            <div class="mt-2">
-                                <img src="{{ asset('storage/' . $category->icon) }}" alt="Current Image" style="width: 100px; height: 100px;">
-                            </div>
+                        @if (isset($productCategory) && $productCategory->icon)
+                            {{-- <div class="mt-2">
+                                <img src="{{ asset('storage/' . $productCategory->icon) }}" alt="Current Image" style="width: 100px; height: 100px;">
+                            </div> --}}
                         @endif
 
                         <button type="submit" class="btn btn-primary mt-3">
-                            {{ isset($category) ? 'Update' : 'Submit' }}
+                            {{ isset($productCategory) ? 'Update' : 'Submit' }}
                         </button>
                     </form>
                 </div>

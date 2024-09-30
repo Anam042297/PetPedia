@@ -35,9 +35,9 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $item->product->name }}</h5>
                                                     <p class="card-text">
-                                                        Total: 
+                                                        Total Price: 
                                                         <span id="total-price-{{ $item->id }}">
-                                                            {{ number_format($item->product->price * $item->quantity, 2) }}
+                                                            {{ number_format($item->product->price ) }}
                                                         </span>
                                                     </p>
 
@@ -56,6 +56,7 @@
                                                             <i class="fas fa-plus"></i>
                                                         </button>
                                                     </form>
+                                                    
 
                                                     <!-- Remove Button -->
                                                     <form action="{{ route('cart.remove', $item->id) }}" method="POST" class="mt-3">
@@ -63,6 +64,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                                     </form>
+                                                  
                                                 </div>
                                             </div>
                                         </div>
@@ -85,8 +87,7 @@
                                     <div class="pt-5">
                                         <h6 class="mb-0">
                                             <a href="{{ route('mart') }}" class="text-body">
-                                                <i class="fas fa-long-arrow-alt-left me-2"></i>Back to shop
-                                            </a>
+                                                <i class="fas fa-long-arrow-alt-left me-2"></i>Back to Mart                                           </a>
                                         </h6>
                                     </div>
                                 </div>
@@ -101,12 +102,23 @@
 
 <!-- Quantity Change Script -->
 <script>
-function changeQuantity(button, change) {
-    let input = button.closest('form').querySelector('input[name="quantity"]');
-    let currentValue = parseInt(input.value);
-    let newValue = Math.max(1, currentValue + change);
-    input.value = newValue;
-    input.form.submit(); // Automatically submit the form
+function changeQuantity(button, delta) {
+    const input = button.parentElement.querySelector('input[name="quantity"]');
+    let currentQuantity = parseInt(input.value, 10) || 0;
+    let newQuantity = currentQuantity + delta;
+
+    if (newQuantity < 1) {
+        newQuantity = 1;
+    }
+
+    input.value = newQuantity;
+    input.form.submit();
 }
+
+
+
 </script>
+
+
+
 @endsection

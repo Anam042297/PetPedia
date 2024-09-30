@@ -28,7 +28,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Image</th>
+                        <th>Icon</th>
                         <th>Actions</th>
                         
                     </tr>

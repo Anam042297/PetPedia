@@ -12,31 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
-    // // Display cart items
-    // public function index()
-    // {
-    //     $cart = Cart::where('user_id', Auth::id())->first();
-    //     $cartItems = $cart ? $cart->items : collect(); // Use collect() to ensure it's a collection
-
-    //     // Calculate the total amount
-    //     $cartTotal = $cartItems->reduce(function ($total, $item) {
-    //         if ($item->product) {
-    //             return $total + ($item->quantity * $item->product->price);
-    //         }
-    //         return $total;
-    //     }, 0);
-   
-    //         // Eager load product images and calculate total
-    //         $cartItems = CartItem::with('product.productimages')->get();
-            
-    //         $cartTotal = $cartItems->sum(function($item) {
-    //             return $item->product->price * $item->quantity;
-    //         });
-
-        
-    //     // Pass the cart items and total to the view
-    //     return view('frontend.cart.index', compact('cartItems', 'cartTotal'));
-    // }
     public function index()
     {
         // Fetch the cart for the authenticated user
@@ -107,6 +82,7 @@ class CartController extends Controller
     }
 
     // Update the quantity of the cart item
+
     public function updateCartItem(Request $request, $id)
     {
         $cartItem = CartItem::findOrFail($id);
@@ -114,12 +90,18 @@ class CartController extends Controller
         $request->validate([
             'quantity' => 'required|integer|min:1',
         ]);
+        $product = $cartItem->product;
+        // Check if the requested quantity exceeds the available stock
+    if ($request->input('quantity') > $product->stock) {
+        return redirect()->route('cart.index')->with('error', 'Requested quantity exceeds available stock. Available: ' . $product->stock);
+    }
 
         $cartItem->quantity = $request->input('quantity');
         $cartItem->save();
 
         return redirect()->route('cart.index')->with('success', 'Cart item updated successfully.');
-    }
+}
+
 
     // Remove an item from the cart
     public function removeFromCart($id)

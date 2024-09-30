@@ -16,17 +16,17 @@ return new class extends Migration
             $table->string('serial_number')->unique();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-            // Define pet type: dog, cat, bird, etc.
-            $table->enum('pet_type', ['dog', 'cat', 'bird']);
+            $table->unsignedBigInteger('category_id');
             $table->decimal('price', 8, 2);
-            $table->unsignedBigInteger('product_category_id'); // Category: food/accessory
-            $table->decimal('weight', 8, 2)->nullable(); // For food items
+            $table->unsignedBigInteger('product_category_id'); 
+            $table->decimal('weight', 8, 2); 
             $table->string('brand')->nullable();
-            $table->unsignedInteger('quantity')->default(0);
+            $table->unsignedInteger('stock')->default(0);
             $table->timestamps();
 
             // Foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
         });
     }

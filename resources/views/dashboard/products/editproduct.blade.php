@@ -7,15 +7,16 @@
             <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
                     <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
-                    <h1 style="color: #fcfcfc; margin: 0;">Create Product</h1>
+                    <h1 style="color: #fcfcfc; margin: 0;">Edit Product</h1>
                 </div>
 
-                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    
+                    @method('PUT')
+
                     <div class="form-group">
                         <label for="name">Product Name</label>
-                        <input type="text" name="name" class="form-control" id="name" required>
+                        <input type="text" name="name" class="form-control" id="name" value="{{ $product->name }}" required>
                         <span class="text-danger">
                             @error('name')
                                 {{ $message }}
@@ -24,23 +25,25 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="pet_type">Type</label>
-                        <select name="pet_type" class="form-control" id="pet_type" required>
-                            <option value="">Select Type</option>
-                            <option value="dog">Dog</option>
-                            <option value="cat">Cat</option>
-                            <option value="bird">Bird</option>
+                        <label for="category_id">Pet Category</label>
+                        <select name="category_id" class="form-control" id="category_id" required>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
                         </select>
                         <span class="text-danger">
-                            @error('pet_type')
+                            @error('category_id')
                                 {{ $message }}
                             @enderror
                         </span>
                     </div>
+            
 
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input type="number" name="price" class="form-control" id="price" required>
+                        <input type="number" name="price" class="form-control" id="price" value="{{ $product->price }}" required>
                         <span class="text-danger">
                             @error('price')
                                 {{ $message }}
@@ -51,9 +54,10 @@
                     <div class="form-group">
                         <label for="product_category_id">Product Category</label>
                         <select name="product_category_id" class="form-control" id="product_category_id" required>
-                            <option value="">Select Product Category</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @foreach ($productcategories as $productCategory)
+                                <option value="{{ $productCategory->id }}" {{ $product->product_category_id == $productCategory->id ? 'selected' : '' }}>
+                                    {{ $productCategory->name }}
+                                </option>
                             @endforeach
                         </select>
                         <span class="text-danger">
@@ -63,10 +67,9 @@
                         </span>
                     </div>
 
-                    <!-- Weight field, only shown if 'food' is selected -->
                     <div class="form-group" id="weight-group" style="display: none;">
                         <label for="weight">Weight (in kg)</label>
-                        <input type="number" name="weight" class="form-control" id="weight" step="0.01">
+                        <input type="number" name="weight" class="form-control" id="weight" step="0.01" value="{{ old('weight', $product->weight) }}">
                         <span class="text-danger">
                             @error('weight')
                                 {{ $message }}
@@ -74,10 +77,9 @@
                         </span>
                     </div>
 
-                    <!-- Brand field -->
                     <div class="form-group">
                         <label for="brand">Brand</label>
-                        <input type="text" name="brand" class="form-control" id="brand">
+                        <input type="text" name="brand" class="form-control" id="brand" value="{{ old('brand', $product->brand) }}">
                         <span class="text-danger">
                             @error('brand')
                                 {{ $message }}
@@ -85,12 +87,11 @@
                         </span>
                     </div>
 
-                    <!-- Quantity field -->
                     <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type="number" name="quantity" class="form-control" id="quantity" min="0" required>
+                        <label for="quantity">Stock</label>
+                        <input type="number" name="stock" class="form-control" id="stock" min="0" value="{{ old('stock', $product->stock) }}" required>
                         <span class="text-danger">
-                            @error('quantity')
+                            @error('stock')
                                 {{ $message }}
                             @enderror
                         </span>
@@ -106,7 +107,7 @@
                         </span>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Product</button>
+                    <button type="submit" class="btn btn-primary">Update Product</button>
                 </form>
             </div>
         </div>
@@ -115,14 +116,7 @@
 
 <!-- JavaScript to conditionally show/hide the weight field -->
 <script>
-    // document.getElementById('pet_type').addEventListener('change', function() {
-    //     var weightGroup = document.getElementById('weight-group');
-    //     if (this.value === 'dog') {
-    //         weightGroup.style.display = 'block';
-    //     } else {
-    //         weightGroup.style.display = 'none';
-    //     }
-    // });
+   
     document.getElementById('product_category_id').addEventListener('change', function() {
     var weightGroup = document.getElementById('weight-group');
     var selectedCategory = this.options[this.selectedIndex].text.toLowerCase();
@@ -132,8 +126,7 @@
     } else {
         weightGroup.style.display = 'none';
     }
+    
 });
-
 </script>
-
 @endsection
