@@ -9,8 +9,8 @@
         @foreach ($products as $product)
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
-                    @if($product->product_images && $product->product_images->isNotEmpty())
-    <img src="{{ asset('storage/productimages/' . basename($product->product_images->first()->image_path)) }}" class="card-img-top" alt="{{ $product->name }}">
+                    @if($product->productImages && $product->productimages->isNotEmpty())
+    <img src="{{ asset('storage/product_images/' . basename($product->productimages->first()->image_path)) }}" class="card-img-top" alt="{{ $product->name }}">
 @else
     <img src="{{ asset('images/placeholder.png') }}" class="card-img-top" alt="No Image Available">
 @endif
@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">
-                            Pet Type: {{ ucfirst($product->pet_type) }} <br> <!-- Display the pet type -->
+                            {{-- Pet Type: {{ ucfirst($product->pet_type) }} <br> <!-- Display the pet type --> --}}
                    
                             Price: {{ number_format($product->price, 2) }} <br> <!-- Format price with 2 decimal places -->
                             @if($product->weight)

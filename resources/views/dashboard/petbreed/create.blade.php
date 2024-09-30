@@ -31,16 +31,16 @@
 
                         <div class="form-group">
                             <label for="catagory">Select Category</label>
-                            <select class="form-control" id="catagory" name="catagory_id">
+                            <select class="form-control" id="category" name="category_id">
                                 <option value="">Select category</option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ isset($breed) && $breed->catagory_id == $category->id ? 'selected' : '' }}>
+                                    <option value="{{ $category->id }}" {{ isset($breed) && $breed->category_id == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
                             </select>
                             <span class="text-danger">
-                                @error('catagory_id')
+                                @error('category_id')
                                     {{ $message }}
                                 @enderror
                             </span>

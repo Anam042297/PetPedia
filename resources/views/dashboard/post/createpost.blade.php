@@ -22,11 +22,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="category">Select Category</label>
-                                    <select class="form-control" id="category" name="catagory_id">
+                                    <select class="form-control" id="category" name="category_id">
                                         <option value="">Select category</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
-                                                @if(isset($post) && $post->catagory_id == $category->id)
+                                                @if(isset($post) && $post->category_id == $category->id)
                                                     selected
                                                 @endif>
                                                 {{ $category->name }}
@@ -36,7 +36,7 @@
                                     
                                     </select>
                                     <span class="text-danger">
-                                        @error('catagory_id')
+                                        @error('category_id')
                                             {{ $message }}
                                         @enderror
                                     </span>

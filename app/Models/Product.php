@@ -16,22 +16,26 @@ class Product extends Model
         'serial_number',
         'user_id',
         'name',
-        'pet_type',
+        'category_id',
         'price',
         'product_category_id',
         'weight',
         'brand',
-        'quantity',
+        'stock',
     ];
  
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    // Relationship: A product belongs to a category
-    public function productCategory()
+    public function category()
     {
-        return $this->belongsTo(ProductCategory::class, 'product_category_id');
+        return $this->belongsTo(Category::class);
+    }
+    // Relationship: A product belongs to a category
+    public function ProductCategory()
+    {
+        return $this->belongsTo(Productcategory::class, 'product_category_id');
     }
 
     // Relationship: A product can have many images

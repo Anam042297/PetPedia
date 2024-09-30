@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Catagory;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -15,7 +15,7 @@ class CatagoryController extends Controller
     {
 
         if ($request->ajax()) {
-            $data = Catagory::latest()->get();
+            $data = Category::latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('Category.edit', $row->id);
@@ -54,7 +54,7 @@ class CatagoryController extends Controller
         ]);
 
         // Create a new category instance
-        $category = new Catagory();
+        $category = new Category();
         $category->name = $validatedData['name'];
         $category->save();
 
@@ -75,7 +75,7 @@ class CatagoryController extends Controller
     // edit view catagory data
     public function edit($id)
     {
-        $category = Catagory::findOrFail($id);
+        $category = Category::findOrFail($id);
         return view('dashboard.petcategory.create', compact('category'));
     }
 
@@ -88,7 +88,7 @@ class CatagoryController extends Controller
             'images' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        $category = Catagory::findOrFail($id);
+        $category = Category::findOrFail($id);
         $category->name = $request->input('name');
         // Update other fields as needed
         $category->save();
@@ -107,7 +107,7 @@ class CatagoryController extends Controller
     //delete catagory
     public function destroy($id)
     {
-        $category = Catagory::find($id);
+        $category = Category::find($id);
 
         if (!$category) {
             return response()->json(['error' => 'user not found ".'], 404);

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Image;
 use App\Models\User;
-use App\Models\Catagory;
+use App\Models\Category;
 use App\Models\Breed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $posts = Post::with(['catagory', 'breed', 'images', 'user'])->get();
+            $posts = Post::with(['category', 'breed', 'images', 'user'])->get();
             return DataTables::of($posts)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('post.edit', $row->id);
@@ -50,7 +50,7 @@ class PostController extends Controller
     //create post
     public function create()
     {
-        $categories = Catagory::all();
+        $categories = Category::all();
         $breeds = Breed::all();
         return view('dashboard.post.createpost', compact('categories', 'breeds'));
     }
@@ -61,7 +61,7 @@ class PostController extends Controller
         // dd(123);
         try {
             $validatedData = $request->validate([
-                'catagory_id' => 'required|exists:catagories,id',
+                'category_id' => 'required|exists:categories,id',
                 'breed_id' => 'required|exists:breeds,id',
                 'gender' => 'required|string',
                 'name' => 'required|string|max:255',
@@ -78,7 +78,7 @@ class PostController extends Controller
         // dd($user_id);
         $post = new Post();
         $post->user_id = $user_id;
-        $post->catagory_id = $validatedData['catagory_id'];
+        $post->category_id = $validatedData['category_id'];
         $post->breed_id = $validatedData['breed_id'];
         $post->gender = $validatedData['gender'];
         $post->name = $validatedData['name'];
@@ -114,7 +114,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        $categories = Catagory::all();
+        $categories = Category::all();
         $breeds = Breed::all();
         return view('dashboard.post.createpost', compact('post', 'categories', 'breeds'));
     }
@@ -123,7 +123,7 @@ class PostController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validate([
-            'catagory_id' => 'required|exists:catagories,id',
+            'category_id' => 'required|exists:categories,id',
             'breed_id' => 'required|exists:breeds,id',
             'gender' => 'required|string|max:255',
             'name' => 'required|string|max:255',
@@ -133,7 +133,7 @@ class PostController extends Controller
         ]);
 
         $post = Post::findOrFail($id);
-        $post->catagory_id = $validatedData['catagory_id'];
+        $post->category_id = $validatedData['category_id'];
         $post->breed_id = $validatedData['breed_id'];
         $post->gender = $validatedData['gender'];
         $post->name = $validatedData['name'];

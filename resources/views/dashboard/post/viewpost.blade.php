@@ -57,7 +57,7 @@
                 url: "/admin/indexpost" ,
             },
             columns: [
-                { data: 'catagory.name', name: 'cataory.name' },
+                { data: 'category.name', name: 'category.name' },
                 { data: 'breed.name', name: 'breed.name' },
                 { data: 'gender', name: 'gender' },
                 { data: 'name', name: 'name' },
