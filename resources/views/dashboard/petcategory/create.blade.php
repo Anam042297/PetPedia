@@ -41,10 +41,10 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="images">Choose images</label>
-                            <input type="file" class="form-control" name="images" id="images">
+                            <label for="image">Choose image</label>
+                            <input type="file" class="form-control" name="image" id="image">
                             <span class="text-danger">
-                                @error('images')
+                                @error('image')
                                     {{ $message }}
                                 @enderror
                             </span>

@@ -59,7 +59,7 @@ class PostController extends Controller
     {
         // dd($request->all());
         // dd(123);
-        try {
+        // try {
             $validatedData = $request->validate([
                 'category_id' => 'required|exists:categories,id',
                 'breed_id' => 'required|exists:breeds,id',
@@ -72,9 +72,9 @@ class PostController extends Controller
             ]);
 
             // dd($validatedData); 
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // dd($e->errors());
-        }
+        // } catch (\Illuminate\Validation\ValidationException $e) {
+        //     // dd($e->errors());
+        // }
         $user_id = Auth::id();
         // dd($user_id);
         $post = new Post();
