@@ -25,11 +25,17 @@ class CatagoryController extends Controller
 
                     return $action;
                 })
-
+                ->addColumn('image', function ($row) {
+                    if ($row->image->isEmpty()) {
+                        return ''; // Return empty if there are no images
+                    }
+                    $firstImage = $row->image;
+                    return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
+                })
 
                 ->removeColumn('id')
                 ->addIndexColumn()
-                ->rawColumns(['images', 'action'])
+                ->rawColumns(['image', 'action'])
                 ->make(true);
         }
         return view('dashboard.petcategory.view');

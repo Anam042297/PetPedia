@@ -68,9 +68,9 @@
                                     <label for="gender">Select Gender</label>
                                     <select class="form-control" id="gender" name="gender">
                                         <option value="">Select gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="unknown">Unknown</option>
+                                        <option value="male" {{ isset($post) && $post->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                        <option value="female" {{ isset($post) && $post->gender == 'female' ? 'selected' : '' }}>Female</option>
+                                        <option value="unknown" {{ isset($post) && $post->gender == 'unknown' ? 'selected' : '' }}>Unknown</option>
                                     </select>
                                     <span class="text-danger">
                                         @error('gender')
