@@ -116,10 +116,10 @@
                                 </div> --}}
                                 <div class="form-group">
                                     @if ($post->images->isNotEmpty())
-                                        <label for="images">Current Images</label>
+                                        {{-- <label for="images">Current Images</label>
                                         @foreach ($post->images as $image)
                                             <img src="{{ asset($image->url) }}" style="max-width: 80px; max-height: 50px" alt="Current Image" class="img-fluid mb-2">
-                                        @endforeach
+                                        @endforeach --}}
                                         <label for="images">Change Images (optional)</label>
                                         <input type="file" class="form-control" name="images[]" id="images" multiple>
                                     @else
