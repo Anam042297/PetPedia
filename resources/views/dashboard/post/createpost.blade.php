@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="images">Choose images</label>
                                     <input type="file" class="form-control" name="images[]" id="images" multiple>
                                     <span class="text-danger">
@@ -113,7 +113,34 @@
                                             {{ $message }}
                                         @enderror
                                     </span>
+                                </div> --}}
+                                <div class="form-group">
+                                    <label for="images">Update Images</label>
+                                
+                                    {{-- Show existing images --}}
+                                    @if ($post->images->isNotEmpty())
+                                        <div class="mb-3">
+                                            <strong>Current Images:</strong>
+                                            <div class="row">
+                                                @foreach ($post->images as $image)
+                                                    <div class="col-md-3">
+                                                        <img src="{{ asset( $post->$image) }}" alt="Post Image" class="img-fluid mb-2">
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                
+                                    {{-- File input for uploading new images --}}
+                                    <input type="file" class="form-control" name="images[]" id="images" multiple>
+                                
+                                    <span class="text-danger">
+                                        @error('images')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
                                 </div>
+                                
                             </div>
                         </div>
 

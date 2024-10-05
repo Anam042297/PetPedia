@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('breed_id');
+            $table->string('gender');
             $table->string('name');
             $table->integer('age');
             $table->text('description');

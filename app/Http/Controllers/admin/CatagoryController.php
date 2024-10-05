@@ -57,23 +57,25 @@ class CatagoryController extends Controller
     {
         // Validate incoming request data
         // dd($request->file('image'));
-        dd($request);
+        // dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
-
+// dd($request->image);
         // Create a new category instance
         $category = new Category();
         $category->name = $validatedData['name'];
-        $category->save();
-
+        
+// dd($request->hasFile('image'));
         // Check if an image file was uploaded
         if ($request->hasFile('image')) {
+            // dd(123);
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $path = $image->storeAs('public/images', $filename);
             $url = Storage::url($path);
+            // dd($url);
             $category->image = $url;
             $category->save();
         }
@@ -93,6 +95,7 @@ class CatagoryController extends Controller
     //  store edit catagory
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
@@ -103,13 +106,15 @@ class CatagoryController extends Controller
         // Update other fields as needed
         $category->save();
          // Check if an image file was uploaded
-         if ($request->hasFile('images')) {
-            $image = $request->file('images');
+         if ($request->hasFile('image')) {
+            // dd(123);
+            $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $path = $image->storeAs('public/images', $filename);
             $url = Storage::url($path);
+            // dd($url);
             $category->image = $url;
-            $category->save();
+            $category->update();
         }
 
         return redirect()->route('Category.display')->with('success', 'Category updated successfully.');
