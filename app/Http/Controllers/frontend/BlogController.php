@@ -5,15 +5,15 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Catagory;
+use App\Models\Category;
 
 class BlogController extends Controller
 {
 
     public function index()
     {
-        $posts = Post::with(['catagory', 'breed', 'images'])->get();
-        $categories = Catagory::all();
+        $posts = Post::with(['category', 'breed', 'images'])->get();
+        $categories = Category::all();
         return view('frontend.blog', compact('posts', 'categories'));
 
     }
@@ -21,10 +21,10 @@ class BlogController extends Controller
     {
 
         // Fetch the category
-        $category = Catagory::findOrFail($categoryId);
+        $category = Category::findOrFail($categoryId);
 
         // Fetch posts related to the category
-        $posts = Post::where('catagory_id', $categoryId)->get();
+        $posts = Post::where('category_id', $categoryId)->get();
 
         // Return the view with posts and category data
         return view('frontend.blogcategory', compact('posts', 'category'));
@@ -37,7 +37,7 @@ class BlogController extends Controller
         if (!auth()->check()) {
             return redirect()->route('login');
         }
-        $post = Post::with(['catagory', 'breed', 'images'])->findOrFail($id);
+        $post = Post::with(['category', 'breed', 'images'])->findOrFail($id);
         return view('frontend.singleblog', compact('post'));
     }
 }

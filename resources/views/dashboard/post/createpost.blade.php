@@ -68,9 +68,9 @@
                                     <label for="gender">Select Gender</label>
                                     <select class="form-control" id="gender" name="gender">
                                         <option value="">Select gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="unknown">Unknown</option>
+                                        <option value="male" {{ isset($post) && $post->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                        <option value="female" {{ isset($post) && $post->gender == 'female' ? 'selected' : '' }}>Female</option>
+                                        <option value="unknown" {{ isset($post) && $post->gender == 'unknown' ? 'selected' : '' }}>Unknown</option>
                                     </select>
                                     <span class="text-danger">
                                         @error('gender')
@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="images">Choose images</label>
                                     <input type="file" class="form-control" name="images[]" id="images" multiple>
                                     <span class="text-danger">
@@ -113,7 +113,28 @@
                                             {{ $message }}
                                         @enderror
                                     </span>
+                                </div> --}}
+                                <div class="form-group">
+                                    @if ($post->images->isNotEmpty())
+                                        <label for="images">Current Images</label>
+                                        @foreach ($post->images as $image)
+                                            <img src="{{ asset($image->url) }}" style="max-width: 80px; max-height: 50px" alt="Current Image" class="img-fluid mb-2">
+                                        @endforeach
+                                        <label for="images">Change Images (optional)</label>
+                                        <input type="file" class="form-control" name="images[]" id="images" multiple>
+                                    @else
+                                        {{-- If no images, provide an option to upload new ones --}}
+                                        <label for="images">Choose Images</label>
+                                        <input type="file" class="form-control" name="images[]" id="images" multiple>
+                                    @endif
+                                    
+                                    <span class="text-danger">
+                                        @error('images')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
                                 </div>
+                                
                             </div>
                         </div>
 

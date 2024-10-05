@@ -39,16 +39,28 @@
                                 @enderror
                             </span>
                         </div>
-                        
+                        {{-- {{dd($category->image)}} --}}
                         <div class="form-group">
-                            <label for="images">Choose images</label>
-                            <input type="file" class="form-control" name="images" id="images">
+                            @if (!empty($category->image))
+                                {{-- Display existing image and option to change it --}}
+                                <label for="image">Current Image</label>
+                                <img src="{{ asset( $category->image) }}" style="max-width: 80px; max-height: 50px" alt="Category Image" class="img-fluid mb-2">
+                                <label for="image">Change Image (optional)</label>
+                                <input type="file" class="form-control" name="image" id="image">
+                            @else
+                                {{-- If no image, provide an option to upload a new one --}}
+                                <label for="image">Choose Image</label>
+                                <input type="file" class="form-control" name="image" id="image">
+                            @endif
+                            
                             <span class="text-danger">
-                                @error('images')
+                                @error('image')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
+                        
+                        
 
                         <button type="submit" class="custom-btn">
                             {{ isset($category) ? 'Update' : 'Submit' }}
