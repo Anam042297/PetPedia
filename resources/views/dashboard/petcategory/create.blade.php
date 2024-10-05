@@ -43,8 +43,8 @@
                         <div class="form-group">
                             @if (!empty($category->image))
                                 {{-- Display existing image and option to change it --}}
-                                <label for="image">Current Image</label>
-                                <img src="{{ asset( $category->image) }}" style="max-width: 80px; max-height: 50px" alt="Category Image" class="img-fluid mb-2">
+                                {{-- <label for="image">Current Image</label>
+                                <img src="{{ asset( $category->image) }}" style="max-width: 80px; max-height: 50px" alt="Category Image" class="img-fluid mb-2"> --}}
                                 <label for="image">Change Image (optional)</label>
                                 <input type="file" class="form-control" name="image" id="image">
                             @else

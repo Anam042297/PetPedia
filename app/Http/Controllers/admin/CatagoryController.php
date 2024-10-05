@@ -98,7 +98,7 @@ class CatagoryController extends Controller
         // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $category = Category::findOrFail($id);
