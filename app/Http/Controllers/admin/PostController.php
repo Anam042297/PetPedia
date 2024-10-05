@@ -120,100 +120,47 @@ class PostController extends Controller
         return view('dashboard.post.createpost', compact('post', 'categories', 'breeds'));
     }
     //update post
-    // public function update(Request $request, $id)
-    // {
-    //     // dd($request->all());
-    //     $validatedData = $request->validate([
-    //         'category_id' => 'required|exists:categories,id',
-    //         'breed_id' => 'required|exists:breeds,id',
-    //         'gender' => 'required|string|max:255',
-    //         'name' => 'required|string|max:255',
-    //         'age' => 'required|integer|min:0',
-    //         'description' => 'string',
-    //         'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-    //     ]);
-
-    //     $post = Post::findOrFail($id);
-    //     $post->category_id = $validatedData['category_id'];
-    //     $post->breed_id = $validatedData['breed_id'];
-    //     $post->gender = $validatedData['gender'];
-    //     $post->name = $validatedData['name'];
-    //     $post->age = $validatedData['age'];
-    //     $post->description = $validatedData['description'];
-    //     // Handle file uploads if any
-    //     if ($request->hasFile('images')) {
-    //         foreach ($request->file('images') as $image) {
-    //             $filename = time() . '.' . $image->getClientOriginalExtension();
-    //             $path = $image->storeAs('public/images', $filename);
-    //             $url = Storage::url($path);
-    //             Image::updateOrCreate([
-    //                 'post_id' => $post->id,
-    //                 'url' => $url,
-    //             ]);
-    //         }
-    //     }
-    //     $post->update();
-
-    //     return redirect()->route('post.index')->with('success', 'Post updated successfully.');
-
-    // }
     public function update(Request $request, $id)
-{
-    // Validate the incoming request data
-    $validatedData = $request->validate([
-        'category_id' => 'required|exists:categories,id',
-        'breed_id' => 'required|exists:breeds,id',
-        'gender' => 'required|string|max:255',
-        'name' => 'required|string|max:255',
-        'age' => 'required|integer|min:0',
-        'description' => 'nullable|string',
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image
-    ]);
+    {
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'breed_id' => 'required|exists:breeds,id',
+            'gender' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'age' => 'required|integer|min:0',
+            'description' => 'string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif',
+        ]);
+        // dd($validatedData);
+        $post = Post::findOrFail($id);
+        $post->category_id = $validatedData['category_id'];
+        $post->breed_id = $validatedData['breed_id'];
+        $post->gender = $validatedData['gender'];
+        $post->name = $validatedData['name'];
+        $post->age = $validatedData['age'];
+        $post->description = $validatedData['description'];
+        // Handle file uploads if any
+        if ($request->hasFile('images')) {
+            $post->images()->delete();
+            // dd($request->images);
+            foreach ($request->file('images') as $image) {
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('public/images', $filename);
+                $url = Storage::url($path);
+                // dd($url);
+                Image::create([
+                    'post_id' => $post->id,
+                    'url' => $url,
+                ]);
 
-    // Find the post by its ID
-    $post = Post::findOrFail($id);
-
-    // Update the post fields
-    $post->update([
-        'category_id' => $validatedData['category_id'],
-        'breed_id' => $validatedData['breed_id'],
-        'gender' => $validatedData['gender'],
-        'name' => $validatedData['name'],
-        'age' => $validatedData['age'],
-        'description' => $validatedData['description'],
-    ]);
-
-    // Handle new image uploads (if any)
-    if ($request->hasFile('images')) {
-        // Optionally, delete existing images
-        foreach ($post->images as $existingImage) {
-            // Remove the old image file from storage
-            if (Storage::exists($existingImage->url)) {
-                Storage::delete($existingImage->url);
             }
-
-            // Delete the image record from the database
-            $existingImage->delete();
         }
+        $post->save();
 
-        // Now, add the new images
-        foreach ($request->file('images') as $image) {
-            $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension(); // Ensure unique filenames
-            $path = $image->storeAs('public/images', $filename); // Store image in 'public/images' folder
-            $url = Storage::url($path); // Get the URL of the uploaded image
+        return redirect()->route('post.index')->with('success', 'Post updated successfully.');
 
-            // Insert the new image into the 'images' table
-            Image::create([
-                'post_id' => $post->id, // Associate with the post
-                'url' => $url,
-            ]);
-        }
     }
-
-    // Redirect back with a success message
-    return redirect()->route('post.index')->with('success', 'Post and images updated successfully.');
-}
-
     //delete post
     public function destroy(string $id)
     {

@@ -115,25 +115,19 @@
                                     </span>
                                 </div> --}}
                                 <div class="form-group">
-                                    <label for="images">Update Images</label>
-                                
-                                    {{-- Show existing images --}}
                                     @if ($post->images->isNotEmpty())
-                                        <div class="mb-3">
-                                            <strong>Current Images:</strong>
-                                            <div class="row">
-                                                @foreach ($post->images as $image)
-                                                    <div class="col-md-3">
-                                                        <img src="{{ asset( $post->$image) }}" alt="Post Image" class="img-fluid mb-2">
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
+                                        <label for="images">Current Images</label>
+                                        @foreach ($post->images as $image)
+                                            <img src="{{ asset($image->url) }}" style="max-width: 80px; max-height: 50px" alt="Current Image" class="img-fluid mb-2">
+                                        @endforeach
+                                        <label for="images">Change Images (optional)</label>
+                                        <input type="file" class="form-control" name="images[]" id="images" multiple>
+                                    @else
+                                        {{-- If no images, provide an option to upload new ones --}}
+                                        <label for="images">Choose Images</label>
+                                        <input type="file" class="form-control" name="images[]" id="images" multiple>
                                     @endif
-                                
-                                    {{-- File input for uploading new images --}}
-                                    <input type="file" class="form-control" name="images[]" id="images" multiple>
-                                
+                                    
                                     <span class="text-danger">
                                         @error('images')
                                             {{ $message }}
