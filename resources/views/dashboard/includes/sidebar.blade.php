@@ -36,7 +36,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/displaycategory" style="color: black;">
                                         <i class="fa-solid fa-layer-group mr-2" ></i>
-                                        Pet Category
+                                        Category
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -65,7 +65,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/indexproductcategories" style="color: black;">
                                       <i class="fa-solid fa-layer-group mr-2"></i>
-                                        Product Category
+                                        Category
                                     </a>
                                 </li>
                             </ul>

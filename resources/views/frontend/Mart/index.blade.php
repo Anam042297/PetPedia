@@ -4,6 +4,28 @@
 
 @section('content')
 <div class="container">
+    <div class="row pb-3">
+        @foreach ($categories as $category)
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 mb-2">
+                     <div class="card-body bg-light p-4">
+                        <a href="{{ route('blog.category', $category->id) }}">
+                            <img src="{{ $category->icon }}" 
+                                 class="card-img-top" 
+                                 alt="{{ $category->name }}" 
+                                 style="height: 150px; object-fit: cover;">
+                        </a>
+                        <h4 class="card-title text-truncate">
+                            {{ $category->name }}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
+<div class="container">
     <h1 class="mt-4">Products</h1>
     <div class="row">
         @foreach ($products as $product)

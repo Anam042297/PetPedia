@@ -73,6 +73,8 @@
 
     .account-card-body {
         padding: 30px;
+        margin-top: -25px; 
+        margin-bottom: 25px; 
     }
     
     .custom-btn {
@@ -84,7 +86,6 @@
         color: white;
         cursor: pointer;
         float: right;
-        margin-top: -25px; 
     }
     #sidebarToggle {
         left:225px;

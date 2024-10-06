@@ -218,7 +218,7 @@
                         <label for="images">Product Images</label>
                         <input type="file" name="images[]" class="form-control" id="images" multiple>
                         <span class="text-danger">
-                            @error('images.*')
+                            @error('images')
                                 {{ $message }}
                             @enderror
                         </span>
