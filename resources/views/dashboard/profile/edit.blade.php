@@ -1,8 +1,14 @@
 @extends('dashboard.master')
 @section('content')
+
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <!-- Image Column -->
+        <div class="col-md-3 d-flex align-items-center">
+            <img src="\backend\hello.jpg" alt="Edit Photo" style="width: 400px; height: 450px; margin-right: 20px;">
+        </div>
+        <!-- Form Column -->
+        <div class="col-md-9">
             <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
                     <img src="\backend\edit.jpg" alt="Profile Photo" style="width: 80px; height: 80px; margin-right: 20px;">
@@ -10,20 +16,18 @@
                         Edit Profile
                     </h3>
                 </div>
-
                 <div class="account-card-body">
                     @if (session('error'))
-                        <div class="alert alert-danger" style="margin-bottom: 20px;">
-                            {{ session('error') }}
-                        </div>
-                    @endif
+                    <div class="alert alert-danger" style="margin-bottom: 20px;">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
-                    @if (session('success'))
-                        <div class="alert alert-success" style="margin-bottom: 20px;">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
+                @if (session('success'))
+                    <div class="alert alert-success" style="margin-bottom: 20px;">
+                        {{ session('success') }}
+                    </div>
+                @endif
                     <form id="adminForm" action="{{ route('admin.update', $admin->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -79,7 +83,6 @@
         </div>
     </div>
 </div>
-
 
 @endsection
 @section("script")

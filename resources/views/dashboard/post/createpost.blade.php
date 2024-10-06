@@ -1,9 +1,14 @@
 @extends('dashboard.master')
 @section('content')
 
-
 <div class="container mt-5">
-        <div class="col-md-8 offset-md-2">
+    <div class="row">
+        <!-- Image Column -->
+        <div class="col-md-3 d-flex align-items-center">
+            <img src="\backend\hello.jpg" alt="Edit Photo" style="width: 400px; height: 450px; margin-right: 20px;">
+        </div>
+        <!-- Form Column -->
+        <div class="col-md-9">
             <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
                     <img src="\backend\edit.jpg" alt="Edit Photo" style="width: 80px; height: 80px; margin-right: 20px;">
@@ -162,6 +167,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 @endsection
