@@ -17,14 +17,14 @@ class CatagoryController extends Controller
         if ($request->ajax()) {
             $data = Category::latest()->get();
             return DataTables::of($data)
-            ->addColumn('image', function ($row) {
-                if ($row->image) {
-                    $imageUrl = $row->image;
-                    return '<img src="' . $imageUrl . '" class="d-block w-100" style="max-width: 80px; max-height: 50px; margin: 0 auto;" alt="Image">';
+                ->addColumn('image', function ($row) {
+                    if ($row->image) {
+                        $imageUrl = $row->image;
+                        return '<img src="' . $imageUrl . '" class="d-block w-100" style="max-width: 80px; max-height: 50px; margin: 0 auto;" alt="Image">';
 
-                    
-                }
-            })
+
+                    }
+                })
                 ->addColumn('action', function ($row) {
                     $editUrl = route('Category.edit', $row->id);
                     $deleteUrl = route('Category.destroy', $row->id);
@@ -33,7 +33,7 @@ class CatagoryController extends Controller
 
                     return $action;
                 })
-            
+
 
                 ->removeColumn('id')
                 ->addIndexColumn()
@@ -62,12 +62,12 @@ class CatagoryController extends Controller
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
-// dd($request->image);
+        // dd($request->image);
         // Create a new category instance
         $category = new Category();
         $category->name = $validatedData['name'];
-        
-// dd($request->hasFile('image'));
+
+        // dd($request->hasFile('image'));
         // Check if an image file was uploaded
         if ($request->hasFile('image')) {
             // dd(123);
@@ -105,8 +105,8 @@ class CatagoryController extends Controller
         $category->name = $request->input('name');
         // Update other fields as needed
         $category->save();
-         // Check if an image file was uploaded
-         if ($request->hasFile('image')) {
+        // Check if an image file was uploaded
+        if ($request->hasFile('image')) {
             // dd(123);
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();

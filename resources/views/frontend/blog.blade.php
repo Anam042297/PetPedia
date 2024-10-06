@@ -58,7 +58,7 @@
                             <div class="mb-3">
                                 <div class="d-flex align-items-center mb-2">
                                     <h5 class="font-weight-bold mb-0 mr-2"><i class="fa fa-folder text-muted"></i> Category:</h5>
-                                    <span>{{ $post->cetegory ? $post->category->name : 'No Category' }}</span>
+                                    <span>{{ $post->category ? $post->category->name : 'No Category' }}</span>
                                 </div>
                             </div>
 
