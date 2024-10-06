@@ -51,14 +51,13 @@ class LoginController extends Controller
                 'password' => 'required|string',
             ]
         );
-        // dd( $credentials);
-        // dd(Auth::attempt($credentials));
-        // $user =User::where('email', $credentials['email'])->first();
-        // if ($user && \Hash::check($request->password, $user->password)) {
-        //     dd('Password matches');
-       // } else {
-       //     dd('Password does not match');
-       // }
+        if (Auth::attempt($request->only('email', 'password'))) {
+            
+            $user = Auth::user();
+            $user->is_active = true; 
+            $user->save();
+        }
+
         if (Auth::attempt($credentials)) {
             if (Auth::user()->role == 'admin') {
 
@@ -74,6 +73,11 @@ class LoginController extends Controller
     }
     public function logout()
     {
+        $user = Auth::user();
+        if ($user) {
+            $user->is_active = false;
+            $user->save();
+        }
         Auth::logout();
         return redirect()->route('home');
     }

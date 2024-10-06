@@ -6,6 +6,7 @@
         <i class="fas fa-user fa-fw"></i> {{ Auth::user()->name }}
     </a>
     <div class="dropdown-menu profile-dropdown-menu">
+        
         <a class="dropdown-item" href="{{ route('admin.view') }}">View Profile</a>
         <a class="dropdown-item" href="{{ route('admin.edit') }}">Edit Profile</a>
         <a class="dropdown-item" href="{{ route('logout') }}"
