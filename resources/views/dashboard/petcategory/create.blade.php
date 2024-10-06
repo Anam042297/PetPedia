@@ -59,11 +59,12 @@
                                 @enderror
                             </span>
                         </div>
+                        @if (empty($post->id))
                         <div class="form-group">
                             <a href="{{ route('post.create') }}" style="color: white;">Create Post</a>&nbsp;|&nbsp;
                             <a href="{{ route('breed.create') }}" style="color: white;">Create Breed</a>
                         </div>
-                        
+                        @endif
 
                         <button type="submit" class="custom-btn">
                             {{ isset($category) ? 'Update' : 'Submit' }}
@@ -73,6 +74,4 @@
             </div>
         </div>
 </div>
-
-
 @endsection

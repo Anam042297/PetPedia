@@ -147,10 +147,13 @@
                                 @enderror
                             </span>
                         </div>
+                        @if (empty($post->id))
                         <div class="form-group">
                             <a href="{{ route('Category.create') }}" style="color: white;">Create Category</a>&nbsp;|&nbsp;
                             <a href="{{ route('breed.create') }}" style="color: white;">Create Breed</a>
                         </div>
+                        @endif
+                     
                         <button type="submit" class="custom-btn">
                             <i class="fas fa-check"></i> 
                             {{ isset($post) ? 'Update' : 'Create' }}

@@ -100,4 +100,31 @@
                         </div>
                     </div>
                 </div> --}}
+                <div class="container">
+                    <h2>Pending Orders</h2>
+                
+                    <div class="table-container">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>User ID</th>
+                                    <th>Status</th>
+                                    <th>Ordered At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- @foreach ($pendingOrders as $index => $order)
+                                    <tr>
+                                        <td>{{ $order->id }}</td>
+                                        <td>{{ $order->user_id }}</td>
+                                        <td>{{ $order->status }}</td>
+                                        <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody> --}}
+                        </table>
+                    </div>
+                </div>
+              
 @endsection
