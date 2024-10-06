@@ -20,6 +20,10 @@
  integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  
- <script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js"></script>
- <script src="https://mediafiles.botpress.cloud/26fd46f3-ea10-4ea8-b14c-811d12fb0b40/webchat/v2.1/config.js"></script>
+ 
+ 
+ <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+ <script src="https://files.bpcontent.cloud/2024/10/06/18/20241006181229-GNV9K4KV.js"></script>
+     
+     
  <script src="{{ asset('backend/js/scripts.js') }}"></script>
