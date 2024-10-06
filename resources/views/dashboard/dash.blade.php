@@ -1,4 +1,22 @@
 @extends('dashboard.master')
+@section('css')
+<style>
+              
+
+    .table tbody {
+        display: block; /* Allows the tbody to scroll */
+        max-height: 200px;
+        width: 100%;  /* Set height for scrolling; adjust as needed */
+        overflow-y: auto; /* Enables vertical scrolling for tbody */
+    }
+    .table tr {
+        display: table; /* Maintains table row display */
+        width: 100%; /* Ensure rows take full width */
+        table-layout: fixed; /* Prevents table width collapse */
+    }
+    
+                    </style>
+@endsection
 @section('content')
 
 
@@ -65,41 +83,7 @@
         </div>
     </div>
 </div>
-                {{-- <div class="container" id="pending-orders">
-                    <h2>Pending Orders</h2>
                 
-                    <div class="table-container">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>User ID</th>
-                                    <th>Status</th>
-                                    <th>Ordered At</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($pendingOrders as $index => $order)
-                                    <tr>
-                                        <td>{{ $order->id }}</td>
-                                        <td>{{ $order->user_id }}</td>
-                                        <td>{{ $order->status }}</td>
-                                        <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div> --}}
-                <style>
-                    .table-container {
-    max-height: 200px; /* Set the maximum height for the table */
-    overflow-y: auto; /* Enables vertical scrolling for the container */
-}
-
-
-
-                </style>
                <div class="container" id="pending-orders">
                 <h2>Pending Orders</h2>
                 <div class="table-container">
