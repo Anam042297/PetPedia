@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -18,8 +20,8 @@ class AdminController extends Controller
 
     // Fetch other data as needed
     $totalPosts = Post::count();
-    // $totalFoodItems = Food::count();
-    // $totalAccessories = Accessory::count();
+    $totalProducts = Product::count();
+    $pendingOrders = Order::where('status', '=', 'pending')->count();
     $activePosts = Post::count();
 
     // Fetch recent activity
@@ -29,8 +31,8 @@ class AdminController extends Controller
 
     return view('dashboard.dash', compact(
         'totalPosts',
-        // 'totalFoodItems',
-        // 'totalAccessories',
+        'totalProducts',
+        'pendingOrders',
         'activeUsers',
         // 'activePosts',
         'recentPosts',

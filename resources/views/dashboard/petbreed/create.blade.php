@@ -55,6 +55,10 @@
                                 @enderror
                             </span>
                         </div>
+                        <div class="form-group">
+                            <a href="{{ route('Category.create') }}" style="color: white;">Create Category</a>&nbsp;|&nbsp;
+                            <a href="{{ route('post.create') }}" style="color: white;">Create Post</a>
+                        </div>
 
                         <button type="submit" class="custom-btn">
                             {{ isset($breed) ? 'Update' : 'Submit' }}

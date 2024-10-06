@@ -59,7 +59,10 @@
                                 @enderror
                             </span>
                         </div>
-                        
+                        <div class="form-group">
+                            <a href="{{ route('post.create') }}" style="color: white;">Create Post</a>&nbsp;|&nbsp;
+                            <a href="{{ route('breed.create') }}" style="color: white;">Create Breed</a>
+                        </div>
                         
 
                         <button type="submit" class="custom-btn">

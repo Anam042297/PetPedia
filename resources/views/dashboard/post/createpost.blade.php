@@ -115,7 +115,7 @@
                                     </span>
                                 </div> --}}
                                 <div class="form-group">
-                                    @if ($post->images->isNotEmpty())
+                                    @if (!empty($post->image))
                                         {{-- <label for="images">Current Images</label>
                                         @foreach ($post->images as $image)
                                             <img src="{{ asset($image->url) }}" style="max-width: 80px; max-height: 50px" alt="Current Image" class="img-fluid mb-2">
@@ -147,7 +147,10 @@
                                 @enderror
                             </span>
                         </div>
-
+                        <div class="form-group">
+                            <a href="{{ route('Category.create') }}" style="color: white;">Create Category</a>&nbsp;|&nbsp;
+                            <a href="{{ route('breed.create') }}" style="color: white;">Create Breed</a>
+                        </div>
                         <button type="submit" class="custom-btn">
                             <i class="fas fa-check"></i> 
                             {{ isset($post) ? 'Update' : 'Create' }}

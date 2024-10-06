@@ -20,12 +20,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/displaycategory" style="color: black;">
-                            <i class="fas fa-tags mr-2" ></i>
-                            Pet Category
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" style="color: black;">
                             <i class="fas fa-th mr-2" ></i>
                             Post Tables
@@ -39,7 +33,12 @@
                                         Posts
                                     </a>
                                 </li>
-                             
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/displaycategory" style="color: black;">
+                                        <i class="fa-solid fa-layer-group mr-2" ></i>
+                                        Pet Category
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/displaybreed" style="color: black;">
                                         <i class="fas fa-dog mr-2" ></i>
@@ -59,13 +58,13 @@
                             <ul class="nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/indexproduct" style="color: black;">
-                                        <i class="fa-brands fa-product-hunt"></i>
+                                        <i class="fa-brands fa-product-hunt mr-2"></i>
                                         Products
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/indexproductcategories" style="color: black;">
-                                      <i class="fa-solid fa-layer-group"></i>
+                                      <i class="fa-solid fa-layer-group mr-2"></i>
                                         Product Category
                                     </a>
                                 </li>

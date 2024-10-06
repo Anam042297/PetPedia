@@ -84,7 +84,7 @@
         color: white;
         cursor: pointer;
         float: right;
-        margin-top: -10px; 
+        margin-top: -25px; 
     }
     #sidebarToggle {
         left:225px;
