@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->unsignedBigInteger('product_category_id'); 
             $table->decimal('weight', 8, 2); 
-            $table->string('brand')->nullable();
+            $table->string('brand');
             $table->unsignedInteger('stock')->default(0);
             $table->timestamps();
 

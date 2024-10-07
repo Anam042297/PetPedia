@@ -35,6 +35,12 @@ class CartController extends Controller
     // Add product to cart
     public function addToCart(Request $request)
     {
+        if (!auth()->check()) {
+            return redirect()->route('/register')->with('error', 'Please register or log in to add items to the cart.');
+        }
+    
+        // Proceed with adding the product to the cart
+    
         $request->validate([
             'product_id' => 'required|integer|exists:products,id',
             'serial_number' => 'required|string',

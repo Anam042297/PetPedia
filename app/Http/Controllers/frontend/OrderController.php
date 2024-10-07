@@ -17,14 +17,44 @@ use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 { 
    // Display a list of the user's orders
-   public function index()
-   {
-       $orders = Order::where('user_id', Auth::id())
-           ->with('orderItems.Product')
-           ->get();
+   public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $orders = Order::where('user_id', Auth::id())
+            ->with('orderItems.Product')
+            ->get();
 
-       return view('frontend.orders.index', compact('orders'));
-   }
+        return DataTables::of($orders)
+            ->addColumn('tracking_id', function ($row) {
+                return $row->tracking_id;
+            })
+        
+            
+            ->addColumn('total_amount', function ($row) {
+                return number_format($row->total_amount, 2); // Format the total amount
+            })
+            ->addColumn('status', function ($row) {
+                return ucfirst($row->status); // Capitalize first letter
+            })
+          
+            ->addColumn('name', function ($row) {
+                return $row->name;
+            })
+            ->addColumn('city', function ($row) {
+                return $row->city;
+            })
+            ->addColumn('phone_no', function ($row) {
+                return $row->phone_no;
+            })
+            ->removeColumn('id')
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    return view('frontend.orders.view');
+}
+
 
    public function checkoutForm()
    {

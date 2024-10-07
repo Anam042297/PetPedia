@@ -10,7 +10,7 @@
             <div class="card mt-5">
                 <div class="card-body text-center">
                     <h1>Thank you for your order!</h1>
-                    <p>Your order has been placed successfully.</p>
+                    <p>A confirmation email with your order details is on its way.</p>
                     <a href="{{ route('mart') }}" class="btn btn-primary">Continue Shopping</a>
                 </div>
             </div>
