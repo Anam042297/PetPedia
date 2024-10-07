@@ -18,13 +18,13 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $products = Product::query()->with(['user','category','productCategory', 'productImages'])->select('products.*');
+            $products = Product::query()->with(['user','category','productCategory', 'productImages'])->get();
             return DataTables::of($products)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('products.edit', $row->id);
                     $deleteUrl = route('products.destroy', $row->id);
-                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
-                        . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_product_button">Delete</button>';
+                    return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>&nbsp'
+                        . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_product_button"><i class="fa-solid fa-trash-can"></i></button>';
                     })
                     ->addColumn('category', function ($row) {
                         return $row->category ? $row->category->name : 'N/A';
@@ -36,7 +36,7 @@ class ProductController extends Controller
                     return $row->productCategory ? $row->productCategory->name : 'N/A';
                 })
                 ->addColumn('weight', function ($row) {
-                    return $row->weight ? $row->weight . ' kg' : 'N/A';
+                    return $row->weight ? $row->weight . ' g' : 'N/A';
                 })
                 ->addColumn('brand', function ($row) {
                     return $row->brand ?? 'N/A';
@@ -71,18 +71,17 @@ class ProductController extends Controller
     // Store a newly created product in the database
     public function store(Request $request)
     { 
-        //  dd($request->all);
+        //  dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:1',
             'product_category_id' => 'required|exists:product_categories,id',
             'weight' => 'required|integer|min:0',
-            'brand' => 'nullable|string|max:255',
-            'stock' => 'required|integer|min:0',
+            'brand' => 'required|string|max:255',
+            'stock' => 'required|integer|min:1',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        //  dd($request->all);
 
         $randomNumber = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
         $validatedData['user_id'] = Auth::id();
@@ -90,7 +89,7 @@ class ProductController extends Controller
 
         // Create a new product instance
         $product = Product::create($validatedData);
-
+// dd($request->hasFile('images'));
         // Handle uploading and associating images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
@@ -153,8 +152,9 @@ class ProductController extends Controller
     // Remove the specified product from the database
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        foreach ($product->productImages as $image) {
+        $product = Product::with('productimages')->findOrFail($id);
+        // dd($product);
+        foreach ($product->productimages as $image) {
             Storage::delete($image->image_path); // Remove image from storage
             $image->delete(); // Delete record from the database
         }

@@ -24,9 +24,9 @@ class ProductCategoryController extends Controller
                    // dd($row);
                     $editUrl = route('ProductCategory.edit', $row->id);
                     $deleteUrl = route('ProductCategory.destroy', $row->id);
-                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">Edit</a>'
+                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>&nbsp'
                    
-                        . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"> Delete</button>';
+                        . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_button"><i class="fa-solid fa-trash-can"></i></button>';
 
                     return $action;
                 })

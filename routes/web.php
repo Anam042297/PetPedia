@@ -82,23 +82,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
    Route::get('/createproduct', [ProductController::class, 'create'])->name('products.create');
    Route::post('/storeproduct', [ProductController::class, 'store'])->name('products.store');
    Route::get('/get-product_category/{petcategory_id}', [ProductController::class, 'getproduct_category']);
-   Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+   Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name(name: 'products.edit');
    Route::put('/product/{id}', [ProductController::class, 'update'])->name('products.update');
  Route::get('/product/{id}', [ProductController::class, 'showProductPage'])->name('product.page');
    Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
    Route::put('/martproduct/{id}', [ProductController::class, 'update'])->name('products.show');
 
  
-
-
-    // // Route to display all orders in DataTables (index)
-    // Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('dashboard.orders.index');
-    
-    // // Route to display a specific order's details (show)
-    // Route::get('/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
-    
-    // // Route to update the order status (updateStatus)
-    // Route::patch('/orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
     
  //user routes
  Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
@@ -119,7 +109,7 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->n
 Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 
-Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.view');
 // web.php
 Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
 
