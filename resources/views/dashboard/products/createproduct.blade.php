@@ -49,7 +49,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="price">Price</label>
-                            <input type="number" name="price" class="form-control" id="price" required>
+                            <input type="number" name="price" class="form-control" id="price" required min="1">
                             <span class="text-danger">
                                 @error('price')
                                     {{ $message }}
@@ -80,7 +80,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="weight">Weight (<span id="weight-unit">grams</span>)</label>
-                            <input type="number" name="weight" class="form-control" id="weight" step="0.01" min="0">
+                            <input type="number" name="weight" class="form-control" id="weight" step="0.01" min="1">
                             <span class="text-danger">
                                 @error('weight')
                                     {{ $message }}
@@ -106,7 +106,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="quantity">Stock</label>
-                            <input type="number" name="stock" class="form-control" id="stock" min="0" required>
+                            <input type="number" name="stock" class="form-control" id="stock" min="1" required>
                             <span class="text-danger">
                                 @error('stock')
                                     {{ $message }}
@@ -114,46 +114,37 @@
                             </span>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="images">Product Images</label>
-                        <input type="file" name="images[]" class="form-control" id="images" multiple>
-                        <span class="text-danger">
-                            @error('images')
-                                {{ $message }}
-                            @enderror
-                        </span>
+                    
+                    <!-- Product Images -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="images">Product Images</label>
+                            <input type="file" name="images[]" class="form-control" id="images" multiple>
+                            <span class="text-danger">
+                                @error('images')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <div class="col-md-12 text-right">
-                        <button type="submit" class="custom-btn"><i class="fas fa-check"></i> Save Product</button>
+                    <!-- Links and Submit Button -->
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="form-group text-left">
+                                <a href="{{ route('Category.create') }}" style="color: white;">Create Category</a>&nbsp;|&nbsp;
+                                <a href="{{ route('ProductCategory.create') }}" style="color: white;">Create Product Category</a>
+                            </div>
+                            <div>
+                                <button type="submit" class="custom-btn"><i class="fas fa-check"></i> Save Product</button>
+                            </div>
+                        </div>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
-{{-- 
-<!-- Script to dynamically update the weight unit -->
-<script>
-    document.getElementById('product_category_id').addEventListener('change', function() {
-        var weightInput = document.getElementById('weight');
-        var weightUnit = document.getElementById('weight-unit');
-        var selectedCategory = this.options[this.selectedIndex].text.toLowerCase();
-        
-        // If the selected category is 'food', show kg; otherwise, show grams
-        if (selectedCategory.includes('food')) {
-            weightInput.required = true;
-            weightUnit.innerText = 'gram';
-            weightInput.setAttribute('step', '0.01'); // Allow decimals for kg
-        } else {
-            weightInput.required = false;
-            weightUnit.innerText = 'grams';
-            weightInput.setAttribute('step', '1'); // No decimals for grams
-        }
-    });
-</script> --}}
 
 @endsection
-

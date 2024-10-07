@@ -20,6 +20,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/orders" style="color: black;">
+                            <i class="fa-solid fa-folder-closed mr-2"></i>
+                            Orders
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" style="color: black;">
                             <i class="fas fa-th mr-2" ></i>
                             Post Tables
@@ -65,7 +71,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/indexproductcategories" style="color: black;">
                                       <i class="fa-solid fa-layer-group mr-2"></i>
-                                        Category
+                                       Product Category
                                     </a>
                                 </li>
                             </ul>

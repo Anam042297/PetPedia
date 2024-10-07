@@ -78,7 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::delete('/destroyproductcategories/{id}', [ProductCategoryController::class, 'destroy'])->name('ProductCategory.destroy');
     
    //product routes
-   Route::get('/indexproduct', [ProductController::class, 'index'])->name('products.index');
+   Route::any('/indexproduct', [ProductController::class, 'index'])->name('products.index');
    Route::get('/createproduct', [ProductController::class, 'create'])->name('products.create');
    Route::post('/storeproduct', [ProductController::class, 'store'])->name('products.store');
    Route::get('/get-product_category/{petcategory_id}', [ProductController::class, 'getproduct_category']);
@@ -107,7 +107,9 @@ Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')
 Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
 Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+Route::group([ 'middleware' => 'auth'], function () {
 
+});
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.view');
 // web.php

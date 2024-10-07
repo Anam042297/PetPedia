@@ -132,7 +132,8 @@
                             success: function(result) {
                                 if (result.success) {
                                     toastr.success(result.success);
-                                    product_table.ajax.reload();
+                                    product_table.ajax.reload(); // Reload the DataTable
+
                                 } else {
                                     toastr.error(result.error);
                                 }
