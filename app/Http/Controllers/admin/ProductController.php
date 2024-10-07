@@ -30,7 +30,7 @@ class ProductController extends Controller
                         return $row->category ? $row->category->name : 'N/A';
                     })
                 ->addColumn('price', function ($row) {
-                    return $row->price ?  '$'. number_format($row->price, 2) : 'N/A'; // Formats the price to include a dollar sign and two decimal places
+                    return $row->price ?  'PKR'. number_format($row->price, 2) : 'N/A'; // Formats the price to include a dollar sign and two decimal places
                 })
                 ->addColumn('product_category', function ($row) {
                     return $row->productCategory ? $row->productCategory->name : 'N/A';
@@ -77,7 +77,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric|min:1',
             'product_category_id' => 'required|exists:product_categories,id',
-            'weight' => 'required|integer|min:0',
+            'weight' => 'required|integer|min:1',
             'brand' => 'required|string|max:255',
             'stock' => 'required|integer|min:1',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -122,11 +122,11 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:1',
             'product_category_id' => 'required|exists:product_categories,id',
-            'weight' => 'required|numeric|min:0',
-            'brand' => 'nullable|string|max:255',
-            'stock' => 'required|integer|min:0',
+            'weight' => 'required|numeric|min:1',
+            'brand' => 'required|string|max:255',
+            'stock' => 'required|integer|min:1',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 // dd($validatedData);

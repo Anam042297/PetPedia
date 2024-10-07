@@ -51,7 +51,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="number" name="price" class="form-control" id="price" value="{{ $product->price }}" required min="0">
+                                <input type="number" name="price" class="form-control" id="price" value="{{ $product->price }}" required min="1">
                                 <span class="text-danger">
                                     @error('price')
                                         {{ $message }}
@@ -83,7 +83,7 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="weight">Weight (<span id="weight-unit">gram</span>)</label>
-                                <input type="number" name="weight" class="form-control" id="weight" step="0.01" min="0" value="{{ old('weight', $product->weight) }}">
+                                <input type="number" name="weight" class="form-control" id="weight" step="0.01" min="1" value="{{ old('weight', $product->weight) }}">
                                 <span class="text-danger">
                                     @error('weight')
                                         {{ $message }}
@@ -110,7 +110,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="quantity">Stock</label>
-                                <input type="number" name="stock" class="form-control" id="stock" min="0" value="{{ old('stock', $product->stock) }}" required>
+                                <input type="number" name="stock" class="form-control" id="stock" min="1" value="{{ old('stock', $product->stock) }}" required>
                                 <span class="text-danger">
                                     @error('stock')
                                         {{ $message }}
@@ -125,13 +125,19 @@
                                 <label for="images">Product Images</label>
                                 <input type="file" name="images[]" class="form-control" id="images" multiple>
                                 <span class="text-danger">
-                                    @error('images.*')
+                                    @error('images')
                                         {{ $message }}
                                     @enderror
                                 </span>
                             </div>
                         </div>
-
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="form-group text-left">
+                                    <a href="{{ route('Category.create') }}" style="color: white;">Create Category</a>&nbsp;|&nbsp;
+                                    <a href="{{ route('ProductCategory.create') }}" style="color: white;">Create Product Category</a>
+                                </div>
+                                <div>
                         <!-- Submit Button -->
                         <div class="col-md-12 text-right">
                             <button type="submit" class="custom-btn"><i class="fas fa-check"></i> Update</button>
