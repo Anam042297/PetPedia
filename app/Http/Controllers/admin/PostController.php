@@ -67,6 +67,7 @@ class PostController extends Controller
                 'name' => 'required|string|max:255',
                 'age' => 'required|integer|min:0',
                 'description' => 'nullable|string',
+                'images' => 'required',
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif',
             ]);
 
@@ -130,8 +131,6 @@ class PostController extends Controller
             'age' => 'required|integer|min:0',
             'description' => 'string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif',
-            'description' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         // dd($validatedData);
         $post = Post::findOrFail($id);

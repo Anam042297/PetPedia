@@ -53,7 +53,7 @@
                                 @enderror
                             </span>
                         </div>
-                        @if (empty($post->id))
+                        @if (empty($category->id))
                         <div class="form-group">
                             <a href="{{ route('post.create') }}" style="color: white;">Create Post</a>&nbsp;|&nbsp;
                             <a href="{{ route('breed.create') }}" style="color: white;">Create Breed</a>
