@@ -22,6 +22,7 @@
  
  
  
+ 
  <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
  <script src="https://files.bpcontent.cloud/2024/10/06/18/20241006181229-GNV9K4KV.js"></script>
      
