@@ -1,9 +1,14 @@
 @extends('dashboard.master')
 @section('content')
 
-
 <div class="container mt-5">
-        <div class="col-md-8 offset-md-2">
+    <div class="row">
+        <!-- Image Column -->
+        <div class="col-md-3 d-flex align-items-center">
+            <img src="\backend\hello.jpg" alt="Edit Photo" style="width: 400px; height: 450px; margin-right: 20px;">
+        </div>
+        <!-- Form Column -->
+        <div class="col-md-9">
             <div class="account-card">
                 <div class="account-card-header d-flex align-items-center justify-content-center">
                     <img src="\backend\edit.jpg" alt="Edit Photo" style="width: 80px; height: 80px; margin-right: 20px;">
@@ -68,9 +73,9 @@
                                     <label for="gender">Select Gender</label>
                                     <select class="form-control" id="gender" name="gender">
                                         <option value="">Select gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="unknown">Unknown</option>
+                                        <option value="male" {{ isset($post) && $post->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                        <option value="female" {{ isset($post) && $post->gender == 'female' ? 'selected' : '' }}>Female</option>
+                                        <option value="unknown" {{ isset($post) && $post->gender == 'unknown' ? 'selected' : '' }}>Unknown</option>
                                     </select>
                                     <span class="text-danger">
                                         @error('gender')
@@ -105,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="images">Choose images</label>
                                     <input type="file" class="form-control" name="images[]" id="images" multiple>
                                     <span class="text-danger">
@@ -113,7 +118,28 @@
                                             {{ $message }}
                                         @enderror
                                     </span>
+                                </div> --}}
+                                <div class="form-group">
+                                    @if (!empty($post->image))
+                                        {{-- <label for="images">Current Images</label>
+                                        @foreach ($post->images as $image)
+                                            <img src="{{ asset($image->url) }}" style="max-width: 80px; max-height: 50px" alt="Current Image" class="img-fluid mb-2">
+                                        @endforeach --}}
+                                        <label for="images">Change Images (optional)</label>
+                                        <input type="file" class="form-control" name="images[]" id="images" multiple>
+                                    @else
+                                        {{-- If no images, provide an option to upload new ones --}}
+                                        <label for="images">Choose Images</label>
+                                        <input type="file" class="form-control" name="images[]" id="images" multiple>
+                                    @endif
+                                    
+                                    <span class="text-danger">
+                                        @error('images')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
                                 </div>
+                                
                             </div>
                         </div>
 
@@ -126,7 +152,13 @@
                                 @enderror
                             </span>
                         </div>
-
+                        @if (empty($post->id))
+                        <div class="form-group">
+                            <a href="{{ route('Category.create') }}" style="color: white;">Create Category</a>&nbsp;|&nbsp;
+                            <a href="{{ route('breed.create') }}" style="color: white;">Create Breed</a>
+                        </div>
+                        @endif
+                     
                         <button type="submit" class="custom-btn">
                             <i class="fas fa-check"></i> 
                             {{ isset($post) ? 'Update' : 'Create' }}
@@ -135,6 +167,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 @endsection

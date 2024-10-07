@@ -17,6 +17,14 @@ class CatagoryController extends Controller
         if ($request->ajax()) {
             $data = Category::latest()->get();
             return DataTables::of($data)
+                ->addColumn('image', function ($row) {
+                    if ($row->image) {
+                        $imageUrl = $row->image;
+                        return '<img src="' . $imageUrl . '" class="d-block w-100" style="max-width: 80px; max-height: 50px; margin: 0 auto;" alt="Image">';
+
+
+                    }
+                })
                 ->addColumn('action', function ($row) {
                     $editUrl = route('Category.edit', $row->id);
                     $deleteUrl = route('Category.destroy', $row->id);
@@ -29,7 +37,7 @@ class CatagoryController extends Controller
 
                 ->removeColumn('id')
                 ->addIndexColumn()
-                ->rawColumns(['images', 'action'])
+                ->rawColumns(['image', 'action'])
                 ->make(true);
         }
         return view('dashboard.petcategory.view');
@@ -48,22 +56,26 @@ class CatagoryController extends Controller
     public function store(Request $request)
     {
         // Validate incoming request data
+        // dd($request->file('image'));
+        // dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'images' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
-
+        // dd($request->image);
         // Create a new category instance
         $category = new Category();
         $category->name = $validatedData['name'];
-        $category->save();
 
+        // dd($request->hasFile('image'));
         // Check if an image file was uploaded
-        if ($request->hasFile('images')) {
-            $image = $request->file('images');
+        if ($request->hasFile('image')) {
+            // dd(123);
+            $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $path = $image->storeAs('public/images', $filename);
             $url = Storage::url($path);
+            // dd($url);
             $category->image = $url;
             $category->save();
         }
@@ -83,23 +95,26 @@ class CatagoryController extends Controller
     //  store edit catagory
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
-            'images' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $category = Category::findOrFail($id);
         $category->name = $request->input('name');
         // Update other fields as needed
         $category->save();
-         // Check if an image file was uploaded
-         if ($request->hasFile('images')) {
-            $image = $request->file('images');
+        // Check if an image file was uploaded
+        if ($request->hasFile('image')) {
+            // dd(123);
+            $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $path = $image->storeAs('public/images', $filename);
             $url = Storage::url($path);
+            // dd($url);
             $category->image = $url;
-            $category->save();
+            $category->update();
         }
 
         return redirect()->route('Category.display')->with('success', 'Category updated successfully.');

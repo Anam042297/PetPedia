@@ -17,7 +17,7 @@ class MartController extends Controller
       $products = Product::with('productimages', 'productCategory')->get();
       $categories = ProductCategory::all();
       // Pass products to the frontend view
-      return view('frontend.Mart.index', compact('products'));
+      return view('frontend.Mart.index', compact('categories','products'));
     }
     public function show($id)
 {

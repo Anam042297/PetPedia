@@ -59,7 +59,7 @@ class PostController extends Controller
     {
         // dd($request->all());
         // dd(123);
-        try {
+        // try {
             $validatedData = $request->validate([
                 'category_id' => 'required|exists:categories,id',
                 'breed_id' => 'required|exists:breeds,id',
@@ -71,9 +71,9 @@ class PostController extends Controller
             ]);
 
             // dd($validatedData); 
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // dd($e->errors());
-        }
+        // } catch (\Illuminate\Validation\ValidationException $e) {
+        //     // dd($e->errors());
+        // }
         $user_id = Auth::id();
         // dd($user_id);
         $post = new Post();
@@ -128,10 +128,12 @@ class PostController extends Controller
             'gender' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
+            'description' => 'string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif',
             'description' => 'nullable|string',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        // dd($validatedData);
         $post = Post::findOrFail($id);
         $post->category_id = $validatedData['category_id'];
         $post->breed_id = $validatedData['breed_id'];
@@ -141,10 +143,13 @@ class PostController extends Controller
         $post->description = $validatedData['description'];
         // Handle file uploads if any
         if ($request->hasFile('images')) {
+            $post->images()->delete();
+            // dd($request->images);
             foreach ($request->file('images') as $image) {
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('public/images', $filename);
                 $url = Storage::url($path);
+                // dd($url);
                 Image::create([
                     'post_id' => $post->id,
                     'url' => $url,

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -13,14 +15,16 @@ class AdminController extends Controller
 
     public function index(){
             // Get the count of active users
-    $activeUsers= User::where('role', '!=', 'admin')->count();
-    ;
+    $Users= User::where('role', '!=', 'admin')->count();
+    
 
     // Fetch other data as needed
     $totalPosts = Post::count();
-    // $totalFoodItems = Food::count();
-    // $totalAccessories = Accessory::count();
-    $activePosts = Post::count();
+    $totalProducts = Product::count();
+    $pendingOrdersCount = Order::where('status', '=', 'pending')->count();
+    $pendingOrders = Order::where('status', '=', 'pending')->get();
+    $activeUsersCount = User::where('is_active', '=', '1')->count();
+    $activeUsers = User::where('is_active', '=', '1')->get();
 
     // Fetch recent activity
     $recentPosts = Post::latest()->take(5)->get();
@@ -29,11 +33,12 @@ class AdminController extends Controller
 
     return view('dashboard.dash', compact(
         'totalPosts',
-        // 'totalFoodItems',
-        // 'totalAccessories',
+        'totalProducts',
+        'pendingOrdersCount',
+        'pendingOrders',
+        'activeUsersCount',
         'activeUsers',
-        // 'activePosts',
-        'recentPosts',
+         'Users',
         // 'recentFoodItems',
         // 'recentAccessories'
 

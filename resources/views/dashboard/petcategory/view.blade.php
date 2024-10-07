@@ -60,8 +60,8 @@
                     data: 'name',
                     name: 'name'
                 },
-                { data: 'images', 
-                  name: 'images', 
+                { data: 'image', 
+                  name: 'image', 
                   orderable: false,
                   searchable: false },
                 {

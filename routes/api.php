@@ -21,8 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('Register',[ApiUserController::class,'register']);
 Route::post('Login',[ApiUserController::class,'login']);
-
+//view user
+Route::get('/user/{id}', [ApiUserController::class, 'getUserById']);
+//home page post
 Route::get('showpost',[PostController::class,'getAllPosts']);
+//single post page
 Route::get('showpost/{id}',[PostController::class,'getPostById']);
+//all post related to category
+Route::get('/showpost/category/{id}', [PostController::class, 'getPostsByCategory']);
 
+//ome page category
 Route::get('categories', [categoryController::class, 'getAllCategories']);
+Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);

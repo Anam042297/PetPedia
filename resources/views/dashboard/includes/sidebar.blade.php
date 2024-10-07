@@ -20,18 +20,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/orders" style="color: black;">
-                            <i class="fa-solid fa-folder-closed mr-2"></i>
-                            Orders
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/displaycategory" style="color: black;">
-                            <i class="fas fa-tags mr-2" ></i>
-                            Pet Category
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" style="color: black;">
                             <i class="fas fa-th mr-2" ></i>
                             Post Tables
@@ -45,7 +33,12 @@
                                         Posts
                                     </a>
                                 </li>
-                             
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/displaycategory" style="color: black;">
+                                        <i class="fa-solid fa-layer-group mr-2" ></i>
+                                        Category
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/displaybreed" style="color: black;">
                                         <i class="fas fa-dog mr-2" ></i>
@@ -72,7 +65,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/indexproductcategories" style="color: black;">
                                       <i class="fa-solid fa-layer-group mr-2"></i>
-                                        Product Category
+                                        Category
                                     </a>
                                 </li>
                             </ul>
