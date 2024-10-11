@@ -130,11 +130,7 @@
 
                     <!-- Links and Submit Button -->
                     <div class="col-md-12">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="form-group text-left">
-                                <a href="{{ route('Category.create') }}" style="color: white;">Create Category</a>&nbsp;|&nbsp;
-                                <a href="{{ route('ProductCategory.create') }}" style="color: white;">Create Product Category</a>
-                            </div>
+                        
                             <div>
                                 <button type="submit" class="custom-btn"><i class="fas fa-check"></i> Save Product</button>
                             </div>

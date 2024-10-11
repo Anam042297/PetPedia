@@ -3,20 +3,21 @@
 @section('title', 'Product Listing')
 
 @section('content')
-<div class="container">
+<div class="col-lg-3">
+    {{-- Product Categories --}}
     <div class="row pb-3">
-        @foreach ($categories as $category)
-            <div class="col-lg-4 mb-4">
+        @foreach ($categories as $productCategory)
+            <div class="col-lg-6 mb-4">
                 <div class="card border-0 mb-2">
-                     <div class="card-body bg-light p-4">
-                        <a href="{{ route('blog.category', $category->id) }}">
-                            <img src="{{ $category->icon }}" 
+                    <div class="card-body bg-light p-4">
+                        <a href="{{ route('ProductCategory.display', $productCategory->id) }}">
+                            <img src="{{ asset('storage/icons/' . basename($productCategory->icon)) }}" 
                                  class="card-img-top" 
-                                 alt="{{ $category->name }}" 
-                                 style="height: 150px; object-fit: cover;">
+                                 alt="{{ $productCategory->name }}" 
+                                 style="width: 100%; height: 75px; object-fit: cover;">  <!-- Fixed size for category icons -->
                         </a>
                         <h4 class="card-title text-truncate">
-                            {{ $category->name }}
+                            {{ $productCategory->name }}
                         </h4>
                     </div>
                 </div>
@@ -32,27 +33,25 @@
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
                     @if($product->productImages && $product->productimages->isNotEmpty())
-    <img src="{{ asset('storage/product_images/' . basename($product->productimages->first()->image_path)) }}" class="card-img-top" alt="{{ $product->name }}">
-@else
-    <img src="{{ asset('images/placeholder.png') }}" class="card-img-top" alt="No Image Available">
-@endif
-
-                    {{-- @if($product->product_images->isNotEmpty())
-                        <img src="{{ asset('storage/productimages/' . basename($product->product_images->first()->image_path)) }}" class="card-img-top" alt="{{ $product->name }}">
+                        <img src="{{ asset('storage/product_images/' . basename($product->productimages->first()->image_path)) }}" 
+                             class="card-img-top" 
+                             alt="{{ $product->name }}" 
+                             style="width: 100%; height: 200px; object-fit: cover;">  <!-- Fixed size for product images -->
                     @else
-                        <img src="{{ asset('images/placeholder.png') }}" class="card-img-top" alt="No Image Available">
-                    @endif --}}
+                        <img src="{{ asset('images/placeholder.png') }}" 
+                             class="card-img-top" 
+                             alt="No Image Available" 
+                             style="width: 100%; height: 250px; object-fit: cover;">  <!-- Fixed size for placeholder -->
+                    @endif
+
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">
-                            {{-- Pet Type: {{ ucfirst($product->pet_type) }} <br> <!-- Display the pet type --> --}}
-                   
-                            Price: {{ number_format($product->price, 2) }} <br> <!-- Format price with 2 decimal places -->
+                            Price: {{ number_format($product->price, 2) }} <br> 
                             @if($product->weight)
-                                Weight: {{ $product->weight }} kg <br> <!-- Show weight if available -->
+                                Weight: {{ $product->weight }} kg <br>
                             @endif
-                            Brand: {{ $product->brand ?? 'No Brand' }} <br> <!-- Show brand or "No Brand" if not set -->
-                          
+                            Brand: {{ $product->brand ?? 'No Brand' }} <br>
                         </p>
                      
                         <form class="add-to-cart-form">

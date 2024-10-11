@@ -10,8 +10,9 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Str;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
+
 use App\Mail\sendmail;
 use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
@@ -105,6 +106,11 @@ class OrderController extends Controller
                    'price' => $cartItem->product->price, // Ensure `product` relationship exists
                    'quantity' => $cartItem->quantity,
                ]);
+           }
+           $product = Product::find($cartItem->product_id);
+           if ($product) {
+               $product->stock -= $cartItem->quantity; // Subtract the quantity from stock
+               $product->save(); // Save the changes to the database
            }
            // Clear the cart
            $cart->items()->delete();

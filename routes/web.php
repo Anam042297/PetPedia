@@ -72,7 +72,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/indexproductcategories', [ProductCategoryController::class, 'index'])->name('ProductCategory.index');
     Route::get('/createproductcategories', [ProductCategoryController::class, 'create'])->name('ProductCategory.create');
     Route::any('/storeproductcategories', [ProductCategoryController::class, 'store'])->name('ProductCategory.store');
-    Route::get('/displayproductcategories', [ProductCategoryController::class, 'viewcategory'])->name('PetCategory.display');
+    Route::get('/displayproductcategories', [ProductCategoryController::class, 'viewcategory'])->name('ProductCategory.display');
     Route::get('/editproductcategories/{id}', [ProductCategoryController::class, 'edit'])->name('ProductCategory.edit');
     Route::put('/productcategories/{id}', [ProductCategoryController::class, 'update'])->name('ProductCategory.update');
     Route::delete('/destroyproductcategories/{id}', [ProductCategoryController::class, 'destroy'])->name('ProductCategory.destroy');
@@ -89,7 +89,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
    Route::put('/martproduct/{id}', [ProductController::class, 'update'])->name('products.show');
 
  
-    
  //user routes
  Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
  Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
@@ -101,22 +100,22 @@ Route::any('/login-post', [LoginController::class, 'login'])->name('form.submit'
 Route::get('/register.page', [LoginController::class, 'showRegisterForm'])->name('register.page');
 Route::post('/store', [LoginController::class, 'store'])->name('user.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
-Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
-Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
-Route::group([ 'middleware' => 'auth'], function () {
 
+  Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+  Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
+  Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+  Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+   
+ 
+  Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
+  Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+  Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
 });
-
-Route::get('/orders', [OrderController::class, 'index'])->name('orders.view');
-// web.php
-Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
-
-Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
-Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
 
 
