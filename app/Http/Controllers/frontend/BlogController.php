@@ -29,7 +29,6 @@ class BlogController extends Controller
         // Return the view with posts and category data
         return view('frontend.blogcategory', compact('posts', 'category'));
 
-
     }
 
     public function show($id)

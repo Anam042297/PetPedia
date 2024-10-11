@@ -77,10 +77,11 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric|min:1',
             'product_category_id' => 'required|exists:product_categories,id',
-            'weight' => 'required|integer|min:1',
+            'weight' => 'required|numeric|min:1',
             'brand' => 'required|string|max:255',
             'stock' => 'required|integer|min:1',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg',
         ]);
 
         $randomNumber = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
@@ -105,7 +106,6 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product created successfully!');
     }
-
     // Show the form for editing the specified product
     public function edit(Product $product, $id)
     {
@@ -127,7 +127,9 @@ class ProductController extends Controller
             'weight' => 'required|numeric|min:1',
             'brand' => 'required|string|max:255',
             'stock' => 'required|integer|min:1',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg',
+            
         ]);
 // dd($validatedData);
         $product = Product::findOrFail($id);
