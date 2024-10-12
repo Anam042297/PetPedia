@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApiUserController;
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\categoryController;
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::get('/showpost/category/{id}', [PostController::class, 'getPostsByCategor
 //ome page category
 Route::get('categories', [categoryController::class, 'getAllCategories']);
 Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);
+
+
+Route::get('/products', [ProductController::class, 'getAllProducts']);
