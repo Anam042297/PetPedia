@@ -28,4 +28,4 @@ jobs:
         with:
           server: ftp.projectflux.online
           username: petpedia@projectflux.online
-          password: petpedia.projectflux.online
+          password: petpedia@projectflux.online
