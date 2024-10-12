@@ -60,7 +60,7 @@ class ProductCategoryController extends Controller
     
         $iconPath = $request->file('icon')->store('icons', 'public');
     
-        $productCategory = new ProductCategory();
+        $productCategory = new Productcategory();
         $productCategory->name = $validatedData['name'];
         $productCategory->icon = $iconPath;
         $productCategory->save();
