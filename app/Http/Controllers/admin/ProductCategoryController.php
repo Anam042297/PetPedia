@@ -72,7 +72,7 @@ class ProductCategoryController extends Controller
     {
         $productCategory = Productcategory::findOrFail($id);
       // dd( $category);
-        return view('dashboard.productcategory.create', compact('productCategory'));
+        return view('dashboard.productcategory.create', compact('productcategory'));
     }
     public function update(Request $request, $id)
     {
