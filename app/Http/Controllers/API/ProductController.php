@@ -24,6 +24,21 @@ class ProductController extends Controller
             'data' => $products
         ]);
     }
-    
+    public function getProductById($id)
+{
+    $product = Product::with(['user','category','productCategory', 'productImages'])->find($id);
+
+    if (!$product) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Product not found'
+        ], 404);
+    }
+
+    return response()->json([
+        'success' => true,
+        'data' => $product
+    ]);
+}
     
 }

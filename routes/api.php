@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApiUserController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\ProductCategoryController;
 use App\Http\Controllers\API\categoryController;
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,5 @@ Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);
 
 
 Route::get('/products', [ProductController::class, 'getAllProducts']);
+Route::get('/product/{id}',[ProductController::class,'getProductById']);
+Route::get('productcategory', [ProductCategoryController::class, 'getAllCategories']);
