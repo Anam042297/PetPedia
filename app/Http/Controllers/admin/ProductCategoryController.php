@@ -60,23 +60,23 @@ class ProductCategoryController extends Controller
     
         $iconPath = $request->file('icon')->store('icons', 'public');
     
-        $productCategory = new Productcategory();
-        $productCategory->name = $validatedData['name'];
-        $productCategory->icon = $iconPath;
-        $productCategory->save();
+        $productcategory = new Productcategory();
+        $productcategory->name = $validatedData['name'];
+        $productcategory->icon = $iconPath;
+        $productcategory->save();
     
         return redirect()->route('ProductCategory.index')->with('success', 'Category added successfully.');
     }
      // Edit view category data
     public function edit($id)
     {
-        $productCategory = Productcategory::findOrFail($id);
+        $productcategory = Productcategory::findOrFail($id);
       // dd( $category);
         return view('dashboard.productcategory.create', compact('productcategory'));
     }
     public function update(Request $request, $id)
     {
-        $productCategory = Productcategory::findOrFail($id);
+        $productcategory = Productcategory::findOrFail($id);
     
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -85,11 +85,11 @@ class ProductCategoryController extends Controller
     
         if ($request->hasFile('icon')) {
             $iconPath = $request->file('icon')->store('icons', 'public');
-            $productCategory->icon = $iconPath;
+            $productcategory->icon = $iconPath;
         }
     
-        $productCategory->name = $validatedData['name'];
-        $productCategory->save();
+        $productcategory->name = $validatedData['name'];
+        $productcategory->save();
     
         return redirect()->route('ProductCategory.index')->with('success', 'Category updated successfully.');
     }
@@ -97,13 +97,13 @@ class ProductCategoryController extends Controller
     // Delete category
     public function destroy($id)
     {  //  dd($id);
-        $productCategory = Productcategory::find($id);  
+        $productcategory = Productcategory::find($id);  
 // dd($category);
-        if (!$productCategory) {
+        if (!$productcategory) {
             return response()->json(['error' => 'Category not found.'], 404);
         }
 
-        $productCategory->delete();
+        $productcategory->delete();
         return response()->json(['success' => 'Category deleted successfully.']);
     }
 }
