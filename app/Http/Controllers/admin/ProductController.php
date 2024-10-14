@@ -9,7 +9,7 @@ use App\Models\ProductCategory;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use DataTables;
+use  Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
