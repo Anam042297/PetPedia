@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\frontend;
+
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
@@ -13,37 +14,38 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
-    public function index(){
-            // Get the count of active users
-    $Users= User::where('role', '!=', 'admin')->count();
-    
-
-    // Fetch other data as needed
-    $totalPosts = Post::count();
-    $totalProducts = Product::count();
-    $pendingOrdersCount = Order::where('status', '=', 'pending')->count();
-    $pendingOrders = Order::where('status', '=', 'pending')->get();
-    $activeUsersCount = User::where('is_active', '=', '1')->count();
-    $activeUsers = User::where('is_active', '=', '1')->get();
-
-    // Fetch recent activity
-    $recentPosts = Post::latest()->take(5)->get();
-    // $recentFoodItems = Food::latest()->take(5)->get();
-    // $recentAccessories = Accessory::latest()->take(5)->get();
-
-    return view('dashboard.dash', compact(
-        'totalPosts',
-        'totalProducts',
-        'pendingOrdersCount',
-        'pendingOrders',
-        'activeUsersCount',
-        'activeUsers',
-         'Users',
-        // 'recentFoodItems',
-        // 'recentAccessories'
+    public function index()
+    {
+        // Get the count of active users
+        $Users = User::where('role', '!=', 'admin')->count();
 
 
-    ));
+        // Fetch other data as needed
+        $totalPosts = Post::count();
+        $totalProducts = Product::count();
+        $pendingOrdersCount = Order::where('status', '=', 'pending')->count();
+        $pendingOrders = Order::where('status', '=', 'pending')->get();
+        $activeUsersCount = User::where('is_active', '=', '1')->count();
+        $activeUsers = User::where('is_active', '=', '1')->where('role', 'user')->get();
+
+        // Fetch recent activity
+        $recentPosts = Post::latest()->take(5)->get();
+        // $recentFoodItems = Food::latest()->take(5)->get();
+        // $recentAccessories = Accessory::latest()->take(5)->get();
+
+        return view('dashboard.dash', compact(
+            'totalPosts',
+            'totalProducts',
+            'pendingOrdersCount',
+            'pendingOrders',
+            'activeUsersCount',
+            'activeUsers',
+            'Users',
+            // 'recentFoodItems',
+            // 'recentAccessories'
+
+
+        ));
     }
     public function edit()
     {
@@ -58,7 +60,7 @@ class AdminController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
             'password' => 'nullable|string|min:8|confirmed',
         ]);
-    
+
         $admin = Auth::user();
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');
@@ -66,12 +68,11 @@ class AdminController extends Controller
             $admin->password = Hash::make($request->input('password'));
         }
         $admin->save();
-    
+
         return redirect()->route('admin.index');
     }
-    public function view(){
-         return view('dashboard.profile.view');
+    public function view()
+    {
+        return view('dashboard.profile.view');
     }
-   
-
 }
