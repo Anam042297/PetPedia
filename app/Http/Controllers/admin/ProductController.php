@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $products = Product::query()->with(['user','category','productCategory', 'productImages'])->get();
+            $products = Product::query()->with(['user','category','ProductCategory', 'productImages'])->get();
             return DataTables::of($products)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('products.edit', $row->id);
