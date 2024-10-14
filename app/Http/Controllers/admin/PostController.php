@@ -11,7 +11,7 @@ use App\Models\Category;
 use App\Models\Breed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class PostController extends Controller
 {
