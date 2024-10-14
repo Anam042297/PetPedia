@@ -1,7 +1,7 @@
 <?php
 //frontend routes
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\frontend\RegisterController;
+use App\Http\Controllers\frontend\registerController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\LoginController;
 use App\Http\Controllers\frontend\BookingController;
@@ -30,7 +30,7 @@ Route::get('/blogsingle/{id}',[BlogController::class,'show'])->name('blog.readmo
 Route::get('/booking',[BookingController::class,'index'])->name('booking');
 Route::get('/mart',[MartController::class,'index'])->name('mart');
 Route::get('/about',[AboutController::class,'index'])->name('about');
-Route::get('/register',[RegisterController::class,'index'])->name('register');
+Route::get('/register',[registerController::class,'index'])->name('register');
 Route::get('/login',[LoginController::class,'index'])->name('login');
 
 // admin middleware
