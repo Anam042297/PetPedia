@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
+use app\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\ProductImage;
-use App\Models\ProductCategory;
-use App\Models\Category;
+use app\Models\Product;
+use app\Models\ProductImage;
+use app\Models\ProductCategory;
+use app\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use  Yajra\DataTables\Facades\DataTables;
