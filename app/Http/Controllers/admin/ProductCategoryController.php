@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Productcategory;
+use App\Models\ProductCategory;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +16,7 @@ class ProductCategoryController extends Controller
     {
         // dd($request);
         if ($request->ajax()) {
-            $data = Productcategory::select('id', 'name','icon')
+            $data = ProductCategory::select('id', 'name','icon')
             ->get();
           //  dd($data);
             return DataTables::of($data)
@@ -70,13 +70,13 @@ class ProductCategoryController extends Controller
      // Edit view category data
     public function edit($id)
     {
-        $productcategory = Productcategory::findOrFail($id);
+        $productcategory = ProductCategory::findOrFail($id);
       // dd( $category);
         return view('dashboard.productcategory.create', compact('productcategory'));
     }
     public function update(Request $request, $id)
     {
-        $productcategory = Productcategory::findOrFail($id);
+        $productcategory = ProductCategory::findOrFail($id);
     
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -97,7 +97,7 @@ class ProductCategoryController extends Controller
     // Delete category
     public function destroy($id)
     {  //  dd($id);
-        $productcategory = Productcategory::find($id);  
+        $productcategory = ProductCategory::find($id);  
 // dd($category);
         if (!$productcategory) {
             return response()->json(['error' => 'Category not found.'], 404);
