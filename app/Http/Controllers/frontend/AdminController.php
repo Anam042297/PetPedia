@@ -26,7 +26,7 @@ class AdminController extends Controller
         $pendingOrdersCount = Order::where('status', '=', 'pending')->count();
         $pendingOrders = Order::where('status', '=', 'pending')->get();
         $activeUsersCount = User::where('is_active', '=', '1')->count();
-        $activeUsers = User::where('is_active', '=', '1')->where('role', 'user')->get();
+        $activeUsers = User::where('role', 'user')->get();
 
         // Fetch recent activity
         $recentPosts = Post::latest()->take(5)->get();
