@@ -31,7 +31,7 @@ class CartController extends Controller
         // Pass the cart items and total to the view
         return view('frontend.cart.index', compact('cartItems', 'cartTotal'));
     }
-    
+        
     // Add product to cart
     public function addToCart(Request $request)
     {

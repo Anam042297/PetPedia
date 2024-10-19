@@ -13,7 +13,7 @@ class ApiUserController extends Controller
     //
     public function register(Request $request)
     {
-        //dd(123); 
+        dd(123); 
         $validation = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
