@@ -20,7 +20,7 @@ class categoryController extends Controller
        ]);
    }
 
-   public function getCategorieById($id)
+   public function getCategoryById($id)
    {
        $data = Category::all()->find($id);
    

@@ -33,4 +33,4 @@ Route::get('/showpost/category/{id}', [PostController::class, 'getPostsByCategor
 Route::get('/showpost/breed/{id}', [PostController::class, 'getPostsByBreed']);
 //ome page category
 Route::get('categories', [categoryController::class, 'getAllCategories']);
-Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);
+Route::get('categories/{id}', [categoryController::class, 'getCategoryById']);
