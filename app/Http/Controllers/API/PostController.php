@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+use App\Models\Breed;
 use App\Models\Post;
 use App\Models\Category;
 
@@ -51,5 +52,20 @@ public function getPostsByCategory($categoryId)
             'posts' => $posts
         ], 200);
     }
+    public function getPostsByBreed($breedId)
+    {
+        // Fetch the category by ID
+        $breed = Breed::findOrFail($breedId);
+
+        // Get all posts related to this category
+        $posts = $breed->posts()->with('category', 'breed', 'images', 'user')->get();
+
+        // Return posts as JSON response
+        return response()->json([
+            'category' => $breed->name,
+            'posts' => $posts
+        ], 200);
+    }
+
 
 }

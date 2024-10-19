@@ -23,8 +23,8 @@ use App\Http\Controllers\frontend\OrderController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('Register',[ApiUserController::class,'register']);
-Route::post('api/login',[ApiUserController::class,'login']);
+Route::post('/register',[ApiUserController::class,'register']);
+Route::post('/login',[ApiUserController::class,'login']);
 //view user
 Route::get('/user/{id}', [ApiUserController::class, 'getUserById']);
 //home page post
@@ -33,7 +33,8 @@ Route::get('showpost',[PostController::class,'getAllPosts']);
 Route::get('showpost/{id}',[PostController::class,'getPostById']);
 //all post related to category
 Route::get('/showpost/category/{id}', [PostController::class, 'getPostsByCategory']);
-
+//all post related to breed
+Route::get('/showpost/breed/{id}', [PostController::class, 'getPostsByBreed']);
 //ome page category
 Route::get('categories', [categoryController::class, 'getAllCategories']);
 Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);
@@ -43,7 +44,7 @@ Route::get('/products', [ProductController::class, 'getAllProducts']);
 Route::get('/product/{id}',[ProductController::class,'getProductById']);
 Route::get('productcategory', [ProductCategoryController::class, 'getAllCategories']);
 
- 
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('cart', [CartController::class, 'index']);
     Route::post('cart/add', [CartController::class, 'addToCart']);
