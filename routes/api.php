@@ -23,7 +23,7 @@ use App\Http\Controllers\frontend\OrderController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('Register',[ApiUserController::class,'register']);
+Route::post('/register',[ApiUserController::class,'register']);
 Route::post('/login',[ApiUserController::class,'login']);
 //view user
 Route::get('/user/{id}', [ApiUserController::class, 'getUserById']);
