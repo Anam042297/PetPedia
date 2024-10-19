@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Support\Str; 
+
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,8 +12,8 @@ class Product extends Model
 
     // The table associated with the model (optional if Laravel naming conventions are followed)
     protected $table = 'products';
-//  The attributes that are mass assignable
-        protected $fillable = [
+    //  The attributes that are mass assignable
+    protected $fillable = [
         'serial_number',
         'user_id',
         'name',
@@ -23,7 +24,7 @@ class Product extends Model
         'brand',
         'stock',
     ];
- 
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -35,7 +36,7 @@ class Product extends Model
     // Relationship: A product belongs to a category
     public function ProductCategory()
     {
-        return $this->belongsTo(Productcategory::class, 'product_category_id');
+        return $this->belongsTo(ProductCategory::class, 'product_category_id');
     }
 
     // Relationship: A product can have many images

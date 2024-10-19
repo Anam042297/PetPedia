@@ -10,7 +10,7 @@ use App\Models\ProductCategory;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
@@ -18,19 +18,19 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $products = Product::query()->with(['user','category','productCategory', 'productImages'])->get();
+            $products = Product::query()->with(['user', 'category', 'ProductCategory', 'productImages'])->get();
             return DataTables::of($products)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('products.edit', $row->id);
                     $deleteUrl = route('products.destroy', $row->id);
                     return '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>&nbsp'
                         . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_product_button"><i class="fa-solid fa-trash-can"></i></button>';
-                    })
-                    ->addColumn('category', function ($row) {
-                        return $row->category ? $row->category->name : 'N/A';
-                    })
+                })
+                ->addColumn('category', function ($row) {
+                    return $row->category ? $row->category->name : 'N/A';
+                })
                 ->addColumn('price', function ($row) {
-                    return $row->price ?  'PKR'. number_format($row->price, 2) : 'N/A'; // Formats the price to include a dollar sign and two decimal places
+                    return $row->price ?  'PKR' . number_format($row->price, 2) : 'N/A'; // Formats the price to include a dollar sign and two decimal places
                 })
                 ->addColumn('product_category', function ($row) {
                     return $row->productCategory ? $row->productCategory->name : 'N/A';
@@ -51,7 +51,7 @@ class ProductController extends Controller
                     $firstImage = $row->productImages->first();
                     return '<img src="' . $firstImage->image_path . '" class="d-block w-100" alt="Product Image">';
                 })
-                
+
                 ->rawColumns(['images', 'action'])
                 ->make(true);
         }
@@ -65,12 +65,12 @@ class ProductController extends Controller
         $categories = Category::all();
         $productcategories = ProductCategory::all();
         // dd($productcategories);
-        return view('dashboard.products.createproduct', compact('categories','productcategories'));
+        return view('dashboard.products.createproduct', compact('categories', 'productcategories'));
     }
 
     // Store a newly created product in the database
     public function store(Request $request)
-    { 
+    {
         //  dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -90,7 +90,7 @@ class ProductController extends Controller
 
         // Create a new product instance
         $product = Product::create($validatedData);
-// dd($request->hasFile('images'));
+        // dd($request->hasFile('images'));
         // Handle uploading and associating images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
@@ -114,7 +114,7 @@ class ProductController extends Controller
         $productcategories = ProductCategory::all();
         return view('dashboard.products.editproduct', compact('product', 'categories', 'productcategories'));
     }
-    
+
     // Update the specified product in the database
     public function update(Request $request, $id)
     {
@@ -129,9 +129,9 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:1',
             'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg',
-            
+
         ]);
-// dd($validatedData);
+        // dd($validatedData);
         $product = Product::findOrFail($id);
         $product->update($validatedData);
 
