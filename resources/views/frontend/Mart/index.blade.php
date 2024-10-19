@@ -10,7 +10,7 @@
             <div class="col-lg-6 mb-4">
                 <div class="card border-0 mb-2">
                     <div class="card-body bg-light p-4">
-                        <a href="{{ route('ProductCategory.display', $productCategory->id) }}">
+                        {{-- <a href="{{ route('ProductCategory.display', $productCategory->id) }}"> --}}
                             <img src="{{ asset('storage/icons/' . basename($productCategory->icon)) }}" 
                                  class="card-img-top" 
                                  alt="{{ $productCategory->name }}" 
