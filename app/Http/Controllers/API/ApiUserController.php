@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class ApiUserController extends Controller
     //
     public function register(Request $request)
     {
-        dd(123); 
+        dd(123);
         $validation = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
@@ -43,6 +44,7 @@ class ApiUserController extends Controller
     }
     public function login(Request $request)
     {
+        // dd($request->all());
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
@@ -60,7 +62,6 @@ class ApiUserController extends Controller
             ];
             return response()->json($response, 200);
         }
-
     }
     public function getUserById($id)
     {
