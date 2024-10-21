@@ -13,55 +13,44 @@ class ApiUserController extends Controller
     //
     public function register(Request $request)
     {
-        //dd(123); 
-        $validation = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255|regex:/^[a-zA-Z]+$/u',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|max:20|regex:/[A-Za-z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
         ]);
-        if ($validation->fails()) {
-            $responce = [
-                'error' => false,
-                'message' => $validation->errors(),
-            ];
-            return response()->json($responce, 400);
-        }
-        $dataEntered = User::create([
-            "name" => $request->name,
-            "email" => $request->email,
-            "password" => hash::make($request->password)
+    
+        // Create the user and generate a token
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
-
-        $success['token'] = $dataEntered->createToken('MyApp')->plainTextToken;
-        $success['name'] = $dataEntered->name;
-        $response = [
-            'success' => true,
-            'data' => $success,
-            'message' => 'User register successful'
-        ];
-        return response()->json($response, 200);
+    
+        return response()->json([
+            'token' => $user->createToken('MyApp')->plainTextToken,
+            'name' => $user->name,
+            'email' => $user->email,
+            'message' => 'User registration successful'
+        ], 201);
     }
+    
+
+
     public function login(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-            $success['token'] = $user->createToken('MyApp')->plainTextToken;
-            $success['name'] = $user->name;
-            $response = [
-                'success' => true,
-                'data' => $success,
+            return response()->json([
+                'token' => $user->createToken('MyApp')->plainTextToken,
+                'name' => $user->name,
                 'message' => 'User login successful'
-            ];
-            return response()->json(['success' => true, 'data' => $success], 200);
-        } else {
-            $response = [
-                'success' => false,
-                'message' => 'Unauthorized'
-            ];
-            return response()->json($response, 200);
+            ], 200);
         }
-
+    
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
+
     public function getUserById($id)
     {
         // Find user by ID
