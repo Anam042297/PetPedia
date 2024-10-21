@@ -45,6 +45,7 @@ class ApiUserController extends Controller
             return response()->json([
                 'token' => $user->createToken('MyApp')->plainTextToken,
                 'name' => $user->name,
+                'email' => $user->email,
                 'message' => 'User login successful'
             ], 200);
         }
