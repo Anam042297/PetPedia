@@ -11,7 +11,8 @@ use App\Models\Product;
     {
         // Get Cart Items
         public function index()
-        {dd(123);
+        {
+            // dd(123);
             $cart = Cart::where('user_id', Auth::id())->with('items.product.productimages')->first();
             $cartItems = $cart ? $cart->items : collect();
             $cartTotal = $cartItems->reduce(function ($total, $item) {
