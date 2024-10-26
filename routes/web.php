@@ -101,7 +101,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
   Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
   Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
   Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
@@ -111,6 +111,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
   Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
 Route::group(['middleware' => 'auth'], function () {
+  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
   Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
 });
