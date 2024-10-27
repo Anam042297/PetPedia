@@ -15,6 +15,7 @@ public function getAllPosts()
 {
     $posts = Post::with(['category', 'breed', 'images', 'user'])->get()->map(function ($post) {
         return [
+            'id' => $post->id,
             'category' => $post->category->name,
             'breed' => $post->breed->name,
             'gender' => $post->gender,
