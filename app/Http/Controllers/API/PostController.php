@@ -13,7 +13,17 @@ class PostController extends Controller
 // Fetch all posts with related data
 public function getAllPosts()
 {
-    $posts = Post::with(['category', 'breed', 'images', 'user'])->get();
+    $posts = Post::with(['category', 'breed', 'images', 'user'])->get()->map(function ($post) {
+        return [
+            'category' => $post->category->name,
+            'breed' => $post->breed->name,
+            'gender' => $post->gender,
+            'name' => $post->name,
+            'age' => $post->age,
+            'description' => $post->description,
+            'images' => $post->images->pluck('url'), 
+        ];
+    });
 
     return response()->json([
         'success' => true,
