@@ -101,7 +101,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
   Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
   Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
   Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');

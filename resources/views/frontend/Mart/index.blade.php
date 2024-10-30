@@ -68,34 +68,41 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>    
-$(document).ready(function() {
-    $('.add-to-cart').click(function(e) {
-        e.preventDefault();
-
-        let productId = $(this).data('product-id');
-        let serialNumber = $(this).data('serial-number');
-        let quantity = 1;
-
-        $.ajax({
-            url: "{{ route('cart.add') }}",
-            method: "POST",
-            data: {
-                product_id: productId,
-                serial_number: serialNumber,
-                quantity: quantity,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                alert(response.message);
-                $('#cart-item-count').text(response.cartItemCount);
-            },
-            error: function(xhr) {
-                alert('Error: ' + xhr.responseJSON.message);
+<script>
+    $(document).ready(function() {
+        let isAuthenticated = {{ Auth::check() ? 'true' : 'false' }};
+    
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+    
+            if (!isAuthenticated) {
+                alert('You must be logged in to add products to the cart.');
+                window.location.href = "{{ route('login') }}"; // Redirect to the login page
+                return;
             }
+    
+            let productId = $(this).data('product-id');
+            let serialNumber = $(this).data('serial-number');
+            let quantity = 1;
+    
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: "POST",
+                data: {
+                    product_id: productId,
+                    serial_number: serialNumber,
+                    quantity: quantity,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    $('#cart-item-count').text(response.cartItemCount);
+                },
+                error: function(xhr) {
+                    // Handle error
+                }
+            });
         });
     });
-});
-</script>
+    </script>
 
 @endsection

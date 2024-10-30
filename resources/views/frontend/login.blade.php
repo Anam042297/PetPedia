@@ -28,7 +28,7 @@
 
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" value="email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                             <span class="text-danger">
                                 @error('email')
                                     {{ $message }}
