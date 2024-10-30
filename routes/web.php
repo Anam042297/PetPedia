@@ -9,7 +9,6 @@ use App\Http\Controllers\frontend\MartController;
 use App\Http\Controllers\frontend\AboutController;
 use App\Http\Controllers\frontend\AdminController;
 use App\Http\Controllers\frontend\CartController;
-use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\OrderController;
 // user route
 use App\Http\Controllers\admin\UserTableController;
@@ -86,7 +85,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
    Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
    Route::put('/martproduct/{id}', [ProductController::class, 'update'])->name('products.show');
 
- 
+   Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+
  //user routes
  Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
  Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
@@ -101,7 +101,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
   Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
   Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
   Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
@@ -111,7 +111,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
   Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+  // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
 });
 
