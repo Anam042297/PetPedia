@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/orders" style="color: black;">
+                        <a class="nav-link" href="/admin/orders" style="color: black;">
                             <i class="fa-solid fa-folder-closed mr-2"></i>
                             Orders
                         </a>
