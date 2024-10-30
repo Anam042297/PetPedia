@@ -63,20 +63,55 @@ public function getPostsByCategory($categoryId)
             'posts' => $posts
         ], 200);
     }
-    public function getPostsByBreed($breedId)
-    {
-        // Fetch the category by ID
-        $breed = Breed::findOrFail($breedId);
+    // public function getPostsByBreed($breedId)
+    // {
+    //     // Fetch the category by ID
+    //     $breed = Breed::findOrFail($breedId);
 
-        // Get all posts related to this category
-        $posts = $breed->posts()->with('category', 'breed', 'images', 'user')->get();
+    //     // Get all posts related to this category
+    //     $posts = $breed->posts()->with('category', 'breed', 'images', 'user')->get();
 
-        // Return posts as JSON response
-        return response()->json([
-            'category' => $breed->name,
-            'posts' => $posts
-        ], 200);
-    }
+    //     // Return posts as JSON response
+    //     return response()->json([
+    //         'category' => $breed->name,
+    //         'posts' => $posts
+    //     ], 200);
+    // }
+
+
+    public function getBreedsByCategory($categoryId)
+{
+    $breeds = Breed::where('category_id', $categoryId)->get(['id', 'name']);
+
+    return response()->json([
+        'success' => true,
+        'data' => $breeds
+    ]);
+}
+public function getPostsByBreed($breedId)
+{
+    $posts = Post::with(['category', 'breed', 'images', 'user'])
+                 ->where('breed_id', $breedId)
+                 ->get();
+
+    $formattedPosts = $posts->map(function ($post) {
+        return [
+            'id' => $post->id,
+            'category' => $post->category->name,
+            'breed' => $post->breed->name,
+            'gender' => $post->gender,
+            'name' => $post->name,
+            'age' => $post->age,
+            'description' => $post->description,
+            'images' => $post->images->pluck('url'),
+        ];
+    });
+
+    return response()->json([
+        'success' => true,
+        'data' => $formattedPosts
+    ]);
+}
 
 
 }
