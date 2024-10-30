@@ -7,6 +7,7 @@ use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductCategoryController;
 use App\Http\Controllers\API\categoryController;
+use App\Http\Controllers\API\breedController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\frontend\OrderController;
 /*
@@ -35,6 +36,26 @@ Route::get('showpost/{id}',[PostController::class,'getPostById']);
 Route::get('/showpost/category/{id}', [PostController::class, 'getPostsByCategory']);
 //all post related to breed
 Route::get('/showpost/breed/{id}', [PostController::class, 'getPostsByBreed']);
+Route::get('/categories/{categoryId}/breeds', [breedController::class, 'getBreedsByCategory']);
+Route::get('/breeds/{breedId}/posts', [breedController::class, 'getPostsByBreed']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //ome page category
 Route::get('categories', [categoryController::class, 'getAllCategories']);
 Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);
