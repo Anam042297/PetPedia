@@ -52,8 +52,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('cart/remove/{id}', [CartController::class, 'removeFromCart']);
     Route::delete('cart/clear', [CartController::class, 'clearCart']);
 
-    Route::get('/orders', [OrderController::class, 'index']); // Get user's orders
-    Route::post('/checkout', [OrderController::class, 'checkout']); // Checkout process
-    Route::get('/checkout-form', [OrderController::class, 'checkoutForm']); // Get checkout form data
-    Route::get('/order/success/{order}', [OrderController::class, 'success']); // Order success
+    Route::get('/orders', [OrderController::class, 'index']); 
+    Route::post('/checkout', [OrderController::class, 'checkout']); 
+    Route::get('/checkout-form', [OrderController::class, 'checkoutForm']); 
+    Route::get('/order/success/{order}', [OrderController::class, 'success']); 
 });
