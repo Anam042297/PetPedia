@@ -45,7 +45,11 @@
                                 @enderror
                             </span>
                         </div>
-
+                        <div class="form-group">
+                            <label>Don't have any account please <a href="{{'register'}}">Register</a> first</label>
+                            
+                        </div>
+                        
                         <button type="submit" class="custom-btn">
                             Login
                         </button>
