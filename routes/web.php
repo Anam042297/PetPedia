@@ -21,14 +21,14 @@ use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\AdminOrderController;
 
 //frontend routes
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/blogcategory/{id}', [BlogController::class, 'showbycategory'])->name('blog.category');
-Route::get('/blogsingle/{id}', [BlogController::class, 'show'])->name('blog.readmore');
-Route::get('/mart', [MartController::class, 'index'])->name('mart');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/register', [registerController::class, 'index'])->name('register');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Route::get('/index', [HomeController::class, 'index']);
+// Route::get('/blog',[BlogController::class,'index'])->name('blog');
+// Route::get('/blogcategory/{id}',[BlogController::class,'showbycategory'])->name('blog.category');
+Route::get('/blogsingle/{id}',[BlogController::class,'show'])->name('blog.readmore');
+Route::get('/mart',[MartController::class,'index'])->name('mart');
+Route::get('/about',[AboutController::class,'index'])->name('about');
+Route::get('/register',[registerController::class,'index'])->name('register');
+Route::get('/login',[LoginController::class,'index'])->name('login');
 
 // admin middleware
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
@@ -120,5 +120,34 @@ Route::group(['middleware' => 'auth'], function () {
 use App\Http\Controllers\ChatBotController;
 Route::match(['get', 'post'], '/botman', [ChatBotController::class, 'handle']);
 Route::get('/debug-env', function () {
-  return env('OPENAI_API_KEY');
+    return env('OPENAI_API_KEY');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use App\Http\Controllers\UserSide\indexController;
+Route::get('/', [indexController::class, 'index'])->name('home');
+// Route::get('/blog', [indexController::class, 'petblog'])->name('blog');
+Route::get('/blog/{categoryId}', [indexController::class, 'petblog'])->name('category.posts');
+
+Route::get('/breed/{categoryId}/{breedId}', [indexController::class, 'breedBlog'])->name('breed.posts');
+Route::get('/post/{postId}', [indexController::class, 'singleBlog'])->name('single.post');
