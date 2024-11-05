@@ -6,7 +6,7 @@
             <div class="navbar-nav mr-auto py-0">
                 <a href="{{ route('home') }}" class="nav-item nav-link">Home</a>
                 <a href="{{ route('mart') }}" class="nav-item nav-link">Mart</a>
-                <a href="{{ route('blog') }}" class="nav-item nav-link">Blog</a>
+                <a href="" class="nav-item nav-link">Blog</a>
                 <a href="{{ route('about') }}" class="nav-item nav-link">About Us</a>
             </div>
 <ul class="navbar-nav ml-auto">
