@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 class ProductCategoryController extends Controller
 {
-    public function getAllCategories()
+    public function getAllProductCategories()
    {
 
        $categories = ProductCategory::all();
@@ -16,6 +16,22 @@ class ProductCategoryController extends Controller
            'success' => true,
            'data' => $categories
            
+       ]);
+   }
+   public function getProductCategoryById($id)
+   {
+       $categories = ProductCategory::all()->find($id);
+   
+       if (!$categories) {
+           return response()->json([
+               'success' => false,
+               'message' => 'ProductCategory not found'
+           ], 404);
+       }
+   
+       return response()->json([
+           'success' => true,
+           'data' => $categories
        ]);
    }
 }

@@ -13,20 +13,32 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
     public function getAllProducts()
-    {
-        // Fetch all products with related models like category, images, and user
-        $products = Product::with(['user','category','productCategory', 'productImages'])->get();
-    
-        // Return a JSON response
-        return response()->json([
-            'success' => true,
-            'data' => $products
-        ]);
-    }
+{
+    $products = Product::with(['category', 'ProductCategory', 'productImages', 'user'])->get()->map(function ($product) {
+        return [
+            'id' => $product->id,
+            'category' => $product->category->name,
+            'product_category' => $product->ProductCategory->name,
+            'name' => $product->name,
+            'price' => $product->price,
+            'brand' => $product->brand,
+            'weight' => $product->weight,
+            'stock' => $product->stock,
+            'images' => $product->productImages->pluck('image_path'),
+        ];
+    });
+
+    return response()->json([
+        'success' => true,
+        'data' => $products
+    ]);
+}
+
     public function getProductById($id)
 {
-    $product = Product::with(['user','category','productCategory', 'productImages'])->find($id);
+    $product = Product::with(['user', 'category', 'productCategory', 'productImages'])->find($id);
 
     if (!$product) {
         return response()->json([
@@ -34,11 +46,24 @@ class ProductController extends Controller
             'message' => 'Product not found'
         ], 404);
     }
-
+    
+    $productData = [
+        'id' => $product->id,
+        'category' => $product->category->name,
+        'product_category' => $product->productCategory->name,
+        'name' => $product->name,
+        'price' => $product->price,
+        'brand' => $product->brand,
+        'weight' => $product->weight,
+        'stock' => $product->stock,
+        'images' => $product->productImages->pluck('image_path'),
+    ];
+    
     return response()->json([
         'success' => true,
-        'data' => $product
+        'data' => $productData
     ]);
-}
     
+    
+}
 }

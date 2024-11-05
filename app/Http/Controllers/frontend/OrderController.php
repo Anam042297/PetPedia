@@ -99,4 +99,7 @@ class OrderController extends Controller
    {
        return view('frontend.orders.success');  // Ensure this view exists
    }
+   // In OrderController.php
+
+
 }

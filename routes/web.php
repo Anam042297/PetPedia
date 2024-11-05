@@ -86,6 +86,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
    Route::put('/martproduct/{id}', [ProductController::class, 'update'])->name('products.show');
 
    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+   Route::get('/orders/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
+   Route::patch('/orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
  //user routes
  Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
@@ -101,6 +103,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
   Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
   Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');

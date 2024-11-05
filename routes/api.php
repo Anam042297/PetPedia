@@ -42,15 +42,17 @@ Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);
 
 Route::get('/products', [ProductController::class, 'getAllProducts']);
 Route::get('/product/{id}',[ProductController::class,'getProductById']);
-Route::get('productcategory', [ProductCategoryController::class, 'getAllCategories']);
-
+Route::get('/productcategory', [ProductCategoryController::class, 'getAllProductCategories']);
+Route::get('/productcategory/{id}', [ProductCategoryController::class, 'getProductCategoryById']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('cart', [CartController::class, 'index']);
     Route::post('cart/add', [CartController::class, 'addToCart']);
-    Route::put('cart/update/{id}', [CartController::class, 'updateCartItem']);
+
+    // Route::put('cart/update', [CartController::class, 'updateCartItem']);
     Route::delete('cart/remove/{id}', [CartController::class, 'removeFromCart']);
-    Route::delete('cart/clear', [CartController::class, 'clearCart']);
+    Route::post('/item/{id}/decrease', [CartController::class, 'decreaseQuantity']);
+
 
     Route::get('/orders', [OrderController::class, 'index']); 
     Route::post('/checkout', [OrderController::class, 'checkout']); 
