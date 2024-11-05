@@ -22,16 +22,17 @@ use App\Http\Controllers\admin\AdminOrderController;
 
 //frontend routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/blog',[BlogController::class,'index'])->name('blog');
-Route::get('/blogcategory/{id}',[BlogController::class,'showbycategory'])->name('blog.category');
-Route::get('/blogsingle/{id}',[BlogController::class,'show'])->name('blog.readmore');
-Route::get('/mart',[MartController::class,'index'])->name('mart');
-Route::get('/about',[AboutController::class,'index'])->name('about');
-Route::get('/register',[registerController::class,'index'])->name('register');
-Route::get('/login',[LoginController::class,'index'])->name('login');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blogcategory/{id}', [BlogController::class, 'showbycategory'])->name('blog.category');
+Route::get('/blogsingle/{id}', [BlogController::class, 'show'])->name('blog.readmore');
+Route::get('/mart', [MartController::class, 'index'])->name('mart');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/register', [registerController::class, 'index'])->name('register');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 // admin middleware
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+
     Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/edit', [AdminController::class, 'edit'])->name('admin.edit');
     Route::put('/update', [AdminController::class, 'update'])->name('admin.update');
@@ -95,6 +96,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
  Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
 
 
+
 });
 Route::any('/login-post', [LoginController::class, 'login'])->name('form.submit');
 Route::get('/register.page', [LoginController::class, 'showRegisterForm'])->name('register.page');
@@ -105,13 +107,16 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
   Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
-  Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
-  Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-  Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
-   
- 
-  Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
-  Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+
+
+
+Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+
+
+Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
+Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
 Route::group(['middleware' => 'auth'], function () {
   // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
@@ -123,5 +128,5 @@ Route::group(['middleware' => 'auth'], function () {
 use App\Http\Controllers\ChatBotController;
 Route::match(['get', 'post'], '/botman', [ChatBotController::class, 'handle']);
 Route::get('/debug-env', function () {
-    return env('OPENAI_API_KEY');
+  return env('OPENAI_API_KEY');
 });
