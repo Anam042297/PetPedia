@@ -58,7 +58,7 @@ class AdminOrderController extends Controller
 //             ->with('orderItems.product')
 //             ->get();
 
-//         return DataTables::of($orders)
+    //         return DataTables::of($orders)
 //             ->addColumn('tracking_id', function ($row) {
 //                 return $row->tracking_id;
 //             })
@@ -88,7 +88,7 @@ class AdminOrderController extends Controller
 //             ->make(true);
 //     }
 
-//     return view('frontend.orders.view');
+    //     return view('frontend.orders.view');
 // }
 
     // Display the orders list view
@@ -96,7 +96,7 @@ class AdminOrderController extends Controller
     {
         if ($request->ajax()) {
             $orders = Order::select(['id', 'tracking_id', 'total_amount', 'status', 'name', 'city', 'phone_no']);
-            
+
             return DataTables::of($orders)
                 ->addColumn('action', function ($order) {
                     // return '<a href="'.route('orders.show', $order->id).'" class="btn btn-primary btn-sm">View Details</a>';
@@ -105,23 +105,23 @@ class AdminOrderController extends Controller
                 ->make(true);
         }
         return view('frontend.orders.view');
-      
+
     }
 
-   
 
-// AdminOrderController.php
-public function updateStatus(Request $request, $id)
-{
-    $request->validate([
-        'status' => 'required|in:pending,processing,completed,canceled',
-    ]);
 
-    $order = Order::findOrFail($id);
-    $order->status = $request->status;
-    $order->save();
+    // AdminOrderController.php
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,processing,completed,canceled',
+        ]);
 
-    return redirect()->back()->with('success', 'Order status updated successfully!');
-}
+        $order = Order::findOrFail($id);
+        $order->status = $request->status;
+        $order->save();
+
+        return redirect()->back()->with('success', 'Order status updated successfully!');
+    }
 
 }

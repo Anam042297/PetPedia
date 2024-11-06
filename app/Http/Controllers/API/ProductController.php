@@ -16,8 +16,8 @@ class ProductController extends Controller
     public function getAllProducts()
     {
         // Fetch all products with related models like category, images, and user
-        $products = Product::with(['user','category','productCategory', 'productImages'])->get();
-    
+        $products = Product::with(['user', 'category', 'productCategory', 'productImages'])->get();
+
         // Return a JSON response
         return response()->json([
             'success' => true,
@@ -25,20 +25,20 @@ class ProductController extends Controller
         ]);
     }
     public function getProductById($id)
-{
-    $product = Product::with(['user','category','productCategory', 'productImages'])->find($id);
+    {
+        $product = Product::with(['user', 'category', 'productCategory', 'productImages'])->find($id);
 
-    if (!$product) {
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Product not found'
+            ], 404);
+        }
+
         return response()->json([
-            'success' => false,
-            'message' => 'Product not found'
-        ], 404);
+            'success' => true,
+            'data' => $product
+        ]);
     }
 
-    return response()->json([
-        'success' => true,
-        'data' => $product
-    ]);
-}
-    
 }

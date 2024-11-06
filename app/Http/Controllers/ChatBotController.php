@@ -42,7 +42,7 @@ class ChatBotController extends Controller
     //         $botman->listen();
 //     }
 
-        public function askName(BotMan $botman)
+    public function askName(BotMan $botman)
     {
         $botman->ask('Hello! What is your name?', function (Answer $answer) use ($botman) {
             $name = $answer->getText();
@@ -121,10 +121,32 @@ class ChatBotController extends Controller
     private function isPetRelated($message)
     {
         // Simple keyword-based check for pet-related queries
-        $petKeywords = ['pet', 'dog','dogs', 'cat', 'cats', 'animal', 'puppy',
-         'kitten', 'breed', 'vet', 'pet food', 'pet care','bird care', 'bird grooming',
-          'bird health', 'bird breeds', 'parrots', 'canaries', 'parakeets', 
-          'bird cages', 'bird food', 'bird toys', 'bird behavior', 'bird training'];
+        $petKeywords = [
+            'pet',
+            'dog',
+            'dogs',
+            'cat',
+            'cats',
+            'animal',
+            'puppy',
+            'kitten',
+            'breed',
+            'vet',
+            'pet food',
+            'pet care',
+            'bird care',
+            'bird grooming',
+            'bird health',
+            'bird breeds',
+            'parrots',
+            'canaries',
+            'parakeets',
+            'bird cages',
+            'bird food',
+            'bird toys',
+            'bird behavior',
+            'bird training'
+        ];
 
         foreach ($petKeywords as $keyword) {
             if (stripos($message, $keyword) !== false) {
@@ -136,7 +158,7 @@ class ChatBotController extends Controller
 
     private function getOpenAIResponse($message)
     {
-        $client = new  Client();
+        $client = new Client();
 
         Log::info('Sending request to OpenAI with API key: ' . $this->apiKey);
 
