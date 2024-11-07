@@ -15,15 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    // Display a list of the user's orders
-    public function index(Request $request)
-    {
-        $orders = Order::where('user_id', Auth::id())
-            ->with('orderItems.product')
-            ->get();
-
-        return response()->json($orders);
-    }
+   
 
     public function checkoutForm()
     {
@@ -91,7 +83,7 @@ class OrderController extends Controller
         });
 
         // Return a success response with the order data
-        return response()->json(['message' => 'Order created successfully!', 'order' => $order], 201);
+        return response()->json(['message' => 'Order created successfully!'], 201);
     }
 
     protected function calculateTotalAmount()

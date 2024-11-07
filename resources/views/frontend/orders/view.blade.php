@@ -56,5 +56,11 @@
             // order: [[3, 'desc']]  // Default order by the 'name' column descending
         });
     });
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 </script>
 @endsection
