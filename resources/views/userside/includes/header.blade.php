@@ -77,10 +77,12 @@
                                                        Logout
                                                     </a>
                                                 </li>
-                                                <li><a href="#">View Profile</a></li>
+                                                @php $user = auth()->user(); @endphp
+
+                                                <li><a href="{{ route('userprofile.view',['id' => $user->id]) }}">View Profile</a></li>
                                             </ul>
                                             <!-- Logout Form -->
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
                                                 @csrf
                                             </form>
                                         @else

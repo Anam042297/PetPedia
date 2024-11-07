@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Breed;
-
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Cart;
 class indexController extends Controller
 {
     public function index()
@@ -49,7 +51,13 @@ class indexController extends Controller
     }
 
 
-
+    public function ViewProfile($id)
+    {
+        $user = User::findOrFail($id); 
+        $CartItemsNo = Cart::where('user_id', $user->id)->count();
+        $pendingOrdersNo = Order::where('user_id', $user->id)->where('status', 'pending')->count();// Fetch user by ID
+        return view('userside.profile', compact('user', 'CartItemsNo', 'pendingOrdersNo')); 
+    }
 
 
 

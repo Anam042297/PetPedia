@@ -151,3 +151,4 @@ Route::get('/blog/{categoryId}', [indexController::class, 'petblog'])->name('cat
 
 Route::get('/breed/{categoryId}/{breedId}', [indexController::class, 'breedBlog'])->name('breed.posts');
 Route::get('/post/{postId}', [indexController::class, 'singleBlog'])->name('single.post');
+Route::get('/user-profile-view/{id}', [indexController::class, 'ViewProfile'])->name('userprofile.view');
