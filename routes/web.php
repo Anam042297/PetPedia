@@ -101,7 +101,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
 Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
@@ -113,6 +113,7 @@ Route::get('/order/success', [OrderController::class, 'success'])->name('order.s
 Route::group(['middleware' => 'auth'], function () {
   // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
+  
 });
 
 
@@ -145,9 +146,28 @@ Route::get('/debug-env', function () {
 
 
 use App\Http\Controllers\UserSide\indexController;
+use App\Http\Controllers\UserSide\ShopController;
+use App\Http\Controllers\UserSide\Cart1Controller;
+use App\Http\Controllers\UserSide\Order1Controller;
 Route::get('/', [indexController::class, 'index'])->name('home');
 // Route::get('/blog', [indexController::class, 'petblog'])->name('blog');
 Route::get('/blog/{categoryId}', [indexController::class, 'petblog'])->name('category.posts');
 
 Route::get('/breed/{categoryId}/{breedId}', [indexController::class, 'breedBlog'])->name('breed.posts');
 Route::get('/post/{postId}', [indexController::class, 'singleBlog'])->name('single.post');
+Route::get('/shop',[ShopController::class,'index'])->name('shop.index');
+Route::get('/cart1', [Cart1Controller::class, 'index'])->name('cart.index');
+Route::post('/cart1/add', [Cart1Controller::class, 'addToCart'])->name('cart.add');
+Route::patch('/cart1/update/{id}', [Cart1Controller::class, 'updateCartItem'])->name('cart.update');
+Route::delete('/cart1/remove/{id}', [Cart1Controller::class, 'removeFromCart'])->name('cart.remove');
+Route::delete('/cart1/clear', [Cart1Controller::class, 'clearCart'])->name('cart.clear');
+
+
+Route::get('/checkout', [Order1Controller::class, 'checkoutForm'])->name('checkout.form');
+Route::get('/order1/success', [Order1Controller::class, 'success'])->name('order.success');
+
+Route::group(['middleware' => 'auth'], function () {
+  // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+ Route::post('/orders1/checkout', [Order1Controller::class, 'checkout'])->name('checkout');
+  
+});

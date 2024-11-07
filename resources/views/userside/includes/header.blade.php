@@ -29,7 +29,7 @@
                                         </ul>
                                     </li>
                                     
-                                    @php
+                                    {{-- @php
                                        $categories = \App\Models\ProductCategory::all();
                                     @endphp
                                     <li>
@@ -39,9 +39,9 @@
                                                 <li><a href="">{{ $category->name }}</a></li>
                                             @endforeach
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                     
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a href="{{ route('cart.index') }}">
                                             <i class="fas fa-shopping-cart"></i> Cart <i class="ti-angle-down"></i>
                                         </a>
@@ -65,8 +65,33 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                    </li>
-                                    
+                                    </li> --}}
+                                    <li>
+                                    <a href="{{ route('shop.index') }}" id="shop-link">Shop</a>
+                                    </li> 
+                                    <li>
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('cart.index') }}">
+                                                {{-- <i class="fas fa-shopping-cart"></i>  --}}
+                                                <i class="fas fa-cart-plus">Cart</i>
+                                                <div class="cart-icon">
+                                                    @if(auth()->check())
+                                                        @php
+                                                            // Check if the user has a cart and if it has items
+                                                            $cart = auth()->user()->cart;
+                                                            $cartItemCount = $cart && $cart->items ? $cart->items->sum('quantity') : 0;
+                                                        @endphp
+                                                        <span id="cart-icon">{{ $cartItemCount }}</span>
+                                                    @else
+                                                        <!-- If user is not logged in, show 0 -->
+                                                        <span id="cart-icon">0</span>
+                                                    @endif
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                     <li>
                                         @auth
                                             <a href="#">
