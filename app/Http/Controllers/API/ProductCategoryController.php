@@ -8,14 +8,14 @@ use App\Models\ProductCategory;
 class ProductCategoryController extends Controller
 {
     public function getAllCategories()
-   {
+    {
 
-       $categories = ProductCategory::all();
+        $categories = ProductCategory::all();
 
-       return response()->json([
-           'success' => true,
-           'data' => $categories
-           
-       ]);
-   }
+        return response()->json([
+            'success' => true,
+            'data' => $categories
+
+        ]);
+    }
 }

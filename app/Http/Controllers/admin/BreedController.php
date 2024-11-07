@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Breed;
 use App\Models\Category;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class BreedController extends Controller
 {// data table function
@@ -16,17 +16,17 @@ class BreedController extends Controller
             // $data = Breed::latest()->get();
             $data = Breed::with(['category'])->get();
             return Datatables::of($data)
-            ->addColumn('category_name', function (Breed $data) {
-                return $data->category ? $data->category->name : 'No Category';
-            })
-            ->addColumn('action', function ($row) {
-                $editUrl = route('breed.edit', $row->id);
-                $deleteUrl = route('breed.destroy', $row->id);
-                $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> &nbsp'
-                .  '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_breed_button">  <i class="fas fa-trash-alt"></i></button>';
+                ->addColumn('category_name', function (Breed $data) {
+                    return $data->category ? $data->category->name : 'No Category';
+                })
+                ->addColumn('action', function ($row) {
+                    $editUrl = route('breed.edit', $row->id);
+                    $deleteUrl = route('breed.destroy', $row->id);
+                    $action = '<a href="' . $editUrl . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> &nbsp'
+                        . '<button data-href="' . $deleteUrl . '" class="btn btn-sm btn-danger delete_breed_button">  <i class="fas fa-trash-alt"></i></button>';
 
-                return $action;
-            })
+                    return $action;
+                })
 
                 ->removeColumn('id')
                 ->addIndexColumn()
@@ -35,12 +35,12 @@ class BreedController extends Controller
         }
         return view('dashboard.petbreed.view');
     }
-// data table view blade
+    // data table view blade
     public function viewbreed()
     {
         return view('dashboard.petbreed.view');
     }
-//create breed
+    //create breed
     public function create()
     {
         $categories = Category::all();
