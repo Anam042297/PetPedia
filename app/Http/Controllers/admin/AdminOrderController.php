@@ -19,19 +19,9 @@ class AdminOrderController extends Controller
             
             return DataTables::of($orders)
                 ->addColumn('action', function ($order) {
-                    //  return '<a href="'.route('orders.show', $order->id).'" class="btn btn-primary btn-sm">View Details</a>';
-                    $viewButton = '<a href="'.route('orders.show', $order->id).'" class="btn btn-primary btn-sm">View Details</a>';
-                
-                    // Dropdown for updating status
-                    $statusDropdown = '
-                        <select class="status-dropdown form-control" data-order-id="'.$order->id.'">
-                            <option value="pending" '.($order->status == 'pending' ? 'selected' : '').'>Pending</option>
-                            <option value="processing" '.($order->status == 'processing' ? 'selected' : '').'>Processing</option>
-                            <option value="completed" '.($order->status == 'completed' ? 'selected' : '').'>Completed</option>
-                            <option value="canceled" '.($order->status == 'canceled' ? 'selected' : '').'>Canceled</option>
-                        </select>';
-    
-                    return $viewButton . ' ' . $statusDropdown;
+                    $viewButton = '<a href="'.route('orders.show', $order->id).'" class="btn btn-primary btn-sm">Change Status</a>';
+        
+                    return $viewButton . ' ' ;
                 })
                 
                 ->rawColumns(['action'])  // Ensure HTML is rendered
@@ -57,14 +47,14 @@ class AdminOrderController extends Controller
 public function updateStatus(Request $request, $id)
 {
     $request->validate([
-        'status' => 'required|in:pending,processing,completed,canceled',
+        'status' => 'required|in: pending,completed,shipped,cancelled',
+       
     ]);
 
     $order = Order::findOrFail($id);
     $order->status = $request->status;
     $order->save();
-
-    return redirect()->back()->with('success', 'Order status updated successfully!');
+    return redirect()->route('orders.index')->with('success', 'Order status updated successfully!');
+}
 }
 
-}
