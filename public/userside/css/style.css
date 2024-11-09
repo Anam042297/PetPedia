@@ -4810,7 +4810,7 @@ h6 {
 
 /* line 14, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog.scss */
 .blog_area a:hover, .blog_area a :hover {
-  background: -webkit-linear-gradient(131deg, #eb592d 0%, #eb592d 99%);
+  background: -webkit-linear-gradient(131deg, #af99ff 0%, #af99ff 99%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
@@ -6301,7 +6301,7 @@ h6 {
 
 /* line 76, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog_part.scss */
 .blog_part .single-home-blog .card .card-body a:hover {
-  background: -webkit-linear-gradient(131deg, #ff7e5f 0%, #feb47b 99%);
+  background: -webkit-linear-gradient(131deg, #af99ff 0%, #af99ff 99%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -6320,7 +6320,7 @@ h6 {
   height: 10px;
   top: 5px;
   left: 0;
-  background-color: #eb592d;
+  background-color: #af99ff;
   border-radius: 50%;
 }
 
@@ -6409,7 +6409,7 @@ h6 {
 .blog_part .single-home-blog .card h5:hover {
   -webkit-transition: 0.8s;
   transition: 0.8s;
-  background: -webkit-linear-gradient(131deg, #feb47b 0%, #ff7e5f 99%);
+  background: -webkit-linear-gradient(131deg, #af99ff 0%, #af99ff 0%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-animation: 1s;
