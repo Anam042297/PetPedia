@@ -50,18 +50,9 @@ Route::get('/breeds/{breedId}/posts', [PostController::class, 'getPostsByBreed']
 
 
 
-
-
-
-
-
-//ome page category
 Route::get('categories', [categoryController::class, 'getAllCategories']);
 Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);
-
-
 Route::get('/products', [ProductController::class, 'getAllProducts']);
-
 Route::get('/product/{id}',[ProductController::class,'getProductById']);
 Route::get('/productcategory', [ProductCategoryController::class, 'getAllProductCategories']);
 Route::get('/productcategory/{id}', [ProductCategoryController::class, 'getProductCategoryById']);
@@ -70,16 +61,18 @@ Route::get('/productcategory/{id}', [ProductCategoryController::class, 'getProdu
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('cart', [CartController::class, 'index']);
-    Route::post('cart/add', [CartController::class, 'addToCart']);
 
-    // Route::put('cart/update', [CartController::class, 'updateCartItem']);
-    Route::delete('cart/remove/{id}', [CartController::class, 'removeFromCart']);
-    Route::post('/item/{id}/decrease', [CartController::class, 'decreaseQuantity']);
-
+  Route::get('/cart', [CartController::class, 'index']);
+  Route::post('/cart/add', [CartController::class, 'addToCart']);
+  Route::put('/cart/add/{id}', [CartController::class, 'updateCartItem']);
+  Route::delete('/cart/{id}', [CartController::class, 'removeFromCart']);
+  Route::patch('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity']);
 
     Route::get('/orders', [OrderController::class, 'index']);
     Route::post('/checkout', [OrderController::class, 'checkout']);
     Route::get('/checkout-form', [OrderController::class, 'checkoutForm']);
     Route::get('/order/success/{order}', [OrderController::class, 'success']);
 });
+
+
+
