@@ -66,6 +66,21 @@
 </li> --}}
 
                                     
+                                    {{-- @php
+                                       $categories = \App\Models\ProductCategory::all();
+                                    @endphp
+
+                                    <!-- Shop Dropdown -->
+                                    @php $productCategories = \App\Models\ProductCategory::all(); @endphp
+                                    <li>
+                                        <a href="#">Shop <i class="ti-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            @foreach($productCategories as $productCategory)
+                                                <li><a href="">{{ $productCategory->name }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li> --}}
+                                    
                                     {{-- <li class="nav-item">
                                     </li>
 

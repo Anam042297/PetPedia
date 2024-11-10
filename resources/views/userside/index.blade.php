@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            {{-- <div class="col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="single_service">
                     <div class="service_thumb d-flex align-items-center justify-content-center">
                         <div class="service_icon">
@@ -74,7 +74,7 @@
                         <h3>Food</h3>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </div>
