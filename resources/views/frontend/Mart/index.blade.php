@@ -86,7 +86,7 @@
             let quantity = 1;
     
             $.ajax({
-                url: "{{ route('cart.add') }}",
+                url: "",
                 method: "POST",
                 data: {
                     product_id: productId,

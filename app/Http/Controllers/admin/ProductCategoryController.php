@@ -59,7 +59,7 @@ class ProductCategoryController extends Controller
         ]);
 
         $iconPath = $request->file('icon')->store('icons', 'public');
-    
+
         $productcategory = new ProductCategory();
         $productcategory->name = $validatedData['name'];
         $productcategory->icon = $iconPath;

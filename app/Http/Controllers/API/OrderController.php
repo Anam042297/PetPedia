@@ -91,7 +91,7 @@ class OrderController extends Controller
         });
 
         // Return a success response with the order data
-        return response()->json(['message' => 'Order created successfully!', 'order' => $order], 201);
+        return response()->json(['message' => 'Order created successfully!'], 201);
     }
 
     protected function calculateTotalAmount()

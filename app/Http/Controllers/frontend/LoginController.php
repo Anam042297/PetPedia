@@ -52,9 +52,9 @@ class LoginController extends Controller
             ]
         );
         if (Auth::attempt($request->only('email', 'password'))) {
-            
+
             $user = Auth::user();
-            $user->is_active = true; 
+            $user->is_active = true;
             $user->save();
         }
 

@@ -17,86 +17,86 @@ use App\Mail\sendmail;
 use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 {
-   public function checkoutForm()
-   {
-    $totalAmount = $this->calculateTotalAmount(); // Get total amount from cart
-    return view('frontend.orders.checkout', compact('totalAmount')); 
-    // Path to your checkout form view
-   }
-  
+    public function checkoutForm()
+    {
+        $totalAmount = $this->calculateTotalAmount(); // Get total amount from cart
+        return view('frontend.orders.checkout', compact('totalAmount'));
+        // Path to your checkout form view
+    }
 
 
-   /**
-    * Handle the order checkout process.
-    */
-   public function checkout(Request $request)
-   {
-       // Validate request
-       $request->validate([
-           'name' => 'required|string|max:255',
-           'city' => 'required|string|max:255',
-           'address' => 'required|string|max:255',
-           'phone_no' => 'required|string|max:15',
-           'payment_method' => 'required|in:cash',
-       ]);
 
-       // Create Order
-       $order = Order::create([
-           'tracking_id'=> Str::random(10),
-           'user_id' => auth()->id(),
-           'name' => $request->name,
-           'city' => $request->city,
-           'address' => $request->address,
-           'phone_no' => $request->phone_no,
-           'payment_method' => $request->payment_method,
-           'total_amount' => $this->calculateTotalAmount(), // Calculate total from cart items
-           'status' => 'pending',
-       ]);
-       $cart = Cart::where('user_id', Auth::id())->first();
-       if (!$cart || $cart->items->isEmpty()) {
-           return redirect()->route('cart')->with('error', 'Your cart is empty!');
-       }
-       // Add Order Items from Cart
-       $cart = Cart::where('user_id', Auth::id())->first();
-       if ($cart) {
-           foreach ($cart->items as $cartItem) {
-               OrderItem::create([
-                   'order_id' => $order->id,
-                   'product_id' => $cartItem->product_id,
-                   'price' => $cartItem->product->price, // Ensure `product` relationship exists
-                   'quantity' => $cartItem->quantity,
-               ]);
-           }
-           $product = Product::find($cartItem->product_id);
-           if ($product) {
-               $product->stock -= $cartItem->quantity; // Subtract the quantity from stock
-               $product->save(); // Save the changes to the database
-           }
-           // Clear the cart
-           $cart->items()->delete();
-       }
-       Mail::to($request->user()->email)->send(new sendmail($order));
+    /**
+     * Handle the order checkout process.
+     */
+    public function checkout(Request $request)
+    {
+        // Validate request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'phone_no' => 'required|string|max:15',
+            'payment_method' => 'required|in:cash',
+        ]);
 
-       // Redirect to a confirmation page
-       return redirect()->route('order.success', ['order' => $order->id]);
-   }
+        // Create Order
+        $order = Order::create([
+            'tracking_id' => Str::random(10),
+            'user_id' => auth()->id(),
+            'name' => $request->name,
+            'city' => $request->city,
+            'address' => $request->address,
+            'phone_no' => $request->phone_no,
+            'payment_method' => $request->payment_method,
+            'total_amount' => $this->calculateTotalAmount(), // Calculate total from cart items
+            'status' => 'pending',
+        ]);
+        $cart = Cart::where('user_id', Auth::id())->first();
+        if (!$cart || $cart->items->isEmpty()) {
+            return redirect()->route('cart')->with('error', 'Your cart is empty!');
+        }
+        // Add Order Items from Cart
+        $cart = Cart::where('user_id', Auth::id())->first();
+        if ($cart) {
+            foreach ($cart->items as $cartItem) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $cartItem->product_id,
+                    'price' => $cartItem->product->price, // Ensure `product` relationship exists
+                    'quantity' => $cartItem->quantity,
+                ]);
+            }
+            $product = Product::find($cartItem->product_id);
+            if ($product) {
+                $product->stock -= $cartItem->quantity; // Subtract the quantity from stock
+                $product->save(); // Save the changes to the database
+            }
+            // Clear the cart
+            $cart->items()->delete();
+        }
+        Mail::to($request->user()->email)->send(new sendmail($order));
 
-   protected function calculateTotalAmount()
-   {
-       $cart = Cart::where('user_id', Auth::id())->first();
-       $total = 0;
+        // Redirect to a confirmation page
+        return redirect()->route('order.success', ['order' => $order->id]);
+    }
 
-       if ($cart) {
-           foreach ($cart->items as $cartitem) {
-               $total += $cartitem->quantity * $cartitem->product->price; // Ensure `product` relationship exists
-           }
-       }
+    protected function calculateTotalAmount()
+    {
+        $cart = Cart::where('user_id', Auth::id())->first();
+        $total = 0;
 
-       return $total;
-   }
+        if ($cart) {
+            foreach ($cart->items as $cartitem) {
+                $total += $cartitem->quantity * $cartitem->product->price; // Ensure `product` relationship exists
+            }
+        }
 
-   public function success()
-   {
-       return view('frontend.orders.success');  // Ensure this view exists
-   }
+        return $total;
+    }
+
+    public function success()
+    {
+        return view('frontend.orders.success');  // Ensure this view exists
+    }
 }
