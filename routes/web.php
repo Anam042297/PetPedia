@@ -150,7 +150,7 @@ use App\Http\Controllers\UserSide\ShopController;
 use App\Http\Controllers\UserSide\Cart1Controller;
 use App\Http\Controllers\UserSide\Order1Controller;
 Route::get('/', [indexController::class, 'index'])->name('home');
-// Route::get('/blog', [indexController::class, 'petblog'])->name('blog');
+//  Route::get('/blog', [indexController::class, 'petblog'])->name('blog');
 Route::get('/blog/{categoryId}', [indexController::class, 'petblog'])->name('category.posts');
 
 Route::get('/breed/{categoryId}/{breedId}', [indexController::class, 'breedBlog'])->name('breed.posts');
@@ -167,7 +167,9 @@ Route::get('/checkout', [Order1Controller::class, 'checkoutForm'])->name('checko
 Route::get('/order1/success', [Order1Controller::class, 'success'])->name('order.success');
 
 Route::group(['middleware' => 'auth'], function () {
-  // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
  Route::post('/orders1/checkout', [Order1Controller::class, 'checkout'])->name('checkout');
   
 });
+use App\Http\Controllers\UserSide\Product1Controller;
+Route::get('/products/category/{categoryId}', [Product1Controller::class, 'getproductsByCategory'])->name('products.byCategory');
+

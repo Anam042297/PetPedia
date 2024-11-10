@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Breed;
+use App\Models\ProductCategory;
 
 class indexController extends Controller
 {
@@ -15,6 +16,8 @@ class indexController extends Controller
         $categories = Category::all();
         return view('userside.index', compact('categories'));
     }
+  
+
     public function petblog($categoryId)
     {
 

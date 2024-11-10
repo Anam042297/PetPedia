@@ -27,21 +27,44 @@
                                             @endforeach
                                         </ul>
                                     </li>
-                                    
-                                    {{-- @php
-                                       $categories = \App\Models\ProductCategory::all();
-                                    @endphp
+
 
                                     <!-- Shop Dropdown -->
-                                    @php $productCategories = \App\Models\ProductCategory::all(); @endphp
+            
+                                    @php $categories = \App\Models\Category::all(); @endphp
                                     <li>
-                                        <a href="#">Shop <i class="ti-angle-down"></i></a>
+                                        <a href="#">Pet Mart<i class="ti-angle-down"></i></a>
                                         <ul class="submenu">
-                                            @foreach($productCategories as $productCategory)
-                                                <li><a href="">{{ $productCategory->name }}</a></li>
+                                            @foreach($categories as $category)
+                                            <li><a href="{{ route('products.byCategory', $category->id) }}">{{ $category->name }}</a></li>
                                             @endforeach
                                         </ul>
-                                    </li> --}}
+                                    </li>
+
+
+
+                                    {{-- @php $categories = \App\Models\Category::all(); @endphp
+<li>
+    <a href="#">Pet Mart <i class="ti-angle-down"></i></a>
+    <ul class="submenu">
+        @foreach($categories as $category)
+            <li>
+                <a href="#">{{ $category->name }} <i class="ti-angle-down"></i></a>
+                @php
+                      $productCategories = \App\Models\Category::all();
+                @endphp
+               
+                    <ul class="submenu">
+                        @foreach($productCategories as $productCategory)
+                            <li><a href="{{ route('products.byCategory', $productCategory->id) }}">{{ $productCategory->name }}</a></li>
+                        @endforeach
+                    </ul>
+               
+            </li>
+        @endforeach
+    </ul>
+</li> --}}
+
                                     
                                     {{-- <li class="nav-item">
                                     </li>
