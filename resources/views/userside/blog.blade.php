@@ -4,7 +4,7 @@
 
 <!-- bradcam_area_start -->
 <div class="slider_area">
-    <div class="single_slider slider_bg_1 d-flex align-items-center">
+    <div class="single_slider slider_bg_1 d-flex align-items-center"  style="max-height: 380px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-6">
@@ -60,10 +60,10 @@
                                 <ul class="blog-info-link">
                                     <li><a><i class="fa fa-folder text-muted"></i> {{ $post->category->name }}</a></li>
                                     <li><a><i class="fa fa-paw text-muted"></i> {{ $post->breed->name }}</a></li>
-                                    <li><a><i class="fa fa-clock text-muted"></i> {{ $post->age }}</a></li>
-                                    <li><a><i class="fa fa-comments"></i> {{ $post->gender }}</a></li>
+                                    <li><a><i class="fa fa-calendar text-muted"></i> {{ $post->age }}</a></li>
+                                    <li><a><i class="fa fa-comments text-muted"></i> {{ $post->gender }}</a></li>
                                 </ul>
-                                <a href="{{ route('single.post', $post->id) }}" class="boxed-btn4">Read More</a>
+                                <a href="{{ route('single.post', $post->id) }}" style="margin-top: 20px" class="boxed-btn4">Read More</a>
                             </div>
                         </article>
                     @endforeach

@@ -171,3 +171,4 @@ Route::group(['middleware' => 'auth'], function () {
  Route::post('/orders1/checkout', [Order1Controller::class, 'checkout'])->name('checkout');
   
 });
+Route::get('/user-profile-view/{id}', [indexController::class, 'ViewProfile'])->name('userprofile.view');
