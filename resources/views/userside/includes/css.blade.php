@@ -14,4 +14,21 @@
 <link  href="{{ asset('userside/css/animate.css') }}"rel="stylesheet"/>
 <link  href="{{ asset('userside/css/slicknav.css') }}"rel="stylesheet"/>
 <link  href="{{ asset('userside/css/style.css') }}"rel="stylesheet"/>
+<link href="{{ asset('userside/css/responsive.css') }}"rel="stylesheet" /> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Custom CSS for Add to Cart Button -->
+<style>
+    .add-to-cart {
+        font-weight: bold;
+        padding: 10px 20px;
+    }
+
+    .add-to-cart:hover {
+        background-color: #af99ff ;
+        /* Change to a slightly darker blue on hover */
+        color: #ffffff; /* Ensure text is readable on hover */
+    }
+</style>
 {{-- <link href="{{ asset('userside/css/responsive.css') }}"rel="stylesheet" />  --}}

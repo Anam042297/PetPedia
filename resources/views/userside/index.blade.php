@@ -53,28 +53,38 @@
 </div>
 
 <!-- product categories -->
+
+
+
 <div class="service_area">
     <div class="container">
         <div class="row justify-content-center">
-            <div class=" text-center">
+            <div class="text-center">
                 <div class="section_title mb-5">
                     <h3>Product Categories</h3>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-4">
-                <div class="single_service" >
-                    <div class="service_thumb d-flex align-items-center justify-content-center">
-                        <div class="service_icon">
-                            <img src="" alt="Food Icon" style="height: 100px;">
+            @foreach($productcategories as $productCategory)
+                <div class="col-lg-3 col-md-4 mb-4 d-flex">
+                    <div class="single_service card h-80 w-80">
+                        <div class="service_thumb d-flex align-items-center justify-content-center">
+                            <div class="service_icon">
+                                <img src="{{ asset('storage/icons/' . basename($productCategory->icon)) }}" 
+                                     alt="{{ $productCategory->name }}" 
+                                     style="width: 150px; height: 120px; object-fit: cover; border-radius: 50%;"> 
+                           </div>
                         </div>
-                    </div>
-                    <div class="service_content text-center">
-                        <h3>Food</h3>
+                        <div class="service_content text-center">
+                            <a href="{{ route('productcategories.products', $productCategory->id) }}"> 
+                            <h3>{{ $productCategory->name }}</h3>
+                            </a>
+                        </div>
+                    
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

@@ -14,11 +14,12 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
-    public function product()
+
+    public function user()
     {
-        return $this->belongsTo(Product::class, 'product_id'); // Use the correct foreign key
+        return $this->belongsTo(User::class);
     }
-    
+
 }
 
  

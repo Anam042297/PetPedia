@@ -55,7 +55,8 @@ class PostController extends Controller
         $category = Category::findOrFail($categoryId);
 
         // Get all posts related to this category
-        $posts = $category->posts()->with('category', 'breed', 'images', 'user')->get();
+        $posts = $category->posts()->with('category', 'breed', 'images', 'user')
+            ->get();
 
         // Return posts as JSON response
         return response()->json([
@@ -63,19 +64,53 @@ class PostController extends Controller
             'posts' => $posts
         ], 200);
     }
+    // public function getPostsByBreed($breedId)
+    // {
+    //     // Fetch the category by ID
+    //     $breed = Breed::findOrFail($breedId);
+
+    //     // Get all posts related to this category
+    //     $posts = $breed->posts()->with('category', 'breed', 'images', 'user')->get();
+
+    //     // Return posts as JSON response
+    //     return response()->json([
+    //         'category' => $breed->name,
+    //         'posts' => $posts
+    //     ], 200);
+    // }
+
+
+    public function getBreedsByCategory($categoryId)
+    {
+        $breeds = Breed::where('category_id', $categoryId)->get(['id', 'name']);
+
+        return response()->json([
+            'success' => true,
+            'data' => $breeds
+        ]);
+    }
     public function getPostsByBreed($breedId)
     {
-        // Fetch the category by ID
-        $breed = Breed::findOrFail($breedId);
+        $posts = Post::with(['category', 'breed', 'images', 'user'])
+            ->where('breed_id', $breedId)
+            ->get()->map(function ($post) {
 
-        // Get all posts related to this category
-        $posts = $breed->posts()->with('category', 'breed', 'images', 'user')->get();
+                return [
+                    'id' => $post->id,
+                    'category' => $post->category->name,
+                    'breed' => $post->breed->name,
+                    'gender' => $post->gender,
+                    'name' => $post->name,
+                    'age' => $post->age,
+                    'description' => $post->description,
+                    'images' => $post->images->pluck('url'),
+                ];
+            });
 
-        // Return posts as JSON response
         return response()->json([
-            'category' => $breed->name,
-            'posts' => $posts
-        ], 200);
+            'success' => true,
+            'data' => $posts
+        ]);
     }
 
 

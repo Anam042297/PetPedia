@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Breed;
+use App\Models\ProductCategory;
+
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Cart;
@@ -15,8 +17,12 @@ class indexController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('userside.index', compact('categories'));
+        $productcategories = ProductCategory::all();
+        return view('userside.index', compact('categories', 'productcategories'));
+        
     }
+  
+
     public function petblog($categoryId)
     {
 
@@ -58,10 +64,10 @@ class indexController extends Controller
         $pendingOrdersNo = Order::where('user_id', $user->id)->where('status', 'pending')->count();// Fetch user by ID
         return view('userside.profile', compact('user', 'CartItemsNo', 'pendingOrdersNo')); 
     }
-
-
-
-
-
-
+    public function productcategory()
+    {
+        $productcategories = ProductCategory::all();
+        // dd( $productcategories);
+        return view('userside.index', compact(' productcategories'));
+    }
 }
