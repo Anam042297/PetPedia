@@ -1,7 +1,18 @@
 @extends('userside.master')
 @section('content')
-{{-- @include('dashboard.includes.css') --}}
-
+<head>  
+    <meta property="og:title" content="{{ $post->name }}" />
+    <meta property="og:description" content="{{ $post->description }}" />
+    <meta property="og:image" content="{{ $post->images->first()->url }}" />
+    <meta property="og:url" content="{{ route('single.post', $post->id) }}" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Custom meta tags for category, breed, gender, and age -->
+    <meta name="category" content="{{ $post->category->name }}" />
+    <meta name="breed" content="{{ $post->breed->name }}" />
+    <meta name="gender" content="{{ $post->gender }}" />
+    <meta name="age" content="{{ $post->age }}" />
+</head>
 
 <div class="slider_area">
    <div class="single_slider  d-flex align-items-center " style="max-height: 200px">
@@ -68,19 +79,19 @@
                             <ul>
                                 <li>
                                     @php
-                                        $phoneNumber = "+923158230935";
-                                        $postLink = route('single.post', $post->id);
-                                        $message = "Hello, I am interested in this post. Could you please provide more information?\n\n"
-                                                 . "Here is the link to the post: {$postLink}";
-                                    @endphp
-    
-                                    <a href="https://wa.me/{{ str_replace('+', '', $phoneNumber) }}?text={{ urlencode($message) }}" 
-                                       target="_blank">
-                                        <h4 class="widget_title" style=" color: #25D366;">
-                                            <i class="fa fa-whatsapp mr-2" style="color: #25D366; font-size: 1.5em; margin-right: 8px;"></i>
-                                            Contact on WhatsApp
-                                        </h4>
-                                    </a>
+                                    $phoneNumber = "+923158230935";
+                                    $postLink = route('single.post', $post->id);
+                                    $message = "Hello, I am interested in this post. Could you please provide more information?\n\n"
+                                             . "Here is the link to the post: {$postLink}";
+                                @endphp
+                                
+                                <a href="https://wa.me/{{ str_replace('+', '', $phoneNumber) }}?text={{ urlencode($message) }}" 
+                                   target="_blank">
+                                    <h4 class="widget_title" style="color: #25D366;">
+                                        <i class="fa fa-whatsapp mr-2" style="color: #25D366; font-size: 1.5em; margin-right: 8px;"></i>
+                                        Contact on WhatsApp
+                                    </h4>
+                                </a>
                                 </li>
                             </ul>
                         </aside>
