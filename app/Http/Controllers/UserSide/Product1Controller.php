@@ -11,22 +11,18 @@ use App\Models\Category;
 
 class Product1Controller extends Controller
 {  
+ 
     public function getProductsByCategory($categoryId)
 {
     $products = Product::where('category_id', $categoryId)->with('productImages')->get();
     $category = Category::findOrFail($categoryId); 
-
     return view('userside.category_products', compact('products', 'category'));
 }
-// In the Controller
-public function showCategories()
+public function getProductsByProductCategory($productcategoryId)
 {
-    $categories = Category::all();
-    $productCategories = ProductCategory::all();
-
-    return view('your.view', compact('categories', 'productCategories'));
+    $products = Product::where('product_category_id', $productcategoryId)->with('productImages')->get();
+    $productCategory = ProductCategory::findOrFail($productcategoryId);
+    return view('userside.productcategory_products', compact('products', 'productCategory'));
 }
 
-
- 
 }

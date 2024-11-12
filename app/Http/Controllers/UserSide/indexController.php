@@ -17,7 +17,9 @@ class indexController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('userside.index', compact('categories'));
+        $productcategories = ProductCategory::all();
+        return view('userside.index', compact('categories', 'productcategories'));
+        
     }
   
 
@@ -62,10 +64,10 @@ class indexController extends Controller
         $pendingOrdersNo = Order::where('user_id', $user->id)->where('status', 'pending')->count();// Fetch user by ID
         return view('userside.profile', compact('user', 'CartItemsNo', 'pendingOrdersNo')); 
     }
-
-
-
-
-
-
+    public function productcategory()
+    {
+        $productcategories = ProductCategory::all();
+        // dd( $productcategories);
+        return view('userside.index', compact(' productcategories'));
+    }
 }

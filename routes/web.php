@@ -147,6 +147,7 @@ Route::get('/debug-env', function () {
 
 use App\Http\Controllers\UserSide\indexController;
 use App\Http\Controllers\UserSide\ShopController;
+use App\Http\Controllers\UserSide\Product1Controller;
 use App\Http\Controllers\UserSide\Cart1Controller;
 use App\Http\Controllers\UserSide\Order1Controller;
 Route::get('/', [indexController::class, 'index'])->name('home');
@@ -172,3 +173,23 @@ Route::group(['middleware' => 'auth'], function () {
   
 });
 Route::get('/user-profile-view/{id}', [indexController::class, 'ViewProfile'])->name('userprofile.view');
+// In web.php
+
+
+Route::get('/category/{categoryId}/products', [Product1Controller::class, 'getProductsByCategory']) ->name('category.products');
+
+Route::get('/productcategory/{productcategoryId}/products', [Product1Controller::class, 'getProductsByProductCategory'])->name('productcategories.products');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('cart', [Cart1Controller::class, 'index'])->name('cart.index');
+    Route::post('cart/store', [Cart1Controller::class, 'store'])->name('cart.store');
+    Route::post('cart/increase/{id}', [Cart1Controller::class, 'increaseQuantity'])->name('cart.increase');
+    Route::post('cart/decrease/{id}', [Cart1Controller::class, 'decreaseQuantity'])->name('cart.decrease');
+    Route::delete('cart/remove/{id}', [Cart1Controller::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('cart/clear', [Cart1Controller::class, 'clearCart'])->name('cart.clear');
+});
+
+    
+    Route::get('/checkout', [Order1Controller::class, 'checkoutForm'])->name('checkout.form');
+    Route::get('/order1/success', [Order1Controller::class, 'success'])->name('order.success');

@@ -1,67 +1,7 @@
-{{-- @extends('frontend.master')
-
-@section('content')
-<div class="wrapper">
-    <div class="container">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-        <form method="POST" action="{{ route('checkout') }}">
-            @csrf
-            <h1>
-                <i class="fas fa-shipping-fast"></i>
-                Shipping Details
-            </h1>
-            <div class="name">
-                <div>
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-            
-                <div> 
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" required>
-                </div>
-                <div>
-                    <label for="address">Address</label>
-                    <input type="text" id="address" name="address" required>
-                </div>
-                <div>
-                    <label for="phone_no">Phone Number</label>
-                    <input type="text" id="phone_no" name="phone_no" required>
-                </div>
-               
-            <h1>
-                <i class="far fa-credit-card"></i>
-                Payment Information
-            </h1>
-            <div class="cc-info">
-                <div>
-                    <label for="payment_method">Payment Method</label>
-                    <select id="payment_method" name="payment_method" required>
-                        <option value="cash">Cash on Delivery</option>
-                    </select>
-                </div>
-                <!-- You can add more payment fields here if needed -->
-            </div>
-            <div class="btns">
-                <button type="submit">Place Order</button>
-                {{-- <a href="{{ route('cart') }}" class="btn">Back to Cart</a> --}}
-            {{-- </div> --}}
-        {{-- </form>
-    </div>
-</div>
-@endsection --}} 
 @extends('userside.master')
 
 @section('content')
-<div class="wrapper">
+<div class="wrapper d-flex justify-content-center py-5">
     <div class="container">
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -73,55 +13,73 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('checkout') }}">
-            @csrf
-            <h1>
-                <i class="fas fa-shipping-fast"></i>
-                Shipping Details
-            </h1>
+        <div class="card shadow-lg border-0 rounded-3 p-4">
+            <form method="POST" action="{{ route('checkout') }}">
+                @csrf
+                <h2 class="mb-4 text-center text-primary">
+                    <i class="fas fa-shipping-fast me-2"></i>Shipping Details
+                </h2>
 
-            <div class="name">
-                <div>
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" required placeholder="Enter your full name">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" value="{{ old('name') }}" class="form-control" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" id="city" name="city" value="{{ old('city') }}" class="form-control" required placeholder="Enter your city">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" id="address" name="address" value="{{ old('address') }}" class="form-control" required placeholder="Enter your address">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="phone_no" class="form-label">Phone Number</label>
+                        <input type="text" id="phone_no" name="phone_no" value="{{ old('phone_no') }}" class="form-control" required placeholder="Enter your phone number" pattern="[0-9]+" minlength="10" maxlength="15">
+                    </div>
                 </div>
+              
 
-                <div>
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" value="{{ old('city') }}" required placeholder="Enter your city">
-                </div>
-
-                <div>
-                    <label for="address">Address</label>
-                    <input type="text" id="address" name="address" value="{{ old('address') }}" required placeholder="Enter your address">
-                </div>
-
-                <div>
-                    <label for="phone_no">Phone Number</label>
-                    <input type="text" id="phone_no" name="phone_no" value="{{ old('phone_no') }}" required placeholder="Enter your phone number" pattern="[0-9]+" minlength="10" maxlength="15">
-                </div>
-            </div>
-
-            <h1>
-                <i class="far fa-credit-card"></i>
-                Payment Information
-            </h1>
-
-            <div class="cc-info">
-                <div>
-                    <label for="payment_method">Payment Method</label>
-                    <select id="payment_method" name="payment_method" required>
-                        <option value="cash" {{ old('payment_method') == 'cash' ? 'selected' : '' }}>Cash on Delivery</option>
-                        <!-- You can add more payment options here if necessary -->
+                <div class="mb-3">
+                    <label for="payment_method" class="form-label">Payment Method</label>
+                    <select id="payment_method" name="payment_method" class="form-select" required>
+                    <option value="cash" {{ old('payment_method', 'cash') == 'cash' ? 'selected' : '' }}>Cash on Delivery</option>
                     </select>
                 </div>
-            </div>
+                
 
-            <div class="btns">
-                <button type="submit" class="btn btn-primary">Place Order</button>
-                {{-- <a href="{{ route('cart') }}" class="btn btn-secondary">Back to Cart</a> --}}
-            </div>
-        </form>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">Place Order</button>
+                </div>
+            </form>
+        </div>
+  
     </div>
 </div>
+
+<style>
+    .wrapper {
+        background-color: #f7f9fb;
+    }
+    .card {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 2rem;
+        border-radius: 15px;
+    }
+    .form-label {
+        font-weight: 600;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
 @endsection

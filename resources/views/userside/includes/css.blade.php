@@ -26,7 +26,8 @@
     }
 
     .add-to-cart:hover {
-        background-color: #003fb3; /* Change to a slightly darker blue on hover */
+        background-color: #af99ff ;
+        /* Change to a slightly darker blue on hover */
         color: #ffffff; /* Ensure text is readable on hover */
     }
 </style>

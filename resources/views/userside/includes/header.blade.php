@@ -31,110 +31,60 @@
 
                                     <!-- Shop Dropdown -->
             
-                                    @php $categories = \App\Models\Category::all(); @endphp
-                                    <li>
-                                        <a href="#">Pet Mart<i class="ti-angle-down"></i></a>
-                                        <ul class="submenu">
-                                            @foreach($categories as $category)
-                                            <li><a href="{{ route('products.byCategory', $category->id) }}">{{ $category->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
+                                  
 
 
 
-                                    {{-- @php $categories = \App\Models\Category::all(); @endphp
+                                {{-- @php $categories = \App\Models\Category::all(); @endphp
 <li>
     <a href="#">Pet Mart <i class="ti-angle-down"></i></a>
     <ul class="submenu">
         @foreach($categories as $category)
             <li>
                 <a href="#">{{ $category->name }} <i class="ti-angle-down"></i></a>
-                @php
-                      $productCategories = \App\Models\Category::all();
-                @endphp
-               
-                    <ul class="submenu">
-                        @foreach($productCategories as $productCategory)
-                            <li><a href="{{ route('products.byCategory', $productCategory->id) }}">{{ $productCategory->name }}</a></li>
-                        @endforeach
-                    </ul>
-               
             </li>
-        @endforeach
-    </ul>
-</li> --}}
+            @endforeach
+        </ul>
+    </li>  --}}
+    @php $categories = \App\Models\Category::all(); @endphp
+    <li>
+        <a href="#">Pet Mart <i class="ti-angle-down"></i></a>
+        <ul class="submenu">
+            @foreach($categories as $category)
+                <li><a href="{{ route('category.products', $category->id) }}">{{ $category->name }}</a></li>
+            @endforeach
+        </ul>
+    </li>
 
-                                    
-                                    {{-- @php
-                                       $categories = \App\Models\ProductCategory::all();
-                                    @endphp
 
-                                    <!-- Shop Dropdown -->
-                                    @php $productCategories = \App\Models\ProductCategory::all(); @endphp
-                                    <li>
-                                        <a href="#">Shop <i class="ti-angle-down"></i></a>
-                                        <ul class="submenu">
-                                            @foreach($productCategories as $productCategory)
-                                                <li><a href="">{{ $productCategory->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </li> --}}
-                                    
-                                    {{-- <li class="nav-item">
-                                    </li>
+    <!-- Cart Dropdown -->
+    <li class="nav-item">
+        <a href="{{ route('cart.index') }}">
+             Cart <i class="ti-angle-down"></i>
+        </a>
+        <ul class="submenu">
+            <li>
+                <a href="{{ route('cart.index') }}">
+                    Items in Cart:
+                    <div class="cart-icon">
+                        @if(auth()->check())
+                            @php
+                                $cart = auth()->user()->cart;
+                                $cartItemCount = $cart && $cart->items ? $cart->items->sum('quantity') : 0;
+                            @endphp
+                            <span id="cart-icon">{{ $cartItemCount }}</span>
+                        @else
+                            <span id="cart-icon">0</span>
+                        @endif
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
 
-                                    <!-- Cart Dropdown -->
-                                    <li class="nav-item">
-                                        <a href="{{ route('cart.index') }}">
-                                             Cart <i class="ti-angle-down"></i>
-                                        </a>
-                                        <ul class="submenu">
-                                            <li>
-                                                <a href="{{ route('cart.index') }}">
-                                                    Items in Cart:
-                                                    <div class="cart-icon">
-                                                        @if(auth()->check())
-                                                            @php
-                                                                $cart = auth()->user()->cart;
-                                                                $cartItemCount = $cart && $cart->items ? $cart->items->sum('quantity') : 0;
-                                                            @endphp
-                                                            <span id="cart-icon">{{ $cartItemCount }}</span>
-                                                        @else
-                                                            <span id="cart-icon">0</span>
-                                                        @endif
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> --}}
-                                    <li>
-                                    <a href="{{ route('shop.index') }}" id="shop-link">Shop</a>
-                                    </li> 
-                                    <li>
-                                    <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('cart.index') }}">
-                                                {{-- <i class="fas fa-shopping-cart"></i>  --}}
-                                                <i class="fas fa-cart-plus">Cart</i>
-                                                <div class="cart-icon">
-                                                    @if(auth()->check())
-                                                        @php
-                                                            // Check if the user has a cart and if it has items
-                                                            $cart = auth()->user()->cart;
-                                                            $cartItemCount = $cart && $cart->items ? $cart->items->sum('quantity') : 0;
-                                                        @endphp
-                                                        <span id="cart-icon">{{ $cartItemCount }}</span>
-                                                    @else
-                                                        <!-- If user is not logged in, show 0 -->
-                                                        <span id="cart-icon">0</span>
-                                                    @endif
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                    </li>
+
+
+                                                  
 
                                     <!-- User Dropdown -->
                                     <li>

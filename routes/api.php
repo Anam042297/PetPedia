@@ -7,8 +7,8 @@ use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductCategoryController;
 use App\Http\Controllers\API\categoryController;
-use App\Http\Controllers\Api\CartController;
-use App\Http\Controllers\frontend\OrderController;
+use App\Http\Controllers\API\CartController;
+use App\Http\Controllers\API\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -65,12 +65,16 @@ Route::get('/product/{id}', [ProductController::class, 'getProductById']);
 Route::get('productcategory', [ProductCategoryController::class, 'getAllCategories']);
 
 
+
+
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('cart', [CartController::class, 'index']);
-    Route::post('cart/add', [CartController::class, 'addToCart']);
-    Route::put('cart/update/{id}', [CartController::class, 'updateCartItem']);
-    Route::delete('cart/remove/{id}', [CartController::class, 'removeFromCart']);
-    Route::delete('cart/clear', [CartController::class, 'clearCart']);
+    Route::get('/cart', [CartController::class, 'index']); // Get cart items
+    Route::post('/cart/add', [CartController::class, 'store']); // Add/update cart item
+    Route::put('/cart/increase/{id}', [CartController::class, 'increaseQuantity']); // Increase quantity
+    Route::put('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity']); // Decrease quantity
+    Route::delete('/cart/{id}', [CartController::class, 'removeFromCart']); // Remove item
+    Route::delete('/cart/clear', [CartController::class, 'clearCart']); // Clear cart
+
 
     Route::get('/orders', [OrderController::class, 'index']);
     Route::post('/checkout', [OrderController::class, 'checkout']);
