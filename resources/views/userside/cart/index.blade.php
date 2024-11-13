@@ -43,34 +43,34 @@
                                                             </p>
 
                                                            
-                                                            <form action="{{ route('cart.increase', $item->id) }}"
-                                                                method="POST" class="d-flex">
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-link px-2">
-                                                                    <i class="fas fa-plus"></i>
-                                                                </button>
-
-                                                                <input min="1" name="quantity"
-                                                                    value="{{ $item->quantity }}" type="number"
-                                                                    class="form-control form-control-sm" disabled />
-                                                            </form>
-
-                                                          
-                                                            <form action="{{ route('cart.decrease', $item->id) }}"
-                                                                method="POST" class="d-flex ">
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-link px-2">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
-                                                            </form>
-
-                                                            <form action="{{ route('cart.remove', $item->id) }}"
-                                                                method="POST" class="mt-3">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger btn-sm">Remove</button>
-                                                            </form>
+                                                            <div class="d-flex align-items-center gap-2">
+                                                                <!-- Increase Quantity Form -->
+                                                                <form action="{{ route('cart.increase', $item->id) }}" method="POST" class="d-inline-flex">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-sm">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                </form>
+                                                            
+                                                                <!-- Quantity Display -->
+                                                                <input min="1" name="quantity" value="{{ $item->quantity }}" type="number" class="form-control form-control-sm mx-2" disabled />
+                                                            
+                                                                <!-- Decrease Quantity Form -->
+                                                                <form action="{{ route('cart.decrease', $item->id) }}" method="POST" class="d-inline-flex">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-sm">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                </form>
+                                                            
+                                                                <!-- Remove Item Form -->
+                                                                <form action="{{ route('cart.remove', $item->id) }}" method="POST" class="d-inline-flex">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger btn-sm mx-2">Remove</button>
+                                                                </form>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

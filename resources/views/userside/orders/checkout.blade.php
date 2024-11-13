@@ -16,8 +16,8 @@
         <div class="card shadow-lg border-0 rounded-3 p-4">
             <form method="POST" action="{{ route('checkout') }}">
                 @csrf
-                <h2 class="mb-4 text-center text-primary">
-                    <i class="fas fa-shipping-fast me-2"></i>Shipping Details
+                <h2 class="mb-4 text-center " style=" color:white;background: linear-gradient(135deg, #ff99b6, #af99ff);border-radius: 15px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);padding: 20px;margin-top: 5px;">
+                    <i class="fas fa-shipping-fast me-2" ></i>Shipping Details
                 </h2>
 
                 <div class="row g-3">
@@ -52,7 +52,7 @@
                 
 
                 <div class="d-flex justify-content-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg px-5">Place Order</button>
+                    <button type="submit" style="margin-top: 20px" class=" boxed-btn4">Place Order</button>
                 </div>
             </form>
         </div>

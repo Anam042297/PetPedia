@@ -9,8 +9,14 @@
                                             <p>At Petpedia, pets are family. Trustworthy support, whenever you need it.</p>
                                         </div>
                                         <div class="contact_btn d-flex align-items-center justify-content-center">
-                                            <a href="contact.html" class="boxed-btn4">Contact Us</a>
-                                            <p>Or  <a href="#"> +880 4664 216</a></p>
+                                            
+                                            @php
+                    $phoneNumber = "+923158230935";
+                    @endphp
+                    <a href="https://wa.me/{{ str_replace('+', '', $phoneNumber) }}"class="boxed-btn4"
+                        target="_blank">
+                        Contact Us
+                    </a>
                                         </div>
                                     </div>
                                 </div>

@@ -146,7 +146,6 @@ Route::get('/debug-env', function () {
 
 
 use App\Http\Controllers\UserSide\indexController;
-use App\Http\Controllers\UserSide\ShopController;
 use App\Http\Controllers\UserSide\Product1Controller;
 use App\Http\Controllers\UserSide\Cart1Controller;
 use App\Http\Controllers\UserSide\Order1Controller;
@@ -156,7 +155,6 @@ Route::get('/blog/{categoryId}', [indexController::class, 'petblog'])->name('cat
 
 Route::get('/breed/{categoryId}/{breedId}', [indexController::class, 'breedBlog'])->name('breed.posts');
 Route::get('/post/{postId}', [indexController::class, 'singleBlog'])->name('single.post');
-Route::get('/shop',[ShopController::class,'index'])->name('shop.index');
 Route::get('/cart1', [Cart1Controller::class, 'index'])->name('cart.index');
 Route::post('/cart1/add', [Cart1Controller::class, 'addToCart'])->name('cart.add');
 Route::patch('/cart1/update/{id}', [Cart1Controller::class, 'updateCartItem'])->name('cart.update');

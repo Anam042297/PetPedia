@@ -10,7 +10,6 @@
                 <div class="col-lg-5 col-md-6">
                     <div class="slider_text">
                         <h3>Explore Blogs<br> <span>to find pets</span></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod.</p>
                     </div>
                 </div>
                 <div class="dog_thumb d-none d-lg-block">
@@ -29,24 +28,27 @@
                     @foreach($posts as $post)
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <div id="imageCarousel{{$post->id}}" class="carousel slide" data-ride="carousel">
+                                <div id="imageCarousel{{ $post->id }}" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
-                                        @foreach($post->images as $key => $image)
-                                            <div class="carousel-item @if($key == 0) active @endif">
-                                                <img class="d-block w-100" src="{{ asset($image->url) }}" alt="pet image" style="height: 250px; object-fit: scale-down;">
+                                        @foreach($post->images as $index => $image)
+                                            <div class="carousel-item @if($index === 0) active @endif">
+                                                <img src="{{ asset($image->url) }}" class="d-block w-100" alt="pet image" style="height: 250px; object-fit: scale-down;">
                                             </div>
                                         @endforeach
                                     </div>
-                                    <a class="carousel-control-prev" href="#imageCarousel{{$post->id}}" role="button" data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#imageCarousel{{$post->id}}" role="button" data-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
+                                
+                                    @if($post->images->count() > 1)
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel{{ $post->id }}" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel{{ $post->id }}" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    @endif
                                 </div>
-                                <a href="#" class="blog_item_date">
+                                <a class="blog_item_date">
                                     <h3>{{ $post->created_at->format('d') }}</h3>
                                     <p>{{ $post->created_at->format('M') }}</p>
                                 </a>

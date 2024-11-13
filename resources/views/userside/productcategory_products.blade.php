@@ -37,7 +37,7 @@
                             @csrf
                             <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <button type="button" class="btn btn-primary add-to-cart" data-product-id="{{ $product->id }}" data-serial-number="{{ $product->serial_number }}">Add to Cart</button>
+                            <button type="button" class="boxed-btn4 add-to-cart" data-product-id="{{ $product->id }}" data-serial-number="{{ $product->serial_number }}">Add to Cart</button>
                         </form>
                     
                     </div>
