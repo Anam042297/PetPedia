@@ -165,7 +165,6 @@ Route::get('/category/{categoryId}/products', [UserProductController::class, 'ge
 
 Route::get('/productcategory/{productcategoryId}/products', [UserProductController::class, 'getProductsByProductCategory'])->name('productcategories.products');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('cart', [UserCartController::class, 'index'])->name('cart.index');
     Route::post('cart/store', [UserCartController::class, 'store'])->name('cart.store');
