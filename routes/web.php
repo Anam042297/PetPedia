@@ -32,65 +32,69 @@ Route::get('/login',[LoginController::class,'index'])->name('login');
 
 // admin middleware
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
-  Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
-  Route::get('/edit', [AdminController::class, 'edit'])->name('admin.edit');
-  Route::put('/update', [AdminController::class, 'update'])->name('admin.update');
-  Route::get('/view', [AdminController::class, 'view'])->name('admin.view');
 
-  //Pet Catagory routes
-  Route::get('/indexcategory', [CatagoryController::class, 'index'])->name('Category.index');
-  Route::get('/createcategory', [CatagoryController::class, 'create'])->name('Category.create');
-  Route::any('/storecategory', [CatagoryController::class, 'store'])->name('Category.store');
-  Route::get('/displaycategory', [CatagoryController::class, 'viewcategory'])->name('Category.display');
-  Route::get('/editcategory/{id}', [CatagoryController::class, 'edit'])->name('Category.edit');
-  Route::put('/categories/{id}', [CatagoryController::class, 'update'])->name('Category.update');
-  Route::delete('/destroycategory/{id}', [CatagoryController::class, 'destroy'])->name('Category.destroy');
+    Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/edit', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::put('/update', [AdminController::class, 'update'])->name('admin.update');
+    Route::get('/view', [AdminController::class, 'view'])->name('admin.view');
 
-  //Pet Breed routes
-  Route::get('/createbreed', [BreedController::class, 'create'])->name('breed.create');
-  Route::any('/storebreed', [BreedController::class, 'store'])->name('breed.store');
-  Route::any('/displaybreed', [BreedController::class, 'viewbreed'])->name('breed.view');
-  Route::any('/indexbreed', [BreedController::class, 'index'])->name('breed.index');
-  Route::get('/breed/{id}/edit', [BreedController::class, 'edit'])->name('breed.edit');
-  Route::put('/breed/{id}/update', [BreedController::class, 'update'])->name('breed.update');
-  Route::delete('/breed/{id}', [BreedController::class, 'destroy'])->name('breed.destroy');
+    //Pet Catagory routes
+    Route::get('/indexcategory', [CatagoryController::class, 'index'])->name('Category.index');
+    Route::get('/createcategory', [CatagoryController::class, 'create'])->name('Category.create');
+    Route::any('/storecategory', [CatagoryController::class, 'store'])->name('Category.store');
+    Route::get('/displaycategory', [CatagoryController::class, 'viewcategory'])->name('Category.display');
+    Route::get('/editcategory/{id}', [CatagoryController::class, 'edit'])->name('Category.edit');
+    Route::put('/categories/{id}', [CatagoryController::class, 'update'])->name('Category.update');
+    Route::delete('/destroycategory/{id}', [CatagoryController::class, 'destroy'])->name('Category.destroy');
 
-  //post routes
-  Route::get('/indexpost', [PostController::class, 'index'])->name('post.index');
-  Route::get('/createpost', [PostController::class, 'create'])->name('post.create');
-  Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
-  Route::get('/viewpost', [PostController::class, 'viewpost'])->name('post.view');
-  Route::get('/get-breeds/{catagory_id}', [PostController::class, 'getBreeds']);
-  Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
-  Route::put('/posts/{id}', [PostController::class, 'update'])->name('post.update');
-  Route::any('/deletepost/{id}', [PostController::class, 'destroy'])->name('post.destroy');
-  //ProductPetCategory routes
+    //Pet Breed routes
+    Route::get('/createbreed', [BreedController::class, 'create'])->name('breed.create');
+    Route::any('/storebreed', [BreedController::class, 'store'])->name('breed.store');
+    Route::any('/displaybreed', [BreedController::class, 'viewbreed'])->name('breed.view');
+    Route::any('/indexbreed', [BreedController::class, 'index'])->name('breed.index');
+    Route::get('/breed/{id}/edit', [BreedController::class, 'edit'])->name('breed.edit');
+    Route::put('/breed/{id}/update', [BreedController::class, 'update'])->name('breed.update');
+    Route::delete('/breed/{id}', [BreedController::class, 'destroy'])->name('breed.destroy');
 
-  Route::get('/indexproductcategories', [ProductCategoryController::class, 'index'])->name('ProductCategory.index');
-  Route::get('/createproductcategories', [ProductCategoryController::class, 'create'])->name('ProductCategory.create');
-  Route::any('/storeproductcategories', [ProductCategoryController::class, 'store'])->name('ProductCategory.store');
-  Route::get('/displayproductcategories', [ProductCategoryController::class, 'viewcategory'])->name('ProductCategory.display');
-  Route::get('/editproductcategories/{id}', [ProductCategoryController::class, 'edit'])->name('ProductCategory.edit');
-  Route::put('/productcategories/{id}', [ProductCategoryController::class, 'update'])->name('ProductCategory.update');
-  Route::delete('/destroyproductcategories/{id}', [ProductCategoryController::class, 'destroy'])->name('ProductCategory.destroy');
+    //post routes
+    Route::get('/indexpost', [PostController::class, 'index'])->name('post.index');
+    Route::get('/createpost', [PostController::class, 'create'])->name('post.create');
+    Route::post('/storepost', [PostController::class, 'store'])->name('post.store');
+    Route::get('/viewpost', [PostController::class, 'viewpost'])->name('post.view');
+    Route::get('/get-breeds/{catagory_id}', [PostController::class, 'getBreeds']);
+    Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('/posts/{id}', [PostController::class, 'update'])->name('post.update');
+    Route::any('/deletepost/{id}',[PostController::class,'destroy'])->name('post.destroy');
+//ProductPetCategory routes
 
-  //product routes
-  Route::any('/indexproduct', [ProductController::class, 'index'])->name('products.index');
-  Route::get('/createproduct', [ProductController::class, 'create'])->name('products.create');
-  Route::post('/storeproduct', [ProductController::class, 'store'])->name('products.store');
-  Route::get('/get-product_category/{petcategory_id}', [ProductController::class, 'getproduct_category']);
-  Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name(name: 'products.edit');
-  Route::put('/product/{id}', [ProductController::class, 'update'])->name('products.update');
-  Route::get('/product/{id}', [ProductController::class, 'showProductPage'])->name('product.page');
-  Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-  Route::put('/martproduct/{id}', [ProductController::class, 'update'])->name('products.show');
+    Route::get('/indexproductcategories', [ProductCategoryController::class, 'index'])->name('ProductCategory.index');
+    Route::get('/createproductcategories', [ProductCategoryController::class, 'create'])->name('ProductCategory.create');
+    Route::any('/storeproductcategories', [ProductCategoryController::class, 'store'])->name('ProductCategory.store');
+    Route::get('/displayproductcategories', [ProductCategoryController::class, 'viewcategory'])->name('ProductCategory.display');
+    Route::get('/editproductcategories/{id}', [ProductCategoryController::class, 'edit'])->name('ProductCategory.edit');
+    Route::put('/productcategories/{id}', [ProductCategoryController::class, 'update'])->name('ProductCategory.update');
+    Route::delete('/destroyproductcategories/{id}', [ProductCategoryController::class, 'destroy'])->name('ProductCategory.destroy');
+    
+   //product routes
+   Route::any('/indexproduct', [ProductController::class, 'index'])->name('products.index');
+   Route::get('/createproduct', [ProductController::class, 'create'])->name('products.create');
+   Route::post('/storeproduct', [ProductController::class, 'store'])->name('products.store');
+   Route::get('/get-product_category/{petcategory_id}', [ProductController::class, 'getproduct_category']);
+   Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name(name: 'products.edit');
+   Route::put('/product/{id}', [ProductController::class, 'update'])->name('products.update');
+ Route::get('/product/{id}', [ProductController::class, 'showProductPage'])->name('product.page');
+   Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+   Route::put('/martproduct/{id}', [ProductController::class, 'update'])->name('products.show');
 
-  Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+   Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+   Route::get('/orders/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
+   Route::patch('/orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
-  //user routes
-  Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
-  Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
-  Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
+ //user routes
+ Route::get('/user', [UserTableController::class, 'index'])->name('usertable');
+ Route::get('/users/{id}/edit', [UserTableController::class, 'edit'])->name('users.edit');
+ Route::delete('/users/{id}', [UserTableController::class, 'destroy'])->name('users.destroy');
+
 
 
 });
@@ -100,11 +104,15 @@ Route::post('/store', [LoginController::class, 'store'])->name('user.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-// Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-// Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-// Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
-// Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-// Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+  Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
+
+
+
+Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 
 // Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');

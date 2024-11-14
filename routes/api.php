@@ -50,34 +50,31 @@ Route::get('/breeds/{breedId}/posts', [PostController::class, 'getPostsByBreed']
 
 
 
-
-
-
-
-
-//ome page category
 Route::get('categories', [categoryController::class, 'getAllCategories']);
 Route::get('categories/{id}', [categoryController::class, 'getCategorieById']);
-
-
 Route::get('/products', [ProductController::class, 'getAllProducts']);
-Route::get('/product/{id}', [ProductController::class, 'getProductById']);
-Route::get('productcategory', [ProductCategoryController::class, 'getAllCategories']);
+Route::get('/product/{id}',[ProductController::class,'getProductById']);
+Route::get('/productcategory', [ProductCategoryController::class, 'getAllProductCategories']);
+Route::get('/productcategory/{id}', [ProductCategoryController::class, 'getProductCategoryById']);
+
+
 
 
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/cart', [CartController::class, 'index']); // Get cart items
-    Route::post('/cart/add', [CartController::class, 'store']); // Add/update cart item
-    Route::put('/cart/increase/{id}', [CartController::class, 'increaseQuantity']); // Increase quantity
-    Route::put('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity']); // Decrease quantity
-    Route::delete('/cart/{id}', [CartController::class, 'removeFromCart']); // Remove item
-    Route::delete('/cart/clear', [CartController::class, 'clearCart']); // Clear cart
 
+  Route::get('/cart', [CartController::class, 'index']);
+  Route::post('/cart/add', [CartController::class, 'addToCart']);
+  Route::put('/cart/add/{id}', [CartController::class, 'updateCartItem']);
+  Route::delete('/cart/{id}', [CartController::class, 'removeFromCart']);
+  Route::patch('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity']);
 
     Route::get('/orders', [OrderController::class, 'index']);
     Route::post('/checkout', [OrderController::class, 'checkout']);
     Route::get('/checkout-form', [OrderController::class, 'checkoutForm']);
     Route::get('/order/success/{order}', [OrderController::class, 'success']);
 });
+
+
+

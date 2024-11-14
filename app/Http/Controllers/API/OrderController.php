@@ -15,15 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    // Display a list of the user's orders
-    public function index(Request $request)
-    {
-        $orders = Order::where('user_id', Auth::id())
-            ->with('orderItems.product')
-            ->get();
-
-        return response()->json($orders);
-    }
+   
 
     public function checkoutForm()
     {

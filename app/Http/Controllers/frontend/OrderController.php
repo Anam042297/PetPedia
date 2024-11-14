@@ -92,11 +92,11 @@ class OrderController extends Controller
             }
         }
 
-        return $total;
-    }
+   public function success()
+   {
+       return view('frontend.orders.success');  // Ensure this view exists
+   }
+   // In OrderController.php
 
-    public function success()
-    {
-        return view('frontend.orders.success');  // Ensure this view exists
-    }
+
 }

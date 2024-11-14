@@ -99,8 +99,11 @@ class AdminOrderController extends Controller
 
             return DataTables::of($orders)
                 ->addColumn('action', function ($order) {
-                    // return '<a href="'.route('orders.show', $order->id).'" class="btn btn-primary btn-sm">View Details</a>';
+                    $viewButton = '<a href="'.route('orders.show', $order->id).'" class="btn btn-primary btn-sm">Change Status</a>';
+        
+                    return $viewButton . ' ' ;
                 })
+                
                 ->rawColumns(['action'])  // Ensure HTML is rendered
                 ->make(true);
         }
@@ -123,5 +126,11 @@ class AdminOrderController extends Controller
 
         return redirect()->back()->with('success', 'Order status updated successfully!');
     }
+    public function show($id)
+    {
+        $order = Order::findOrFail($id);
+        return view('frontend.orders.show', compact('order'));
+    }
 
 }
+
