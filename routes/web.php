@@ -100,21 +100,21 @@ Route::post('/store', [LoginController::class, 'store'])->name('user.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
-Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+// Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+// Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+// Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
+// Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+// Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 
-Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
-Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+// Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
+// Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
-Route::group(['middleware' => 'auth'], function () {
-  // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-  Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
+// Route::group(['middleware' => 'auth'], function () {
+//   // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+//   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
   
-});
+// });
 
 
 
@@ -146,48 +146,34 @@ Route::get('/debug-env', function () {
 
 
 use App\Http\Controllers\UserSide\indexController;
-use App\Http\Controllers\UserSide\Product1Controller;
-use App\Http\Controllers\UserSide\Cart1Controller;
-use App\Http\Controllers\UserSide\Order1Controller;
+use App\Http\Controllers\UserSide\UserProductController;
+use App\Http\Controllers\UserSide\UserCartController;
+use App\Http\Controllers\UserSide\UserOrderController;
 Route::get('/', [indexController::class, 'index'])->name('home');
 // Route::get('/blog', [indexController::class, 'petblog'])->name('blog');
 Route::get('/blog/{categoryId}', [indexController::class, 'petblog'])->name('category.posts');
 
 Route::get('/breed/{categoryId}/{breedId}', [indexController::class, 'breedBlog'])->name('breed.posts');
 Route::get('/post/{postId}', [indexController::class, 'singleBlog'])->name('single.post');
-Route::get('/cart1', [Cart1Controller::class, 'index'])->name('cart.index');
-Route::post('/cart1/add', [Cart1Controller::class, 'addToCart'])->name('cart.add');
-Route::patch('/cart1/update/{id}', [Cart1Controller::class, 'updateCartItem'])->name('cart.update');
-Route::delete('/cart1/remove/{id}', [Cart1Controller::class, 'removeFromCart'])->name('cart.remove');
-Route::delete('/cart1/clear', [Cart1Controller::class, 'clearCart'])->name('cart.clear');
 
 
-Route::get('/checkout', [Order1Controller::class, 'checkoutForm'])->name('checkout.form');
-Route::get('/order1/success', [Order1Controller::class, 'success'])->name('order.success');
-
-Route::group(['middleware' => 'auth'], function () {
-  // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
- Route::post('/orders1/checkout', [Order1Controller::class, 'checkout'])->name('checkout');
-  
-});
 Route::get('/user-profile-view/{id}', [indexController::class, 'ViewProfile'])->name('userprofile.view');
 // In web.php
 
 
-Route::get('/category/{categoryId}/products', [Product1Controller::class, 'getProductsByCategory']) ->name('category.products');
+Route::get('/category/{categoryId}/products', [UserProductController::class, 'getProductsByCategory']) ->name('category.products');
 
-Route::get('/productcategory/{productcategoryId}/products', [Product1Controller::class, 'getProductsByProductCategory'])->name('productcategories.products');
+Route::get('/productcategory/{productcategoryId}/products', [UserProductController::class, 'getProductsByProductCategory'])->name('productcategories.products');
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('cart', [Cart1Controller::class, 'index'])->name('cart.index');
-    Route::post('cart/store', [Cart1Controller::class, 'store'])->name('cart.store');
-    Route::post('cart/increase/{id}', [Cart1Controller::class, 'increaseQuantity'])->name('cart.increase');
-    Route::post('cart/decrease/{id}', [Cart1Controller::class, 'decreaseQuantity'])->name('cart.decrease');
-    Route::delete('cart/remove/{id}', [Cart1Controller::class, 'removeFromCart'])->name('cart.remove');
-    Route::post('cart/clear', [Cart1Controller::class, 'clearCart'])->name('cart.clear');
+    Route::get('cart', [UserCartController::class, 'index'])->name('cart.index');
+    Route::post('cart/store', [UserCartController::class, 'store'])->name('cart.store');
+    Route::post('cart/increase/{id}', [UserCartController::class, 'increaseQuantity'])->name('cart.increase');
+    Route::post('cart/decrease/{id}', [UserCartController::class, 'decreaseQuantity'])->name('cart.decrease');
+    Route::delete('cart/remove/{id}', [UserCartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('cart/clear', [UserCartController::class, 'clearCart'])->name('cart.clear');
 });
-
-    
-    Route::get('/checkout', [Order1Controller::class, 'checkoutForm'])->name('checkout.form');
-    Route::get('/order1/success', [Order1Controller::class, 'success'])->name('order.success');
+    Route::get('/checkout', [UserOrderController::class, 'checkoutForm'])->name('checkout.form');
+    Route::get('/order/success', [UserOrderController::class, 'success'])->name('order.success');
+    Route::post('/orders/checkout', [UserOrderController::class, 'checkout'])->name('checkout');

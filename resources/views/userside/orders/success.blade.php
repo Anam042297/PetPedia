@@ -11,7 +11,7 @@
                 <div class="card-body text-center">
                     <h1>Thank you for your order!</h1>
                     <p>A confirmation email with your order details is on its way.</p>
-                    <a href="{{ route('shop.index') }}" class="btn btn-primary">Continue Shopping</a>
+                    <a href="{{ route('home') }}" class="btn btn-primary">Continue Shopping</a>
                 </div>
             </div>
         </div>

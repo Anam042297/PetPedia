@@ -89,12 +89,12 @@
                                             class="btn btn-dark btn-block btn-lg {{ count($cartItems) == 0 ? 'disabled' : '' }}">
                                             Checkout
                                         </a>
-                                        {{-- <div class="pt-5">
-                                            <h6 class="mb-0">
+                                        <div class="pt-5">
+                                            {{-- <h6 class="mb-0">
                                        <a href="{{ route('mart') }}" class="text-body">
                                                     <i class="fas fa-long-arrow-alt-left me-2"></i>Back to Mart </a>
-                                            </h6>
-                                        </div> --}}
+                                            </h6> --}}
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
