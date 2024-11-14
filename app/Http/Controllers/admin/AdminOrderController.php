@@ -11,7 +11,6 @@ use Yajra\DataTables\DataTables;
 
 class AdminOrderController extends Controller
 {
-    // Display the orders list view
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -33,22 +32,14 @@ class AdminOrderController extends Controller
 
     public function show($id)
     {
-        // Fetch the order by ID
         $order = Order::findOrFail($id);
-    
-        // Return a view with the order details
         return view('frontend.orders.show', compact('order'));
     }
-    
 
-
-
-// AdminOrderController.php
 public function updateStatus(Request $request, $id)
 {
     $request->validate([
         'status' => 'required|in: pending,completed,shipped,cancelled',
-       
     ]);
 
     $order = Order::findOrFail($id);
