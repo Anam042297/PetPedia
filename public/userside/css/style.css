@@ -12,7 +12,9 @@
   -ms-flex-pack: start;
   justify-content: start;
 }
-
+* {
+  box-sizing: border-box;
+}
 /* line 13, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_extend.scss */
 .overlay::before {
   background-image: -moz-linear-gradient(170deg, rgba(34, 34, 34, 0) 0%, black 100%);
@@ -32,6 +34,7 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: normal;
   font-style: normal;
+  overflow-x: hidden;
 }
 
 /* line 11, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_reset.scss */

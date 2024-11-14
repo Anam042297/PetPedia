@@ -58,17 +58,23 @@
     
                 <div class="col-lg-4 d-flex align-items-center justify-content-center">
                     @php
-                    $phoneNumber = "+923158230935";
-                    $postLink = route('single.post', $post->id);
-                    $message = "Hello, I am interested in this post. Could you please provide more information?\n\n"
-                    . "Here is the link to the post: {$postLink}";
-                    @endphp
-                    <a href="https://wa.me/{{ str_replace('+', '', $phoneNumber) }}?text={{ urlencode($message) }}"
-                        target="_blank">
-                        <h4 class="widget_title" style=" color: #25D366;">
-                            Contact on WhatsApp
-                        </h4>
-                    </a>
+    $phoneNumber = "+923158230935";
+    $message = "Hello, I am interested in this post. Could you please provide more information about?\n\n"
+             . "Id: {$post->id}\n"
+             . "Name: {$post->name}\n"
+             . "Age: {$post->age}\n"
+             ."Gender: {$post->gender}\n"
+             . "Breed: {$post->breed->name}\n"
+             . "Category: {$post->category->name}\n"
+             . "Description: {$post->description}";
+@endphp
+<a href="https://wa.me/{{ str_replace('+', '', $phoneNumber) }}?text={{ urlencode($message) }}"
+   target="_blank">
+    <h4 class="widget_title" style="color: #25D366;">
+        Contact on WhatsApp
+    </h4>
+</a>
+
                  </div>
             </div>
         </div>
