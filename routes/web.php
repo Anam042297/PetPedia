@@ -174,13 +174,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('cart/remove/{id}', [UserCartController::class, 'removeFromCart'])->name('cart.remove');
     Route::post('cart/clear', [UserCartController::class, 'clearCart'])->name('cart.clear');
 });
-
-    
     Route::get('/checkout', [UserOrderController::class, 'checkoutForm'])->name('checkout.form');
     Route::get('/order/success', [UserOrderController::class, 'success'])->name('order.success');
-
-    Route::group(['middleware' => 'auth'], function () {
-      // Route::get('/orders', [UserOrderController::class, 'index'])->name('orders.index');
-      Route::post('/orders/checkout', [UserOrderController::class, 'checkout'])->name('checkout');
-       
-     });
+    Route::post('/orders/checkout', [UserOrderController::class, 'checkout'])->name('checkout');
