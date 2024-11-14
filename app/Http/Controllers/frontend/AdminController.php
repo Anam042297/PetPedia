@@ -18,21 +18,12 @@ class AdminController extends Controller
     {
         // Get the count of active users
         $Users = User::where('role', '!=', 'admin')->count();
-
-
-        // Fetch other data as needed
         $totalPosts = Post::count();
         $totalProducts = Product::count();
         $pendingOrdersCount = Order::where('status', '=', 'pending')->count();
         $pendingOrders = Order::where('status', '=', 'pending')->get();
         $activeUsersCount = User::where('is_active', '=', '1')->count();
         $activeUsers = User::where('role', 'user')->get();
-
-        // Fetch recent activity
-        $recentPosts = Post::latest()->take(5)->get();
-        // $recentFoodItems = Food::latest()->take(5)->get();
-        // $recentAccessories = Accessory::latest()->take(5)->get();
-
         return view('dashboard.dash', compact(
             'totalPosts',
             'totalProducts',
@@ -41,8 +32,6 @@ class AdminController extends Controller
             'activeUsersCount',
             'activeUsers',
             'Users',
-            // 'recentFoodItems',
-            // 'recentAccessories'
 
 
         ));

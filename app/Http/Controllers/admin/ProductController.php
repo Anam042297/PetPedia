@@ -30,7 +30,7 @@ class ProductController extends Controller
                     return $row->category ? $row->category->name : 'N/A';
                 })
                 ->addColumn('price', function ($row) {
-                    return $row->price ?  'PKR' . number_format($row->price, 2) : 'N/A'; // Formats the price to include a dollar sign and two decimal places
+                    return $row->price ? 'PKR' . number_format($row->price, 2) : 'N/A'; // Formats the price to include a dollar sign and two decimal places
                 })
                 ->addColumn('product_category', function ($row) {
                     return $row->productCategory ? $row->productCategory->name : 'N/A';

@@ -7,8 +7,8 @@ use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductCategoryController;
 use App\Http\Controllers\API\categoryController;
-use App\Http\Controllers\Api\CartController;
-use App\Http\Controllers\frontend\OrderController;
+use App\Http\Controllers\API\CartController;
+use App\Http\Controllers\API\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -56,6 +56,8 @@ Route::get('/products', [ProductController::class, 'getAllProducts']);
 Route::get('/product/{id}',[ProductController::class,'getProductById']);
 Route::get('/productcategory', [ProductCategoryController::class, 'getAllProductCategories']);
 Route::get('/productcategory/{id}', [ProductCategoryController::class, 'getProductCategoryById']);
+
+
 
 
 

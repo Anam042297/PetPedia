@@ -20,14 +20,14 @@ class ApiUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|max:20|regex:/[A-Za-z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
         ]);
-    
+
         // Create the user and generate a token
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-    
+
         return response()->json([
             'token' => $user->createToken('MyApp')->plainTextToken,
             'name' => $user->name,
@@ -35,7 +35,7 @@ class ApiUserController extends Controller
             'message' => 'User registration successful'
         ], 201);
     }
-    
+
 
 
     public function login(Request $request)
@@ -49,7 +49,7 @@ class ApiUserController extends Controller
                 'message' => 'User login successful'
             ], 200);
         }
-    
+
         return response()->json(['message' => 'Unauthorized'], 401);
     }
 

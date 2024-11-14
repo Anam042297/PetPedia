@@ -21,14 +21,14 @@ use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\AdminOrderController;
 
 //frontend routes
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/blogcategory/{id}', [BlogController::class, 'showbycategory'])->name('blog.category');
-Route::get('/blogsingle/{id}', [BlogController::class, 'show'])->name('blog.readmore');
-Route::get('/mart', [MartController::class, 'index'])->name('mart');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/register', [registerController::class, 'index'])->name('register');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Route::get('/index', [HomeController::class, 'index']);
+// Route::get('/blog',[BlogController::class,'index'])->name('blog');
+// Route::get('/blogcategory/{id}',[BlogController::class,'showbycategory'])->name('blog.category');
+Route::get('/blogsingle/{id}',[BlogController::class,'show'])->name('blog.readmore');
+Route::get('/mart',[MartController::class,'index'])->name('mart');
+Route::get('/about',[AboutController::class,'index'])->name('about');
+Route::get('/register',[registerController::class,'index'])->name('register');
+Route::get('/login',[LoginController::class,'index'])->name('login');
 
 // admin middleware
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
@@ -115,18 +115,72 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->n
 Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 
-Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
-Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+// Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
+// Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
-Route::group(['middleware' => 'auth'], function () {
-  // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-  Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
-});
+// Route::group(['middleware' => 'auth'], function () {
+//   // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+//   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
+  
+// });
 
 
 
 use App\Http\Controllers\ChatBotController;
 Route::match(['get', 'post'], '/botman', [ChatBotController::class, 'handle']);
 Route::get('/debug-env', function () {
-  return env('OPENAI_API_KEY');
+    return env('OPENAI_API_KEY');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use App\Http\Controllers\UserSide\indexController;
+use App\Http\Controllers\UserSide\UserProductController;
+use App\Http\Controllers\UserSide\UserCartController;
+use App\Http\Controllers\UserSide\UserOrderController;
+Route::get('/', [indexController::class, 'index'])->name('home');
+// Route::get('/blog', [indexController::class, 'petblog'])->name('blog');
+Route::get('/blog/{categoryId}', [indexController::class, 'petblog'])->name('category.posts');
+
+Route::get('/breed/{categoryId}/{breedId}', [indexController::class, 'breedBlog'])->name('breed.posts');
+Route::get('/post/{postId}', [indexController::class, 'singleBlog'])->name('single.post');
+
+
+Route::get('/user-profile-view/{id}', [indexController::class, 'ViewProfile'])->name('userprofile.view');
+// In web.php
+
+
+Route::get('/category/{categoryId}/products', [UserProductController::class, 'getProductsByCategory']) ->name('category.products');
+
+Route::get('/productcategory/{productcategoryId}/products', [UserProductController::class, 'getProductsByProductCategory'])->name('productcategories.products');
+
+Route::middleware('auth')->group(function () {
+    Route::get('cart', [UserCartController::class, 'index'])->name('cart.index');
+    Route::post('cart/store', [UserCartController::class, 'store'])->name('cart.store');
+    Route::post('cart/increase/{id}', [UserCartController::class, 'increaseQuantity'])->name('cart.increase');
+    Route::post('cart/decrease/{id}', [UserCartController::class, 'decreaseQuantity'])->name('cart.decrease');
+    Route::delete('cart/remove/{id}', [UserCartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('cart/clear', [UserCartController::class, 'clearCart'])->name('cart.clear');
+});
+    Route::get('/checkout', [UserOrderController::class, 'checkoutForm'])->name('checkout.form');
+    Route::get('/order/success', [UserOrderController::class, 'success'])->name('order.success');
+    Route::post('/orders/checkout', [UserOrderController::class, 'checkout'])->name('checkout');

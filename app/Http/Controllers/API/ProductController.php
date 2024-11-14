@@ -40,11 +40,10 @@ class ProductController extends Controller
 {
     $product = Product::with(['user', 'category', 'productCategory', 'productImages'])->find($id);
 
-    if (!$product) {
         return response()->json([
-            'success' => false,
-            'message' => 'Product not found'
-        ], 404);
+            'success' => true,
+            'data' => $product
+        ]);
     }
     
     $productData = [
