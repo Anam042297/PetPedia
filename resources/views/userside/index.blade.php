@@ -9,7 +9,7 @@
                 <div class="col-lg-5 col-md-6">
                     <div class="slider_text">
                         <h3>Find Your <br> <span>Furry Friend</span></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod.</p>
+                        <p>Dedicated to a community that cares, <br> Petpedia is your one-stop destination for pet care, adoption, and trusted guidance.</p>
                     </div>
                 </div>
             </div>
