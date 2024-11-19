@@ -3817,7 +3817,7 @@ h6 {
 
 /* line 317, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
 .genric-btn.link {
-  color: #415094;
+  color: #af99ff;
   background: #f9f9ff;
   text-decoration: underline;
   border: 1px solid transparent;
@@ -3825,14 +3825,14 @@ h6 {
 
 /* line 322, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
 .genric-btn.link:hover {
-  color: #415094;
+  color: #af99ff;
   border: 1px solid #f9f9ff;
   background: #fff;
 }
 
 /* line 328, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
 .genric-btn.link-border {
-  color: #415094;
+  color: #af99ff;
   border: 1px solid #f9f9ff;
   background: #fff;
   text-decoration: underline;
@@ -3840,7 +3840,7 @@ h6 {
 
 /* line 333, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
 .genric-btn.link-border:hover {
-  color: #415094;
+  color: #af99ff;
   background: #f9f9ff;
   border: 1px solid transparent;
 }
@@ -5319,12 +5319,12 @@ h6 {
 
 /* line 541, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog.scss */
 .blog_details a {
-  color: #ff8b23;
+  color: #af99ff;
 }
 
 /* line 544, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog.scss */
 .blog_details a:hover {
-  color: #eb592d;
+  color:#af99ff;
 }
 
 /* line 549, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog.scss */
@@ -5620,7 +5620,7 @@ h6 {
 
 /* line 842, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog.scss */
 .blog_right_sidebar .tag_cloud_widget ul li a:hover {
-  background: #eb592d;
+  background:#af99ff;
   color: #fff !important;
   -webkit-text-fill-color: #fff;
   text-decoration: none;
@@ -5867,7 +5867,7 @@ h6 {
 
 /* line 1208, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog.scss */
 .single-post-area .blog-author a:hover {
-  color: #eb592d;
+  color:#af99ff;
 }
 
 /* line 1213, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog.scss */
@@ -6296,7 +6296,7 @@ h6 {
 
 /* line 72, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_blog_part.scss */
 .blog_part .single-home-blog .card .card-body a {
-  color: #eb592d;
+  color: #af99ff;
   text-transform: uppercase;
   -webkit-transition: 0.8s;
   transition: 0.8s;

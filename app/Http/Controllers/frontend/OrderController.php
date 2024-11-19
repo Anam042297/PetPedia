@@ -91,7 +91,7 @@ class OrderController extends Controller
                 $total += $cartitem->quantity * $cartitem->product->price; // Ensure `product` relationship exists
             }
         }
-
+    }
    public function success()
    {
        return view('frontend.orders.success');  // Ensure this view exists

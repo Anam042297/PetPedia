@@ -22,7 +22,7 @@
                             </select>
                         </div>
                         <div class="form-group text-center mt-3">
-                            <button type="submit" class="btn btn-primary">Update Status</button>
+                            <button type="submit" class="btn custom-btn">Update Status</button>
                         </div>
                     </form>
                 </div>

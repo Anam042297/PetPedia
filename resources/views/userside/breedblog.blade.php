@@ -11,9 +11,6 @@
                         <h3>Explore Blogs<br> <span>to find pets</span></h3>
                     </div>
                 </div>
-                <div class="dog_thumb d-none d-lg-block">
-                    <img src="{{ asset('userside/img/team/3.png') }}" alt="" style="height: 450px;">
-                </div>
             </div>
         </div>
     </div>

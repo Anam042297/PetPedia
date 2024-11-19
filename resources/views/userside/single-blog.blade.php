@@ -12,9 +12,6 @@
                        <h3>Blog<br> <span>Details</h3>
                      </div>
                   </div>
-                  <div class="dog_thumb d-none d-lg-block">
-                   <img src="{{ asset('userside/img/team/3.png') }}" alt="" style="height: 250px; ">
-                  </div>
                </div>
             </div>
          </div>

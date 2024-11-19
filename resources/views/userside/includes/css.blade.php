@@ -30,5 +30,30 @@
         /* Change to a slightly darker blue on hover */
         color: #ffffff; /* Ensure text is readable on hover */
     }
+
+    footer {
+        background: linear-gradient(135deg, #fcd7e2, #e1daff);
+  color: #000000; /* White text */
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #000000 /* White link text */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #af99ff; /* Gold hover effect */
+}
+
+footer hr {
+  border-color: rgba(255, 255, 255, 0.3); /* Light white border */
+}
+
+footer h5, footer p, footer i,footer a {
+  color:#00000000000; /* Explicit white text for headings, paragraphs, and icons */
+}
+
 </style>
 {{-- <link href="{{ asset('userside/css/responsive.css') }}"rel="stylesheet" />  --}}
