@@ -59,22 +59,16 @@ class PostController extends Controller
     {
         // dd($request->all());
         // dd(123);
-        // try {
         $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'breed_id' => 'required|exists:breeds,id',
             'gender' => 'required|string',
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
-
-        // dd($validatedData); 
-        // } catch (\Illuminate\Validation\ValidationException $e) {
-        //     // dd($e->errors());
-        // }
         $user_id = Auth::id();
         // dd($user_id);
         $post = new Post();
@@ -101,7 +95,6 @@ class PostController extends Controller
             }
         }
 
-        // Redirect to a success page or route
         return redirect('/admin/viewpost')->with('success', 'Post created successfully!');
     }
     //get breed info as per catagory
@@ -140,7 +133,6 @@ class PostController extends Controller
         $post->name = $validatedData['name'];
         $post->age = $validatedData['age'];
         $post->description = $validatedData['description'];
-        // Handle file uploads if any
         if ($request->hasFile('images')) {
             $post->images()->delete();
             // dd($request->images);

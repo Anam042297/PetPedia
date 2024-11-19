@@ -40,7 +40,6 @@ class OrderController extends Controller
             'payment_method' => 'required|in:cash',
         ]);
 
-        // Create Order
         $order = Order::create([
             'tracking_id' => Str::random(10),
             'user_id' => auth()->id(),
@@ -49,7 +48,7 @@ class OrderController extends Controller
             'address' => $request->address,
             'phone_no' => $request->phone_no,
             'payment_method' => $request->payment_method,
-            'total_amount' => $this->calculateTotalAmount(), // Calculate total from cart items
+            'total_amount' => $this->calculateTotalAmount(), 
             'status' => 'pending',
         ]);
         $cart = Cart::where('user_id', Auth::id())->first();
@@ -83,15 +82,19 @@ class OrderController extends Controller
 
     protected function calculateTotalAmount()
     {
-        $cart = Cart::where('user_id', Auth::id())->first();
+        $cart = Cart::where('user_id', Auth::id())->first(); // Get the user's cart
         $total = 0;
-
+    
         if ($cart) {
             foreach ($cart->items as $cartitem) {
-                $total += $cartitem->quantity * $cartitem->product->price; // Ensure `product` relationship exists
+                // Calculate total by multiplying quantity and product price
+                $total += $cartitem->quantity * $cartitem->product->price;
             }
         }
+    
+        return $total; // Return the calculated total
     }
+    
    public function success()
    {
        return view('frontend.orders.success');  // Ensure this view exists
