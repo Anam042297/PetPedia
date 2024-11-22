@@ -17,9 +17,8 @@
                                     <li class="nav-item">
                                         <a href="{{ route('cart.index') }}">
                                              Cart
-                                              {{-- <i class="ti-angle-down"></i> --}}
-                                        </a>
-                                        {{-- <ul class="submenu">
+                                              <i class="ti-angle-down"></i>
+                                        </a>  <ul class="submenu">
                                             <li>
                                                 <a href="{{ route('cart.index') }}">
                                                     Items in Cart:
@@ -36,7 +35,8 @@
                                                     </div>
                                                 </a>
                                             </li>
-                                        </ul> --}}
+                                        </ul>
+                                      
                                     </li>
                                     @php $categories = \App\Models\Category::all(); @endphp
                                     <li>

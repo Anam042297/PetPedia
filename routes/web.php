@@ -105,7 +105,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+ Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
 
 
@@ -115,14 +115,14 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->n
 Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 
-// Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
-// Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
+Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
-// Route::group(['middleware' => 'auth'], function () {
-//   // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-//   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::group(['middleware' => 'auth'], function () {
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+  Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
   
-// });
+});
 
 
 
