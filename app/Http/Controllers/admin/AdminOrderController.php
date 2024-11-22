@@ -49,7 +49,7 @@ class AdminOrderController extends Controller
         $order->status = $request->status;
         $order->save();
 
-        return redirect()->back()->with('success', 'Order status updated successfully!');
+        return redirect('admin/orders')->with('success', 'Order status updated successfully!');
     }
    
    
