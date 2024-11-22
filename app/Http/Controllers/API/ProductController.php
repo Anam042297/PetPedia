@@ -45,24 +45,4 @@ class ProductController extends Controller
             'data' => $product
         ]);
     }
-    
-    $productData = [
-        'id' => $product->id,
-        'category' => $product->category->name,
-        'product_category' => $product->productCategory->name,
-        'name' => $product->name,
-        'price' => $product->price,
-        'brand' => $product->brand,
-        'weight' => $product->weight,
-        'stock' => $product->stock,
-        'images' => $product->productImages->pluck('image_path'),
-    ];
-    
-    return response()->json([
-        'success' => true,
-        'data' => $productData
-    ]);
-    
-    
-}
 }
