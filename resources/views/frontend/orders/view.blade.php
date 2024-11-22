@@ -53,14 +53,14 @@
                 {data: 'phone_no', name: 'phone_no'},  // Phone Number
                 {data: 'action', name: 'action', orderable: false, searchable: false},  // Action buttons (e.g., view details)
             ],
+     
             // order: [[3, 'desc']]  // Default order by the 'name' column descending
         });
     });
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+
+@if(session('success'))
+            order_table.ajax.reload(null, false);  // Reload the DataTable without resetting the page
+        @endif
 
 </script>
 @endsection
