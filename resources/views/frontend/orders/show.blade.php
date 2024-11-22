@@ -16,9 +16,9 @@
                             <label for="status" style="color: #fcfcfc;">Order Status:</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="processing" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                <option value="completed" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                                <option value="canceled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Canceled</option>
+                                <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                                <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                                <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                             </select>
                         </div>
                         <div class="form-group text-center mt-3">
