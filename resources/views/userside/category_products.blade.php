@@ -34,14 +34,14 @@
                         <strong>Brand:</strong> {{ $product->brand }} <br>
                     </p>
                 </div>
-
+                <div class="card-footer">
                     <form class="add-to-cart-form">
                         @csrf
                         <input type="hidden" name="quantity" value="1">
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <button type="button" class="boxed-btn4 add-to-cart" data-product-id="{{ $product->id }}" data-serial-number="{{ $product->serial_number }}">Add to Cart</button>
                     </form>
-          
+                </div>
             </div>
         </div>
     @empty

@@ -28,8 +28,8 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">
-                            <strong>Price:</strong> PKR {{ number_format($product->price, 2) }} <br>
-                            <strong>Brand:</strong> {{ $product->brand }}
+                            <strong>Price:</strong>{{ number_format($product->price, 2) }} <br>
+                            <strong>Brand:</strong> {{ $product->brand }}<br>
                         </p>
                     </div>
                     <div class="card-footer">
