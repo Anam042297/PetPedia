@@ -119,7 +119,7 @@ Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkou
 Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
 Route::group(['middleware' => 'auth'], function () {
-// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
   
 });

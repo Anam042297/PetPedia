@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 
 class AdminOrderController extends Controller
 {
+  
     public function index(Request $request)
     {
         if ($request->ajax()) {

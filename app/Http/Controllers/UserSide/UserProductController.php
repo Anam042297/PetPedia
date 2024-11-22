@@ -11,14 +11,20 @@ use App\Models\Category;
 class UserProductController extends Controller
 {
     public function getProductsByCategory($categoryId)
-    {
-        $products = Product::where('category_id', $categoryId)->with('productImages')->get();
-        $category = Category::findOrFail($categoryId); 
-        return view('userside.category_products', compact('products', 'category'));
-    }
+{
+    $category = Category::findOrFail($categoryId); 
+    $products = Product::where('category_id', $categoryId)
+                        ->where('stock', '>=', 1)
+                        ->with('productImages') 
+                        ->paginate(10);
+    return view('userside.category_products', compact('products', 'category'));
+}
+
     public function getProductsByProductCategory($productcategoryId)
     {
-        $products = Product::where('product_category_id', $productcategoryId)->with('productImages')->get();
+        $products = Product::where('product_category_id', $productcategoryId)
+        ->where('stock','>=',1)
+        ->with('productImages')->get();
         $productCategory = ProductCategory::findOrFail($productcategoryId);
         return view('userside.productcategory_products', compact('products', 'productCategory'));
     }
