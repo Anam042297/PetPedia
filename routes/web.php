@@ -25,7 +25,7 @@ use App\Http\Controllers\admin\AdminOrderController;
 // Route::get('/blog',[BlogController::class,'index'])->name('blog');
 // Route::get('/blogcategory/{id}',[BlogController::class,'showbycategory'])->name('blog.category');
 Route::get('/blogsingle/{id}',[BlogController::class,'show'])->name('blog.readmore');
-Route::get('/mart',[MartController::class,'index'])->name('mart');
+// Route::get('/mart',[MartController::class,'index'])->name('mart');
 Route::get('/about',[AboutController::class,'index'])->name('about');
 Route::get('/register',[registerController::class,'index'])->name('register');
 Route::get('/login',[LoginController::class,'index'])->name('login');

@@ -15,8 +15,7 @@ class UserProductController extends Controller
     $category = Category::findOrFail($categoryId); 
     $products = Product::where('category_id', $categoryId)
                         ->where('stock', '>=', 1)
-                        ->with('productImages') 
-                        ->paginate(10);
+                        ->with('productImages');
     return view('userside.category_products', compact('products', 'category'));
 }
 
