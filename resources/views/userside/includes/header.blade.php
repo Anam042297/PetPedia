@@ -14,30 +14,7 @@
                             <nav>
                                 <ul id="navigation">
                                     <li><a href="/">Home</a></li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('cart.index') }}">
-                                             Cart
-                                              <i class="ti-angle-down"></i>
-                                        </a>  <ul class="submenu">
-                                            <li>
-                                                <a href="{{ route('cart.index') }}">
-                                                    Items in Cart:
-                                                    <div class="cart-icon">
-                                                        @if(auth()->check())
-                                                            @php
-                                                                $cart = auth()->user()->cart;
-                                                                $cartItemCount = $cart && $cart->items ? $cart->items->sum('quantity') : 0;
-                                                            @endphp
-                                                            <span id="cart-icon">{{ $cartItemCount }}</span>
-                                                        @else
-                                                            <span id="cart-icon">0</span>
-                                                        @endif
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                      
-                                    </li>
+                                    
                                     @php $categories = \App\Models\Category::all(); @endphp
                                     <li>
                                         <a href="#">Pet Blogs <i class="ti-angle-down"></i></a>
@@ -57,16 +34,11 @@
             @endforeach
         </ul>
     </li>
-
-
-    <!-- Cart Dropdown -->
-    
-
-
-
-                                                  
-
-                                    <!-- User Dropdown -->
+    <li class="nav-item">
+        <a href="{{ route('cart.index') }}" class="nav-link">
+            <i class="fas fa-shopping-cart" style="font-size: 1.0rem;"></i>
+        </a>
+    </li>
                                     <li>
                                         @auth
                                             <a href="#">

@@ -27,13 +27,13 @@ class AdminOrderController extends Controller
                 ->rawColumns(['action'])  // Ensure HTML is rendered
                 ->make(true);
         }
-        return view('frontend.orders.view');
+        return view('dashboard.orders.view');
 
     }
     public function show($id)
     {
         $order = Order::findOrFail($id);
-        return view('frontend.orders.show', compact('order'));
+        return view('dashboard.orders.show', compact('order'));
     }
 
 

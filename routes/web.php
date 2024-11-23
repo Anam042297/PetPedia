@@ -5,11 +5,9 @@ use App\Http\Controllers\frontend\registerController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\LoginController;
 use App\Http\Controllers\frontend\BlogController;
-use App\Http\Controllers\frontend\MartController;
 use App\Http\Controllers\frontend\AboutController;
 use App\Http\Controllers\frontend\AdminController;
-use App\Http\Controllers\frontend\CartController;
-use App\Http\Controllers\frontend\OrderController;
+
 // user route
 use App\Http\Controllers\admin\UserTableController;
 //blog post routes
@@ -104,25 +102,25 @@ Route::post('/store', [LoginController::class, 'store'])->name('user.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-  Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
- Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+//   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+//  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
 
 
 
-Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
-Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+// Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
+// Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+// Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 
-Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
-Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+// Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
+// Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
-Route::group(['middleware' => 'auth'], function () {
+// Route::group(['middleware' => 'auth'], function () {
 
-  Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
+//   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
   
-});
+// });
 
 
 
