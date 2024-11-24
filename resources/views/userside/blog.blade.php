@@ -24,7 +24,7 @@
                     @foreach($posts as $post)
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                {{-- <div id="imageCarousel{{ $post->id }}" class="carousel slide" data-bs-ride="carousel">
+                                <div id="imageCarousel{{ $post->id }}" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
                                         @foreach($post->images as $index => $image)
                                             <div class="carousel-item @if($index === 0) active @endif">
@@ -43,9 +43,7 @@
                                             <span class="visually-hidden">Next</span>
                                         </button>
                                     @endif
-                                </div> --}}  @foreach($product->productimages as $image)
-                <img src="{{ $image->url }}" alt="{{ $product->name }}" style="width: 100px; height: auto;">
-                @endforeach
+                                </div>
                                 <a class="blog_item_date">
                                     <h3>{{ $post->created_at->format('d') }}</h3>
                                     <p>{{ $post->created_at->format('M') }}</p>
