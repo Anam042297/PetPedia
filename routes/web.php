@@ -2,10 +2,7 @@
 //frontend routes
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\registerController;
-use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\LoginController;
-use App\Http\Controllers\frontend\BlogController;
-use App\Http\Controllers\frontend\AboutController;
 use App\Http\Controllers\frontend\AdminController;
 
 // user route
@@ -19,12 +16,6 @@ use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\AdminOrderController;
 
 //frontend routes
-// Route::get('/index', [HomeController::class, 'index']);
-// Route::get('/blog',[BlogController::class,'index'])->name('blog');
-// Route::get('/blogcategory/{id}',[BlogController::class,'showbycategory'])->name('blog.category');
-Route::get('/blogsingle/{id}',[BlogController::class,'show'])->name('blog.readmore');
-// Route::get('/mart',[MartController::class,'index'])->name('mart');
-Route::get('/about',[AboutController::class,'index'])->name('about');
 Route::get('/register',[registerController::class,'index'])->name('register');
 Route::get('/login',[LoginController::class,'index'])->name('login');
 
@@ -102,27 +93,6 @@ Route::post('/store', [LoginController::class, 'store'])->name('user.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-//   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-//  Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-
-
-
-
-// Route::patch('/cart/update/{id}', [CartController::class, 'updateCartItem'])->name('cart.update');
-// Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-// Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
-
-
-// Route::get('/checkout', [OrderController::class, 'checkoutForm'])->name('checkout.form');
-// Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
-
-// Route::group(['middleware' => 'auth'], function () {
-
-//   Route::post('/orders/checkout', [OrderController::class, 'checkout'])->name('checkout');
-  
-// });
-
-
 
 use App\Http\Controllers\ChatBotController;
 Route::match(['get', 'post'], '/botman', [ChatBotController::class, 'handle']);
@@ -156,7 +126,6 @@ use App\Http\Controllers\UserSide\UserProductController;
 use App\Http\Controllers\UserSide\UserCartController;
 use App\Http\Controllers\UserSide\UserOrderController;
 Route::get('/', [indexController::class, 'index'])->name('home');
-// Route::get('/blog', [indexController::class, 'petblog'])->name('blog');
 Route::get('/blog/{categoryId}', [indexController::class, 'petblog'])->name('category.posts');
 
 Route::get('/breed/{categoryId}/{breedId}', [indexController::class, 'breedBlog'])->name('breed.posts');
@@ -164,7 +133,7 @@ Route::get('/post/{postId}', [indexController::class, 'singleBlog'])->name('sing
 
 
 Route::get('/user-profile-view/{id}', [indexController::class, 'ViewProfile'])->name('userprofile.view');
-// In web.php
+
 
 
 Route::get('/category/{categoryId}/products', [UserProductController::class, 'getProductsByCategory']) ->name('category.products');
