@@ -20,34 +20,36 @@
         <div class="container p-4 mb-5 rounded shadow">
             <div class="row">
                 <div class="col-lg-6">
-                    <div id="imageCarousel{{ $post->id }}" class="carousel slide" data-bs-ride="carousel">
+                    <div id="postImageCarousel{{ $post->id }}" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            @foreach ($post->images as $index => $image)
-                                <div class="carousel-item @if($index === 0) active @endif">
-                                    <img src="{{ $image->url }}" class="d-block w-100" alt="Image">
+                            @foreach($post->images as $key => $image)
+                                <div class="carousel-item @if($key == 0) active @endif">
+                                    <img class="d-block w-100" src="{{ asset($image->url) }}" alt="Post Image" 
+                                         style="height: 250px; object-fit: scale-down;">
                                 </div>
                             @endforeach
                         </div>
                         @if($post->images->count() > 1)
-                            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel{{ $post->id }}" data-bs-slide="prev">
+                            <a class="carousel-control-prev" href="#postImageCarousel{{ $post->id }}" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel{{ $post->id }}" data-bs-slide="next">
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#postImageCarousel{{ $post->id }}" role="button" data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                                <span class="sr-only">Next</span>
+                            </a>
                         @endif
                     </div>
-                    
-    
-                    <div class="blog_details mt-4">
-                        <h2>{{ $post->name }}</h2>
-                        <ul class="list-inline text-muted mt-3 mb-4">
-                            <li class="list-inline-item"><i class="fa fa-folder"></i> {{ $post->category->name }}</li>
-                            <li class="list-inline-item"><i class="fa fa-paw"></i> {{ $post->breed->name }}</li>
-                            <li class="list-inline-item"><i class="fa fa-calendar"></i> {{ $post->age }}</li>
-                            <li class="list-inline-item"><i class="fa fa-comments"></i> {{ $post->gender }}</li>
+                    <div class="blog_details">
+                        <a class="d-inline-block" href="#">
+                            <h2>{{ $post->name }}</h2>
+                        </a>
+                        
+                        <ul class="blog-info-link">
+                            <li><a><i class="fa fa-folder text-muted"></i> {{ $post->category->name }}</a></li>
+                            <li><a><i class="fa fa-paw text-muted"></i> {{ $post->breed->name }}</a></li>
+                            <li><a><i class="fa fa-clock text-muted"></i> {{ $post->age }}</a></li>
+                            <li><a><i class="fa fa-comments"></i> {{ $post->gender }}</a></li>
                         </ul>
                         <p>{{ $post->description }}</p>
                     </div>
