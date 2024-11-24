@@ -29,9 +29,17 @@ class UserOrderController extends Controller
             'name' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'phone_no' => 'required|string|max:15',
+            'phone_no' => [
+                'required',
+                'string',
+                'max:15',
+                'regex:/^(03[0-9]{2})[0-9]{7}$/', 
+            ],
             'payment_method' => 'required|in:cash',
+        ], [
+            'phone_no.regex' => 'The phone number must be a valid Pakistani number starting with 03 and followed by 9 digits.',
         ]);
+        
  
         $order = Order::create([
             'tracking_id'=> Str::random(10),
