@@ -2,19 +2,7 @@
 @extends('userside.master')
 @section('content')
 
-<div class="slider_area">
-    <div class="single_slider slider_bg_1 d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-6">
-                    <div class="slider_text">
-                        <h3>Explore Blogs<br> <span>to find pets</span></h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <section class="blog_area section-padding">
     <div class="container">
