@@ -82,13 +82,13 @@ class UserCartController extends Controller
          return redirect()->route('cart.index')->with('success', 'Item removed from cart');
      }
  
-     public function clearCart()
-     {
-         $cart = Cart::where('user_id', Auth::id())->first();
-         if ($cart) {
-             $cart->items()->delete();
-         }
+    //  public function clearCart()
+    //  {
+    //      $cart = Cart::where('user_id', Auth::id())->first();
+    //      if ($cart) {
+    //          $cart->items()->delete();
+    //      }
  
-         return redirect()->route('cart.index')->with('success', 'Cart cleared successfully');
-     }
+    //      return redirect()->route('cart.index')->with('success', 'Cart cleared successfully');
+    //  }
 }
