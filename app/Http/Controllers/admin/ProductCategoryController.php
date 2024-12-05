@@ -16,8 +16,7 @@ class ProductCategoryController extends Controller
     {
         // dd($request);
         if ($request->ajax()) {
-            $data = ProductCategory::select('id', 'name', 'icon')
-                ->get();
+            $data = ProductCategory::select('id', 'name', 'icon')->get();
             //  dd($data);
             return DataTables::of($data)
                 ->addColumn('action', function ($row) {
@@ -59,18 +58,12 @@ class ProductCategoryController extends Controller
         ]);
 
 
-        $productcategory= new ProductCategory();
+        $iconPath = $request->file('icon')->store('icons', 'public');
+
+        $productcategory = new ProductCategory();
         $productcategory->name = $validatedData['name'];
-        if ($request->hasFile('icon')) {
-            // dd(123);
-            $image = $request->file('icon');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('public/icon', $filename);
-            $url = Storage::url($path);
-            // dd($url);
-            $productcategory->icon= $url;
-            $productcategory->save();
-        }
+        $productcategory->icon = $iconPath;
+        $productcategory->save();
         return redirect()->route('ProductCategory.index')->with('success', 'Category added successfully.');
     }
     // Edit view category data

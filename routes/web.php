@@ -46,7 +46,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::put('/posts/{id}', [PostController::class, 'update'])->name('post.update');
     Route::any('/deletepost/{id}',[PostController::class,'destroy'])->name('post.destroy');
-//ProductPetCategory routes
+    //ProductCategory routes
 
     Route::get('/indexproductcategories', [ProductCategoryController::class, 'index'])->name('ProductCategory.index');
     Route::get('/createproductcategories', [ProductCategoryController::class, 'create'])->name('ProductCategory.create');
@@ -63,7 +63,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
    Route::get('/get-product_category/{petcategory_id}', [ProductController::class, 'getproduct_category']);
    Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name(name: 'products.edit');
    Route::put('/product/{id}', [ProductController::class, 'update'])->name('products.update');
- Route::get('/product/{id}', [ProductController::class, 'showProductPage'])->name('product.page');
+   Route::get('/product/{id}', [ProductController::class, 'showProductPage'])->name('product.page');
    Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
    Route::put('/martproduct/{id}', [ProductController::class, 'update'])->name('products.show');
 

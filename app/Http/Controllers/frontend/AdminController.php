@@ -16,7 +16,6 @@ class AdminController extends Controller
 
     public function index()
     {
-        // Get the count of active users
         $Users = User::where('role', '!=', 'admin')->count();
         $totalPosts = Post::count();
         $totalProducts = Product::count();
