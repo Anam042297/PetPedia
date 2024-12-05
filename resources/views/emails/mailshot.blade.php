@@ -7,7 +7,11 @@
     <h1>Thank You for Your Order!</h1>
     <p>Your order ID is: {{ $order->tracking_id }}</p>
     <p>Total Amount:PKR{{ $order->total_amount }}</p>
-    <p>We appreciate your business!Keep in touch us for more enjoyable experience.If you have any Query Contact Us
+    <p>We appreciate your business!Keep in touch us for more enjoyable experience.
+
+        Your order will be dilivered in 5 to 6 days.
+
+    If you have any Query Contact Us
          </p>
          @php
          $phoneNumber = "+923158230935";

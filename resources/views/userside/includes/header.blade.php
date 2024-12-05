@@ -36,7 +36,7 @@
     </li>
     <li class="nav-item">
         <a href="{{ route('cart.index') }}" class="nav-link">
-            <i class="fas fa-shopping-cart" style="font-size: 1.0rem;"></i>
+            <i class="fas fa-shopping-cart mr-2" style="font-size: 1.0rem;"></i>Cart
         </a>
     </li>
                                     <li>
