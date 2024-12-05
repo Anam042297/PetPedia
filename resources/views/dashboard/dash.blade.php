@@ -4,15 +4,15 @@
               
 
     .table tbody {
-        display: block; /* Allows the tbody to scroll */
+        display: block; 
         max-height: 300px;
-        width: 100%;  /* Set height for scrolling; adjust as needed */
-        overflow-y: auto; /* Enables vertical scrolling for tbody */
+        width: 100%;  
+        overflow-y: auto;
     }
     .table tr {
-        display: table; /* Maintains table row display */
-        width: 100%; /* Ensure rows take full width */
-        table-layout: fixed; /* Prevents table width collapse */
+        display: table; 
+        width: 100%; 
+        table-layout: fixed; 
     }
     
                     </style>
