@@ -23,7 +23,6 @@
                 <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
                   <h5 class="text-uppercase mb-4 font-weight-bold">Contact</h5>
                   <p><i class="fas fa-home mr-2"></i>123 Pet Street, PetCity</p>
-                  <p><i class="fas fa-envelope mr-2"></i>info@petpedia.com</p>
                   <p><i class="fas fa-phone mr-2"></i>+92315-8230935</p>
                   <p><i class="fas fa-globe mr-2"></i>petpedia.projectflux.online</p>
                 </div>
