@@ -23,7 +23,7 @@ class AdminController extends Controller
         $pendingOrdersCount = Order::where('status', '=', 'pending')->count();
         $pendingOrders = Order::where('status', '=', 'pending')->get();
         $activeUsersCount =User::where('is_active', 1)
-        ->where('role', 'user')->get();
+        ->where('role', 'user')->count();
         $activeUsers = User::where('is_active', 1)
                              ->where('role', 'user')->get();
         return view('dashboard.dash', compact(
