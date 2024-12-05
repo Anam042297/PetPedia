@@ -1,25 +1,17 @@
 <?php
-//frontend routes
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\registerController;
 use App\Http\Controllers\frontend\LoginController;
 use App\Http\Controllers\frontend\AdminController;
-
-// user route
 use App\Http\Controllers\admin\UserTableController;
-//blog post routes
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\CatagoryController;
 use App\Http\Controllers\admin\BreedController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\AdminOrderController;
-
-//frontend routes
 Route::get('/register',[registerController::class,'index'])->name('register');
 Route::get('/login',[LoginController::class,'index'])->name('login');
-
-// admin middleware
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
@@ -91,14 +83,6 @@ Route::any('/login-post', [LoginController::class, 'login'])->name('form.submit'
 Route::get('/register.page', [LoginController::class, 'showRegisterForm'])->name('register.page');
 Route::post('/store', [LoginController::class, 'store'])->name('user.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
-
-use App\Http\Controllers\ChatBotController;
-Route::match(['get', 'post'], '/botman', [ChatBotController::class, 'handle']);
-Route::get('/debug-env', function () {
-    return env('OPENAI_API_KEY');
-});
 
 
 

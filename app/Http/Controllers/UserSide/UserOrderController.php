@@ -53,9 +53,9 @@ class UserOrderController extends Controller
             'status' => 'pending',
         ]);
         $cart = Cart::where('user_id', Auth::id())->first();
-        if (!$cart || $cart->items->isEmpty()) {
-            return redirect()->route('cart')->with('error', 'Your cart is empty!');
-        }
+        // if (!$cart || $cart->items->isEmpty()) {
+        //     return redirect()->route('cart')->with('error', 'Your cart is empty!');
+        // }
      
         $cart = Cart::where('user_id', Auth::id())->first();
         if ($cart) {
