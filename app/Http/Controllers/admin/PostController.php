@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Breed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class PostController extends Controller
@@ -84,14 +85,13 @@ class PostController extends Controller
         // dd($request->hasFile('images'));
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $filename = uniqid() . '.' . $image->getClientOriginalName();
+                $filename = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('public/images', $filename);
                 $url = Storage::url($path);
                 Image::create([
                     'post_id' => $post->id,
                     'url' => $url,
                 ]);
-
             }
         }
 
@@ -137,7 +137,7 @@ class PostController extends Controller
             $post->images()->delete();
             // dd($request->images);
             foreach ($request->file('images') as $image) {
-                $filename = uniqid() . '.' . $image->getClientOriginalName();
+                $filename = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('public/images', $filename);
                 $url = Storage::url($path);
                 // dd($url);
