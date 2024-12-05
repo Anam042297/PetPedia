@@ -137,7 +137,7 @@ class PostController extends Controller
             $post->images()->delete();
             // dd($request->images);
             foreach ($request->file('images') as $image) {
-                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $filename = uniqid() . '.' . $image->getClientOriginalName();
                 $path = $image->storeAs('public/images', $filename);
                 $url = Storage::url($path);
                 // dd($url);
