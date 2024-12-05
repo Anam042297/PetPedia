@@ -60,13 +60,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
    Route::any('/indexproduct', [ProductController::class, 'index'])->name('products.index');
    Route::get('/createproduct', [ProductController::class, 'create'])->name('products.create');
    Route::post('/storeproduct', [ProductController::class, 'store'])->name('products.store');
-   Route::get('/get-product_category/{petcategory_id}', [ProductController::class, 'getproduct_category']);
+ 
    Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name(name: 'products.edit');
    Route::put('/product/{id}', [ProductController::class, 'update'])->name('products.update');
-   Route::get('/product/{id}', [ProductController::class, 'showProductPage'])->name('product.page');
    Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-   Route::put('/martproduct/{id}', [ProductController::class, 'update'])->name('products.show');
-
+ 
+    //admin order
    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
    Route::get('/orders/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
    Route::patch('/orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.updateStatus');

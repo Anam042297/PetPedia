@@ -127,7 +127,6 @@ class ProductController extends Controller
             'weight' => 'required|numeric|min:1',
             'brand' => 'required|string|max:255',
             'stock' => 'required|integer|min:1',
-            'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg',
 
         ]);
