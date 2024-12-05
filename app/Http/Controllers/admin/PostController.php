@@ -31,7 +31,7 @@ class PostController extends Controller
                 })
                 ->addColumn('images', function ($row) {
                     if ($row->images->isEmpty()) {
-                        return ''; // Return empty if there are no images
+                        return '';
                     }
                     $firstImage = $row->images->first();
                     return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';

@@ -27,10 +27,10 @@
                                 <div id="postImageCarousel{{ $post->id }}" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
                                         @foreach($post->images as $key => $image)
-                                            <div class="carousel-item @if($key == 0) active @endif">
-                                                <img class="d-block w-100" src="{{ asset($image->url) }}" alt="Post Image" 
-                                                     style="height: 250px; object-fit: scale-down;">
-                                            </div>
+                                        <div class="carousel-item @if($key == 0) active @endif">
+                                            <img class="d-block w-100" src="{{ asset($image->url) }}" alt="Post Image" 
+                                                 style="height: 250px; object-fit: scale-down;">
+                                        </div>
                                         @endforeach
                                     </div>
                                     @if($post->images->count() > 1)
