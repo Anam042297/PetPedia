@@ -28,7 +28,7 @@
     @foreach($category->products as $product)
         <li>
             <h3>{{ $product->name }}</h3>
-            <p>Price: ${{ $product->price }}</p>
+            <p>Price: PKP{{ $product->price }}</p>
             <p>Brand: {{ $product->brand }}</p>
             <p>Weight: {{ $product->weight }} kg</p>
             

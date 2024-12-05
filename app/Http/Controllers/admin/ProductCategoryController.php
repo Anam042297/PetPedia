@@ -58,13 +58,19 @@ class ProductCategoryController extends Controller
             'icon' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $iconPath = $request->file('icon')->store('icons', 'public');
 
-        $productcategory = new ProductCategory();
+        $productcategory= new ProductCategory();
         $productcategory->name = $validatedData['name'];
-        $productcategory->icon = $iconPath;
-        $productcategory->save();
-
+        if ($request->hasFile('icon')) {
+            // dd(123);
+            $image = $request->file('icon');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/icon', $filename);
+            $url = Storage::url($path);
+            // dd($url);
+            $productcategory->icon= $url;
+            $productcategory->save();
+        }
         return redirect()->route('ProductCategory.index')->with('success', 'Category added successfully.');
     }
     // Edit view category data

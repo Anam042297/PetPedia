@@ -1,8 +1,5 @@
-
 @extends('userside.master')
-
 @section('title', 'Order Success')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

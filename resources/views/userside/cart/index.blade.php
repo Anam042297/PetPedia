@@ -2,11 +2,12 @@
 @section('title', 'Shopping Cart')
 
 @section('content')
-    <section class="h-100 h-custom" style="background-color: #af99ff;">
+    <section class="h-100 h-custom" style="background: linear-gradient(to right, #ff99b6, #af99ff);">
+        {{-- style=" color:white;background: linear-gradient(135deg, #ff99b6, #af99ff) --}}
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
-                    <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                    <div class="card card-registration card-registration-2" style="border-radius: 15px; background-color:#f3e8ff;">
                         <div class="card-body p-0">
                             <div class="row g-0">
 
@@ -64,11 +65,15 @@
                                                                 </form>
                                                             
                                                                 <!-- Remove Item Form -->
+                                                            
                                                                 <form action="{{ route('cart.remove', $item->id) }}" method="POST" class="d-inline-flex">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger btn-sm mx-2">Remove</button>
+                                                                    <button type="submit" class="btn btn-danger btn-sm mx-2">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
                                                                 </form>
+                                                                
                                                             </div>
                                                             
                                                         </div>

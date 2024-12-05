@@ -1,8 +1,9 @@
 @extends('userside.master')
-
 @section('content')
-<div class="wrapper d-flex justify-content-center py-5">
-    <div class="container">
+
+    <div class="wrapper d-flex justify-content-center py-5" >
+
+    <div class="container" style="max-width: 600px;">
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -13,7 +14,8 @@
         </div>
         @endif
 
-        <div class="card shadow-lg border-0 rounded-3 p-4">
+            <div class="card shadow-lg border-0 rounded-3 p-4" style="background-color:#f3e8ff;">
+
             <form method="POST" action="{{ route('checkout') }}">
                 @csrf
                 <h2 class="mb-4 text-center " style=" color:white;background: linear-gradient(135deg, #ff99b6, #af99ff);border-radius: 15px;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);padding: 20px;margin-top: 5px;">
@@ -59,27 +61,4 @@
   
     </div>
 </div>
-
-<style>
-    .wrapper {
-        background-color: #f7f9fb;
-    }
-    .card {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 2rem;
-        border-radius: 15px;
-    }
-    .form-label {
-        font-weight: 600;
-    }
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-        transition: background-color 0.3s ease;
-    }
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-</style>
 @endsection
