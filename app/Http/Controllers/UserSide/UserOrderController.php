@@ -53,28 +53,32 @@ class UserOrderController extends Controller
             'status' => 'pending',
         ]);
         $cart = Cart::where('user_id', Auth::id())->first();
-        // if (!$cart || $cart->items->isEmpty()) {
-        //     return redirect()->route('cart')->with('error', 'Your cart is empty!');
-        // }
+        if (!$cart || $cart->items->isEmpty()) {
+            return redirect()->route('cart')->with('error', 'Your cart is empty!');
+        }
      
         $cart = Cart::where('user_id', Auth::id())->first();
-        if ($cart) {
-            foreach ($cart->items as $cartItem) {
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $cartItem->product_id,
-                    'price' => $cartItem->product->price, 
-                    'quantity' => $cartItem->quantity,
-                ]);
-            }
-            $product = Product::find($cartItem->product_id);
-            if ($product) {
-                $product->stock -= $cartItem->quantity;
-                $product->save(); 
-            }
-            // Clear the cart
-             $cart->items()->delete();
+
+if ($cart) {
+    foreach ($cart->items as $cartItem) {
+        OrderItem::create([
+            'order_id' => $order->id,
+            'product_id' => $cartItem->product_id,
+            'price' => $cartItem->product->price,
+            'quantity' => $cartItem->quantity,
+        ]);
+        
+        $product = Product::find($cartItem->product_id);
+        if ($product) {
+            $product->stock -= $cartItem->quantity; 
+            $product->save(); 
         }
+    }
+
+    // Clear the cart items
+    $cart->items()->delete();
+}
+
         Mail::to($request->user()->email)->send(new sendmail($order));
  
         return redirect()->route('order.success', ['order' => $order->id]);
