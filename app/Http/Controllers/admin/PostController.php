@@ -35,7 +35,7 @@ class PostController extends Controller
                         return '';
                     }
                     $firstImage = $row->images->first();
-                    return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
+                    return '<img src="' . $firstImage->url . '" class="d-block w-100"  style="max-width: 80px; max-height: 80px; margin: 0 auto;"alt="Image">';
                 })
 
                 ->rawColumns(['images', 'action'])
