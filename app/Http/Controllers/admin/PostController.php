@@ -33,7 +33,7 @@ class PostController extends Controller
                     if ($row->images->isEmpty()) {
                         return '';
                     }
-                    $firstImage = $row->images->first();
+                    $firstImage = $row->images;
                     return '<img src="' . $firstImage->url . '" class="d-block w-100" alt="Image">';
                 })
 
