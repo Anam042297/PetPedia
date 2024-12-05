@@ -84,7 +84,7 @@ class PostController extends Controller
         // dd($request->hasFile('images'));
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $filename = uniqid() . '.' . $image->getClientOriginalName();
                 $path = $image->storeAs('public/images', $filename);
                 $url = Storage::url($path);
                 Image::create([
@@ -94,6 +94,17 @@ class PostController extends Controller
 
             }
         }
+        // if ($request->hasFile('images')) {
+        //     foreach ($request->file('images') as $image) {
+        //         $filename = time() . '_' . $image->getClientOriginalName();
+        //         $path = $image->storeAs('public/images', $filename);
+        //         $url = Storage::url($path);
+        //         Image::updOaterCreate(
+        //             ['product_id' => $post->id],
+        //             ['url' => $url]
+        //         );
+        //     }
+        // }
 
         return redirect('/admin/viewpost')->with('success', 'Post created successfully!');
     }

@@ -44,6 +44,40 @@
                                         </a>
                                     @endif
                                 </div>
+                                {{-- <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        @foreach ($post->images  as $index => $image)
+                                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                <img class="d-block w-100" src="{{ asset($image->url) }}" alt="Post Image" 
+                                                 style="height: 250px; object-fit: scale-down;">
+                                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                                    <div class="p-3" style="max-width: 900px;">
+                                                        <h3 class="text-white mb-3 d-none d-sm-block">{{ $image->subtitle ?? '' }}</h3>
+                                                        <h1 class="display-3 text-white mb-3">{{ $image->title }}</h1>
+                                                        <h5 class="text-white mb-3 d-none d-sm-block">{{ $image->description ?? '' }}</h5>
+                                                        @if ($image->button_one_text && $image->button_one_link)
+                                                            <a href="{{ $image->button_one_link }}" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">{{ $image->button_one_text }}</a>
+                                                        @endif
+                                                        @if ($image->button_two_text && $image->button_two_link)
+                                                            <a href="{{ $image->button_two_link }}" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">{{ $image->button_two_text }}</a>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                
+                                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                                        <div class="btn btn-primary rounded" style="width: 45px; height: 45px;">
+                                            <span class="carousel-control-prev-icon mb-n2"></span>
+                                        </div>
+                                    </a>
+                                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                                        <div class="btn btn-primary rounded" style="width: 45px; height: 45px;">
+                                            <span class="carousel-control-next-icon mb-n2"></span>
+                                        </div>
+                                    </a>
+                                </div> --}}
                                 
                                 <a class="blog_item_date">
                                     <h3>{{ $post->created_at->format('d') }}</h3>
