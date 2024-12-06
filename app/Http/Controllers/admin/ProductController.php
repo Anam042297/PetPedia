@@ -48,7 +48,7 @@ class ProductController extends Controller
                         return '<img src="/path/to/placeholder.png" class="d-block w-100" alt="No Image">';
                     }
                     $firstImage = $row->productImages->first();
-                    return '<img src="' . $firstImage->image_path . '" class="d-block w-100" alt="Product Image">';
+                    return '<img src="' . $firstImage->image_path . '" class="d-block w-100" style="max-width: 80px; max-height: 80px; margin: 0 auto;alt="Product Image">';
                 })
 
                 ->rawColumns(['images', 'action'])
