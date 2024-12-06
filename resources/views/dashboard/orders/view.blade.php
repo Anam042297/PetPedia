@@ -42,24 +42,23 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('orders.index') }}",  // Use Laravel's route helper
+                url: "{{ route('orders.index') }}",  
             },
             columns: [
-                {data: 'tracking_id', name: 'tracking_id'},  // Tracking ID
-                {data: 'total_amount', name: 'total_amount'},  // Total Amount
-                {data: 'status', name: 'status'},  // Order Status
-                {data: 'name', name: 'name'},  // Customer Name
-                {data: 'city', name: 'city'},  // City
-                {data: 'phone_no', name: 'phone_no'},  // Phone Number
-                {data: 'action', name: 'action', orderable: false, searchable: false},  // Action buttons (e.g., view details)
+                {data: 'tracking_id', name: 'tracking_id'},  
+                {data: 'total_amount', name: 'total_amount'},  
+                {data: 'status', name: 'status'},  
+                {data: 'name', name: 'name'}, 
+                {data: 'city', name: 'city'}, 
+                {data: 'phone_no', name: 'phone_no'},  
+                {data: 'action', name: 'action', orderable: false, searchable: false},  
             ],
-     
-            // order: [[3, 'desc']]  // Default order by the 'name' column descending
+    
         });
     });
 
 @if(session('success'))
-            order_table.ajax.reload(null, false);  // Reload the DataTable without resetting the page
+            order_table.ajax.reload(null, false); 
         @endif
 
 </script>

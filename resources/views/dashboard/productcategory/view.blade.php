@@ -69,8 +69,6 @@
                 }
             ]
         });
-
-        // Handle delete action with confirmation
         $(document).on('click', 'button.delete_button', function() {
             swal({
                 title: 'Are you sure?',
@@ -82,7 +80,7 @@
                 if (willDelete) {
                     var href = $(this).data('href');
                     var data = {
-                        _token: '{{ csrf_token() }}' // CSRF token
+                        _token: '{{ csrf_token() }}'
                     };
 
                     $.ajax({
@@ -93,7 +91,7 @@
                         success: function(result) {
                             if (result.success) {
                                 toastr.success(result.success);
-                                petcategory_table.ajax.reload(); // Reload the DataTable
+                                petcategory_table.ajax.reload(); 
                             } else {
                                 toastr.error(result.error);
                             }

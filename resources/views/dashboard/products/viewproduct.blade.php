@@ -55,61 +55,58 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "/admin/indexproduct", // Adjust this URL based on your route
+                    url: "/admin/indexproduct", 
                 },
                 columns: [
-                    // Creator (user who added the product)
+                    
                     {
                         data: 'name',
                         name: 'name'
-                    }, // Product name
+                    }, 
                     {
                         data: 'category',
                         name: 'category',
                         sortable:false
-                    }, // Pet type: dog, cat, bird, etc.
+                    }, 
                     {
                         data: 'price',
                         name: 'price',
                         sortable:false
-                    }, // Product price
+                    }, 
                     {
                         data: 'product_category',
                         name: 'product_category',
                         sortable:false
-                    }, // Product category: food/accessory
+                    }, 
                     {
                         data: 'weight',
                         name: 'weight',
                        sortable:false
-                    //     visible: true
-                    }, // Visible only for food products
+                    }, 
                     {
                         data: 'brand',
                         name: 'brand',
                         sortable: false
-                    }, // Product brand
+                    },
                     {
                         data: 'stock',
                         name: 'stock',
                         sortable: false
-                    }, // Product quantity
+                    }, 
                     {
                         data: 'images',
                         name: 'images',
                         orderable: false,
                         searchable: false
-                    }, // Product images
+                    }, 
                     {
                         data: 'action',
                         name: 'action',
                         orderable: false,
                         searchable: false
-                    } // Action buttons
+                    }
                 ]
             });
-
-            // Delete product confirmation and AJAX request
             $(document).on('click', 'button.delete_product_button', function() {
                 swal({
                     title: 'Are you sure?',
@@ -121,7 +118,7 @@
                     if (willDelete) {
                         var href = $(this).data('href');
                         var data = {
-                            _token: '{{ csrf_token() }}' // Ensure the CSRF token is included
+                            _token: '{{ csrf_token() }}' 
                         };
 
                         $.ajax({
@@ -132,7 +129,7 @@
                             success: function(result) {
                                 if (result.success) {
                                     toastr.success(result.success);
-                                    product_table.ajax.reload(); // Reload the DataTable
+                                    product_table.ajax.reload(); 
 
                                 } else {
                                     toastr.error(result.error);

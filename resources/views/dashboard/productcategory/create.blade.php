@@ -54,13 +54,13 @@
                             </span>
                         </div>
 
-                        @if (isset($productcategory) && $productcategory->icon)
-                            {{-- <div class="mt-2">
-                                <img src="{{ asset('storage/' . $productCategory->icon) }}" alt="Current Image" style="width: 100px; height: 100px;">
-                            </div> --}}
-                        @endif
+                        {{-- @if (isset($productcategory) && $productcategory->icon)
+                            <div class="mt-2">
+                                <img src="{{ asset('storage/' . $productcategory->icon) }}" alt="Current Image" style="width: 100px; height: 100px;">
+                            </div>
+                        @endif --}}
 
-                        <button type="submit" class="btn btn-primary mt-3">
+                        <button type="submit" class="custom-btn">
                             {{ isset($productcategory) ? 'Update' : 'Submit' }}
                         </button>
                     </form>

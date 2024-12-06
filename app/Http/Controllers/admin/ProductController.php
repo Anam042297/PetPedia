@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $products = Product::query()->with(['user', 'category', 'ProductCategory', 'productImages'])->get();
+            $products = Product::with(['user', 'category', 'ProductCategory', 'productImages'])->get();
             return DataTables::of($products)
                 ->addColumn('action', function ($row) {
                     $editUrl = route('products.edit', $row->id);
@@ -57,7 +57,6 @@ class ProductController extends Controller
         return view('dashboard.products.viewproduct');
     }
 
-    // Show the form for creating a new product
     public function create(Request $request)
     {
         // dd($request->all);
@@ -67,7 +66,6 @@ class ProductController extends Controller
         return view('dashboard.products.createproduct', compact('categories', 'productcategories'));
     }
 
-    // Store a newly created product in the database
     public function store(Request $request)
     {
         //  dd($request->all());
