@@ -23,17 +23,12 @@ class OrderItem extends Model
     ];
 
 
-    /**
-     * Get the order that owns the item.
-     */
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
 
-    /**
-     * Get the product that belongs to this order item.
-     */
+   
     public function Product()
     {
         return $this->belongsTo(Product::class, 'product_id');
