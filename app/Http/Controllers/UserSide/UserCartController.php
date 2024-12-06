@@ -12,13 +12,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB; 
 class UserCartController extends Controller
 {
-     // Retrieve all items in the user's cart
      public function index()
      {
          $cart = Cart::with('items.product.productimages')->firstOrNew(['user_id' => Auth::id()]);
          $cartItems = $cart->items ?? collect();
- 
-         // Calculate total
+
          $cartTotal = $cartItems->sum(fn($item) => $item->product ? $item->quantity * $item->product->price : 0);
  
          return view('userside.cart.index', compact('cartItems', 'cartTotal'));
@@ -82,13 +80,4 @@ class UserCartController extends Controller
          return redirect()->route('cart.index')->with('success', 'Item removed from cart');
      }
  
-    //  public function clearCart()
-    //  {
-    //      $cart = Cart::where('user_id', Auth::id())->first();
-    //      if ($cart) {
-    //          $cart->items()->delete();
-    //      }
- 
-    //      return redirect()->route('cart.index')->with('success', 'Cart cleared successfully');
-    //  }
 }

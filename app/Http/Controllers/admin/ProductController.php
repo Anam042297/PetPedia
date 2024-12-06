@@ -14,7 +14,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
-    // Display a listing of the products with DataTables
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -88,10 +87,8 @@ class ProductController extends Controller
         $validatedData['user_id'] = Auth::id();
         $validatedData['serial_number'] = $randomNumber;
 
-        // Create a new product instance
         $product = Product::create($validatedData);
         // dd($request->hasFile('images'));
-        // Handle uploading and associating images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $filename = time() . '_' . $image->getClientOriginalName();
@@ -106,7 +103,7 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product created successfully!');
     }
-    // Show the form for editing the specified product
+  
     public function edit(Product $product, $id)
     {
         $product = Product::findOrFail($id);
@@ -115,7 +112,6 @@ class ProductController extends Controller
         return view('dashboard.products.editproduct', compact('product', 'categories', 'productcategories'));
     }
 
-    // Update the specified product in the database
     public function update(Request $request, $id)
     {
         // dd($request);
@@ -134,7 +130,6 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->update($validatedData);
 
-        // Handle image updates
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $filename = time() . '_' . $image->getClientOriginalName();
@@ -150,14 +145,13 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product updated successfully!');
     }
 
-    // Remove the specified product from the database
     public function destroy($id)
     {
         $product = Product::with('productimages')->findOrFail($id);
         // dd($product);
         foreach ($product->productimages as $image) {
-            Storage::delete($image->image_path); // Remove image from storage
-            $image->delete(); // Delete record from the database
+            Storage::delete($image->image_path);
+            $image->delete();
         }
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully!');

@@ -73,7 +73,7 @@ public function updateCartItem(Request $request, $id)
 {
     $cartItem = CartItem::findOrFail($id);
 
-    // Validate the quantity and ensure stock availability.
+    
     $request->validate(['quantity' => 'required|integer|min:1']);
     $quantity = $request->input('quantity');
 
@@ -81,7 +81,7 @@ public function updateCartItem(Request $request, $id)
         return response()->json(['message' => 'Insufficient stock available.'], 400);
     }
 
-    // Update quantity and recalculate cart total.
+
     $cartItem->update(['quantity' => $quantity]);
     $cartTotal = $cartItem->cart->items->sum(fn($item) => $item->quantity * $item->product->price);
 
@@ -93,8 +93,6 @@ public function updateCartItem(Request $request, $id)
 }
 
     
-
-    // Remove from Cart
     public function removeFromCart($id)
     {
         $cartItem = CartItem::findOrFail($id);
@@ -108,12 +106,10 @@ public function updateCartItem(Request $request, $id)
     {
         $cartItem = CartItem::findOrFail($id);
     
-        // Decrement quantity if greater than 1
         if ($cartItem->quantity > 1) {
             $cartItem->decrement('quantity');
         }
     
-        // Recalculate the cart total
         $cartTotal = $cartItem->cart->items->sum(fn($item) => $item->quantity * $item->product->price);
     
         return response()->json([

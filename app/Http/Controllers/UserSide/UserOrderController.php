@@ -74,8 +74,7 @@ if ($cart) {
             $product->save(); 
         }
     }
-
-    // Clear the cart items
+    
     $cart->items()->delete();
 }
 

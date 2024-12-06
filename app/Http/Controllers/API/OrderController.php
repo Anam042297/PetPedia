@@ -23,12 +23,10 @@ class OrderController extends Controller
         return response()->json(['total_amount' => $totalAmount]);
     }
 
-    /**
-     * Handle the order checkout process.
-     */
+  
     public function checkout(Request $request)
     {
-        // Validate request
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'city' => 'required|string|max:255',
@@ -37,15 +35,14 @@ class OrderController extends Controller
             'payment_method' => 'required|in:cash',
         ]);
 
-        // Check if cart is empty
         $cart = Cart::where('user_id', Auth::id())->first();
         if (!$cart || $cart->items->isEmpty()) {
             return response()->json(['error' => 'Your cart is empty!'], 400);
         }
 
-        // Start a transaction
+       
         DB::transaction(function () use ($request, $cart) {
-            // Create Order
+
             $order = Order::create([
                 'tracking_id' => Str::random(10),
                 'user_id' => auth()->id(),
@@ -59,7 +56,6 @@ class OrderController extends Controller
             ]);
 
             foreach ($cart->items as $cartItem) {
-                // Check if there's enough stock
                 $product = Product::find($cartItem->product_id);
                 if ($product && $product->stock >= $cartItem->quantity) {
                     OrderItem::create([
@@ -69,20 +65,16 @@ class OrderController extends Controller
                         'quantity' => $cartItem->quantity,
                     ]);
 
-                    // Update product stock
                     $product->stock -= $cartItem->quantity;
                     $product->save();
                 }
             }
-
-            // Clear the cart
             $cart->items()->delete();
 
-            // Send email confirmation
+     
             Mail::to($request->user()->email)->send(new sendmail($order));
         });
 
-        // Return a success response with the order data
         return response()->json(['message' => 'Order created successfully!'], 201);
     }
 

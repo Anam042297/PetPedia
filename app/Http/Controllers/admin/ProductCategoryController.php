@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductCategoryController extends Controller
 {
-    // Data table
     public function index(Request $request)
     {
         // dd($request);
@@ -37,13 +36,11 @@ class ProductCategoryController extends Controller
         return view('dashboard.productcategory.view');
     }
 
-    // View data table view blade
     public function viewcategory()
     {
         return view('dashboard.productcategory.view');
     }
 
-    // Create category
     public function create()
     {
         return view('dashboard.productcategory.create');
@@ -66,11 +63,11 @@ class ProductCategoryController extends Controller
         $productcategory->save();
         return redirect()->route('ProductCategory.index')->with('success', 'Category added successfully.');
     }
-    // Edit view category data
+
     public function edit($id)
     {
         $productcategory = ProductCategory::findOrFail($id);
-        // dd( $category);
+        // dd( $productcategory);
         return view('dashboard.productcategory.create', compact('productcategory'));
     }
     public function update(Request $request, $id)
@@ -93,11 +90,10 @@ class ProductCategoryController extends Controller
         return redirect()->route('ProductCategory.index')->with('success', 'Category updated successfully.');
     }
 
-    // Delete category
     public function destroy($id)
     {  //  dd($id);
         $productcategory = ProductCategory::find($id);
-        // dd($category);
+        // dd($productcategory);
         if (!$productcategory) {
             return response()->json(['error' => 'Category not found.'], 404);
         }
